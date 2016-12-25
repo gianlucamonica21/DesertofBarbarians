@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+ 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css">
+    <script type="text/javascript" src="https://cdn.rawgit.com/	codemirror/CodeMirror/master/mode/xml/xml.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/carlo/jquery-base64/master/jquery.base64.min.js"></script>
+	<script src="lib/codemirror.js"></script>
+	<link rel="stylesheet" href="lib/codemirror.css">
+	<script src="mode/javascript/javascript.js"></script>
+	<script src="CodeMirror-master/addon/hint/show-hint.js"></script>
+	<script src="CodeMirror-master/addon/hint/javascript-hint.js"></script>
+	<link rel="stylesheet" href="CodeMirror-master/addon/hint/show-hint.css">
+	
+<style>
+body {
+	background-color: #eee;
+}
+</style>
+</head>
+
+<body>
+	<!--<div id="codeeditor"></div>-->
+	<textarea id="codeeditor"></textarea>
+	<button onclick="submit();">SUBMIT</button>
+	<iframe id="result"></iframe>
+</body>
+	<script type="text/javascript">
+		var editor = CodeMirror(document.getElementById("codeeditor"),{
+
+			mode: "javascript",
+			extraKeys: {"Ctrl-Space": "autocomplete"}
+
+		});
+
+		function submit()
+        {
+            editor.save();
+            var code = document.getElementById("codeeditor").value;
+            var data_url = "data:text/javascript;charset=utf-8;base64," + $.base64.encode(code);
+            document.getElementById("result").src = data_url;
+        }
+	</script>
+</html>
