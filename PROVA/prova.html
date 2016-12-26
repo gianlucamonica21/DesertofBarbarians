@@ -10,7 +10,11 @@
     </head>
     <body>
         <textarea id="editor"></textarea>
+        <br>
+        <br>
         <button onclick="submit_html();">Submit</button>
+        <br>
+        <br>
         <iframe id="result"></iframe>
     </body>
     <script>
@@ -23,8 +27,22 @@
         {
             editor.save();
             var code = document.getElementById("editor").value;
-            var data_url = "data:text/javascript;charset=utf-8;base64," + $.base64.encode(code);
-            document.getElementById("result").src = data_url;
-        }
-    </script>
+            //eval(code);
+            var script = document.createElement('script');
+            script.type= "text/javascript";
+
+            try {
+              script.appendChild(document.createTextNode(code));
+              document.body.appendChild(script);
+            } catch (e) {
+              script.text = code;
+              document.body.appendChild(script);
+            }
+             var data_url = "data:text/javascript;charset=utf-8;base64," + $.base64.encode(script.text);
+            script.src= data_url;
+            $('#result').contents().find('body').append(codemirror);    
+         
+          // document.getElementById("result").src = data_url;
+      }
+  </script>
 </html>
