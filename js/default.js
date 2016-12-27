@@ -6,11 +6,17 @@ $(document).ready(function(){
 	});
 
 	$('#submitButton').click(function(){
+
         var code = document.getElementById("editor").value;
 		editor.save();
+		alert("CLICKED");
+		//var data_url = "data:text/javascript;charset=utf-8;base64," + $.base64.encode(code);
+		//document.getElementById("result").src = data_url;
 		var resultFrame = document.getElementById("result");
-    	var iWind = resultFrame.contentWindow;   // the iframe's window
-    	iWind.eval(code);
+      	var iWind = resultFrame.contentWindow;   // the iframe's window
+     	resultFrame = iWind.eval(code);
+
+
 	});
 
 });
