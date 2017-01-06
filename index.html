@@ -93,9 +93,8 @@
           <div class="panel panel-default">
             <div class="panel-body">
 
-                <iframe id="result" height="200" width="350" ></iframe>
-             <!-- <canvas width="480" height="600"></canvas>
-               <script src="Missile-Command-JavaScript-Clone-master/missile_command.js" type="text/javascript"></script> -->
+               <canvas width="480" height="600"></canvas>
+               <!--<script src="Missile-Command-JavaScript-Clone-master/missile_command.js" type="text/javascript"></script> -->
  
         
             </div>
@@ -274,5 +273,46 @@
       </footer>
 
     </div>
+    <script type="text/javascript">
+    	
+
+		var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
+			mode: "javascript",
+          lineNumbers: true,
+          styleSelectedText: true,
+          theme : 'blackboard',
+          extraKeys:{
+            "Ctrl-Space":"autocomplete"
+          }
+		});
+
+		 // editor.on('beforeChange',function(cm,change) {
+   //        if ( ~readOnlyLines.indexOf(change.from.line) ) {
+   //          change.cancel();
+   //        	}
+   //        });
+
+
+   		// Lettura da file del codice da eseguire, posiziona il codice nell'editor
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "foo.txt", true);
+		xhr.onload = function (e) {
+		  if (xhr.readyState === 4) {
+		    if (xhr.status === 200) {
+		      //console.log(xhr.responseText);
+		      editor.setValue(xhr.responseText);
+		    } else {
+		      console.error(xhr.statusText);
+		    }
+		  }
+		};
+		xhr.onerror = function (e) {
+		  console.error(xhr.statusText);
+		};
+		xhr.send(null);
+
+
+	
+    </script>
   </body>
   </html>
