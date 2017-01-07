@@ -42,6 +42,7 @@
           var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
           xhr.open( 'post', 'SaveToFile.php', true);
           xhr.send(data);
+          location.reload();
 
 	// 	editor.save();
 

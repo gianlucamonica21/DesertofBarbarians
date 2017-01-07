@@ -93,9 +93,15 @@
           <div class="panel panel-default">
             <div class="panel-body">
 
-               <canvas width="480" height="600"></canvas>
-               <!--<script src="Missile-Command-JavaScript-Clone-master/missile_command.js" type="text/javascript"></script> -->
- 
+               <div class="row" id="mc-container">
+						<canvas id="miscom" class="game center-block" width="510" height="460">
+
+                <script src="js/Levels/First/first.js" type="text/javascript"></script> 
+						    <script src="js/Levels/First/missile_command.js" type="text/javascript"></script> 
+							Missile Command
+						</canvas>
+					</div>
+               
         
             </div>
           </div>
@@ -106,7 +112,9 @@
             <div class="panel-heading">Editor</div>
             <div class="panel-body">
               <textarea id="editor"></textarea>
-              <button  class="btn btn-default" id="submitButton">Submit</button>
+              <button  class="btn btn-default" id="submitButton">Execute</button>
+              <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
+
             </div>
           </div>
 
@@ -273,29 +281,32 @@
       </footer>
 
     </div>
+ 
     <script type="text/javascript">
     	
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
 			mode: "javascript",
           lineNumbers: true,
-          styleSelectedText: true,
-          theme : 'blackboard',
-          extraKeys:{
-            "Ctrl-Space":"autocomplete"
-          }
+          styleSelectedText: true
 		});
 
-		 // editor.on('beforeChange',function(cm,change) {
-   //        if ( ~readOnlyLines.indexOf(change.from.line) ) {
-   //          change.cancel();
-   //        	}
-   //        });
+    //TO DO -> implement a logical block of the code line
+		var readOnlyLines = [1,2,3,4,5,7];
+		editor.on('beforeChange',function(cm,change) {
+        if ( ~readOnlyLines.indexOf(change.from.line) ) {
+            change.cancel();
+          	}
+        });
+
+		for(var j = 0; j < 8; j++)
+        	window.editor.addLineClass( j, 'background', 'disabled');
 
 
    		// Lettura da file del codice da eseguire, posiziona il codice nell'editor
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "foo.txt", true);
+    //TO DO -> implement a logical load of level and file
+		xhr.open("GET", "js/Levels/First/first.js", true);
 		xhr.onload = function (e) {
 		  if (xhr.readyState === 4) {
 		    if (xhr.status === 200) {
