@@ -1,7 +1,0 @@
-/*
-
-blablablablablablablablablablabla
-
-*/
-
-var ciao;

@@ -292,7 +292,30 @@
 		});
 
     //TO DO -> implement a logical block of the code line
-		var readOnlyLines = [1,2,3,4,5,7];
+    function reqListener () {
+      console.log(this.responseText);
+    }
+
+    var oReadNumberLine = new XMLHttpRequest(); //New request object
+    
+    oReadNumberLine.open("get", "GetFileInformation.php", true);
+   oReadNumberLine.onload = function (e) {
+      if (oReadNumberLine.readyState === 4) {
+        if (oReadNumberLine.status === 200) {
+          console.log("Number of lines: " + (this.responseText));
+        } else {
+          console.error(oReadNumberLine.statusText);
+        }
+      }
+    };
+    oReadNumberLine.onerror = function (e) {
+      console.error(oReadNumberLine.statusText);
+    };
+    oReadNumberLine.send();
+
+
+
+		var readOnlyLines = [1,2,3,4,5,6,7,9,10,11];
 		editor.on('beforeChange',function(cm,change) {
         if ( ~readOnlyLines.indexOf(change.from.line) ) {
             change.cancel();

@@ -1,11 +1,10 @@
 /*
 
-blablablablablablablablablablabla
+asfads
 
 */
 
-function ciao(){
 
-	alert("k, i am working, now lets go on!");
-
+function changeMissileSpeed(speed){
+	return speed/12;
 }

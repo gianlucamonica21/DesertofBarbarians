@@ -343,7 +343,9 @@ var MC = MC || (function() {
         var y = this.target.pos.y - this.origin.y;
         this.angle = Math.atan(x / y);
 
-        this.colour = 'rgb(0, 255, 0)';
+        this.colour = 'rgb(255,0,0)';
+        speed = speed * 2;
+        speed = changeMissileSpeed(speed);
         this.speed = speed;
         this.distance = 0;
     };
@@ -472,7 +474,7 @@ var MC = MC || (function() {
     };
 
     function init() {
-        ciao();    
+           
         engine.loadLevel(levels[0]);
         engine.run();
         
