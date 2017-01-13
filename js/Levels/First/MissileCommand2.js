@@ -1,5 +1,6 @@
 // Missile Command
-alert("JNBUGI");
+
+//ciao(); 
 
 var canvas = document.querySelector( 'canvas' ),
   ctx = canvas.getContext( '2d' );
@@ -7,7 +8,7 @@ var canvas = document.querySelector( 'canvas' ),
 // Constants
 var CANVAS_WIDTH  = canvas.width,
   CANVAS_HEIGHT = canvas.height,
-  SPEEDMISSILEDEFENSE = 12,
+  SPEEDMISSILEDEFENSE = setSpeed(),
   MISSILE = {
     active: 1,
     exploding: 2,
