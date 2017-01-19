@@ -1,0 +1,6 @@
+Loading levels schema
+
+Login User
+
+At the moment of the "index.html" loading:
+	read from DB the level reached from the 'x' user, load the corrispondent level ( level.js and "missilecommand.js") and the information 'bout the level (line to block in the editor, helper sentences, score, other stuff)

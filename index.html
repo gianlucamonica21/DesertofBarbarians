@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,9 @@
   <script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
   <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
   <script type="text/javascript" src="js/default.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
+  
+
   
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -295,71 +299,91 @@
 
     //TO DO -> implement a logical block of the code line
 
-    function reqListener () {
-      console.log(this.responseText);
-    }
-    // read from the file containing the line information 'bout the level
-    var oReadNumberLine = new XMLHttpRequest(); //New request object
-    var lineToBlock;
-    oReadNumberLine.open("get", "js/Levels/First/firstInformation.txt", true);
-    oReadNumberLine.onload = function (e) {
-      if (oReadNumberLine.readyState === 4) {
-        if (oReadNumberLine.status === 200) {
-          console.log("Number of X line: " + (this.responseText));
-          lineToBlock = this.responseText;
-        } else {
-          console.error(oReadNumberLine.statusText);
-        }
-      }
-    };
-    oReadNumberLine.onerror = function (e) {
-      console.error(oReadNumberLine.statusText);
-    };
-    oReadNumberLine.send();
+    // function reqListener () {
+    //   console.log(this.responseText);
+    // }
+    // // read from the file containing the line information 'bout the level
+    // var oReadNumberLine = new XMLHttpRequest(); //New request object
+    // var lineToBlock;
+    // oReadNumberLine.open("get", "js/Levels/First/firstInformation.txt", true);
+    // oReadNumberLine.onload = function (e) {
+    //   if (oReadNumberLine.readyState === 4) {
+    //     if (oReadNumberLine.status === 200) {
+    //       console.log("Number of X line: " + (this.responseText));
+    //       lineToBlock = this.responseText;
+    //     } else {
+    //       console.error(oReadNumberLine.statusText);
+    //     }
+    //   }
+    // };
+    // oReadNumberLine.onerror = function (e) {
+    //   console.error(oReadNumberLine.statusText);
+    // };
+    // oReadNumberLine.send();
 
-    // read from the file containing the total number of lines  'bout the level
-    var oReadTotalNumberLine = new XMLHttpRequest(); //New request object
-    var totalNumber;
-    oReadTotalNumberLine.open("get", "GetFileInformation.php", true);
-    oReadTotalNumberLine.onload = function (e) {
-      if (oReadTotalNumberLine.readyState === 4) {
-        if (oReadTotalNumberLine.status === 200) {
-          console.log("Total number of line: " + (this.responseText));
-          totalNumber = this.responseText;
-        } else {
-          console.error(oReadTotalNumberLine.statusText);
-        }
-      }
-    };
-    oReadTotalNumberLine.onerror = function (e) {
-      console.error(oReadTotalNumberLine.statusText);
-    };
-    oReadTotalNumberLine.send();
-
-
-    var readOnlyLines = [2];
-    console.log("2) Array readOnlyLines: " + readOnlyLines);		  
-
-    editor.on('beforeChange',function(cm,change) {
-      if ( ~readOnlyLines.indexOf(change.from.line) ) {
-        change.cancel();
-      }
-    });
-
-    for(var j = 0; j < 8; j++)
-     window.editor.addLineClass( j, 'background', 'disabled');
+    // // read from the file containing the total number of lines  'bout the level
+    // var oReadTotalNumberLine = new XMLHttpRequest(); //New request object
+    // var totalNumber;
+    // oReadTotalNumberLine.open("get", "GetFileInformation.php", true);
+    // oReadTotalNumberLine.onload = function (e) {
+    //   if (oReadTotalNumberLine.readyState === 4) {
+    //     if (oReadTotalNumberLine.status === 200) {
+    //       console.log("Total number of line: " + (this.responseText));
+    //       totalNumber = this.responseText;
+    //     } else {
+    //       console.error(oReadTotalNumberLine.statusText);
+    //     }
+    //   }
+    // };
+    // oReadTotalNumberLine.onerror = function (e) {
+    //   console.error(oReadTotalNumberLine.statusText);
+    // };
+    // oReadTotalNumberLine.send();
 
 
-   		// Lettura da file del codice da eseguire, posiziona il codice nell'editor
-      var xhr = new XMLHttpRequest();
+    // var readOnlyLines = [2];
+    // console.log("2) Array readOnlyLines: " + readOnlyLines);		  
+
+    // editor.on('beforeChange',function(cm,change) {
+    //   if ( ~readOnlyLines.indexOf(change.from.line) ) {
+    //     change.cancel();
+    //   }
+    // });
+
+    // for(var j = 0; j < 8; j++)
+    //  window.editor.addLineClass( j, 'background', 'disabled');
+
+
+   	//read from the file.js and set the content in the editor
+    var xhr = new XMLHttpRequest();
     //TO DO -> implement a logical load of level and file
+    var widgets = [];
+
+    for (var i = 0; i < widgets.length; ++i)
+      window.editor.removeLineWidget(widgets[i]);
+
+    widgets.length = 0;
     xhr.open("GET", "js/Levels/First/setSpeed.js", true);
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-		      //console.log(xhr.responseText);
+		      //Read the file content and set in the editor
 		      editor.setValue(xhr.responseText);
-		    } else {
+          JSHINT(editor.getValue());
+
+          for (var i = 0; i < JSHINT.errors.length; ++i) {
+            var err = JSHINT.errors[i];
+            if (!err) continue;
+            var msg = document.createElement("div");
+            var icon = msg.appendChild(document.createElement("span"));
+            icon.innerHTML = "*---->";
+            icon.className = "lint-error-icon";
+            msg.appendChild(document.createTextNode(err.reason));
+            msg.className = "lint-error";
+            alert("errore di sintassi");
+            widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true}));
+          }
+        } else {
           console.error(xhr.statusText);
         }
       }
