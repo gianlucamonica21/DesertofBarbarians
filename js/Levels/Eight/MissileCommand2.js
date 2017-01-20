@@ -700,9 +700,9 @@ var endLevel = function( missilesLeft, citiesSaved ) {
     var nextLevel = citiesSaved === 6 ? true : false;
 
     if (!nextLevel) {
-        console.log("[Messaggio dal comandante] Riprova, non devi perdere nessuna torretta.");
+        //console.log("[Messaggio dal comandante] Riprova, non devi perdere nessuna torretta.");
     } else {
-    	console.log("[Messaggio dal comandante] Ottimo lavoro, recluta.");
+    	//console.log("[Messaggio dal comandante] Ottimo lavoro, recluta.");
     }
     drawEndLevel( missilesLeft, missilesBonus,
                   citiesSaved, citiesBonus );
@@ -715,8 +715,9 @@ var endLevel = function( missilesLeft, citiesSaved ) {
     }, 2000);
 
     if (nextLevel) {
-    	newmsg("general", ["You did a good job, Recruit.","The war, however, is still going and the enemy could attack again at any moment."], {
-    		'speed': 30,
+    	//newmsg("general", ["You did a good job, Recruit.","The war, however, is still going and the enemy could attack again at any moment."], {
+    	   ({
+        	'speed': 30,
     		'callback': function() {
 				// settare il tempo in modo da far comparire tutta il testo prima della chiamata alla funzione
 				setTimeout( setupNextLevel, 2000, nextLevel );

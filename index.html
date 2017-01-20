@@ -100,8 +100,8 @@
              <div class="row" id="mc-container">
               <canvas id="miscom" class="game center-block" width="510" height="460">
 
-                <script src="js/Levels/First/setSpeed.js" type="text/javascript"></script>
-                <script src="js/Levels/First/MissileCommand2.js" type="text/javascript">
+                <script src="js/Levels/One/setSpeed.js" type="text/javascript"></script>
+                <script src="js/Levels/One/MissileCommand2.js" type="text/javascript">
                 </script> 
                 <script type="text/javascript">  missileCommand(true);</script>
                 Missile Command
@@ -290,12 +290,12 @@
 
   <script type="text/javascript">
 
-
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
-     mode: "javascript",
-     lineNumbers: true,
-     styleSelectedText: true
-   });
+  // set editor by CodeMirror function
+  var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
+   mode: "javascript",
+   lineNumbers: true,
+   styleSelectedText: true
+ });
 
     //TO DO -> implement a logical block of the code line
 
@@ -363,14 +363,16 @@
       window.editor.removeLineWidget(widgets[i]);
 
     widgets.length = 0;
-    xhr.open("GET", "js/Levels/First/setSpeed.js", true);
+    xhr.open("GET", "js/Levels/One/setSpeed.js", true);
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
 		      //Read the file content and set in the editor
 		      editor.setValue(xhr.responseText);
+          //Check errors present in the content of the editor
           JSHINT(editor.getValue());
 
+          // insert of the error comment in the editor at the right line
           for (var i = 0; i < JSHINT.errors.length; ++i) {
             var err = JSHINT.errors[i];
             if (!err) continue;

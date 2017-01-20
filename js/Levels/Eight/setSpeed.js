@@ -1,3 +1,3 @@
 function setSpeed(){
-	return 20;
+	return 70;
 }
