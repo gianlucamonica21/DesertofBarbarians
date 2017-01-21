@@ -2,30 +2,49 @@
 //require "dbconfig.php";
 
 if ( empty( $_POST ) ) {
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Registration Page</title>
-    </head>
-    <body>
-        <h1>Registration</h1>
-        <form name="registration" action="registration.php" method="POST">
-          <label for 'username'>Username: </label>
-          <input type="text" name="username"/>
+  ?>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Registration Page</title>
+  </head>
+  <!-- BOOTSTRAP-->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/custom.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <body>
+    <div class="row">
+      <div class="col-md-5 well">
+        <div class="form-group">
 
-          <label for 'password'>Password: </label>
-          <input type="password" name="password"/>
+          <h1>Registration</h1>
+          <form name="registration"  method="POST">
 
-          <br>
-          <button type="submit">Submit</button>
-      </form>
-      <?php
+            <label for="">Login</label>
+            <input type="text" name="username" class="form-control"/>
+
+            <label for="">Password</label>
+            <input type="password" name="password" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <input type="submit" name="btnLogin" class="btn btn-primary" value="Register"/>
+          </div>
+        </form>
+      </div>
+    </div>
+    <?php
   } else {
  // print_r( $_POST );
   }
   //include "dbconfig.php";
-
+  if(isset($_SESSION['err'])){
+    echo $_SESSION['err'];
+  }
+  unset($_SESSION['err']);
   // setting var to connect to the DB
   $servername = "localhost";
   $user = "root";
@@ -36,48 +55,37 @@ if ( empty( $_POST ) ) {
     $conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-
+    if(!$conn){
+      echo "Error! You are not connected!";
+    }
     //setting var from the form
-    $form = $_POST;
-    $username = $form[ 'username' ];
-    $password = $form[ 'password' ];
+    
+    $errflag = false;
+    $username = $_POST[ 'username' ];
+    $password = $_POST[ 'password' ];
     $score = 0;
 
     //check the input of data
-    if($username == '') {
-        echo '<br><br>You must enter your Username <br>';
-        $errflag = true;
-    }
-    else{
-        echo $login;
-    }
-    if($password == '') {
-        echo 'You must enter your Password';
-        $errflag = true;
-    }
-
-    if($errflag){
-        return 0;
-    }
 
     //sql code to do the insert
     $sql = "INSERT INTO User ( login, password, score ) VALUES ( :login, :password, :score)";
 
     //exec the query on db to register
     $query = $conn->prepare( $sql );
-    $result = $query->execute( array( ':login'=>$username, ':password'=>$password, ':score'=>$score) );
+    if(!empty($username) and !empty($password)){
 
-    if ( $result ){
-      echo "<p><br><br>Thank you. You have been registered</p>";
-  } else {
-      echo "<p><br><br>Sorry, there has been a problem inserting your details. Please contact admin.</p>";
+      $result = $query->execute( array( ':login'=>$username, ':password'=>$password, ':score'=>$score) );
+
+      if ( $result ){
+       header('location: registered.php');
+     } 
+    
   }
-
+ 
 }
 catch(PDOException $e)
 {
-    echo "<br>Connection failed: " . $e->getMessage();
+  echo "<br>Connection failed: " . $e->getMessage();
 }
 
 $conn = null;
