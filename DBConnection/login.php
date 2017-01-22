@@ -27,51 +27,16 @@
 				</div>
 				<div class="form-group">
 					<input type="submit" name="btnLogin" class="btn btn-primary" value="Login"/>
-					<?php 
-					if(!empty($_SESSION['messagenotloggedin']))
-					{
-						echo $_SESSION['messagenotloggedin']; 
-					} 
-					?>
+					
 				</div>
-				<?php 
-				unset($_SESSION['messagenotloggedin']); 
-				?>
+				
 			</div>
 		</form>
 	</div>
 </div>
 </body>
 </html>
-<script>
-	document.getElementById("loginform").onsubmit = function () {
-    var x = document.forms["loginform"]["login"].value;
-    var y = document.forms["loginform"]["password"].value;
-    var submit = true;
-
-    if (x == null || x == "") {
-        nameError = "Please enter your name";
-        document.getElementById("login_error").innerHTML = nameError;
-        submit = false;
-    }
-
-    if (y == null || y == "") {
-        passError = "Please enter your password";
-        document.getElementById("password_error").innerHTML = passError;
-        submit = false;
-    }
-
-    
-
-    return submit;
-}
-
-function removeWarning() {
-    document.getElementById(this.id + "_error").innerHTML = "";
-}
-
- document.getElementById("login").onkeyup = removeWarning;
- document.getElementById("password").onkeyup = removeWarning;
+<script src="js/login.script.js">
 </script>​
 <?php
 //include "dbconfig.php";
@@ -115,10 +80,8 @@ try {
 		}
 		else{
 			//header("Location: login.php");
-			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password! Please verify! If you want to register! <A HREF="registration.php">Please go here.</A>
+			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password! Please verify! If you want to register! <A HREF="registration.php">Please go here.</A></div>';
 
-</div>';;
-			 
 		}
 	}
 

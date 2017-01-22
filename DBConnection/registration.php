@@ -1,8 +1,4 @@
-<?php
-//require "dbconfig.php";
 
-if ( empty( $_POST ) ) {
-  ?>
   <!DOCTYPE html>
   <html>
   <head>
@@ -16,13 +12,13 @@ if ( empty( $_POST ) ) {
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <body>
-    <div class="row">
-      <div class="col-md-5 well">
-        <div class="form-group">
+  <body  >
+    <div class="row" >
+      <div class="col-md-5 well" >
+        <div class="form-group" >
 
           <h1>Registration</h1>
-          <form name="registration" id="registration"  method="POST">
+          <form name="registration" id="registration" method="POST">
 
             <label for="">Login</label>
             <input id="username" type="text" name="username" class="form-control"/>
@@ -38,45 +34,12 @@ if ( empty( $_POST ) ) {
         </form>
       </div>
     </div>
-    <script>
-      document.getElementById("registration").onsubmit = function () {
-        var x = document.forms["registration"]["username"].value;
-        var y = document.forms["registration"]["password"].value;
-        var submit = true;
-
-        if (x == null || x == "") {
-          nameError = "Please enter your name";
-          document.getElementById("username_error").innerHTML = nameError;
-          submit = false;
-        }
-
-        if (y == null || y == "") {
-          passError = "Please enter your password";
-          document.getElementById("password_error").innerHTML = passError;
-          submit = false;
-        }
-
-        
-
-        return submit;
-      }
-
-      function removeWarning() {
-        document.getElementById(this.id + "_error").innerHTML = "";
-      }
-
-      document.getElementById("username").onkeyup = removeWarning;
-      document.getElementById("password").onkeyup = removeWarning;
+    <script src="js/registration.script.js">
     </script>​
     <?php
-  } else {
- // print_r( $_POST );
-  }
+ 
   //include "dbconfig.php";
-  if(isset($_SESSION['err'])){
-    echo $_SESSION['err'];
-  }
-  unset($_SESSION['err']);
+  
   // setting var to connect to the DB
   $servername = "localhost";
   $user = "root";
@@ -119,7 +82,8 @@ if ( empty( $_POST ) ) {
  }
  catch(PDOException $e)
  {
-  echo "<br>Connection failed: " . $e->getMessage();
+  echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>Database error!Please check the input!</div>';
+  //. $e->getMessage();
 }
 
 $conn = null;
