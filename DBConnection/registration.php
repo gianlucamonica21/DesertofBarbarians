@@ -22,13 +22,15 @@ if ( empty( $_POST ) ) {
         <div class="form-group">
 
           <h1>Registration</h1>
-          <form name="registration"  method="POST">
+          <form name="registration" id="registration"  method="POST">
 
             <label for="">Login</label>
-            <input type="text" name="username" class="form-control"/>
+            <input id="username" type="text" name="username" class="form-control"/>
+            <span class="error"><p id="username_error"></p></span>
 
             <label for="">Password</label>
-            <input type="password" name="password" class="form-control"/>
+            <input id="password" type="password" name="password" class="form-control"/>
+            <span class="error"><p id="password_error"></p></span>
           </div>
           <div class="form-group">
             <input type="submit" name="btnLogin" class="btn btn-primary" value="Register"/>
@@ -36,6 +38,36 @@ if ( empty( $_POST ) ) {
         </form>
       </div>
     </div>
+    <script>
+      document.getElementById("registration").onsubmit = function () {
+        var x = document.forms["registration"]["username"].value;
+        var y = document.forms["registration"]["password"].value;
+        var submit = true;
+
+        if (x == null || x == "") {
+          nameError = "Please enter your name";
+          document.getElementById("username_error").innerHTML = nameError;
+          submit = false;
+        }
+
+        if (y == null || y == "") {
+          passError = "Please enter your password";
+          document.getElementById("password_error").innerHTML = passError;
+          submit = false;
+        }
+
+        
+
+        return submit;
+      }
+
+      function removeWarning() {
+        document.getElementById(this.id + "_error").innerHTML = "";
+      }
+
+      document.getElementById("username").onkeyup = removeWarning;
+      document.getElementById("password").onkeyup = removeWarning;
+    </script>​
     <?php
   } else {
  // print_r( $_POST );
@@ -77,14 +109,16 @@ if ( empty( $_POST ) ) {
       $result = $query->execute( array( ':login'=>$username, ':password'=>$password, ':score'=>$score) );
 
       if ( $result ){
-       header('location: registered.php');
+          //header('location: registered.php');
+       header('Location: ../index.html');
+       
      } 
-    
-  }
- 
-}
-catch(PDOException $e)
-{
+     
+   }
+   
+ }
+ catch(PDOException $e)
+ {
   echo "<br>Connection failed: " . $e->getMessage();
 }
 

@@ -110,11 +110,14 @@ try {
 		$rows = $result->fetch(PDO::FETCH_NUM);
 
 		if($rows > 0){
-			header('location: logged.php');
+			//header('location: logged.php');
+			header('Location: ../index.html');
 		}
 		else{
 			//header("Location: login.php");
-			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not logged in!</div>';;
+			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password! Please verify! If you want to register! <A HREF="registration.php">Please go here.</A>
+
+</div>';;
 			 
 		}
 	}
