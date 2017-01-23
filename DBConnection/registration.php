@@ -75,9 +75,6 @@
     $initial_grade = 1;
     $sql_grade_insertion = "INSERT INTO Graduated ( login, grade ) VALUES ( :login, :initial_grade)";
 
-    // Per inserzione tabella Access
-    $sql_access_insertion = "INSERT INTO Access ( login, logindate ) VALUES ( :login, DEFAULT(logindate))";
-
     //check the input of data
 
     //exec the query on db to register
