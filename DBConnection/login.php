@@ -64,10 +64,7 @@ try {
 
 	//check the input of data
 	if(!empty($login) and !empty($password)){
-
-
-
-	//query to login
+        //query to login
 		$result = $conn->prepare("SELECT * FROM User WHERE login= :login AND password= :password");
 		$result->bindParam(':login', $login);
 		$result->bindParam(':password', $password);
@@ -84,9 +81,6 @@ try {
 
 		}
 	}
-
-
-
 }
 catch(PDOException $e)
 {

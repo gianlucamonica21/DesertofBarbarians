@@ -37,9 +37,9 @@
     <script src="js/registration.script.js">
     </script>​
     <?php
- 
+
   //include "dbconfig.php";
-  
+
   // setting var to connect to the DB
   $servername = "localhost";
   $user = "root";
@@ -53,42 +53,63 @@
     if(!$conn){
       echo "Error! You are not connected!";
     }
+
     //setting var from the form
-    
+    // Per inserzione tabella User
     $errflag = false;
     $username = $_POST[ 'username' ];
     $password = $_POST[ 'password' ];
-    $score = 0;
+    $total_score = 0;
+    $sql_user_insertion = "INSERT INTO User ( login, password, score ) VALUES ( :login, :password, :total_score)";
+
+    // Per inserzione tabella Campaign, inizia da livello zero con score per livello nullo
+    $initial_level = 1;
+    $max_score_per_level = 0;
+    $sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :initial_level, :max_score_per_level)";
+
+    // Per inserzione tabella Achieved
+    $initial_achievement = 1;
+    $sql_ach_insertion = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :initial_achievement)";
+
+    // Per inserzione tabella Graduated
+    $initial_grade = 1;
+    $sql_grade_insertion = "INSERT INTO Graduated ( login, grade ) VALUES ( :login, :initial_grade)";
+
+    // Per inserzione tabella Access
+    $sql_access_insertion = "INSERT INTO Access ( login, logindate ) VALUES ( :login, DEFAULT(logindate))";
 
     //check the input of data
 
-    //sql code to do the insert
-    $sql = "INSERT INTO User ( login, password, score ) VALUES ( :login, :password, :score)";
-
     //exec the query on db to register
-    $query = $conn->prepare( $sql );
+    $query = $conn->prepare($sql_user_insertion);
     if(!empty($username) and !empty($password)){
+      $result_user = $query->execute( array( ':login'=>$username, ':password'=>$password, ':total_score'=>$total_score) );
 
-      $result = $query->execute( array( ':login'=>$username, ':password'=>$password, ':score'=>$score) );
+      $query = $conn->prepare($sql_campaign_insertion);
+      $result_campaign = $query->execute( array( ':login'=>$username,
+                                                 ':initial_level'=>$initial_level,
+                                                 ':max_score_per_level'=>$max_score_per_level) );
+      $query = $conn->prepare($sql_ach_insertion);
+      $result_arch = $query->execute( array( ':login'=>$username,
+                                            ':initial_achievement'=>$initial_achievement) );
+      $query = $conn->prepare($sql_grade_insertion);
+      $result_grade = $query->execute( array( ':login'=>$username,
+                                             ':initial_grade'=>$initial_grade) );
 
-      if ( $result ){
+      // Solo se tutti gli insert sono andati a buon fine
+      if ( $result_user and $result_campaign and $result_arch and $result_grade){
           //header('location: registered.php');
-       header('Location: ../index.html');
-       
-     } 
-     
-   }
-   
- }
- catch(PDOException $e)
- {
+          header('Location: ../index.html');
+      }
+    }
+}
+catch(PDOException $e)
+{
   echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>Database error!Please check the input!</div>';
-  //. $e->getMessage();
+  $e->getMessage();
 }
 
 $conn = null;
-
-
 ?>
 </body>
 </html>
