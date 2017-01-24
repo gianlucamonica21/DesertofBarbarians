@@ -55,23 +55,23 @@
     }
 
     //setting var from the form
-    // Per inserzione tabella User
+    // r.1 Per inserzione tabella User
     $errflag = false;
     $username = $_POST[ 'username' ];
     $password = $_POST[ 'password' ];
     $total_score = 0;
     $sql_user_insertion = "INSERT INTO User ( login, password, score ) VALUES ( :login, :password, :total_score)";
 
-    // Per inserzione tabella Campaign, inizia da livello zero con score per livello nullo
+    // r.2 Per inserzione tabella Campaign, inizia da livello zero con score per livello nullo
     $initial_level = 1;
     $max_score_per_level = 0;
     $sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :initial_level, :max_score_per_level)";
 
-    // Per inserzione tabella Achieved
+    // r.3 Per inserzione tabella Achieved
     $initial_achievement = 1;
     $sql_ach_insertion = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :initial_achievement)";
 
-    // Per inserzione tabella Graduated
+    // r.4 Per inserzione tabella Graduated
     $initial_grade = 1;
     $sql_grade_insertion = "INSERT INTO Graduated ( login, grade ) VALUES ( :login, :initial_grade)";
 

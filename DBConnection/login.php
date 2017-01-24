@@ -60,7 +60,7 @@ try {
 
 	//check the input of data
 	if(!empty($login) and !empty($password)){
-    // query to login
+    // l.1 query to login
 		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login AND password= :password");
 		$user_query->bindParam(':login', $login);
 		$user_query->bindParam(':password', $password);
@@ -70,22 +70,30 @@ try {
 		$user_rows = $user_query->fetch();
 		$total_score = $user_rows["score"];
 
-		// Estrai grado
+		// l.2 Estrai grado
 		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
 		$grade_query->bindParam(':login', $login);
 		$grade_query->execute();
 		$grade_rows = $grade_query->fetch();
 		$grade = $grade_rows["grade"];
 
-		// Estrai massimo livello e relativo score record in quel livello
-		$level_query = $conn->prepare("SELECT * FROM Campaign WHERE login= :login");
+		// l.3 Estrai massimo livello completato dal giocatore
+		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
 		$level_query->bindParam(':login', $login);
 		$level_query->execute();
 		$level_rows = $level_query->fetch();
-		$max_level = $level_rows["level"];
-		$max_level_record_score = $level_rows["score"];
+		$max_level = $level_rows["maxlevel"];
 
-		// Estrai le righe non modificabili per il massimo livello
+		/* l.4 Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
+			allora lo score sarà zero */
+		$score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
+		$score_query->bindParam(':login', $login);
+		$score_query->bindParam(':level', $max_level);
+		$score_query->execute();
+		$score_row = $score_query->fetch();
+		$max_level_record_score = $score_row["score"];
+
+		// l.5 Estrai le righe non modificabili per il massimo livello
 		$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
 		$constrows_query->bindParam(':level', $max_level);
 		$constrows_query->execute();
@@ -96,7 +104,7 @@ try {
 			$constrows[] = $constrow["row"];
 		}
 
-		// Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
+		// l.6 Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
 		$achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
 		$achievements_query->bindParam(':login', $login);
 		$achievements_query->execute();
