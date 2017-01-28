@@ -297,64 +297,9 @@
    styleSelectedText: true
  });
 
-    //TO DO -> implement a logical block of the code line
-
-    // function reqListener () {
-    //   console.log(this.responseText);
-    // }
-    // // read from the file containing the line information 'bout the level
-    // var oReadNumberLine = new XMLHttpRequest(); //New request object
-    // var lineToBlock;
-    // oReadNumberLine.open("get", "js/Levels/First/firstInformation.txt", true);
-    // oReadNumberLine.onload = function (e) {
-    //   if (oReadNumberLine.readyState === 4) {
-    //     if (oReadNumberLine.status === 200) {
-    //       console.log("Number of X line: " + (this.responseText));
-    //       lineToBlock = this.responseText;
-    //     } else {
-    //       console.error(oReadNumberLine.statusText);
-    //     }
-    //   }
-    // };
-    // oReadNumberLine.onerror = function (e) {
-    //   console.error(oReadNumberLine.statusText);
-    // };
-    // oReadNumberLine.send();
-
-    // // read from the file containing the total number of lines  'bout the level
-    // var oReadTotalNumberLine = new XMLHttpRequest(); //New request object
-    // var totalNumber;
-    // oReadTotalNumberLine.open("get", "GetFileInformation.php", true);
-    // oReadTotalNumberLine.onload = function (e) {
-    //   if (oReadTotalNumberLine.readyState === 4) {
-    //     if (oReadTotalNumberLine.status === 200) {
-    //       console.log("Total number of line: " + (this.responseText));
-    //       totalNumber = this.responseText;
-    //     } else {
-    //       console.error(oReadTotalNumberLine.statusText);
-    //     }
-    //   }
-    // };
-    // oReadTotalNumberLine.onerror = function (e) {
-    //   console.error(oReadTotalNumberLine.statusText);
-    // };
-    // oReadTotalNumberLine.send();
 
 
-    // var readOnlyLines = [2];
-    // console.log("2) Array readOnlyLines: " + readOnlyLines);		  
-
-    // editor.on('beforeChange',function(cm,change) {
-    //   if ( ~readOnlyLines.indexOf(change.from.line) ) {
-    //     change.cancel();
-    //   }
-    // });
-
-    // for(var j = 0; j < 8; j++)
-    //  window.editor.addLineClass( j, 'background', 'disabled');
-
-
-   	//read from the file.js and set the content in the editor
+   	//read from the file.js and set the content in the Editor
     var xhr = new XMLHttpRequest();
     //TO DO -> implement a logical load of level and file
     var widgets = [];
@@ -395,8 +340,6 @@
     };
     xhr.send(null);
 
-
-
-  </script>
-</body>
-</html>
+      </script>
+    </body>
+    </html>

@@ -1,24 +1,50 @@
-	$(document).ready(function(){
-	// var code = $("#editor")[0];
-	// var editor = CodeMirror.fromTextArea(code, {
-	// 	lineNumbers : true,
-	// 	mode : "javascript"
-	// });
+$(document).ready(function(){
+
+	$('#submitButton').click(function(){
+
+
+  // scrittura su file modificato nell'editor
+  var data = new FormData();
+  data.append("data" , window.editor.getValue());
+  var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+  xhr.open( 'post', 'SaveToFile.php', true);
+  xhr.send(data);
+  location.reload();
+
+
+});
+
+	$('#evaluateButton').click(function(){
+
+
+		try{
+			var test = userSolutionChecker();
+     // scrittura su file modificato nell'editor
+     var data = new FormData();
+     data.append("data" , window.editor.getValue());
+     var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+     xhr.open( 'post', 'SaveToFile.php', true);
+     xhr.send(data);
+     location.reload();
+ }
+ catch(err){
+        // var test = getTest();
+    }
+
+    if (test == true){
+    	alert ("Livello passato!");
+        // var data = new FormData();
+        // data.append("data" , window.editor.getValue());
+        // var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+        // xhr.open( 'post','next_level.php', false);
+        // xhr.send(data);
+        location.reload();
+    }
+    else
+    	alert("Valore sbagliato: riprova ancora");
+});
+
+
 	
-	 $('#submitButton').click(function(){
-
-
-	 	  // scrittura su file modificato nell'editor
-	 	  var data = new FormData();
-          data.append("data" , window.editor.getValue());
-          var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
-          xhr.open( 'post', 'SaveToFile.php', true);
-          xhr.send(data);
-          location.reload();
-     
-   
-	 });
-		
-
 });
 

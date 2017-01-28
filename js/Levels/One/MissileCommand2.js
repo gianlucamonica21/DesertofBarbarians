@@ -18,8 +18,8 @@ var CANVAS_WIDTH  = canvas.width,
 
 // Variables
 var levelscore = 0,
-  level = 3,
-  maxLevel = 3,
+  level = 1,
+  maxLevel = 1,
   levelIndex = {},
   cities = [],
   antiMissileBatteries = [],
@@ -923,3 +923,13 @@ function isDefined (x) {
     var undef;
     return x !== undef;
 };
+
+function userSolutionChecker(){
+    //check the missile speed
+    if (SPEEDMISSILEDEFENSE > 8 && SPEEDMISSILEDEFENSE < 15){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
