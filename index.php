@@ -1,15 +1,52 @@
 <?php
-  session_start();
-  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    
-    $x = $_SESSION['loggedinUser'];  
-  } else {
-    echo '<script type="text/javascript">alert("non sei loggato");</script>';
+session_start();
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+
+  $x = $_SESSION['loggedinUser'];  
+} else {
+  echo '<script type="text/javascript">alert("non sei loggato");</script>';
+}
+
+//include "dbconfig.php";
+$servername = "localhost";
+$user = "root";
+$pass = "root";
+$errflag = false;
+
+try {
+  //set the connection to DB
+  $conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);
+    // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  if(!$conn){
+    echo "Error! You are not connected!";
   }
+  //retrieve of the data inputby user
+  
+
+  //check the level of the user loggedin 
+
+  $level_query = $conn->prepare("SELECT level from User join Level where login = :login ");
+  $level_query->bindParam(':login', $x);
+  $level_query->execute();
+  $level_rows = $level_query->fetch();
+  $level = $level_rows["level"];
+
+}
+catch(PDOException $e)
+{
+  echo "Connection failed: " . $e->getMessage();
+}
+
+$conn = null;
 ?>
 <script type="text/javascript">
   var x = "<?php echo $x;?>"
+  var level = "<?php echo $level;?>"
+  
   alert("You are logged as " + x);
+  alert("With level " + level);
+  
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,11 +147,73 @@
 
              <div class="row" id="mc-container">
               <canvas id="miscom" class="game center-block" width="510" height="460">
+                <?php
+              //load the correct level of the user
+                switch ($level) {
+                  case 1:
+                  echo '<script src="js/Levels/One/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/One/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 2:
+                  echo '<script src="js/Levels/Two/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Two/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 3:
+                  echo '<script src="js/Levels/Three/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Three/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 4:
+                  echo '<script src="js/Levels/Four/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Four/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 5:
+                  echo '<script src="js/Levels/Five/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Five/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 6:
+                  echo '<script src="js/Levels/Six/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Six/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 7:
+                  echo '<script src="js/Levels/Seven/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Seven/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 8:
+                  echo '<script src="js/Levels/Eight/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Eight/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 9:
+                  echo '<script src="js/Levels/Nine/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Nine/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
+                  case 10:
+                  echo '<script src="js/Levels/Ten/setSpeed.js" type="text/javascript"></script>
+                  <script src="js/Levels/Ten/MissileCommand2.js" type="text/javascript">
+                  </script> 
+                  <script type="text/javascript">  missileCommand(true);</script>' ;
+                  break;
 
-                <script src="js/Levels/One/setSpeed.js" type="text/javascript"></script>
-                <script src="js/Levels/One/MissileCommand2.js" type="text/javascript">
-                </script> 
-                <script type="text/javascript">  missileCommand(true);</script>
+                }
+                ?>
+                
                 Missile Command
               </canvas>
             </div>

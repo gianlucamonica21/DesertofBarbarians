@@ -135,7 +135,7 @@ var drawLevelMessage = function() {
     ctx.fillStyle = '#6d6';
 
     ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'click to start.', 130, 180 );
+    ctx.fillText( 'click to start.You are a the Second Level!', 130, 180 );
 
  
 

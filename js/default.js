@@ -32,7 +32,10 @@ $(document).ready(function(){
     }
 
     if (test == true){
-    	alert ("Livello passato!");
+    	alert ("Livello passato!"); 
+      // query per incrementare livello dell' utente 
+
+      
         // var data = new FormData();
         // data.append("data" , window.editor.getValue());
         // var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
