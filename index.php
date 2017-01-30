@@ -1,5 +1,16 @@
-
-
+<?php
+  session_start();
+  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    
+    $x = $_SESSION['loggedinUser'];  
+  } else {
+    echo '<script type="text/javascript">alert("non sei loggato");</script>';
+  }
+?>
+<script type="text/javascript">
+  var x = "<?php echo $x;?>"
+  alert("You are logged as " + x);
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -343,10 +354,3 @@
   </script>
 </body>
 </html>
-<?php
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-echo "Welcome to the member's area, " . $_SESSION['username'] . "!";
-} else {
-echo "Please log in first to see this page.";
-}
-?>
