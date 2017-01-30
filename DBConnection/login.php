@@ -65,6 +65,10 @@ try {
 		$user_query->bindParam(':login', $login);
 		$user_query->bindParam(':password', $password);
 		$user_query->execute();
+		//save the user loggedin
+		$_SESSION['loggedin'] = true;
+		$_SESSION['loggedinUser'] = $login;
+		
 		/* 	Riga originale ma non funzionante
 				$rows = $result->fetch(PDO::FETCH_NUM); */
 		$user_rows = $user_query->fetch();
@@ -121,7 +125,7 @@ try {
 				$constrows_rows > 0 and
 				$achievements_rows > 0) {
 			//header('location: logged.php');
-			header('Location: ../index.html');
+			header('Location: ../index.php');
 		}
 		else{
 			//header("Location: login.php");

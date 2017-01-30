@@ -96,7 +96,7 @@
       // Solo se tutti gli insert sono andati a buon fine
       if ( $result_user and $result_campaign and $result_arch and $result_grade){
           //header('location: registered.php');
-          header('Location: ../index.html');
+          header('Location: ../index.php');
       }
     }
 }
