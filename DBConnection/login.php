@@ -68,8 +68,7 @@ try {
 		$user_query->execute();
 		$user_rows = $user_query->fetch();
 		//save the user loggedin
-		$_SESSION['loggedin'] = true;
-		$_SESSION['loggedinUser'] = $login;
+		
 
 		/* 	Riga originale ma non funzionante
 				$rows = $result->fetch(PDO::FETCH_NUM); */
@@ -133,6 +132,8 @@ try {
 			 	$achievements_rows > 0)
 			 {
 			//header('location: logged.php');
+		 	$_SESSION['loggedin'] = true;
+			$_SESSION['loggedinUser'] = $login;
 			header('Location: ../index.php');
 		}
 		else{

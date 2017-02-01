@@ -35,7 +35,18 @@ $(document).ready(function(){
         alert ("Livello passato!");
         
         //Query to update the level of the user
-
+        var stringa;
+        var oReq = new XMLHttpRequest(); //New request object
+        oReq.onload = function() {
+        //This is where you handle what to do with the response.
+        //The actual data is found on this.responseText
+        stringa = this.responseText; //Will alert: 42
+        };
+        oReq.open("get", "nextlevel.php", false);
+        //                               ^ block the rest of the execution.
+        //                                 Don't wait until the request finishes to 
+        //                                 continue.
+        oReq.send(); 
 
 
         //Code to reload and reupdate the level  
@@ -46,7 +57,7 @@ $(document).ready(function(){
         //The actual data is found on this.responseText
         stringa = this.responseText; //Will alert: 42
         };
-        oReq.open("get", "reload_level.php", false);
+        oReq.open("get", "load_level.php", false);
         //                               ^ block the rest of the execution.
         //                                 Don't wait until the request finishes to 
         //                                 continue.

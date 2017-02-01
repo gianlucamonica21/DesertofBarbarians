@@ -44,8 +44,10 @@ $conn = null;
   var x = "<?php echo $x;?>"
   var level = "<?php echo $level;?>"
   
-  alert("You are logged as " + x);
-  alert("With level " + level);
+//  document.getElementById("spanUser").textContent=;
+
+  //alert("You are logged as " + x);
+  //alert("With level " + level);
   
 </script>
 <!DOCTYPE html>
@@ -123,7 +125,7 @@ $conn = null;
 
           <ul class="nav navbar-nav navbar-right">
             <button type="button" class="btn btn-default btn-lg navbar-btn text-center">
-              <span> Welcome, user!</span><br> Logout
+              <span id="spanUser"><?php echo "Welcome ".$x;?> </span><br> Logout
             </button>
           </ul>
         </div>
