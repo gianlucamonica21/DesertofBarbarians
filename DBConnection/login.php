@@ -39,7 +39,7 @@
 <script src="js/login.script.js">
 </script>​
 <?php
-//include "dbconfig.php";
+
 session_start();
 $servername = "localhost";
 $user = "root";
@@ -61,17 +61,19 @@ try {
 	//check the input of data
 	if(!empty($login) and !empty($password)){
     // l.1 query to login
+
 		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login AND password= :password");
 		$user_query->bindParam(':login', $login);
 		$user_query->bindParam(':password', $password);
 		$user_query->execute();
+		$user_rows = $user_query->fetch();
 		//save the user loggedin
 		$_SESSION['loggedin'] = true;
 		$_SESSION['loggedinUser'] = $login;
 		
 		/* 	Riga originale ma non funzionante
 				$rows = $result->fetch(PDO::FETCH_NUM); */
-		$user_rows = $user_query->fetch();
+		
 		$total_score = $user_rows["score"];
 
 		// l.2 Estrai grado
@@ -119,11 +121,13 @@ try {
 			$achievements[] = $achievements_row["achievement"];
 		}
 
-		if($user_rows > 0 and
-				$grade_rows > 0 and
-				$level_rows > 0 and
-				$constrows_rows > 0 and
-				$achievements_rows > 0) {
+		if($user_rows > 0
+			 and
+			 	$grade_rows > 0 and
+			 	$level_rows > 0 and
+			 	$constrows_rows > 0 and
+			 	$achievements_rows > 0)
+			 {
 			//header('location: logged.php');
 			header('Location: ../index.php');
 		}
