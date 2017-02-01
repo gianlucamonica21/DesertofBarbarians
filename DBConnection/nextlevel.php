@@ -15,34 +15,48 @@ try {
 		echo "Error! You are not connected!";
 	}
 	//retrieve of the data inputby user
-	$current_player = "maxim";
-	$password = "maxim";
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+	  $current_player = $_SESSION['loggedinUser'];
+		$old_total_score = $_SESSION['totalScore'];
+		$max_level = $_SESSION['maxLevel'];
+		$old_current_level_score = $_SESSION['maxCurrentLevelScore'];
+		$new_current_level_score = $_SESSION['levelScore'];
+	} else {
+	  echo '<script type="text/javascript">alert("non sei loggato");</script>';
+	}
 
 	//check the input of data
-	if(!empty($login) and !empty($password)){
-    /*
-    	Codice temporaneo da spostare, quando un utente finisce un livello
-    */
+	if(!empty($current_player)){
     // Altrimenti, e se è più grande, aggiorna lo score
-    $update_score_query = conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
-    $update_score_query->bindParam(':score', $new_level_score);
-    $update_score_query->bindParam(':login', $current_player);
-    $update_score_query->bindParam(':level', $current_level);
-    $update_score_query->execute();
+		if($new_current_level_score > $old_current_level_score) {
+	    $update_score_query = conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
+	    $update_score_query->bindParam(':score', $new_current_level_score);
+	    $update_score_query->bindParam(':login', $current_player);
+	    $update_score_query->bindParam(':level', $current_level);
+	    $update_score_query->execute();
+		}
 
     // E una volta finito il livello aggiorna anche lo score totale
-    // Lo score totale lo si prende con la query riciclabile da login.php
-    // In php lo si somma ai punti appena guadagnati e si fa SET
-    $new_total_score = 0;
+    $new_total_score = $old_total_score + $new_current_level_score;
+		$_SESION['totalScore'] = $new_total_score;
     $update_total_score = conn->prepare("UPDATE User SET score= :score WHERE login= :login");
     $update_total_score->bindParam(':score', $new_total_score);
     $update_total_score->bindParam(':login', $current_player);
     $update_total_score->execute();
 
-    // Ma bisogna aggiornare anche grado
+    // Aggiornamento grado
 
-    // Entrati in un nuovo livello, esrai le relative informazioni
-    // query riusabile da login.php
+		// Aggiornamento achievements
+
+		// Inserzione nuovo livello sbloccato
+		if ($max_level < 10) {
+			$max_level = $max_level + 1;
+			$sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :level, :score)";
+			$sql_campaign_insertion->bindParam(':login', $current_player);
+			$sql_campaign_insertion->bindParam(':level', $max_level);
+			$sql_campaign_insertion->bindParam(':score', 0);
+		}
+
 		if(true) {
 			//header('location: logged.php');
 			header('Location: ../index.html');

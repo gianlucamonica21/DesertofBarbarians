@@ -6,7 +6,7 @@ $(document).ready(function(){
   // scrittura su file modificato nell'editor
   var data = new FormData();
   data.append("data" , window.editor.getValue());
-  var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+  var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
   xhr.open( 'post', 'SaveToFile.php', true);
   xhr.send(data);
   location.reload();
@@ -22,7 +22,7 @@ $(document).ready(function(){
      // scrittura su file modificato nell'editor
      var data = new FormData();
      data.append("data" , window.editor.getValue());
-     var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+     var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
      xhr.open( 'post', 'SaveToFile.php', true);
      xhr.send(data);
      location.reload();
@@ -32,10 +32,9 @@ $(document).ready(function(){
     }
 
     if (test == true){
-    	alert ("Livello passato!"); 
-      // query per incrementare livello dell' utente 
+    	alert ("Livello passato!");
+				
 
-      
         // var data = new FormData();
         // data.append("data" , window.editor.getValue());
         // var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
@@ -48,6 +47,5 @@ $(document).ready(function(){
 });
 
 
-	
-});
 
+});

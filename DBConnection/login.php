@@ -68,11 +68,12 @@ try {
 		//save the user loggedin
 		$_SESSION['loggedin'] = true;
 		$_SESSION['loggedinUser'] = $login;
-		
+
 		/* 	Riga originale ma non funzionante
 				$rows = $result->fetch(PDO::FETCH_NUM); */
 		$user_rows = $user_query->fetch();
 		$total_score = $user_rows["score"];
+		$_SESSION['totalScore'] = $total_score;
 
 		// l.2 Estrai grado
 		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
@@ -80,6 +81,7 @@ try {
 		$grade_query->execute();
 		$grade_rows = $grade_query->fetch();
 		$grade = $grade_rows["grade"];
+		$_SESSION['userGrade'] = $grade;
 
 		// l.3 Estrai massimo livello completato dal giocatore
 		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
@@ -87,6 +89,7 @@ try {
 		$level_query->execute();
 		$level_rows = $level_query->fetch();
 		$max_level = $level_rows["maxlevel"];
+		$_SESSION['maxLevel'] = $max_level;
 
 		/* l.4 Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
 			allora lo score sarà zero */
@@ -96,6 +99,7 @@ try {
 		$score_query->execute();
 		$score_row = $score_query->fetch();
 		$max_level_record_score = $score_row["score"];
+		$_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
 
 		// l.5 Estrai le righe non modificabili per il massimo livello
 		$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
