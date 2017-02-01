@@ -59,7 +59,7 @@ try {
 
 		if(true) {
 			//header('location: logged.php');
-			header('Location: ../index.html');
+			header('Location: ../index.php');
 		}
 		else{
 			//header("Location: login.php");
