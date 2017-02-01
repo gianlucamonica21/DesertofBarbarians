@@ -70,7 +70,6 @@ try {
 		// Save the user loggedin
 		$_SESSION['loggedin'] = true;
 		$_SESSION['loggedinUser'] = $login;
-		$_SESSION['totalScore'] = $user_rows["score"];
 
 		if($user_rows > 0) {
 			header('Location: ../index.php');
