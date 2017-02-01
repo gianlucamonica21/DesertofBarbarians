@@ -66,12 +66,82 @@ try {
 		$user_query->bindParam(':password', $password);
 		$user_query->execute();
 		$user_rows = $user_query->fetch();
+<<<<<<< HEAD
+		//save the user loggedin
+		
+
+		/* 	Riga originale ma non funzionante
+				$rows = $result->fetch(PDO::FETCH_NUM); */
+		
+		$total_score = $user_rows["score"];
+		$_SESSION['totalScore'] = $total_score;
+
+		// l.2 Estrai grado
+		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
+		$grade_query->bindParam(':login', $login);
+		$grade_query->execute();
+		$grade_rows = $grade_query->fetch();
+		$grade = $grade_rows["grade"];
+		$_SESSION['userGrade'] = $grade;
+
+		// l.3 Estrai massimo livello completato dal giocatore
+		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+		$level_query->bindParam(':login', $login);
+		$level_query->execute();
+		$level_rows = $level_query->fetch();
+		$max_level = $level_rows["maxlevel"];
+		$_SESSION['maxLevel'] = $max_level;
+
+		/* l.4 Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
+			allora lo score sarà zero */
+		$score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
+		$score_query->bindParam(':login', $login);
+		$score_query->bindParam(':level', $max_level);
+		$score_query->execute();
+		$score_row = $score_query->fetch();
+		$max_level_record_score = $score_row["score"];
+		$_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
+
+		// l.5 Estrai le righe non modificabili per il massimo livello
+		$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
+		$constrows_query->bindParam(':level', $max_level);
+		$constrows_query->execute();
+		$constrows_rows = $constrows_query->fetchAll();
+		foreach ($constrows_rows as $constrow) {
+			/* L'array constrows conterrà i numeri di tutte le righe costanti
+			   per il livello caricato dopo il login */
+			$constrows[] = $constrow["row"];
+		}
+
+		// l.6 Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
+		$achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
+		$achievements_query->bindParam(':login', $login);
+		$achievements_query->execute();
+		$achievements_rows = $achievements_query->fetchAll();
+		foreach ($achievements_rows as $achievements_row) {
+			/* L'array achievements conterrà i codici di tutti i badges mai
+			   guadagnati dall'utente appena loggato */
+			$achievements[] = $achievements_row["achievement"];
+		}
+
+		if($user_rows > 0
+			 and
+			 	$grade_rows > 0 and
+			 	$level_rows > 0 and
+			 	$constrows_rows > 0 and
+			 	$achievements_rows > 0)
+			 {
+			//header('location: logged.php');
+		 	$_SESSION['loggedin'] = true;
+			$_SESSION['loggedinUser'] = $login;
+=======
 
 		// Save the user loggedin
 		$_SESSION['loggedin'] = true;
 		$_SESSION['loggedinUser'] = $login;
 
 		if($user_rows > 0) {
+>>>>>>> a4f07ec4f27c2b87486d68595213e3ad8075f0af
 			header('Location: ../index.php');
 		}
 		else {
