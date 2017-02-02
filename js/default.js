@@ -42,11 +42,15 @@ $(document).ready(function(){
         //The actual data is found on this.responseText
         stringa = this.responseText; //Will alert: 42
         };
-        oReq.open("get", "nextlevel.php", false);
+        oReq.open("get", "DBConnection/nextlevel.php", false);
         //                               ^ block the rest of the execution.
         //                                 Don't wait until the request finishes to 
         //                                 continue.
-        oReq.send(); 
+        oReq.send();
+        alert(stringa);
+        
+
+
 
 
         //Code to reload and reupdate the level  
@@ -57,7 +61,7 @@ $(document).ready(function(){
         //The actual data is found on this.responseText
         stringa = this.responseText; //Will alert: 42
         };
-        oReq.open("get", "load_level.php", false);
+        oReq.open("get", "../DBConnection/load_level.php", false);
         //                               ^ block the rest of the execution.
         //                                 Don't wait until the request finishes to 
         //                                 continue.
