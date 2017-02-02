@@ -27,7 +27,7 @@ try {
 
 	//check the input of data
 	if(!empty($current_player)){
-    // Altrimenti, e se è più grande, aggiorna lo score
+    // Se è più grande, aggiorna lo score
 		if($new_current_level_score > $old_current_level_score) {
 	    $update_score_query = conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
 	    $update_score_query->bindParam(':score', $new_current_level_score);
@@ -58,13 +58,10 @@ try {
 		}
 
 		if(true) {
-			//header('location: logged.php');
 			header('Location: ../index.php');
 		}
 		else{
-			//header("Location: login.php");
 			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password. Please verify!<A HREF="registration.php">Please go here.</A></div>';
-
 		}
 	}
 }
