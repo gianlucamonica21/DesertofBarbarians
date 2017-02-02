@@ -1,3 +1,3 @@
 var rechargeAntiMissileBatteries = function () {
-	amb[2].missilesLeft = 0;
+	antiMissileBatteries[1].missilesLeft = 6;
 }; 
