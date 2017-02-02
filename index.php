@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors', 1);
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
@@ -31,6 +32,7 @@ try {
   $level_query->execute();
   $level_rows = $level_query->fetch();
   $level = $level_rows["level"];
+  $_SESSION["level"] = $level;
 
 }
 catch(PDOException $e)
@@ -153,8 +155,8 @@ $conn = null;
               //load the correct level of the user
                 switch ($level) {
                   case 1:
-                  echo '<script src="js/Levels/Three/levelThree.js" type="text/javascript"></script>
-                  <script src="js/Levels/Three/MissileCommand2.js" type="text/javascript">
+                  echo '<script src="js/levels/3/levelThree.js" type="text/javascript"></script>
+                  <script src="js/levels/3/MissileCommand.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
                   break;
@@ -420,7 +422,7 @@ $conn = null;
       window.editor.removeLineWidget(widgets[i]);
 
     widgets.length = 0;
-    xhr.open("GET", "js/Levels/Three/levelThree.js", true);
+    xhr.open("GET", "js/levels/3/levelThree.js", true);
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {

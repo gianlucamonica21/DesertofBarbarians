@@ -88,7 +88,7 @@ var initializeLevel = function() {
 // Create a certain number of enemy missiles based on the game level
 var createEmemyMissiles = function() {
     var targets = viableTargets(),
-        numMissiles = /*gamelevel.missilesAmount;*/ 5;
+        numMissiles = /*Increased since last level*/ 20;
     for( var i = 0; i < numMissiles; i++ ) {
         enemyMissiles.push( new EnemyMissile(targets) );
     }
