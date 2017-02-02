@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors', 1);
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
@@ -33,6 +34,7 @@ try {
   $level_query->execute();
   $level_rows = $level_query->fetch();
   $level = $level_rows["level"];
+  $_SESSION["level"] = $level;
 
   if(!empty($current_player)){
     $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
@@ -216,19 +218,19 @@ $conn = null;
               //load the correct level of the user
                 switch ($level) {
                   case 1:
-                  echo '<script src="js/Levels/One/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/One/MissileCommand2.js" type="text/javascript">
+                  echo '<script src="js/levels/3/levelThree.js" type="text/javascript"></script>
+                  <script src="js/levels/3/MissileCommand.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
                   break;
                   case 2:
-                  echo '<script src="js/Levels/Two/setSpeed.js" type="text/javascript"></script>
+                  echo '<script src="js/Levels/Two/levelTwo.js" type="text/javascript"></script>
                   <script src="js/Levels/Two/MissileCommand2.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
                   break;
                   case 3:
-                  echo '<script src="js/Levels/Three/setSpeed.js" type="text/javascript"></script>
+                  echo '<script src="js/Levels/Three/levelThree.js" type="text/javascript"></script>
                   <script src="js/Levels/Three/MissileCommand2.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
@@ -499,7 +501,7 @@ $conn = null;
       window.editor.removeLineWidget(widgets[i]);
 
     widgets.length = 0;
-    xhr.open("GET", "js/Levels/One/setSpeed.js", true);
+    xhr.open("GET", "js/levels/3/levelThree.js", true);
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -519,7 +521,7 @@ $conn = null;
             msg.appendChild(document.createTextNode(err.reason));
             msg.className = "lint-error";
             alert("errore di sintassi");
-            widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true}));
+            widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true})); 
           }
         } else {
           console.error(xhr.statusText);

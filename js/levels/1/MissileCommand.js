@@ -1,6 +1,5 @@
 // Missile Command
 
-//ciao(); 
 
 var canvas = document.querySelector( 'canvas' ),
   ctx = canvas.getContext( '2d' );
@@ -8,7 +7,7 @@ var canvas = document.querySelector( 'canvas' ),
 // Constants
 var CANVAS_WIDTH  = canvas.width,
   CANVAS_HEIGHT = canvas.height,
-  SPEEDMISSILEDEFENSE = setSpeed(),
+  SPEEDMISSILEDEFENSE = 12,
   MISSILE = {
     active: 1,
     exploding: 2,
@@ -18,8 +17,8 @@ var CANVAS_WIDTH  = canvas.width,
 
 // Variables
 var levelscore = 0,
-  level = 3,
-  maxLevel = 3,
+  level = 1,
+  maxLevel = 1,
   levelIndex = {},
   cities = [],
   antiMissileBatteries = [],
@@ -81,7 +80,7 @@ var initializeLevel = function() {
     playerMissiles = [];
     enemyMissiles = [];
     createEmemyMissiles();
-    createBonusMissiles(/*gamelevel.missilesBonus*/5);
+    createBonusMissiles(/*gamelevel.missilesBonus*/0);
     drawBeginLevel();
 };
 
@@ -135,7 +134,7 @@ var drawLevelMessage = function() {
     ctx.fillStyle = '#6d6';
 
     ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'click to start.You are a the Second Level!', 130, 180 );
+    ctx.fillText( 'click to start.You are a the First Level!', 130, 180 );
 
  
 
@@ -492,7 +491,7 @@ PlayerMissile.prototype.update = function() {
 };
 
 // Create a missile that will be shot at indicated location
-var playerShoot = function( x, y ) {
+/* var playerShoot = function( x, y ) {
     if( y >= 50 && y <= 370 ) {
       var source = whichAntiMissileBattery( x );
       if( source === -1 ){ // No missiles left
@@ -500,7 +499,7 @@ var playerShoot = function( x, y ) {
       }
       playerMissiles.push( new PlayerMissile( source, x, y ) );
     }
-};
+}; */
 
 // Constructor for the Enemy's Missile, which is a subclass of Missile
 // and uses Missile's constructor
@@ -923,3 +922,13 @@ function isDefined (x) {
     var undef;
     return x !== undef;
 };
+
+function userSolutionChecker(){
+    //check the missile speed
+    if (SPEEDMISSILEDEFENSE > 8 && SPEEDMISSILEDEFENSE < 15){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
