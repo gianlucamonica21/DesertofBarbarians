@@ -32,7 +32,7 @@ try {
   $level_query->execute();
   $level_rows = $level_query->fetch();
   $level = $level_rows["level"];
-  $_SESSION["level"] = $level;
+  $_SESSION["level"] = 3;
 
 }
 catch(PDOException $e)
@@ -86,7 +86,7 @@ $conn = null;
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body>
+    <body level=<?php echo $_SESSION['level']?>>
       <!-- NAVBAR -->
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -152,308 +152,270 @@ $conn = null;
              <div class="row" id="mc-container">
               <canvas id="miscom" class="game center-block" width="510" height="460">
                 <?php
-              //load the correct level of the user
-                switch ($level) {
-                  case 1:
-                  echo '<script src="js/levels/3/levelThree.js" type="text/javascript"></script>
-                  <script src="js/levels/3/MissileCommand.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 2:
-                  echo '<script src="js/Levels/Two/levelTwo.js" type="text/javascript"></script>
-                  <script src="js/Levels/Two/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 3:
-                  echo '<script src="js/Levels/Three/levelThree.js" type="text/javascript"></script>
-                  <script src="js/Levels/Three/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 4:
-                  echo '<script src="js/Levels/Four/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Four/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 5:
-                  echo '<script src="js/Levels/Five/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Five/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 6:
-                  echo '<script src="js/Levels/Six/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Six/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 7:
-                  echo '<script src="js/Levels/Seven/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Seven/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 8:
-                  echo '<script src="js/Levels/Eight/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Eight/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 9:
-                  echo '<script src="js/Levels/Nine/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Nine/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
-                  case 10:
-                  echo '<script src="js/Levels/Ten/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/Ten/MissileCommand2.js" type="text/javascript">
-                  </script> 
-                  <script type="text/javascript">  missileCommand(true);</script>' ;
-                  break;
+                // Load the correct level of the user
 
-                }
-                ?>
-                
-                Missile Command
-              </canvas>
-            </div>
+                // Convert current level number to string
+                $levelNumber = $_SESSION["level"];
+                $levelString = "$levelNumber";
+                if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
+                  // Load user solution file
+                  echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
+                } else {
+                  // Load default file
+                 echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
+               }
+                // Load base game
+               echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
+                // Start game
+               echo '<script type="text/javascript">  missileCommand(true); </script>'; 
+               ?> 
+
+               Missile Command
+             </canvas>
+           </div>
 
 
-          </div>
+         </div>
+       </div>
+     </div>
+     <!-- Editor panel  -->
+     <div class="col-lg-6 col-md-6 col-sm-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">Editor</div>
+        <div class="panel-body">
+          <textarea id="editor"></textarea>
+          <button  class="btn btn-default" id="submitButton">Execute</button>
+          <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
+
         </div>
-      </div>
-      <!-- Editor panel  -->
-      <div class="col-lg-6 col-md-6 col-sm-7">
-        <div class="panel panel-default">
-          <div class="panel-heading">Editor</div>
-          <div class="panel-body">
-            <textarea id="editor"></textarea>
-            <button  class="btn btn-default" id="submitButton">Execute</button>
-            <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
-
-          </div>
-        </div>
-
       </div>
 
     </div>
-    <!-- Chat Panel  -->
-    <div class="panel panel-default">
-      <div class="panel-heading">Level 1</div>
-      <div class="panel-body">
-        Panel content
-      </div>
-    </div>
-    <!-- PROFILE MODAL -->
-    <div class="modal" id="profileModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Profile</h4>
-          </div>
-          <div class="modal-body">
-            <div align="center">
-              <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div> 
-              <h2>Username</h2>  
-              <h3>RANK: Captain</h3>
-              <div class="progress">
-                <div class="progress-bar" style="width: 60%"></div>
-              </div>
-              <h4>Points to next rank: 7878</h4>
-            </div>
-            <div class="row">
-              <div class="col-md-6 col-xs-6 follow line" align="center">
-                <h3>125651 <br/> <span>POINTS</span>
-                </h3>
-              </div>
-              <div class="col-md-6 col-xs-6 follow line" align="center">
-                <h3>125651 <br/> <span>BADGES</span>
-                </h3>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- TUTORIAL MODAL -->
-    <div class="modal" id="tutorialModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">How to Play</h4>
-          </div>
-          <div class="modal-body">
-            <p>One fine body…</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LEVELS MODAL -->
-    <div class="modal" id="levelsModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Levels</h4>
-          </div>
-          <div class="modal-body">
-            <div class="btn-group">
-              <a href="#" type="button" class="btn btn-primary">1</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary">2</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary">3</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary">4</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary">5</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary disabled">6</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary disabled">7</a>
-            </div>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary disabled">8</a>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Go!</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- LEADERBOARD MODAL -->
-    <div class="modal" id="leaderboardModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Leaderboard</h4>
-          </div>
-          <div class="modal-body">
-            <table class="table table-striped table-hover table-bordered ">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Username</th>
-                  <th>Badges</th>
-                  <th>Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-              </tbody>
-            </table> 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Made by Gianluca Monica and Margherita Donnici.</p>
-          <p>Human-Computer Interaction course project, University of Bologna, 2016 </p>
-        </div>
-      </div>
-    </footer>
 
   </div>
+  <!-- Chat Panel  -->
+  <div class="panel panel-default">
+    <div class="panel-heading">Level 1</div>
+    <div class="panel-body">
+      Panel content
+    </div>
+  </div>
+  <!-- PROFILE MODAL -->
+  <div class="modal" id="profileModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Profile</h4>
+        </div>
+        <div class="modal-body">
+          <div align="center">
+            <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div> 
+            <h2>Username</h2>  
+            <h3>RANK: Captain</h3>
+            <div class="progress">
+              <div class="progress-bar" style="width: 60%"></div>
+            </div>
+            <h4>Points to next rank: 7878</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-xs-6 follow line" align="center">
+              <h3>125651 <br/> <span>POINTS</span>
+              </h3>
+            </div>
+            <div class="col-md-6 col-xs-6 follow line" align="center">
+              <h3>125651 <br/> <span>BADGES</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TUTORIAL MODAL -->
+  <div class="modal" id="tutorialModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">How to Play</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body…</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script type="text/javascript">
+  <!-- LEVELS MODAL -->
+  <div class="modal" id="levelsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Levels</h4>
+        </div>
+        <div class="modal-body">
+          <div class="btn-group">
+            <a href="#" type="button" class="btn btn-primary">1</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">2</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">3</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">4</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">5</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary disabled">6</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary disabled">7</a>
+          </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary disabled">8</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Go!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- LEADERBOARD MODAL -->
+  <div class="modal" id="leaderboardModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Leaderboard</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped table-hover table-bordered ">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Badges</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+              </tr>
+            </tbody>
+          </table> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Made by Gianluca Monica and Margherita Donnici.</p>
+        <p>Human-Computer Interaction course project, University of Bologna, 2016 </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script type="text/javascript">
 
   // set editor by CodeMirror function
-  var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
-   mode: "javascript",
-   lineNumbers: true,
-   styleSelectedText: true
- });
+  var editor = 
+  CodeMirror.fromTextArea(document.getElementById("editor"),{
+    mode: "javascript",
+    lineNumbers: true,
+    styleSelectedText: true
+  });
+  
+  $.ajax({
+    url: 'getLevel.php',
+    type: 'GET',
+    success: function(result){
+      loadLevelJs(result);
+    }
+
+  });
 
 
-
-   	//read from the file.js and set the content in the Editor
+  function loadLevelJs(path){
     var xhr = new XMLHttpRequest();
-    //TO DO -> implement a logical load of level and file
-    var widgets = [];
+      //TO DO -> implement a logical load of level and file
+      var widgets = [];
 
-    for (var i = 0; i < widgets.length; ++i)
-      window.editor.removeLineWidget(widgets[i]);
+      for (var i = 0; i < widgets.length; ++i)
+        window.editor.removeLineWidget(widgets[i]);
 
-    widgets.length = 0;
-    xhr.open("GET", "js/levels/3/levelThree.js", true);
-    xhr.onload = function (e) {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-		      //Read the file content and set in the editor
-		      editor.setValue(xhr.responseText);
-          //Check errors present in the content of the editor
-          JSHINT(editor.getValue());
+      widgets.length = 0;
 
-          // insert of the error comment in the editor at the right line
-          for (var i = 0; i < JSHINT.errors.length; ++i) {
-            var err = JSHINT.errors[i];
-            if (!err) continue;
-            var msg = document.createElement("div");
-            var icon = msg.appendChild(document.createElement("span"));
-            icon.innerHTML = "*---->";
-            icon.className = "lint-error-icon";
-            msg.appendChild(document.createTextNode(err.reason));
-            msg.className = "lint-error";
-            alert("errore di sintassi");
-            widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true})); 
+      xhr.open("GET", path, true);
+      xhr.onload = function (e) {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            //Read the file content and set in the editor
+            editor.setValue(xhr.responseText);
+            //Check errors present in the content of the editor
+            JSHINT(editor.getValue());
+
+            // insert of the error comment in the editor at the right line
+            for (var i = 0; i < JSHINT.errors.length; ++i) {
+              var err = JSHINT.errors[i];
+              if (!err) continue;
+              var msg = document.createElement("div");
+              var icon = msg.appendChild(document.createElement("span"));
+              icon.innerHTML = "*---->";
+              icon.className = "lint-error-icon";
+              msg.appendChild(document.createTextNode(err.reason));
+              msg.className = "lint-error";
+              alert("errore di sintassi");
+              widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true})); 
+            }
+          } else {
+            console.error(xhr.statusText);
           }
-        } else {
-          console.error(xhr.statusText);
         }
-      }
-    };
-    xhr.onerror = function (e) {
-      console.error(xhr.statusText);
-    };
-    xhr.send(null);
-
+      };
+      xhr.onerror = function (e) {
+        console.error(xhr.statusText);
+      };
+      xhr.send(null);      
+    }
   </script>
 </body>
 </html>
