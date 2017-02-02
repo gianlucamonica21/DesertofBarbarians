@@ -47,7 +47,7 @@ $(document).ready(function(){
         //                                 Don't wait until the request finishes to 
         //                                 continue.
         oReq.send();
-        alert(stringa);
+        alert("RISULTATO PRIMA CHIAMATA da defalut.js : "+ stringa);
         
 
 
@@ -61,11 +61,12 @@ $(document).ready(function(){
         //The actual data is found on this.responseText
         stringa = this.responseText; //Will alert: 42
         };
-        oReq.open("get", "../DBConnection/load_level.php", false);
+        oReq.open("get", "DBConnection/load_level.php", false);
         //                               ^ block the rest of the execution.
         //                                 Don't wait until the request finishes to 
         //                                 continue.
         oReq.send(); 
+        alert("RISULTATO SECONDA CHIAMATA da default.js :" + stringa);
 
 
 

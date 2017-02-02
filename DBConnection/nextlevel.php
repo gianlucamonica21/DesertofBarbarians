@@ -34,7 +34,7 @@ try {
     $stmt->execute();
 
 
-	 echo "ho fatto la query!";
+	 echo "ho fatto la query in NEXT!";
 
 
 
