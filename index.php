@@ -1,11 +1,13 @@
 <?php
+ini_set('display_errors', 1);
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
-  $x = $_SESSION['loggedinUser'];  
+  $current_player = $_SESSION['loggedinUser'];  
 } else {
   echo '<script type="text/javascript">alert("non sei loggato");</script>';
 }
+
 
 //include "dbconfig.php";
 $servername = "localhost";
@@ -24,13 +26,84 @@ try {
   //retrieve of the data inputby user
   
 
-  //check the level of the user loggedin 
+  //check the level of the user loggedin
+  // LOAD LEVEL
 
   $level_query = $conn->prepare("SELECT level from User join Level where login = :login ");
-  $level_query->bindParam(':login', $x);
+  $level_query->bindParam(':login', $current_player);
   $level_query->execute();
   $level_rows = $level_query->fetch();
   $level = $level_rows["level"];
+  $_SESSION["level"] = $level;
+
+
+
+  // if(!empty($current_player)){
+  //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
+  //   $user_query->bindParam(':login', $current_player);
+  //   $user_query->execute();
+  //   $user_rows = $user_query->fetch();
+  //   $total_score = $user_rows["score"];
+  //   $_SESSION['totalScore'] = $total_score;
+  //   // Estrai grado
+  //   $grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
+  //   $grade_query->bindParam(':login', $current_player);
+  //   $grade_query->execute();
+  //   $grade_rows = $grade_query->fetch();
+  //   $grade = $grade_rows["grade"];
+  //   $_SESSION['userGrade'] = $grade;
+
+  //   // Estrai massimo livello completato dal giocatore
+  //   $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+  //   $level_query->bindParam(':login', $current_player);
+  //   $level_query->execute();
+  //   $level_rows = $level_query->fetch();
+  //   $max_level = $level_rows["maxlevel"];
+  //   $_SESSION['maxLevel'] = $max_level;
+
+  //   /* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
+  //     allora lo score sarà zero */
+  //   $score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
+  //   $score_query->bindParam(':login', $current_player);
+  //   $score_query->bindParam(':level', $max_level);
+  //   $score_query->execute();
+  //   $score_row = $score_query->fetch();
+  //   $max_level_record_score = $score_row["score"];
+  //   $_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
+
+  //   // Estrai le righe non modificabili per il massimo livello
+  //   $constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
+  //   $constrows_query->bindParam(':level', $max_level);
+  //   $constrows_query->execute();
+  //   $constrows_rows = $constrows_query->fetchAll();
+  //   foreach ($constrows_rows as $constrow) {
+  //     /* L'array constrows conterrà i numeri di tutte le righe costanti
+  //        per il livello caricato dopo il login */
+  //     $constrows[] = $constrow["row"];
+  //   }
+
+  //   // Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
+  //   $achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
+  //   $achievements_query->bindParam(':login', $current_player);
+  //   $achievements_query->execute();
+  //   $achievements_rows = $achievements_query->fetchAll();
+  //   foreach ($achievements_rows as $achievements_row) {
+  //     /* L'array achievements conterrà i codici di tutti i badges mai
+  //        guadagnati dall'utente appena loggato */
+  //     $achievements[] = $achievements_row["achievement"];
+  //   }
+
+
+  //  }  
+
+  //   if($grade_rows > 0 and
+  //       $level_rows > 0 and
+  //       $constrows_rows > 0 and
+  //       $achievements_rows > 0) {
+  //         echo '<script>alert("Query done!")</script>';
+  //   }
+
+
 
 }
 catch(PDOException $e)
@@ -41,14 +114,8 @@ catch(PDOException $e)
 $conn = null;
 ?>
 <script type="text/javascript">
-  var x = "<?php echo $x;?>"
+  var x = "<?php echo $current_player;?>"
   var level = "<?php echo $level;?>"
-  
-//  document.getElementById("spanUser").textContent=;
-
-  //alert("You are logged as " + x);
-  //alert("With level " + level);
-  
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,7 +192,7 @@ $conn = null;
 
           <ul class="nav navbar-nav navbar-right">
             <button type="button" class="btn btn-default btn-lg navbar-btn text-center">
-              <span id="spanUser"><?php echo "Welcome ".$x;?> </span><br> Logout
+              <span id="spanUser"><?php echo "Welcome ".$current_player;?> </span><br> Logout
             </button>
           </ul>
         </div>
@@ -153,19 +220,19 @@ $conn = null;
               //load the correct level of the user
                 switch ($level) {
                   case 1:
-                  echo '<script src="js/Levels/One/setSpeed.js" type="text/javascript"></script>
-                  <script src="js/Levels/One/MissileCommand2.js" type="text/javascript">
+                  echo '<script src="js/levels/3/levelThree.js" type="text/javascript"></script>
+                  <script src="js/levels/3/MissileCommand.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
                   break;
                   case 2:
-                  echo '<script src="js/Levels/Two/setSpeed.js" type="text/javascript"></script>
+                  echo '<script src="js/Levels/Two/levelTwo.js" type="text/javascript"></script>
                   <script src="js/Levels/Two/MissileCommand2.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
                   break;
                   case 3:
-                  echo '<script src="js/Levels/Three/setSpeed.js" type="text/javascript"></script>
+                  echo '<script src="js/Levels/Three/levelThree.js" type="text/javascript"></script>
                   <script src="js/Levels/Three/MissileCommand2.js" type="text/javascript">
                   </script> 
                   <script type="text/javascript">  missileCommand(true);</script>' ;
@@ -409,7 +476,21 @@ $conn = null;
    styleSelectedText: true
  });
 
-
+  //Code to reload and reupdate the level  
+    var stringa;
+    var oReq = new XMLHttpRequest(); //New request object
+    oReq.onload = function() {
+    //This is where you handle what to do with the response.
+    //The actual data is found on this.responseText
+    stringa = this.responseText; //Will alert: 42
+    };
+    oReq.open("get", "DBConnection/load_level.php", false);
+    //                               ^ block the rest of the execution.
+    //                                 Don't wait until the request finishes to 
+    //                                 continue.
+    oReq.send(); 
+    alert("RISULTATO  CHIAMATA da index :" + stringa);
+  
 
    	//read from the file.js and set the content in the Editor
     var xhr = new XMLHttpRequest();
@@ -420,7 +501,7 @@ $conn = null;
       window.editor.removeLineWidget(widgets[i]);
 
     widgets.length = 0;
-    xhr.open("GET", "js/Levels/One/setSpeed.js", true);
+    xhr.open("GET", "js/levels/3/levelThree.js", true);
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -440,7 +521,7 @@ $conn = null;
             msg.appendChild(document.createTextNode(err.reason));
             msg.className = "lint-error";
             alert("errore di sintassi");
-            widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true}));
+            widgets.push(window.editor.addLineWidget(err.line - 1, msg, {coverGutter: false, noHScroll: true})); 
           }
         } else {
           console.error(xhr.statusText);
