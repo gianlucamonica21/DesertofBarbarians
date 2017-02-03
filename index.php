@@ -259,7 +259,7 @@ $conn = null;
           <textarea id="editor"></textarea>
           <button  class="btn btn-default" id="submitButton">Execute</button>
           <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
-
+          <button  class="btn btn-default" id="returnButton">Restart Game</button>
         </div>
       </div>
 
@@ -422,6 +422,7 @@ $conn = null;
 
 <script type="text/javascript">
 
+  var stoppedGame = false;
   // set editor by CodeMirror function
   var editor = 
   CodeMirror.fromTextArea(document.getElementById("editor"),{
@@ -444,6 +445,7 @@ $conn = null;
     // }
     // alert("stai scrivendo");
     drawStopMessage();
+    stoppedGame = true;
   });
 
   //Code to reload and reupdate the level  

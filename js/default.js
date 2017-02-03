@@ -14,6 +14,14 @@ $(document).ready(function(){
 
 });
 
+  $('#returnButton').click(function(){
+    //nextFrame();
+    if(stoppedGame){
+     startLevel();
+     stoppedGame = false;
+  }
+  });
+
 	$('#evaluateButton').click(function(){
 
 

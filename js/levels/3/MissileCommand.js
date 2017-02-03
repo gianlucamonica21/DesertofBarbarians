@@ -143,7 +143,7 @@ var drawLevelMessage = function() {
 
 var drawStopMessage = function() {
     if(stopNumbers == 0){
-      
+
     }
     else
     { 
@@ -866,8 +866,10 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
+    if(stopNumbers>0){
     var fps = 30;
     timerID = setInterval( nextFrame, 1000 / fps );
+  }
 };
 
 // Determine which Anti Missile Battery will be used to serve a
