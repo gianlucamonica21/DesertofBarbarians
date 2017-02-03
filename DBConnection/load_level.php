@@ -19,92 +19,90 @@ try {
 	  echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
 
+	//
+	// $e = "nuovo";
+	// $ss = 1222;
+	// $level = 1;
+	//
+	// // $update_score_query =
+	// // conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
+	// // $result1 = $update_score_query->execute(array(':score'=>666,':login'=>"Nuovo",':level'=>1));
+	// $sql = "UPDATE Campaign SET score=:s WHERE login='maxim' AND level=1";
+	//
+  //   // Prepare statement
+  //   $stmt = $conn->prepare($sql);
+  //   $stmt->bindParam(':s', $ss,PDO::PARAM_INT);
+  //   // execute the query
+  //   $stmt->execute();
 
-	$e = "nuovo";
-	$ss = 1222;
-	$level = 1;
+	 // Check the input of data
+		if(!empty($current_player)){
+			$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
+			$user_query->bindParam(':login', $current_player);
+			$user_query->execute();
+			$user_rows = $user_query->fetch();
+			$total_score = $user_rows["score"];
+			$_SESSION['totalScore'] = $total_score;
 
-	// $update_score_query = 
-	// conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
-	// $result1 = $update_score_query->execute(array(':score'=>666,':login'=>"Nuovo",':level'=>1));
-	$sql = "UPDATE Campaign SET score=:s WHERE login='maxim' AND level=1";
+		// Estrai grado
+		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
+		$grade_query->bindParam(':login', $current_player);
+		$grade_query->execute();
+		$grade_rows = $grade_query->fetch();
+		$grade = $grade_rows["grade"];
+		$_SESSION['userGrade'] = $grade;
 
-    // Prepare statement
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':s', $ss,PDO::PARAM_INT);
-    // execute the query
-    $stmt->execute();
+		// Estrai massimo livello completato dal giocatore
+		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+		$level_query->bindParam(':login', $current_player);
+		$level_query->execute();
+		$level_rows = $level_query->fetch();
+		$max_level = $level_rows["maxlevel"];
+		$_SESSION['maxLevel'] = $max_level;
 
+		/* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
+			allora lo score sarà zero */
+		$score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
+		$score_query->bindParam(':login', $current_player);
+		$score_query->bindParam(':level', $max_level);
+		$score_query->execute();
+		$score_row = $score_query->fetch();
+		$max_level_record_score = $score_row["score"];
+		$_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
 
-	 echo "ho fatto la query in LOADLEVEL!";
-	// Check the input of data
-	// if(!empty($current_player)){
-	// 	$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
-	// 	$user_query->bindParam(':login', $current_player);
-	// 	$user_query->execute();
-	// 	$user_rows = $user_query->fetch();
-	// 	$total_score = $user_rows["score"];
-	// 	$_SESSION['totalScore'] = $total_score;
+		// Estrai le righe non modificabili per il massimo livello
+		$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
+		$constrows_query->bindParam(':level', $max_level);
+		$constrows_query->execute();
+		$constrows_rows = $constrows_query->fetchAll();
+		foreach ($constrows_rows as $constrow) {
+			/* L'array constrows conterrà i numeri di tutte le righe costanti
+			   per il livello caricato dopo il login */
+			$constrows[] = $constrow["row"];
+		}
 
-	// 	// Estrai grado
-	// 	$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
-	// 	$grade_query->bindParam(':login', $current_player);
-	// 	$grade_query->execute();
-	// 	$grade_rows = $grade_query->fetch();
-	// 	$grade = $grade_rows["grade"];
-	// 	$_SESSION['userGrade'] = $grade;
-
-	// 	// Estrai massimo livello completato dal giocatore
-	// 	$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-	// 	$level_query->bindParam(':login', $current_player);
-	// 	$level_query->execute();
-	// 	$level_rows = $level_query->fetch();
-	// 	$max_level = $level_rows["maxlevel"];
-	// 	$_SESSION['maxLevel'] = $max_level;
-
-	// 	/* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
-	// 		allora lo score sarà zero */
-	// 	$score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
-	// 	$score_query->bindParam(':login', $current_player);
-	// 	$score_query->bindParam(':level', $max_level);
-	// 	$score_query->execute();
-	// 	$score_row = $score_query->fetch();
-	// 	$max_level_record_score = $score_row["score"];
-	// 	$_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
-
-	// 	// Estrai le righe non modificabili per il massimo livello
-	// 	$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
-	// 	$constrows_query->bindParam(':level', $max_level);
-	// 	$constrows_query->execute();
-	// 	$constrows_rows = $constrows_query->fetchAll();
-	// 	foreach ($constrows_rows as $constrow) {
-	// 		/* L'array constrows conterrà i numeri di tutte le righe costanti
-	// 		   per il livello caricato dopo il login */
-	// 		$constrows[] = $constrow["row"];
-	// 	}
-
-	// 	// Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
-	// 	$achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
-	// 	$achievements_query->bindParam(':login', $current_player);
-	// 	$achievements_query->execute();
-	// 	$achievements_rows = $achievements_query->fetchAll();
-	// 	foreach ($achievements_rows as $achievements_row) {
-	// 		/* L'array achievements conterrà i codici di tutti i badges mai
-	// 		   guadagnati dall'utente appena loggato */
-	// 		$achievements[] = $achievements_row["achievement"];
-	// 	}
-
-	// 	if($grade_rows > 0 and
-	// 		 	$level_rows > 0 and
-	// 		 	$constrows_rows > 0 and
-	// 		 	$achievements_rows > 0) {
-
-	// 		header('Location: ../index.php');
-	// 	}
-	// 	else {
-	// 		echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password. Please verify!<A HREF="registration.php">Please go here.</A></div>';
-	// 	}
-	// }
+		// Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
+		$achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
+		$achievements_query->bindParam(':login', $current_player);
+		$achievements_query->execute();
+		$achievements_rows = $achievements_query->fetchAll();
+		foreach ($achievements_rows as $achievements_row) {
+			/* L'array achievements conterrà i codici di tutti i badges mai
+			   guadagnati dall'utente appena loggato */
+			$achievements[] = $achievements_row["achievement"];
+		}
+		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
+		// if($grade_rows > 0 and
+		// 	 	$level_rows > 0 and
+		// 	 	$constrows_rows > 0 and
+		// 	 	$achievements_rows > 0) {
+		//
+		// 	header('Location: ../index.php');
+		// }
+		// else {
+		// 	echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password. Please verify!<A HREF="registration.php">Please go here.</A></div>';
+		// }
+	}
 }
 catch(PDOException $e)
 {
