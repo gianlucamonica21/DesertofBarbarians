@@ -438,6 +438,14 @@ $conn = null;
     }
   });
 
+  editor.on('beforeChange',function(cm,change) {
+    // if ( ~readOnlyLines.indexOf(change.from.line) ) {
+    //   change.cancel();
+    // }
+    // alert("stai scrivendo");
+    drawStopMessage();
+  });
+
   //Code to reload and reupdate the level  
   var stringa;
     var oReq = new XMLHttpRequest(); //New request object

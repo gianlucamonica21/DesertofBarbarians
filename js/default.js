@@ -10,7 +10,7 @@ $(document).ready(function(){
   xhr.open( 'post', 'SaveToFile.php', true);
   xhr.send(data);
   location.reload();
-
+  //startLevel();
 
 });
 

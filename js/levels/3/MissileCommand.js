@@ -1,6 +1,6 @@
 // Missile Command
 
-
+var stopNumbers=0;
 var canvas = document.querySelector( 'canvas' ),
   ctx = canvas.getContext( '2d' );
 
@@ -139,6 +139,24 @@ var drawLevelMessage = function() {
     ctx.font = 'bold 32px monaco, consolas';
     ctx.fillStyle = '#d66';
     ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
+};
+
+var drawStopMessage = function() {
+    if(stopNumbers == 0){
+      
+    }
+    else
+    { 
+    ctx.fillStyle = '#6d6';
+
+    ctx.font =  '20px monaco, consolas';
+    ctx.fillText( 'Game is now stop', 130, 180 );
+    ctx.font = 'bold 32px monaco, consolas';
+    ctx.fillStyle = '#d66';
+    ctx.fillText( '', 130, 250 );
+    stopLevel();
+    } 
+    stopNumbers++;
 };
 
 // Show bonus points at end of a level
