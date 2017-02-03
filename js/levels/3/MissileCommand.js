@@ -112,7 +112,7 @@ var drawGameState = function() {
     drawBackground();
     drawCities();
     drawAntiMissileBatteries();
-    drawScore();
+ //   drawScore();
 };
 
 var drawBeginLevel = function() {
@@ -135,10 +135,7 @@ var drawLevelMessage = function() {
     ctx.fillStyle = '#6d6';
 
     ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'click to start.You are a the First Level!', 130, 180 );
-
- 
-
+    ctx.fillText( 'click to start third level.', 130, 180 );
     ctx.font = 'bold 32px monaco, consolas';
     ctx.fillStyle = '#d66';
     ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
@@ -150,15 +147,15 @@ var drawEndLevel = function( missilesLeft, missilesBonus, citiesSaved, citiesBon
     var bonus = missilesBonus + citiesBonus;
     ctx.fillStyle = '#6d6';
     ctx.font = 'bold 25px monaco, consolas';
-    ctx.fillText( 'BONUS POINTS: ' +  bonus, 150, 149 );
+ //   ctx.fillText( 'BONUS POINTS: ' +  bonus, 150, 149 );
 
     ctx.font = '20px monaco, consolas';
     ctx.fillStyle = 'white';
-    ctx.fillText( '' + missilesBonus, 170, 213 );
+ //   ctx.fillText( '' + missilesBonus, 170, 213 );
     ctx.fillStyle = 'white';
     ctx.fillText( 'Missiles Left: ' + missilesLeft, 230, 213 );
     ctx.fillStyle = 'white';
-    ctx.fillText( '' + citiesBonus, 170, 277 );
+ //   ctx.fillText( '' + citiesBonus, 170, 277 );
     ctx.fillStyle = 'white';
     ctx.fillText( 'Cities Saved: ' + citiesSaved, 230, 277 );
 };

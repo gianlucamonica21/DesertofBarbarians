@@ -1,4 +1,5 @@
 <?php
+
 //include "dbconfig.php";
 session_start();
 $servername = "localhost";
@@ -14,58 +15,47 @@ try {
 	if(!$conn){
 		echo "Error! You are not connected!";
 	}
-	//retrieve of the data inputby user
+
+	// Retrieve of the data inputby user
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-	  $current_player = $_SESSION['loggedinUser'];
+		$current_player = $_SESSION['loggedinUser'];
 		$old_total_score = $_SESSION['totalScore'];
-		$max_level = $_SESSION['maxLevel'];
 		$old_current_level_score = $_SESSION['maxCurrentLevelScore'];
-		$new_current_level_score = $_SESSION['levelScore'];
+		$max_level = $_SESSION['maxLevel'];
+		$new_current_level_score = 777;
+		//$new_current_level_score = $_SESSION['levelScore'];
 	} else {
-	  echo '<script type="text/javascript">alert("non sei loggato");</script>';
+		echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
 
-	//check the input of data
-	if(!empty($current_player)){
-    // Altrimenti, e se è più grande, aggiorna lo score
-		if($new_current_level_score > $old_current_level_score) {
-	    $update_score_query = conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
-	    $update_score_query->bindParam(':score', $new_current_level_score);
-	    $update_score_query->bindParam(':login', $current_player);
-	    $update_score_query->bindParam(':level', $current_level);
-	    $update_score_query->execute();
-		}
+	// Se è più grande, aggiorna lo score record del livello
+	if($new_current_level_score > $old_current_level_score) {
+		$update_score_query = conn->prepare("UPDATE Campaign SET score= :s WHERE login= :log AND level= :l");
+	  $update_score_query->bindParam(':s', $new_current_level_score);
+	  $update_score_query->bindParam(':log', $current_player);
+	  $update_score_query->bindParam(':l', $max_level);
+	  $update_score_query->execute();
+	}
 
-    // E una volta finito il livello aggiorna anche lo score totale
-    $new_total_score = $old_total_score + $new_current_level_score;
-		$_SESION['totalScore'] = $new_total_score;
-    $update_total_score = conn->prepare("UPDATE User SET score= :score WHERE login= :login");
-    $update_total_score->bindParam(':score', $new_total_score);
-    $update_total_score->bindParam(':login', $current_player);
-    $update_total_score->execute();
+	// E una volta finito il livello aggiorna anche lo score totale
+	$new_total_score = $old_total_score + $new_current_level_score;
+	$_SESSION['totalScore'] = $new_total_score;
+	$update_total_score = conn->prepare("UPDATE User SET score= :s WHERE login= :log");
+	$update_total_score->bindParam(':s', $new_total_score);
+	$update_total_score->bindParam(':log', $current_player);
+	$update_total_score->execute();
 
-    // Aggiornamento grado
+  // Aggiornamento grado
 
-		// Aggiornamento achievements
+	// Aggiornamento achievements
 
-		// Inserzione nuovo livello sbloccato
-		if ($max_level < 10) {
-			$max_level = $max_level + 1;
-			$sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :level, :score)";
-			$sql_campaign_insertion->bindParam(':login', $current_player);
-			$sql_campaign_insertion->bindParam(':level', $max_level);
-			$sql_campaign_insertion->bindParam(':score', 0);
-		}
-
-		if(true) {
-			//header('location: logged.php');
-			header('Location: ../index.php');
-		}
-		else{
-			//header("Location: login.php");
-			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password. Please verify!<A HREF="registration.php">Please go here.</A></div>';
-
-		}
+	// Inserzione nuovo livello sbloccato
+	if ($max_level < 10) {
+		$max_level = $max_level + 1;
+		$sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :log, :l, :s)";
+		$sql_campaign_insertion->bindParam(':log', $current_player);
+		$sql_campaign_insertion->bindParam(':l', $max_level);
+		$sql_campaign_insertion->bindParam(':s', 0);
 	}
 }
 catch(PDOException $e)

@@ -111,7 +111,7 @@ var drawGameState = function() {
     drawBackground();
     drawCities();
     drawAntiMissileBatteries();
-    drawScore();
+ //   drawScore();
 };
 
 var drawBeginLevel = function() {
@@ -134,10 +134,7 @@ var drawLevelMessage = function() {
     ctx.fillStyle = '#6d6';
 
     ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'click to start.You are a the First Level!', 130, 180 );
-
- 
-
+    ctx.fillText( 'click to start first level.', 130, 180 );
     ctx.font = 'bold 32px monaco, consolas';
     ctx.fillStyle = '#d66';
     ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
