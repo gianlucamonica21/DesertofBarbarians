@@ -439,12 +439,15 @@ $conn = null;
     }
   });
 
+  var startedCoding;
   editor.on('beforeChange',function(cm,change) {
     // if ( ~readOnlyLines.indexOf(change.from.line) ) {
     //   change.cancel();
     // }
     // alert("stai scrivendo");
     drawStopMessage();
+    startedCoding = (new Date()).getTime();
+    //console.log("Hai iniziato a scrivere :" + startCoding);
     stoppedGame = true;
   });
 

@@ -1,7 +1,9 @@
 $(document).ready(function(){
 
-	$('#submitButton').click(function(){
+  var finishedCoding;
+  $('#submitButton').click(function(){
 
+   
 
   // scrittura su file modificato nell'editor
   var data = new FormData();
@@ -19,14 +21,18 @@ $(document).ready(function(){
     if(stoppedGame){
      startLevel();
      stoppedGame = false;
-  }
-  });
+   }
+ });
 
-	$('#evaluateButton').click(function(){
+  $('#evaluateButton').click(function(){
+
+   finishedCoding = (new Date()).getTime();
+   difference = startedCoding - finishedCoding;
+   alert("Hai impiegato " + (-1*difference) + " millesimi di non so cosa per fornire la soluzione");
 
 
-		try{
-			var test = userSolutionChecker();
+   try{
+     var test = userSolutionChecker();
      // scrittura su file modificato nell'editor
      var data = new FormData();
      data.append("data" , window.editor.getValue());
@@ -49,8 +55,8 @@ $(document).ready(function(){
         //This is where you handle what to do with the response.
         //The actual data is found on this.responseText
         stringa = this.responseText; //Will alert: 42
-        };
-        oReq.open("get", "DBConnection/nextlevel.php", false);
+      };
+      oReq.open("get", "DBConnection/nextlevel.php", false);
         //                               ^ block the rest of the execution.
         //                                 Don't wait until the request finishes to 
         //                                 continue.
@@ -68,8 +74,8 @@ $(document).ready(function(){
         //This is where you handle what to do with the response.
         //The actual data is found on this.responseText
         stringa = this.responseText; //Will alert: 42
-        };
-        oReq.open("get", "DBConnection/load_level.php", false);
+      };
+      oReq.open("get", "DBConnection/load_level.php", false);
         //                               ^ block the rest of the execution.
         //                                 Don't wait until the request finishes to 
         //                                 continue.
@@ -79,10 +85,10 @@ $(document).ready(function(){
 
 
         location.reload();
-}
-else
- alert("Valore sbagliato: riprova ancora");
-});
+      }
+      else
+       alert("Valore sbagliato: riprova ancora");
+   });
 
 
 
