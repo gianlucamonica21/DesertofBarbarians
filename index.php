@@ -5,7 +5,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
   $current_player = $_SESSION['loggedinUser'];  
 } else {
-  echo '<script type="text/javascript">alert("non sei loggato");</script>';
+      header("location: DBConnection/loginPage.php");
 }
 
 
@@ -191,9 +191,9 @@ $conn = null;
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <button type="button" class="btn btn-default btn-lg navbar-btn text-center">
-              <span id="spanUser"><?php echo "Welcome ".$current_player;?> </span><br> Logout
-            </button>
+            <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php">
+              <span id="spanUser">Welcome <?php echo $current_player ?> !</span><br> Logout
+            </a>
           </ul>
         </div>
       </div>
@@ -210,7 +210,7 @@ $conn = null;
         </div>
         <!-- Chat Panel  -->
         <div class="panel panel-default">
-          <div class="panel-heading">Level 1</div>
+          <div class="panel-heading">Level <?php echo $level ?></div>
           <div class="panel-body">
             <div id="chat"></div>
           </div>
@@ -468,7 +468,6 @@ $conn = null;
 
     function loadLevelJs(path){
       var xhr = new XMLHttpRequest();
-      //TO DO -> implement a logical load of level and file
       var widgets = [];
 
       for (var i = 0; i < widgets.length; ++i)
