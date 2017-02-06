@@ -2,7 +2,6 @@
 session_set_cookie_params(86400);
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-
   $current_player = $_SESSION['loggedinUser'];  
 } else {
   header("location: DBConnection/loginPage.php");
@@ -29,14 +28,12 @@ try {
   //check the level of the user loggedin
   // LOAD LEVEL
 
-  $level_query = $conn->prepare("SELECT level from User join Level where login = :login ");
-  $level_query->bindParam(':login', $current_player);
-  $level_query->execute();
-  $level_rows = $level_query->fetch();
-  $level = $level_rows["level"];
-  $_SESSION["level"] = 3;
-
-
+    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+    $level_query->bindParam(':login', $current_player);
+    $level_query->execute();
+    $level_rows = $level_query->fetch();
+    $level = $level_rows["maxlevel"];
+    $_SESSION["level"] = $level;
 
   // if(!empty($current_player)){
   //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
@@ -412,8 +409,8 @@ $conn = null;
   <footer>
     <div class="row">
       <div class="col-lg-12">
-        <p>Made by Gianluca Monica and Margherita Donnici.</p>
-        <p>Human-Computer Interaction course project, University of Bologna, 2016 </p>
+        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
       </div>
     </div>
   </footer>

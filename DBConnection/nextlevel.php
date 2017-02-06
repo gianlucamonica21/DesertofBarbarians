@@ -60,6 +60,7 @@ try {
 		$result_campaign = $query->execute( array( ':login'=>$current_player,
 																							 ':level'=>$max_level,
 																							 ':max_score_per_level'=>$max_score_per_level) );
+	//$_SESSION['level'] = $max_level;
 	}
 }
 catch(PDOException $e)

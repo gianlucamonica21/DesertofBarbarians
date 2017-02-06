@@ -7,7 +7,6 @@ var canvas = document.querySelector( 'canvas' ),
 // Constants
 var CANVAS_WIDTH  = canvas.width,
   CANVAS_HEIGHT = canvas.height,
-  SPEEDMISSILEDEFENSE = 12,
   MISSILE = {
     active: 1,
     exploding: 2,
@@ -74,6 +73,10 @@ var initializeAntiMissileBatteries = function () {
     }); 
 };
 
+var rechargeAntiMissileBatteries = function () {
+  antiMissileBatteries[1].missilesLeft = 6;
+};
+
 // Reset various variables at the start of a new level
 var initializeLevel = function() {
     initializeAntiMissileBatteries();
@@ -88,7 +91,7 @@ var initializeLevel = function() {
 // Create a certain number of enemy missiles based on the game level
 var createEmemyMissiles = function() {
     var targets = viableTargets(),
-        numMissiles = /*Increased since last level*/ 20;
+        numMissiles = 5;
     for( var i = 0; i < numMissiles; i++ ) {
         enemyMissiles.push( new EnemyMissile(targets) );
     }
@@ -135,7 +138,7 @@ var drawLevelMessage = function() {
     ctx.fillStyle = '#6d6';
 
     ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'click to start third level.', 130, 180 );
+    ctx.fillText( 'click to start second level.', 130, 180 );
     ctx.font = 'bold 32px monaco, consolas';
     ctx.fillStyle = '#d66';
     ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
@@ -459,7 +462,7 @@ Missile.prototype.explode = function() {
 var missileSpeed = function (xDistance, yDistance) {
     var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
 
-    var distancePerFrame = SPEEDMISSILEDEFENSE;
+    var distancePerFrame = 12;
 
     return distance / distancePerFrame;
 };
@@ -507,7 +510,8 @@ PlayerMissile.prototype.update = function() {
 };
 
 // Create a missile that will be shot at indicated location
- var playerShoot = function( x, y ) {
+
+/* var playerShoot = function( x, y ) {
     if( y >= 50 && y <= 370 ) {
       var source = whichAntiMissileBattery( x );
       if( source === -1 ){ // No missiles left
@@ -515,7 +519,7 @@ PlayerMissile.prototype.update = function() {
       }
       playerMissiles.push( new PlayerMissile( source, x, y ) );
     }
-};
+}; */
 
 // Constructor for the Enemy's Missile, which is a subclass of Missile
 // and uses Missile's constructor

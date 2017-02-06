@@ -4,7 +4,9 @@
   CodeMirror.fromTextArea(document.getElementById("editor"),{
     mode: "javascript",
     lineNumbers: true,
-    styleSelectedText: true
+    styleSelectedText: true,
+    lineWrapping: true,
+    viewportMargin: Infinity
   });
   
   $.ajax({

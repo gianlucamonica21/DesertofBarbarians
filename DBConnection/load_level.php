@@ -59,7 +59,6 @@ try {
 		$level_rows = $level_query->fetch();
 		$max_level = $level_rows["maxlevel"];
 		$_SESSION['maxLevel'] = $max_level;
-
 		/* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
 			allora lo score sarà zero */
 		$score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");

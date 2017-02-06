@@ -74,8 +74,8 @@ if (isset($_SESSION['loggedinUser'])) {
           <footer>
             <div class="row">
               <div class="col-lg-12">
-                <p>Made by Gianluca Monica and Margherita Donnici.</p>
-                <p>Human-Computer Interaction course project, University of Bologna, 2016 </p>
+                <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina..</p>
+                <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
               </div>
             </div>
           </footer>

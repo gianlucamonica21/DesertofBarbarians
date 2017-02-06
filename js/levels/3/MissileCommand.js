@@ -7,7 +7,6 @@ var canvas = document.querySelector( 'canvas' ),
 // Constants
 var CANVAS_WIDTH  = canvas.width,
   CANVAS_HEIGHT = canvas.height,
-  SPEEDMISSILEDEFENSE = 12,
   MISSILE = {
     active: 1,
     exploding: 2,
@@ -88,7 +87,7 @@ var initializeLevel = function() {
 // Create a certain number of enemy missiles based on the game level
 var createEmemyMissiles = function() {
     var targets = viableTargets(),
-        numMissiles = /*Increased since last level*/ 20;
+        numMissiles = /*Increased since last level*/ 15;
     for( var i = 0; i < numMissiles; i++ ) {
         enemyMissiles.push( new EnemyMissile(targets) );
     }
@@ -459,7 +458,7 @@ Missile.prototype.explode = function() {
 var missileSpeed = function (xDistance, yDistance) {
     var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
 
-    var distancePerFrame = SPEEDMISSILEDEFENSE;
+    var distancePerFrame = 12;
 
     return distance / distancePerFrame;
 };

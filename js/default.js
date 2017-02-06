@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
    try{
-     var test = userSolutionChecker();
+     var test = true; //userSolutionChecker();
      // scrittura su file modificato nell'editor
      var data = new FormData();
      data.append("data" , window.editor.getValue());
