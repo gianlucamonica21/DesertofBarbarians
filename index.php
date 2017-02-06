@@ -127,6 +127,7 @@ $conn = null;
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/custom.min.css" rel="stylesheet">
   <link href="css/index.css"" rel="stylesheet">
+  <link href="css/chat.css"" rel="stylesheet">
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link href="plugin/codemirror/lib/codemirror.css" rel="stylesheet">
 
@@ -224,7 +225,13 @@ $conn = null;
            <div class="panel panel-default">
             <div class="panel-heading">Level <?php echo $level ?></div>
             <div class="panel-body">
-              <div id="chat"></div>
+              <div id="chat">               
+                <ul class="chat-thread">
+                  <li class="generalMsg">Are we meeting today?</li>
+                  <li class="soldierMsg">yes, what time suits you?</li>
+                  <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li>
+                </ul>
+              </div>
             </div>
           </div>
           <!-- Game panel  -->
