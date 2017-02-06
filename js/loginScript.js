@@ -16,22 +16,24 @@ document.getElementById("login-form").onsubmit = function (event) {
 			data: "username=" + username + "&password=" + password,
 			dataType: 'text',
 			success: function (response) {
-				// Redirect to index.php
-				window.location.href = "../index.php";
+				console.log("HI:00");
+				//window.location("index.php");
+				window.location.href = "index.php";
 				return;
 			},
 			error: function (xhr, status, error) {
-				console.log('XHR:');
-				console.log(xhr);
-				console.log('textStatus:');
-				console.log(status);
-				console.log('errorThrown:');
-				console.log(err);
-				errorMsg = xhr.responseText;
+  			var err = "";//eval("(" + xhr.responseText + ")");
+        console.log('jqXHR:');
+        console.log(xhr);
+        console.log('textStatus:');
+        console.log(status);
+        console.log('errorThrown:');
+        console.log(err);
+        errorMsg = xhr.responseText;
 				var errorMessageElement = document.getElementsByClassName("login-form-main-message");
 				errorMessageElement[0].classList.add("show","error");
 				errorMessageElement[0].innerHTML = errorMsg;
-			}
+       }
 		});
 	}
 
