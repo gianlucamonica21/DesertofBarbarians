@@ -5,7 +5,7 @@
     mode: "javascript",
     lineNumbers: true,
     styleSelectedText: true,
-    lineWrapping: true,
+    lineWrapping: false,
     viewportMargin: Infinity
   });
   

@@ -28,12 +28,12 @@ try {
   //check the level of the user loggedin
   // LOAD LEVEL
 
-    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-    $level_query->bindParam(':login', $current_player);
-    $level_query->execute();
-    $level_rows = $level_query->fetch();
-    $level = $level_rows["maxlevel"];
-    $_SESSION["level"] = $level;
+  $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+  $level_query->bindParam(':login', $current_player);
+  $level_query->execute();
+  $level_rows = $level_query->fetch();
+  $level = $level_rows["maxlevel"];
+  $_SESSION["level"] = $level;
 
   // if(!empty($current_player)){
   //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
@@ -205,66 +205,66 @@ $conn = null;
             <p class="lead">A meta-Javascript game adventure to learn programming.</p>
           </div>
         </div>
-        <!-- Chat Panel  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">Level <?php echo $level ?></div>
-          <div class="panel-body">
-            <div id="chat"></div>
-          </div>
-        </div>
         <div class="row">
-         <!-- Game panel  -->
-         <div class="col-lg-6 col-md-6 col-sm-7">
-          <div class="panel panel-default">
-            <div class="panel-heading">Console</div>
-            <div class="panel-body">
+          <!-- Editor panel  -->
+          <div class="col-lg-6 col-md-6 col-sm-7">
+            <div class="panel panel-default">
+              <div class="panel-heading">Editor</div>
+              <div class="panel-body">
+                <textarea id="editor"></textarea>
+                <button  class="btn btn-default" id="submitButton">Execute</button>
+                <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
+                <button  class="btn btn-default" id="returnButton">Restart Game</button>
+              </div>
+            </div>
 
-             <div class="row" id="mc-container">
-              <canvas id="miscom" class="game center-block" width="510" height="460">
-                <?php
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-7">
+           <!-- Chat Panel  -->
+           <div class="panel panel-default">
+            <div class="panel-heading">Level <?php echo $level ?></div>
+            <div class="panel-body">
+              <div id="chat"></div>
+            </div>
+          </div>
+          <!-- Game panel  -->
+          <div >
+            <div class="panel panel-default">
+              <div class="panel-heading">Console</div>
+              <div class="panel-body">
+
+               <div class="row" id="mc-container">
+                <canvas id="miscom" class="game center-block" width="510" height="460">
+                  <?php
                 // Load the correct level of the user
 
                 // Convert current level number to string
-                $levelNumber = $_SESSION["level"];
-                $levelString = "$levelNumber";
-                if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
+                  $levelNumber = $_SESSION["level"];
+                  $levelString = "$levelNumber";
+                  if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
                   // Load user solution file
-                  echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
-                } else {
+                    echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
+                  } else {
                   // Load default file
-                 echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
-               }
+                   echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
+                 }
                 // Load base game
-               echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
+                 echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
                 // Start game
-               echo '<script type="text/javascript">  missileCommand(true); </script>'; 
-               ?> 
+                 echo '<script type="text/javascript">  missileCommand(true); </script>'; 
+                 ?> 
 
-               Missile Command
-             </canvas>
+                 Missile Command
+               </canvas>
+             </div>
            </div>
-
-
          </div>
        </div>
      </div>
-     <!-- Editor panel  -->
-     <div class="col-lg-6 col-md-6 col-sm-7">
-      <div class="panel panel-default">
-        <div class="panel-heading">Editor</div>
-        <div class="panel-body">
-          <textarea id="editor"></textarea>
-          <button  class="btn btn-default" id="submitButton">Execute</button>
-          <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
-          <button  class="btn btn-default" id="returnButton">Restart Game</button>
-        </div>
-      </div>
 
-    </div>
-
-  </div>
-  <!-- PROFILE MODAL -->
-  <div class="modal" id="profileModal">
+   </div>
+   <!-- PROFILE MODAL -->
+   <div class="modal" id="profileModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
