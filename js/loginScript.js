@@ -18,7 +18,7 @@ document.getElementById("login-form").onsubmit = function (event) {
 			success: function (response) {
 				console.log("HI:00");
 				//window.location("index.php");
-				window.location.href = "index.php";
+				window.location.href = "../index.php";
 				return;
 			},
 			error: function (xhr, status, error) {
