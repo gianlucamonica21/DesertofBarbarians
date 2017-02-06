@@ -18,7 +18,7 @@
   });
 
   var startedCoding;
-  editor.on('beforeChange',function(cm,change) {
+  editor.on('change',function(cm,change) {
     // if ( ~readOnlyLines.indexOf(change.from.line) ) {
     //   change.cancel();
     // }
@@ -27,6 +27,7 @@
     startedCoding = (new Date()).getTime();
     //console.log("Hai iniziato a scrivere :" + startCoding);
     stoppedGame = true;
+    $('#returnButton').removeClass("disabled");
   });
 
   //Code to reload and reupdate the level  

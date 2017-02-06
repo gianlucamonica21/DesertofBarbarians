@@ -214,7 +214,7 @@ $conn = null;
                 <textarea id="editor"></textarea>
                 <button  class="btn btn-default" id="submitButton">Execute</button>
                 <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
-                <button  class="btn btn-default" id="returnButton">Restart Game</button>
+                <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
               </div>
             </div>
 

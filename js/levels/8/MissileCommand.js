@@ -1,6 +1,5 @@
 // Missile Command
 
-var stopNumbers=0;
 var canvas = document.querySelector( 'canvas' ),
 ctx = canvas.getContext( '2d' );
 
@@ -147,11 +146,7 @@ var drawLevelMessage = function() {
 };
 
 var drawStopMessage = function() {
-  if(stopNumbers == 0){
 
-  }
-  else
-  { 
     ctx.fillStyle = '#6d6';
 
     ctx.font =  '20px monaco, consolas';
@@ -160,8 +155,7 @@ var drawStopMessage = function() {
     ctx.fillStyle = '#d66';
     ctx.fillText( '', 130, 250 );
     stopLevel();
-  } 
-  stopNumbers++;
+
 };
 
 // Show bonus points at end of a level
@@ -873,10 +867,10 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
-  if(stopNumbers>0){
+
     var fps = 30;
     timerID = setInterval( nextFrame, 1000 / fps );
-  }
+
 };
 
 // Determine which Anti Missile Battery will be used to serve a

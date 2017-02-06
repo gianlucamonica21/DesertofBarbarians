@@ -21,6 +21,7 @@ $(document).ready(function(){
     if(stoppedGame){
      startLevel();
      stoppedGame = false;
+     $('#returnButton').addClass("disabled");
    }
  });
 
