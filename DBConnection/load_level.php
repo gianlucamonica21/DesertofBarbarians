@@ -19,30 +19,14 @@ try {
 	  echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
 
-	//
-	// $e = "nuovo";
-	// $ss = 1222;
-	// $level = 1;
-	//
-	// // $update_score_query =
-	// // conn->prepare("UPDATE Campaign SET score= :score WHERE login= :login AND level= :level");
-	// // $result1 = $update_score_query->execute(array(':score'=>666,':login'=>"Nuovo",':level'=>1));
-	// $sql = "UPDATE Campaign SET score=:s WHERE login='maxim' AND level=1";
-	//
-  //   // Prepare statement
-  //   $stmt = $conn->prepare($sql);
-  //   $stmt->bindParam(':s', $ss,PDO::PARAM_INT);
-  //   // execute the query
-  //   $stmt->execute();
-
-	 // Check the input of data
-		if(!empty($current_player)){
-			$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
-			$user_query->bindParam(':login', $current_player);
-			$user_query->execute();
-			$user_rows = $user_query->fetch();
-			$total_score = $user_rows["score"];
-			$_SESSION['totalScore'] = $total_score;
+	// Check the input of data
+	if(!empty($current_player)){
+		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
+		$user_query->bindParam(':login', $current_player);
+		$user_query->execute();
+		$user_rows = $user_query->fetch();
+		$total_score = $user_rows["score"];
+		$_SESSION['totalScore'] = $total_score;
 
 		// Estrai grado
 		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
@@ -59,6 +43,7 @@ try {
 		$level_rows = $level_query->fetch();
 		$max_level = $level_rows["maxlevel"];
 		$_SESSION['maxLevel'] = $max_level;
+
 		/* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
 			allora lo score sarà zero */
 		$score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
@@ -68,6 +53,18 @@ try {
 		$score_row = $score_query->fetch();
 		$max_level_record_score = $score_row["score"];
 		$_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
+
+		// Estrai Coefficiente di difficoltà e limite di tempo
+		$level_query = $conn->prepare("SELECT rows, coef, timelimit FROM Level WHERE level= :level");
+		$level_query->bindParam(':level', $max_level);
+		$level_query->execute();
+		$level_details = $level_query->fetch();
+		$tot_rows = $level_details["rows"];
+		$points_coef = $level_details["coef"];
+		$time_limit = $level_details["timelimit"];
+		$_SESSION['totalRows'] = $tot_rows;
+		$_SESSION['pointsCoef'] = $points_coef;
+		$_SESSION['timeLimit'] = $time_limit;
 
 		// Estrai le righe non modificabili per il massimo livello
 		$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
@@ -91,16 +88,6 @@ try {
 			$achievements[] = $achievements_row["achievement"];
 		}
 		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
-		// if($grade_rows > 0 and
-		// 	 	$level_rows > 0 and
-		// 	 	$constrows_rows > 0 and
-		// 	 	$achievements_rows > 0) {
-		//
-		// 	header('Location: ../index.php');
-		// }
-		// else {
-		// 	echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password. Please verify!<A HREF="registration.php">Please go here.</A></div>';
-		// }
 	}
 }
 catch(PDOException $e)

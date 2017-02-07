@@ -1,5 +1,4 @@
 <?php
-
 //include "dbconfig.php";
 session_start();
 $servername = "localhost";
@@ -22,15 +21,17 @@ try {
 		$old_total_score = $_SESSION['totalScore'];
 		$old_current_level_score = $_SESSION['maxCurrentLevelScore'];
 		$max_level = $_SESSION['maxLevel'];
-		$new_current_level_score = 2123;
-		//$new_current_level_score = $_SESSION['levelScore'];
+		$time_to_finish = $_POST['data'];
+		$total_rows = $_SESSION['totalRows'];
+		$points_coef = $_SESSION['pointsCoef'];
+		$time_limit = $_SESSION['timeLimit'];
 	} else {
 		echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
-
-	echo "Prima di aggiornare i parametri sono i seguenti. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
+	echo "Prima di aggiornare i parametri sono i seguenti. TIME: ".$time_to_finish." Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
 
 	// Se è più grande, aggiorna lo score record del livello
+	$new_current_level_score = ((($time_limit - $time_to_finish) / $time_limit) * 100) * $points_coef;
 	if($new_current_level_score > $old_current_level_score) {
 		$update_campaign = "UPDATE Campaign SET score= :score WHERE login= :login AND level= :level";
 		$query = $conn->prepare($update_campaign);
