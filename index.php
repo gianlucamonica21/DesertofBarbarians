@@ -216,7 +216,7 @@ $conn = null;
                 <button  class="btn btn-danger" id="submitButton"><i class="fa fa-play" aria-hidden="true"></i></button>
                 <button  class="btn btn-success" id="evaluateButton"><i class="fa fa-check" aria-hidden="true"></i></button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
-                <button  class="btn btn-warning" id="hintButton"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                <button  class="btn btn-warning" id="refreshButton"><i class="fa fa-undo" aria-hidden="true"></i></button>
                 <button  class="btn btn-info" id="hintButton"><i class="fa fa-question" aria-hidden="true"></i></button>
               </div>
             </div>

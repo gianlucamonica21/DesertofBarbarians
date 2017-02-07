@@ -38,6 +38,21 @@ $('#returnButton').click(function(){
    }
  });
 
+// HINT BUTTON
+
+$('#hintButton').click(function(){
+  var currentLevel = document.body.getAttribute("level");
+  var filepath = "js/levels/" + currentLevel + "/dialogues.json";
+  $.getJSON( filepath, function(result) {
+    msgString = result.soldierMsg;
+    $('.chat-thread').append(
+      $('<li>')
+      .addClass("soldierMsg")
+      .text(msgString)
+      );
+  });
+ });
+
 // EVALUATE BUTTON
 
 $('#evaluateButton').click(function(){
