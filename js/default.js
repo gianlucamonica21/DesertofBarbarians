@@ -10,7 +10,11 @@ $(document).ready(function(){
     $('.chat-thread').append(
       $('<li>')
       .addClass("generalMsg")
-      .text(msgString)
+      .typed({
+        strings: [msgString],
+        typeSpeed: 10
+      })
+      
       );
   });
 
@@ -53,7 +57,7 @@ $('#hintButton').click(function(){
       .text(msgString)
       );
   });
- });
+});
 
 // EVALUATE BUTTON
 

@@ -138,6 +138,7 @@ $conn = null;
   <script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
   <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
   <script type="text/javascript" src="js/default.js"></script>
+  <script type="text/javascript" src="js/typed.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
   
 
