@@ -30,7 +30,7 @@ $(document).ready(function(){
    finishedCoding = (new Date()).getTime();
    difference = startedCoding - finishedCoding;
    alert("Hai impiegato " + (-1*difference) + " millesimi di non so cosa per fornire la soluzione");
-
+   
 
    try{
      var test = true; //userSolutionChecker();

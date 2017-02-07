@@ -27,14 +27,15 @@ try {
 
   //check the level of the user loggedin
   // LOAD LEVEL
-
+  if($_SESSION["staticallyLevel"] === false){
+    echo '<script>alert("sono dentro");</script>';
   $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
   $level_query->bindParam(':login', $current_player);
   $level_query->execute();
   $level_rows = $level_query->fetch();
   $level = $level_rows["maxlevel"];
   $_SESSION["level"] = $level;
-
+  }
   // if(!empty($current_player)){
   //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
   //   $user_query->bindParam(':login', $current_player);
@@ -331,35 +332,80 @@ $conn = null;
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Levels</h4>
         </div>
-        <div class="modal-body">
+        <div class="buttons">
           <div class="btn-group">
-            <a href="#" type="button" class="btn btn-primary">1</a>
+            <button   id="button1" class="btn btn-primary level-buttons">1</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary">2</a>
+            <button  id="button1" class="btn btn-primary level-buttons">2</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary">3</a>
+            <button id="button1" class="btn btn-primary level-buttons">3</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary">4</a>
+            <button id="button1" class="btn btn-primary level-buttons">4</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary">5</a>
+            <button id="button1" class="btn btn-primary level-buttons">5</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary disabled">6</a>
+            <button id="button1" class="btn btn-primary level-buttons ">6</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary disabled">7</a>
+            <button id="button1" class="btn btn-primary level-buttons ">7</button>
           </div>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary disabled">8</a>
+            <button id="button1" class="btn btn-primary level-buttons ">8</button>
+          </div>
+           <div class="btn-group">
+            <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
+        <script type="text/javascript">
+          // recuperare livello, selezionare, deselezionare correttamente i livelli
+          var maxlevel;
+          var oReq = new XMLHttpRequest(); //New request object
+          oReq.onload = function() {
+          //This is where you handle what to do with the response.
+          //The actual data is found on this.responseText
+          maxlevel = this.responseText; //Will alert: 42
+        };
+        oReq.open("get", "DBConnection/get_maxlevel.php", false);
+          //                               ^ block the rest of the execution.
+          //                                 Don't wait until the request finishes to 
+          //                                 continue.
+          oReq.send(); 
+          alert("MaxLevel: " + maxlevel);
+
+          var levelArr = document.getElementsByClassName("level-buttons");
+          //alert(levelArr);
+
+          for(var i=0; i<levelArr.length; i++)
+          {
+            if(i > maxlevel){
+            levelArr[i].classList.add("disabled");
+            }
+          }
+
+          $('.level-buttons').click(function(){
+            if(!(this.hasClass("disabled"))){
+            clickedLevel = this.textContent;
+            alert("clicked " + clickedLevel);
+            var data = new FormData();
+            data.append("data" , clickedLevel);
+            var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+            xhr.open( 'post', 'DBConnection/change_level.php', true);
+            xhr.send(data);
+            location.reload(); 
+          }
+
+           });
+
+        </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Go!</button>
+          <!--<button type="button" id="go_to_level" class="btn btn-primary">Go!</button>-->
+        
         </div>
       </div>
     </div>
