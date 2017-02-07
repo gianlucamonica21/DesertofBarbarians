@@ -54,7 +54,10 @@ $('#hintButton').click(function(){
     $('.chat-thread').append(
       $('<li>')
       .addClass("soldierMsg")
-      .text(msgString)
+      .typed({
+        strings: [msgString],
+        typeSpeed: 10
+      })
       );
   });
 });
