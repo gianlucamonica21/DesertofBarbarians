@@ -138,7 +138,6 @@ $conn = null;
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
   <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
-  <script type="text/javascript" src="js/default.js"></script>
   <script type="text/javascript" src="js/typed.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
   
@@ -473,6 +472,7 @@ $conn = null;
 
 </div>
 <script type="text/javascript" src="js/editor.js"></script>
+<script type="text/javascript" src="js/default.js"></script>
 <noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>

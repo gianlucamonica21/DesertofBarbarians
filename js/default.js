@@ -63,9 +63,19 @@ $('#hintButton').click(function(){
   });
 });
 
+// REFRESH BUTTON
+$('#refreshButton').click(function(){
+
+    var currentLevel = document.body.getAttribute("level");
+    var filepath = "js/levels/"+ currentLevel + "/level" + currentLevel + ".js";
+    $.get(filepath,  function(data){
+          editor.setValue(data);
+    });
+
+   });
+
 // EVALUATE BUTTON
 
-D
 $('#evaluateButton').click(function(){
    finishedCoding = (new Date()).getTime();
    difference = (finishedCoding - startedCoding) / 1000;
