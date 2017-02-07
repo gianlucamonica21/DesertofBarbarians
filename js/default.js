@@ -1,9 +1,21 @@
 $(document).ready(function(){
 
-  var finishedCoding;
-  $('#submitButton').click(function(){
+  // Load level instructions
+  var currentLevel = document.body.getAttribute("level");
+  var filepath = "js/levels/" + currentLevel + "/dialogues.json";
+  $.getJSON( filepath, function(result) {
+    msgString = result.generalMsg;
+    $('.chat-thread').append(
+      $('<li>')
+      .addClass("generalMsg")
+      .text(msgString)
+      );
+  });
 
-   
+  var finishedCoding;
+
+// EXECUTE BUTTON
+$('#submitButton').click(function(){
 
   // scrittura su file modificato nell'editor
   var data = new FormData();
@@ -16,7 +28,8 @@ $(document).ready(function(){
 
 });
 
-  $('#returnButton').click(function(){
+// RESTART GAME BUTTON
+$('#returnButton').click(function(){
     //nextFrame();
     if(stoppedGame){
      startLevel();
@@ -25,14 +38,16 @@ $(document).ready(function(){
    }
  });
 
-  $('#evaluateButton').click(function(){
+// EVALUATE BUTTON
 
-   finishedCoding = (new Date()).getTime();
-   difference = startedCoding - finishedCoding;
-   alert("Hai impiegato " + (-1*difference) + " millesimi di non so cosa per fornire la soluzione");
+$('#evaluateButton').click(function(){
+
+ finishedCoding = (new Date()).getTime();
+ difference = startedCoding - finishedCoding;
+ alert("Hai impiegato " + (-1*difference) + " millesimi di non so cosa per fornire la soluzione");
 
 
-   try{
+ try{
      var test = true; //userSolutionChecker();
      // scrittura su file modificato nell'editor
      var data = new FormData();
@@ -63,11 +78,6 @@ $(document).ready(function(){
         //                                 continue.
         oReq.send();
         alert("RISULTATO PRIMA CHIAMATA da defalut.js : "+ stringa);
-        
-
-
-
-
         //Code to reload and reupdate the level  
         var stringa;
         var oReq = new XMLHttpRequest(); //New request object

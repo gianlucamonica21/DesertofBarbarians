@@ -149,7 +149,7 @@ $conn = null;
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body level=<?php echo $_SESSION['level']?>>
+    <body level = <?php echo $_SESSION['level']?> >
       <!-- NAVBAR -->
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -213,9 +213,11 @@ $conn = null;
               <div class="panel-heading">Editor</div>
               <div class="panel-body">
                 <textarea id="editor"></textarea>
-                <button  class="btn btn-default" id="submitButton">Execute</button>
-                <button  class="btn btn-default" id="evaluateButton">Evaluate</button>
+                <button  class="btn btn-danger" id="submitButton"><i class="fa fa-play" aria-hidden="true"></i></button>
+                <button  class="btn btn-success" id="evaluateButton"><i class="fa fa-check" aria-hidden="true"></i></button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
+                <button  class="btn btn-warning" id="hintButton"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                <button  class="btn btn-info" id="hintButton"><i class="fa fa-question" aria-hidden="true"></i></button>
               </div>
             </div>
 
@@ -227,9 +229,9 @@ $conn = null;
             <div class="panel-body">
               <div id="chat">               
                 <ul class="chat-thread">
-                  <li class="generalMsg">Are we meeting today?</li>
+            <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
-                  <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li>
+                  <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
                 </ul>
               </div>
             </div>

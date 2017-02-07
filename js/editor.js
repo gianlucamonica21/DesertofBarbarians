@@ -10,7 +10,7 @@
   });
   
   $.ajax({
-    url: 'getLevel.php',
+    url: 'getEditorCode.php',
     type: 'GET',
     success: function(result){
       loadLevelJs(result);
