@@ -4,7 +4,9 @@ $(document).ready(function(){
   var currentLevel = document.body.getAttribute("level");
   var filepath = "js/levels/" + currentLevel + "/dialogues.json";
   $.getJSON( filepath, function(result) {
+
     msgString = result.generalMsg;
+    $('.chat-thread').empty();
     $('.chat-thread').append(
       $('<li>')
       .addClass("generalMsg")
