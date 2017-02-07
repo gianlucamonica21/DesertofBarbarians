@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+  // Initialize tooltips
+   $('.btn').tooltip();
+
   // Load level instructions
   var currentLevel = document.body.getAttribute("level");
   var filepath = "js/levels/" + currentLevel + "/dialogues.json";
