@@ -9,7 +9,7 @@ $(document).ready(function() {
   $.getJSON(filepath, function(result) {
 
     msgString = result.generalMsg;
-    $('.chat-thread').empty();
+    
     $('.chat-thread').append(
       $('<li>')
       .addClass("generalMsg")
@@ -18,7 +18,7 @@ $(document).ready(function() {
         typeSpeed: 10
       })
 
-    );
+      );
   });
 
   var finishedCoding;
@@ -52,8 +52,9 @@ $(document).ready(function() {
           strings: ["Syntax errors found. Please submit input again."],
           typeSpeed: 10
         })
-      );
+        );
     } else {
+      $('#evaluateButton').removeClass("disabled");
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
@@ -89,7 +90,7 @@ $(document).ready(function() {
           strings: [msgString],
           typeSpeed: 10
         })
-      );
+        );
     });
   });
 
@@ -113,14 +114,13 @@ $(document).ready(function() {
     alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
     // If no syntax errors are found, check solution
     try {
-      var test = true; //userSolutionChecker();
+      var test = false; //userSolutionChecker();
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
       xhr.open('post', 'SaveToFile.php', true);
       xhr.send(data);
-      location.reload();
     } catch (err) {
       // var test = getTest();
     }
@@ -173,13 +173,21 @@ $(document).ready(function() {
       alert("RISULTATO SECONDA CHIAMATA da default.js :" + stringa);
 
 
+    //  $('.chat-thread').empty();
+    location.reload();
+  } else {
 
-      location.reload();
-    } else {
-      alert("Valore sbagliato: riprova ancora");
+    $('.chat-thread').append(
+      $('<li>')
+      .addClass("generalMsg")
+      .typed({
+        strings: ["This is not working!"],
+        typeSpeed: 10
+      })
+      );
 
-    };
+  };
 
-  });
+});
 
 });
