@@ -29,6 +29,7 @@ try {
 		// Save the user loggedin
 		$_SESSION['loggedin'] = true;
 		$_SESSION['loggedinUser'] = $login;
+		$_SESSION["staticallyLevel"] = false;
 
 		if($user_rows > 0) {
 			echo "OK";
