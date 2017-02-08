@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   $current_player = $_SESSION['loggedinUser'];  
 } else {
-  header("location: DBConnection/loginPage.php");
+  header("location: DBConnection/login.php");
 }
 
 

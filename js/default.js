@@ -25,10 +25,12 @@ $(document).ready(function() {
 
 
   // EXECUTE BUTTON
-  $('#submitButton').click(function() {
-    for (var i = 0; i < widgets.length; ++i)
-      window.editor.removeLineWidget(widgets[i]);
 
+  $('#submitButton').click(function() {
+    // Remove old syntax errors
+    for (var i = 0; i < widgets.length; ++i){
+      window.editor.removeLineWidget(widgets[i]);
+    }
     widgets.length = 0;
     //Check errors present in the content of the editor
     JSHINT(editor.getValue());
@@ -59,12 +61,18 @@ $(document).ready(function() {
         );
     } else {
       $('#evaluateButton').removeClass("disabled");
-      // scrittura su file modificato nell'editor
+      // Save user code to file
       var data = new FormData();
       data.append("data", window.editor.getValue());
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
       xhr.open('post', 'SaveToFile.php', true);
       xhr.send(data);
+      // Inject code inside the game
+
+   /*   newFunction = window.editor.getValue();
+      console.log(newFunction);
+      eval(newFunction); */
+
       location.reload();
       //startLevel();
     }
