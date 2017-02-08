@@ -18,20 +18,35 @@ try {
 	// Retrieve of the data inputby user
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 		$current_player = $_SESSION['loggedinUser'];
+
+		// Informazione sull'utente
+		$max_level = $_SESSION['maxLevel'];
 		$old_total_score = $_SESSION['totalScore'];
 		$old_current_level_score = $_SESSION['maxCurrentLevelScore'];
-		$max_level = $_SESSION['maxLevel'];
+
+		// Variabili per calcolo del punteggio
 		$time_to_finish = $_POST['data'];
-		$total_rows = $_SESSION['totalRows'];
 		$points_coef = $_SESSION['pointsCoef'];
 		$time_limit = $_SESSION['timeLimit'];
+
+		// Variabili per Aggiornamento del Grado
+		$grade = $_SESSION['userGrade'];
+		$next_grade = $_SESSION['nextGrade'];
+		$next_grade_score = $_SESSION['nextGradeScore'];
+		$next_grade_details = $_SESSION['nextGradeDetails'];
 	} else {
 		echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
 	echo "Prima di aggiornare i parametri sono i seguenti. TIME: ".$time_to_finish." Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
 
-	// Se è più grande, aggiorna lo score record del livello
-	$new_current_level_score = ((($time_limit - $time_to_finish) / $time_limit) * 100) * $points_coef;
+	/* Se è più grande aggiorna lo score record del livello,
+		che viene calcolato prendendo il tempo ancora rimasto a disposizione dell'utente
+		e trasformandolo in percentuale, per poi essere moltiplicato per un Coefficiente
+		di difficoltà perstabilito per ogni livello. */
+	if ($time_to_finish > $time_limit)
+		$new_current_level_score = 0;
+	else
+		$new_current_level_score = ((($time_limit - $time_to_finish) / $time_limit) * 100) * $points_coef;
 	if($new_current_level_score > $old_current_level_score) {
 		$update_campaign = "UPDATE Campaign SET score= :score WHERE login= :login AND level= :level";
 		$query = $conn->prepare($update_campaign);
@@ -48,9 +63,24 @@ try {
 	$result_update_total_score = $query->execute( array( ':score'=>$new_total_score,
  																								':login'=>$current_player) );
 
-  // Aggiornamento grado
+  // Aggiornamento grado, solo se con requisiti necessari
+	if ($new_current_level_score < $next_grade_score &&
+			$grade < $next_grade) {
+		$update_grade = "UPDATE Graduated SET grade= :next_grade WHERE login= :login";
+		$query = $conn->prepare($update_grade);
+		$result = $query->execute( array(':next_grade'=>$next_grade,
+																			':login'=>$current_player) );
+	}
 
 	// Aggiornamento achievements
+	/*
+	if (true) {
+		$add_badge = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :achievement )";
+		$query = $conn->prepare($add_badge);
+		$result = $query->execute( array( ':login'=>$current_player,
+	 																		':achievement'=>$badge) );
+	}
+	*/
 
 	// Inserzione nuovo livello sbloccato
 	if ($max_level < 10) {
@@ -61,7 +91,7 @@ try {
 		$result_campaign = $query->execute( array( ':login'=>$current_player,
 																							 ':level'=>$max_level,
 																							 ':max_score_per_level'=>$max_score_per_level) );
-	//$_SESSION['level'] = $max_level;
+	  //$_SESSION['maxLevel'] = $max_level;
 	}
 }
 catch(PDOException $e)
