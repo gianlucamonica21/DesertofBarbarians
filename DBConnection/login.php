@@ -1,88 +1,85 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login Page</title>
-</head>
-<!-- BOOTSTRAP-->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/custom.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<body>
-
-	<div class="row">
-		<div class="col-md-5 well">
-			<h1>Login</h1>
-
-			<form action="login.php" method="post" id="loginform">
-				<div class="form-group">
-					<label for="">Login</label>
-					<input id="login" type="text" name="login" class="form-control"/> <span class="error"><p id="login_error"></p></span>
-
-					<label for="">Password</label>
-					<input id="password" type="password" name="password" class="form-control"/> <span class="error"><p id="password_error"></p></span>
-				</div>
-				<div class="form-group">
-					<input type="submit" name="btnLogin" class="btn btn-primary" value="Login"/>
-
-				</div>
-
-			</div>
-		</form>
-	</div>
-</div>
-</body>
-</html>
-<script src="js/login.script.js">
-</script>​
 <?php
-
+// If user is already logged in, redirect to index.php
 session_start();
-$servername = "localhost";
-$user = "root";
-$pass = "root";
-$errflag = false;
-
-try {
-	// Set the connection to DB
-	$conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);
-    // Set the PDO error mode to exception
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	if(!$conn){
-		echo "Error! You are not connected!";
-	}
-	// Retrieve of the data inputby user
-	$login = $_POST['login'];
-	$password = $_POST['password'];
-
-	// Check the input of data
-	if(!empty($login) and !empty($password)){
-    // Query to login
-		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login AND password= :password");
-		$user_query->bindParam(':login', $login);
-		$user_query->bindParam(':password', $password);
-		$user_query->execute();
-		$user_rows = $user_query->fetch();
-
-		// Save the user loggedin
-		$_SESSION['loggedin'] = true;
-		$_SESSION['loggedinUser'] = $login;
-
-		if($user_rows > 0) {
-			header('Location: ../index.php');
-		}
-		else {
-			echo '<div class="alert alert-danger fade in"><button type="button" class="close close-alert" data-dismiss="alert" aria-hidden="true">×</button>You are not registered, or you enter a wrong user or a wrong password. Please verify!<A HREF="registration.php">Please go here.</A></div>';
-		}
-	}
+if (isset($_SESSION['loggedinUser'])) {
+    header("location: ../index.php");
 }
-catch(PDOException $e)
-{
-	echo "Connection failed: " . $e->getMessage();
-}
-
-$conn = null;
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Barbarian's Desert</title>
+
+  <!-- Bootstrap -->
+  <link href="../css/bootstrap.css" rel="stylesheet">
+  <link href="../css/custom.min.css" rel="stylesheet">
+  <link href="../css/index.css"" rel="stylesheet">
+  <link rel="stylesheet" href="../fonts/font-awesome/css/font-awesome.min.css">
+  <link href="../css/login.css" rel="stylesheet">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+
+      <div class="container">
+        <div class="page-header" id="banner">
+          <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <h1>The Barbarian's Desert</h1>
+              <p class="lead">A meta-Javascript game adventure to learn programming.</p>
+              <p class="lead">To begin playing, please login or register!</p>
+
+            </div>
+          </div>
+          <!-- LOGIN FORM -->
+          <div class="text-center center-form" style="padding:20px 0">
+            <div class="logo">login</div>
+            <!-- Main Form -->
+            <div class="login-form-1">
+              <form id="login-form" class="text-left">
+                <div class="login-form-main-message"></div>
+                <div class="main-login-form">
+                  <div class="login-group">
+                    <div class="form-group">
+                      <label for="lg_username" class="sr-only">Username</label>
+                      <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
+                    </div>
+                    <div class="form-group">
+                      <label for="lg_password" class="sr-only">Password</label>
+                      <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
+                    </div>
+                  </div>
+                  <button type="submit" id="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                </div>
+                <div class="etc-login-form">
+                  <p>new user? <a href="registration.php">create new account</a></p>
+                </div>
+              </form>
+            </div>
+            <!-- end:Main Form -->
+          </div>
+          <footer>
+            <div class="row">
+              <div class="col-lg-12">
+                <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina..</p>
+                <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </body>
+        <script type="text/javascript" src="../js/loginScript.js"></script>
+      </html>
