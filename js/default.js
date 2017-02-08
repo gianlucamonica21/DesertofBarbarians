@@ -26,6 +26,10 @@ $(document).ready(function() {
 
   // EXECUTE BUTTON
   $('#submitButton').click(function() {
+    for (var i = 0; i < widgets.length; ++i)
+      window.editor.removeLineWidget(widgets[i]);
+
+    widgets.length = 0;
     //Check errors present in the content of the editor
     JSHINT(editor.getValue());
     // insert of the error comment in the editor at the right line
@@ -181,7 +185,7 @@ $(document).ready(function() {
       $('<li>')
       .addClass("generalMsg")
       .typed({
-        strings: ["This is not working!"],
+        strings: ["This is not working! Try again!"],
         typeSpeed: 10
       })
       );
