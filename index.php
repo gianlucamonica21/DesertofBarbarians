@@ -28,7 +28,7 @@ try {
   //check the level of the user loggedin
   // LOAD LEVEL
   if($_SESSION["staticallyLevel"] === false){
-    echo '<script>alert("sono dentro");</script>';
+    //echo '<script>alert("sono dentro");</script>';
     $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
     $level_query->bindParam(':login', $current_player);
     $level_query->execute();
@@ -379,8 +379,8 @@ $conn = null;
           //This is where you handle what to do with the response.
           //The actual data is found on this.responseText
           maxlevel = this.responseText; //Will alert: 42
-        };
-        oReq.open("get", "DBConnection/get_maxlevel.php", false);
+          };
+          oReq.open("get", "DBConnection/get_maxlevel.php", false);
           //                               ^ block the rest of the execution.
           //                                 Don't wait until the request finishes to 
           //                                 continue.
@@ -398,7 +398,7 @@ $conn = null;
           }
 
           $('.level-buttons').click(function(){
-            if(!(this.hasClass("disabled"))){
+            if(!($(this).hasClass("disabled"))){
               clickedLevel = this.textContent;
               alert("clicked " + clickedLevel);
               var data = new FormData();
