@@ -7,9 +7,11 @@
 		$levelNumber = $_SESSION["level"];
 		$levelFolder = "$levelNumber";
 		// Creates new file (or overwrites old one) with path /js/levels/(levelnumber)/(username).js
-		$file = fopen("js/levels/".$levelFolder."/".$_SESSION['loggedinUser'].".js", 'w');
+		$filepath = "js/levels/".$levelFolder."/".$_SESSION['loggedinUser'].".js";
+		$file = fopen(filepath, 'w');
 		$_SESSION["update"] = "true";
 		fwrite($file, $data);
 		fclose($file);
+		echo filepath;
 	}
 ?>

@@ -29,12 +29,12 @@ try {
   // LOAD LEVEL
   if($_SESSION["staticallyLevel"] === false){
     echo '<script>alert("sono dentro");</script>';
-  $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-  $level_query->bindParam(':login', $current_player);
-  $level_query->execute();
-  $level_rows = $level_query->fetch();
-  $level = $level_rows["maxlevel"];
-  $_SESSION["level"] = $level;
+    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+    $level_query->bindParam(':login', $current_player);
+    $level_query->execute();
+    $level_rows = $level_query->fetch();
+    $level = $level_rows["maxlevel"];
+    $_SESSION["level"] = $level;
   }
   // if(!empty($current_player)){
   //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
@@ -138,7 +138,6 @@ $conn = null;
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
   <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
-  <script type="text/javascript" src="js/default.js"></script>
   <script type="text/javascript" src="js/typed.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
   
@@ -215,11 +214,19 @@ $conn = null;
               <div class="panel-heading">Editor</div>
               <div class="panel-body">
                 <textarea id="editor"></textarea>
-                <button  class="btn btn-danger" id="submitButton"><i class="fa fa-play" aria-hidden="true"></i></button>
-                <button  class="btn btn-success" id="evaluateButton"><i class="fa fa-check" aria-hidden="true"></i></button>
+                <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute">
+                  <i class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-success" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
-                <button  class="btn btn-warning" id="refreshButton"><i class="fa fa-undo" aria-hidden="true"></i></button>
-                <button  class="btn btn-info" id="hintButton"><i class="fa fa-question" aria-hidden="true"></i></button>
+                <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help">
+                <i class="fa fa-question" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
 
@@ -360,7 +367,7 @@ $conn = null;
           <div class="btn-group">
             <button id="button1" class="btn btn-primary level-buttons ">8</button>
           </div>
-           <div class="btn-group">
+          <div class="btn-group">
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
@@ -386,29 +393,29 @@ $conn = null;
           for(var i=0; i<levelArr.length; i++)
           {
             if(i > maxlevel){
-            levelArr[i].classList.add("disabled");
+              levelArr[i].classList.add("disabled");
             }
           }
 
           $('.level-buttons').click(function(){
             if(!(this.hasClass("disabled"))){
-            clickedLevel = this.textContent;
-            alert("clicked " + clickedLevel);
-            var data = new FormData();
-            data.append("data" , clickedLevel);
-            var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-            xhr.open( 'post', 'DBConnection/change_level.php', true);
-            xhr.send(data);
-            location.reload(); 
-          }
+              clickedLevel = this.textContent;
+              alert("clicked " + clickedLevel);
+              var data = new FormData();
+              data.append("data" , clickedLevel);
+              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+              xhr.open( 'post', 'DBConnection/change_level.php', true);
+              xhr.send(data);
+              location.reload(); 
+            }
 
-           });
+          });
 
         </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!--<button type="button" id="go_to_level" class="btn btn-primary">Go!</button>-->
-        
+
         </div>
       </div>
     </div>
@@ -472,7 +479,9 @@ $conn = null;
   </footer>
 
 </div>
+
 <script type="text/javascript" src="js/editor.js"></script>
+<script type="text/javascript" src="js/default.js"></script>
 <noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>
