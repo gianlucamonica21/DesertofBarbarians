@@ -221,6 +221,7 @@ $conn = null;
                 <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
+                <script type="text/javascript"></script>
                 <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
                 <i class="fa fa-undo" aria-hidden="true"></i>
                 </button>
@@ -392,7 +393,7 @@ $conn = null;
 
           for(var i=0; i<levelArr.length; i++)
           {
-            if(i > maxlevel){
+            if(i > maxlevel-1){
               levelArr[i].classList.add("disabled");
             }
           }
