@@ -36,6 +36,20 @@ try {
 		$grade = $grade_rows["grade"];
 		$_SESSION['userGrade'] = $grade;
 
+		// Estrai prossimo grado e requisito
+		$next_grade = $grade + 1;
+		$desiderable_grade = $conn->prepare("SELECT * FROM Grade WHERE id= :id");
+		$desiderable_grade->bindParam(':id', $next_grade);
+		$desiderable_grade->execute();
+		$desiderable_grade_row = $desiderable_grade->fetch();
+		if ($desiderable_grade_row == 0)
+			$next_grade = $grade;
+		$next_grade_score = $desiderable_grade_row["score"];
+		$next_grade_details = $desiderable_grade_row["type"];
+		$_SESSION['nextGrade'] = $next_grade;
+		$_SESSION['nextGradeScore'] = $next_grade_score;
+		$_SESSION['nextGradeDetails'] = $next_grade_details;
+
 		// Estrai massimo livello completato dal giocatore
 		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
 		$level_query->bindParam(':login', $current_player);
