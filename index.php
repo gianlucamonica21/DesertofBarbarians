@@ -136,7 +136,7 @@ $conn = null;
                 <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute">
                   <i class="fa fa-play" aria-hidden="true"></i>
                 </button>
-                <button  class="btn btn-success" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate">
+                <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
@@ -292,7 +292,22 @@ $conn = null;
           </div>
         </div>
         <script type="text/javascript">
+        var levelArr = document.getElementsByClassName("level-buttons");
+        
+        var maxlevel = '<?php echo $_SESSION["maxLevel"]; ?>';
+        for(var i=0; i<levelArr.length; i++)
+        {
+          if(i >= maxlevel){
+            levelArr[i].classList.add("disabled");
+          }
+        } 
           $('.level-buttons').click(function(){
+              
+             //alert(levelArr);
+          //
+          
+
+
             if(!($(this).hasClass("disabled"))){
               var clicked = true;
               clickedLevel = this.textContent;
@@ -314,15 +329,7 @@ $conn = null;
           // oReq.send(data);
           
 
-          var levelArr = document.getElementsByClassName("level-buttons");
-          //alert(levelArr);
-          //
-          // for(var i=0; i<levelArr.length; i++)
-          // {
-          //   if(i >= maxlevel){
-          //     levelArr[i].classList.add("disabled");
-          //   }
-          // }
+          
         </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
