@@ -18,7 +18,7 @@ $(document).ready(function() {
         typeSpeed: 10
       })
 
-    );
+      );
   });
 
   var finishedCoding;
@@ -58,7 +58,7 @@ $(document).ready(function() {
           strings: ["Syntax errors found. Please submit input again."],
           typeSpeed: 10
         })
-      );
+        );
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -97,7 +97,7 @@ $(document).ready(function() {
           strings: [msgString],
           typeSpeed: 10
         })
-      );
+        );
     });
   });
 
@@ -132,19 +132,19 @@ $('#evaluateButton').click(function() {
     } catch (err) {
       // var test = getTest();
     }
-      if (test == true) {
-        alert ("Livello passato!");
-        var data = new FormData();
-        data.append("data" , difference);
-        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-        xhr.open("post", "DBConnection/nextlevel.php", true);
-        xhr.send(data);
+    if (test == true) {
+      alert ("Livello passato!");
+      var data = new FormData();
+      data.append("data" , difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
 
-    var data = new FormData();
-    data.append("data", 0);
-    var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-    xhr.open("post", "DBConnection/load_level_x.php", true);
-    xhr.send(data);
+      var data = new FormData();
+      data.append("data", 0);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/load_level_x.php", true);
+      xhr.send(data);
 
     // //Code to reload and reupdate the level
     // var stringa;
@@ -170,11 +170,19 @@ $('#evaluateButton').click(function() {
         typeSpeed: 10
       })
       );
-    }
+  }
+} else {
+  $('.chat-thread').append(
+    $('<li>')
+    .addClass("soldierMsg")
+    .typed({
+      strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
+      typeSpeed: 10
+    }));
   }
 });
 
-function parseCode(code) {
+  function parseCode(code) {
   // Create an array where each element is one line of the code
   var lines = code.split("\n");
 
