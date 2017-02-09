@@ -18,7 +18,7 @@ $(document).ready(function() {
         typeSpeed: 10
       })
 
-      );
+    );
   });
 
   var finishedCoding;
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   $('#submitButton').click(function() {
     // Remove old syntax errors
-    for (var i = 0; i < widgets.length; ++i){
+    for (var i = 0; i < widgets.length; ++i) {
       window.editor.removeLineWidget(widgets[i]);
     }
     widgets.length = 0;
@@ -58,7 +58,7 @@ $(document).ready(function() {
           strings: ["Syntax errors found. Please submit input again."],
           typeSpeed: 10
         })
-        );
+      );
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -69,11 +69,7 @@ $(document).ready(function() {
       xhr.send(data);
       // Inject code inside the game
       var newFunction = parseCode(window.editor.getValue());
-      console.log(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
-      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
-
-    //  location.reload();
-      //startLevel();
+      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
     }
   });
 
@@ -101,7 +97,7 @@ $(document).ready(function() {
           strings: [msgString],
           typeSpeed: 10
         })
-        );
+      );
     });
   });
 
@@ -118,57 +114,57 @@ $(document).ready(function() {
 });
 
 // EVALUATE BUTTON
-$('#evaluateButton').click(function(){
- finishedCoding = (new Date()).getTime();
- difference = (finishedCoding - startedCoding) / 1000;
- alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+$('#evaluateButton').click(function() {
+  if (!($(this).hasClass("disabled"))) {
+    finishedCoding = (new Date()).getTime();
+    difference = (finishedCoding - startedCoding) / 1000;
+    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
- try {
-   var test = true; //userSolutionChecker();
-   // scrittura su file modificato nell'editor
-   var data = new FormData();
-   data.append("data" , window.editor.getValue());
-   var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-   xhr.open( 'post', 'SaveToFile.php', true);
-   xhr.send(data);
-   location.reload();
- }
- catch(err) {
-        // var test = getTest();
-      }
+    try {
+      var test = true; //userSolutionChecker();
+      // scrittura su file modificato nell'editor
+      var data = new FormData();
+      data.append("data", window.editor.getValue());
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open('post', 'SaveToFile.php', true);
+      xhr.send(data);
+      location.reload();
+    } catch (err) {
+      // var test = getTest();
+    }
 
-      if (test == true) {
-        alert ("Livello passato!");
-        var data = new FormData();
-        data.append("data" , difference);
-        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-        xhr.open("post", "DBConnection/nextlevel.php", true);
-        xhr.send(data);
+    if (test == true) {
+      alert("Livello passato!");
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
 
-    //Code to reload and reupdate the level
-    var stringa;
-    var oReq = new XMLHttpRequest(); //New request object
-    oReq.onload = function() {
-      //This is where you handle what to do with the response.
-      //The actual data is found on this.responseText
-      stringa = this.responseText; //Will alert: 42
-    };
+      //Code to reload and reupdate the level
+      var stringa;
+      var oReq = new XMLHttpRequest(); //New request object
+      oReq.onload = function() {
+        //This is where you handle what to do with the response.
+        //The actual data is found on this.responseText
+        stringa = this.responseText; //Will alert: 42
+      };
 
-    oReq.open("get", "DBConnection/load_level.php", false);
-    oReq.send();
-    alert("RISULTATO SECONDA CHIAMATA da default.js :" + stringa);
+      oReq.open("get", "DBConnection/load_level.php", false);
+      oReq.send();
+      alert("RISULTATO SECONDA CHIAMATA da default.js :" + stringa);
 
-    location.reload();
-  }
-  else {
-    $('.chat-thread').append(
-      $('<li>')
-      .addClass("generalMsg")
-      .typed({
-        strings: ["This is not working! Try again!"],
-        typeSpeed: 10
-      })
+      location.reload();
+    } else {
+      $('.chat-thread').append(
+        $('<li>')
+        .addClass("generalMsg")
+        .typed({
+          strings: ["This is not working! Try again!"],
+          typeSpeed: 10
+        })
       );
+    }
   }
 });
 
