@@ -156,7 +156,7 @@ $('#evaluateButton').click(function(){
 
     oReq.open("get", "DBConnection/load_level.php", false);
     oReq.send();
-    alert("RISULTATO SECONDA CHIAMATA da default.js :" + stringa);
+    alert("RISULTATO SECONDA CHIAMATA da default.js (di Load_level.php) :" + stringa);
 
     location.reload();
   }

@@ -45,7 +45,7 @@
   //                                 Don't wait until the request finishes to 
   //                                 continue.
   oReq.send();
-  alert("RISULTATO  CHIAMATA da index :" + stringa);
+  alert("RISULTATO  CHIAMATA da editor.js (di load_level.php):" + stringa);
 
   function loadLevelJs(path) {
     var xhr = new XMLHttpRequest();
