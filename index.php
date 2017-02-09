@@ -2,7 +2,7 @@
 session_set_cookie_params(86400);
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-  $current_player = $_SESSION['loggedinUser'];  
+  $current_player = $_SESSION['loggedinUser'];
 } else {
   header("location: DBConnection/loginPage.php");
 }
@@ -23,18 +23,18 @@ try {
     echo "Error! You are not connected!";
   }
   //retrieve of the data inputby user
-  
+
 
   //check the level of the user loggedin
   // LOAD LEVEL
   if($_SESSION["staticallyLevel"] === false){
-    echo '<script>alert("sono dentro");</script>';
-    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-    $level_query->bindParam(':login', $current_player);
-    $level_query->execute();
-    $level_rows = $level_query->fetch();
-    $level = $level_rows["maxlevel"];
-    $_SESSION["level"] = $level;
+    echo '<script>alert("Sono dentro con intensità");</script>';
+    // $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+    // $level_query->bindParam(':login', $current_player);
+    // $level_query->execute();
+    // $level_rows = $level_query->fetch();
+    // $level = $level_rows["maxlevel"];
+    // $_SESSION["level"] = $level;
   }
   // if(!empty($current_player)){
   //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
@@ -92,7 +92,7 @@ try {
   //   }
 
 
-  //  }  
+  //  }
 
   //   if($grade_rows > 0 and
   //       $level_rows > 0 and
@@ -140,9 +140,9 @@ $conn = null;
   <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
   <script type="text/javascript" src="js/typed.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
-  
 
-  
+
+
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -166,12 +166,12 @@ $conn = null;
               <li>
                 <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
-                </button> 
+                </button>
               </li>
               <li>
                <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#tutorialModal">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><br> How to play
-              </button>  
+              </button>
             </li>
 
             <li>
@@ -236,7 +236,7 @@ $conn = null;
            <div class="panel panel-default">
             <div class="panel-heading">Level <?php echo $level ?></div>
             <div class="panel-body">
-              <div id="chat">               
+              <div id="chat">
                 <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
@@ -269,8 +269,8 @@ $conn = null;
                 // Load base game
                  echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
                 // Start game
-                 echo '<script type="text/javascript">  missileCommand(true); </script>'; 
-                 ?> 
+                 echo '<script type="text/javascript">  missileCommand(true); </script>';
+                 ?>
 
                  Missile Command
                </canvas>
@@ -291,8 +291,8 @@ $conn = null;
         </div>
         <div class="modal-body">
           <div align="center">
-            <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div> 
-            <h2>Username</h2>  
+            <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
+            <h2>Username</h2>
             <h3>RANK: Captain</h3>
             <div class="progress">
               <div class="progress-bar" style="width: 60%"></div>
@@ -382,9 +382,9 @@ $conn = null;
         };
         oReq.open("get", "DBConnection/get_maxlevel.php", false);
           //                               ^ block the rest of the execution.
-          //                                 Don't wait until the request finishes to 
+          //                                 Don't wait until the request finishes to
           //                                 continue.
-          oReq.send(); 
+          oReq.send();
           alert("MaxLevel: " + maxlevel);
 
           var levelArr = document.getElementsByClassName("level-buttons");
@@ -392,7 +392,7 @@ $conn = null;
 
           for(var i=0; i<levelArr.length; i++)
           {
-            if(i > maxlevel){
+            if(i >= maxlevel){
               levelArr[i].classList.add("disabled");
             }
           }
@@ -406,7 +406,7 @@ $conn = null;
               var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
               xhr.open( 'post', 'DBConnection/change_level.php', true);
               xhr.send(data);
-              location.reload(); 
+              location.reload();
             }
 
           });
@@ -460,7 +460,7 @@ $conn = null;
                 <td>Column content</td>
               </tr>
             </tbody>
-          </table> 
+          </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
