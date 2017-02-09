@@ -32,24 +32,24 @@
     $('#evaluateButton').addClass("disabled");
   });
 
-  //Code to reload and reupdate the level  
+  // Code to reload and reupdate the level
   var stringa;
   var oReq = new XMLHttpRequest(); //New request object
   oReq.onload = function() {
-    //This is where you handle what to do with the response.
-    //The actual data is found on this.responseText
-    stringa = this.responseText; //Will alert: 42
+    stringa = this.responseText;
   };
-  oReq.open("get", "DBConnection/load_level.php", false);
-  //                               ^ block the rest of the execution.
-  //                                 Don't wait until the request finishes to 
-  //                                 continue.
+  oReq.open("get", "DBConnection/load_player.php", false);
   oReq.send();
-  alert("RISULTATO  CHIAMATA da editor.js (di load_level.php):" + stringa);
+  alert("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
+
+  var data = new FormData();
+  data.append("data", 0);
+  var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+  xhr.open("post", "DBConnection/load_level_x.php", true);
+  xhr.send(data);
 
   function loadLevelJs(path) {
     var xhr = new XMLHttpRequest();
-
 
     for (var i = 0; i < widgets.length; ++i)
       window.editor.removeLineWidget(widgets[i]);

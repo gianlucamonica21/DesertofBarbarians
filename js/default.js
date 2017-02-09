@@ -145,18 +145,24 @@ $('#evaluateButton').click(function(){
         xhr.open("post", "DBConnection/nextlevel.php", true);
         xhr.send(data);
 
-    //Code to reload and reupdate the level
-    var stringa;
-    var oReq = new XMLHttpRequest(); //New request object
-    oReq.onload = function() {
-      //This is where you handle what to do with the response.
-      //The actual data is found on this.responseText
-      stringa = this.responseText; //Will alert: 42
-    };
+    var data = new FormData();
+    data.append("data", 0);
+    var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+    xhr.open("post", "DBConnection/load_level_x.php", true);
+    xhr.send(data);
 
-    oReq.open("get", "DBConnection/load_level.php", false);
-    oReq.send();
-    alert("RISULTATO SECONDA CHIAMATA da default.js (di Load_level.php) :" + stringa);
+    // //Code to reload and reupdate the level
+    // var stringa;
+    // var oReq = new XMLHttpRequest(); //New request object
+    // oReq.onload = function() {
+    //   //This is where you handle what to do with the response.
+    //   //The actual data is found on this.responseText
+    //   stringa = this.responseText; //Will alert: 42
+    // };
+
+    // oReq.open("get", "DBConnection/load_level.php", false);
+    // oReq.send();
+    // alert("RISULTATO SECONDA CHIAMATA da default.js (di Load_level.php) :" + stringa);
 
     location.reload();
   }
@@ -181,7 +187,7 @@ function parseCode(code) {
   var functionName = words[words.indexOf('=') - 1]; // The name will be the element before "="
 
   // Get function arguments
-  // First split after "(". then after ")", then with "," 
+  // First split after "(". then after ")", then with ","
   var arguments = code.split('(')[1].split(')')[0].split(',');
 
   // Remove first line with function name (we don't need it anymore)

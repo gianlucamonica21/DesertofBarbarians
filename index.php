@@ -21,9 +21,6 @@ try {
   if(!$conn){
     echo "Error! You are not connected!";
   }
-  //retrieve of the data inputby user
-
-  
 }
 catch(PDOException $e)
 {
@@ -33,6 +30,7 @@ catch(PDOException $e)
 $conn = null;
 ?>
 <script type="text/javascript">
+  var clickedLevel;
   var x = "<?php echo $current_player;?>"
   var level = "<?php echo $_SESSION['level'];?>"
 </script>
@@ -293,50 +291,37 @@ $conn = null;
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
-<<<<<<< HEAD
         <script type="text/javascript">
-          // recuperare livello, selezionare, deselezionare correttamente i livelli
-          var maxlevel;
-          var oReq = new XMLHttpRequest(); //New request object
-          oReq.onload = function() {
-          //This is where you handle what to do with the response.
-          //The actual data is found on this.responseText
-          maxlevel = this.responseText; //Will alert: 42
-        };
-        oReq.open("get", "DBConnection/get_maxlevel.php", false);
-          //                               ^ block the rest of the execution.
-          //                                 Don't wait until the request finishes to
-          //                                 continue.
-          oReq.send();
-          alert("MaxLevel: " + maxlevel);
+          $('.level-buttons').click(function(){
+            if(!($(this).hasClass("disabled"))){
+              var clicked = true;
+              clickedLevel = this.textContent;
+              alert("clicked " + clickedLevel);
+              location.reload();
+            }
+          });
+
+          // var data = new FormData();
+          // data.append("data", clickedLevel);
+          // var oReq = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+          // oReq.open("post", "DBConnection/load_level_x.php", true);
+          // oReq.send(data);
+          var data = new FormData();
+          data.append("data", 0);
+          var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+          xhr.open("post", "DBConnection/load_level_x.php", true);
+          xhr.send(data);
 
           var levelArr = document.getElementsByClassName("level-buttons");
           //alert(levelArr);
-
-          for(var i=0; i<levelArr.length; i++)
-          {
-            if(i >= maxlevel){
-              levelArr[i].classList.add("disabled");
-            }
-          }
-
-          $('.level-buttons').click(function(){
-            if(!($(this).hasClass("disabled"))){
-              clickedLevel = this.textContent;
-              alert("clicked " + clickedLevel);
-              var data = new FormData();
-              data.append("data" , clickedLevel);
-              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-              xhr.open( 'post', 'DBConnection/change_level.php', true);
-              xhr.send(data);
-              location.reload();
-            }
-
-          });
-
+          //
+          // for(var i=0; i<levelArr.length; i++)
+          // {
+          //   if(i >= maxlevel){
+          //     levelArr[i].classList.add("disabled");
+          //   }
+          // }
         </script>
-=======
->>>>>>> c3030c4988bcea5733221335b1ff8828065aa752
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!--<button type="button" id="go_to_level" class="btn btn-primary">Go!</button>-->
