@@ -7,7 +7,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   header("location: DBConnection/login.php");
 }
 
-
 //include "dbconfig.php";
 $servername = "localhost";
 $user = "root";
@@ -24,86 +23,7 @@ try {
   }
   //retrieve of the data inputby user
 
-
-  //check the level of the user loggedin
-  // LOAD LEVEL
-  if($_SESSION["staticallyLevel"] === false){
-    echo '<script>alert("Sono dentro con intensità");</script>';
-    //echo '<script>alert("sono dentro");</script>';
-    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-    $level_query->bindParam(':login', $current_player);
-    $level_query->execute();
-    $level_rows = $level_query->fetch();
-    $level = $level_rows["maxlevel"];
-    $_SESSION["level"] = $level;
-  }
-  // if(!empty($current_player)){
-  //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
-  //   $user_query->bindParam(':login', $current_player);
-  //   $user_query->execute();
-  //   $user_rows = $user_query->fetch();
-  //   $total_score = $user_rows["score"];
-  //   $_SESSION['totalScore'] = $total_score;
-  //   // Estrai grado
-  //   $grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
-  //   $grade_query->bindParam(':login', $current_player);
-  //   $grade_query->execute();
-  //   $grade_rows = $grade_query->fetch();
-  //   $grade = $grade_rows["grade"];
-  //   $_SESSION['userGrade'] = $grade;
-
-  //   // Estrai massimo livello completato dal giocatore
-  //   $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-  //   $level_query->bindParam(':login', $current_player);
-  //   $level_query->execute();
-  //   $level_rows = $level_query->fetch();
-  //   $max_level = $level_rows["maxlevel"];
-  //   $_SESSION['maxLevel'] = $max_level;
-
-  //   /* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
-  //     allora lo score sarà zero */
-  //   $score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
-  //   $score_query->bindParam(':login', $current_player);
-  //   $score_query->bindParam(':level', $max_level);
-  //   $score_query->execute();
-  //   $score_row = $score_query->fetch();
-  //   $max_level_record_score = $score_row["score"];
-  //   $_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
-
-  //   // Estrai le righe non modificabili per il massimo livello
-  //   $constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
-  //   $constrows_query->bindParam(':level', $max_level);
-  //   $constrows_query->execute();
-  //   $constrows_rows = $constrows_query->fetchAll();
-  //   foreach ($constrows_rows as $constrow) {
-  //     /* L'array constrows conterrà i numeri di tutte le righe costanti
-  //        per il livello caricato dopo il login */
-  //     $constrows[] = $constrow["row"];
-  //   }
-
-  //   // Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
-  //   $achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
-  //   $achievements_query->bindParam(':login', $current_player);
-  //   $achievements_query->execute();
-  //   $achievements_rows = $achievements_query->fetchAll();
-  //   foreach ($achievements_rows as $achievements_row) {
-  //     /* L'array achievements conterrà i codici di tutti i badges mai
-  //        guadagnati dall'utente appena loggato */
-  //     $achievements[] = $achievements_row["achievement"];
-  //   }
-
-
-  //  }
-
-  //   if($grade_rows > 0 and
-  //       $level_rows > 0 and
-  //       $constrows_rows > 0 and
-  //       $achievements_rows > 0) {
-  //         echo '<script>alert("Query done!")</script>';
-  //   }
-
-
-
+  
 }
 catch(PDOException $e)
 {
@@ -114,7 +34,7 @@ $conn = null;
 ?>
 <script type="text/javascript">
   var x = "<?php echo $current_player;?>"
-  var level = "<?php echo $level;?>"
+  var level = "<?php echo $_SESSION['level'];?>"
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -236,7 +156,7 @@ $conn = null;
           <div class="col-lg-6 col-md-6 col-sm-7">
            <!-- Chat Panel  -->
            <div class="panel panel-default">
-            <div class="panel-heading">Level <?php echo $level ?></div>
+            <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
             <div class="panel-body">
               <div id="chat">
                 <ul class="chat-thread">
@@ -401,7 +321,7 @@ $conn = null;
           }
 
           $('.level-buttons').click(function(){
-            if(!(this.hasClass("disabled"))){
+            if(!($(this).hasClass("disabled"))){
               clickedLevel = this.textContent;
               alert("clicked " + clickedLevel);
               var data = new FormData();

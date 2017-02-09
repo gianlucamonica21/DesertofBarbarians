@@ -14,8 +14,8 @@ try {
 		echo "Error! You are not connected!";
 	}
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-	  $current_player = $_SESSION['loggedinUser'];
-		$level_to_load = $_POST['levelToLoad'];
+    $current_player = $_SESSION['loggedinUser'];
+	$level_to_load = $_POST['levelToLoad'];
   } else {
 	  echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
