@@ -1,5 +1,4 @@
 <?php
-//include "dbconfig.php";
 session_start();
 $servername = "localhost";
 $user = "root";
@@ -20,6 +19,7 @@ try {
 		$current_player = $_SESSION['loggedinUser'];
 
 		// Informazione sull'utente
+		$current_level = $_SESSION['level'];
 		$max_level = $_SESSION['maxLevel'];
 		$old_total_score = $_SESSION['totalScore'];
 		$old_current_level_score = $_SESSION['maxCurrentLevelScore'];
@@ -52,7 +52,7 @@ try {
 		$query = $conn->prepare($update_campaign);
 		$result_update_campaign = $query->execute( array( ':score'=>$new_current_level_score,
 																							 ':login'=>$current_player,
-																							 ':level'=>$max_level) );
+																							 ':level'=>$current_level) );
   }
 
 	// E una volta finito il livello aggiorna anche lo score totale
@@ -83,13 +83,14 @@ try {
 	*/
 
 	// Inserzione nuovo livello sbloccato
-	if ($max_level < 10) {
-		$max_level = $max_level + 1;
+	if ($current_level < 10 &&
+			$current_level == $max_level) {
+		$current_level = $current_level + 1;
     $max_score_per_level = 0;
     $sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :level, :max_score_per_level)";
 		$query = $conn->prepare($sql_campaign_insertion);
 		$result_campaign = $query->execute( array( ':login'=>$current_player,
-																							 ':level'=>$max_level,
+																							 ':level'=>$current_level,
 																							 ':max_score_per_level'=>$max_score_per_level) );
 	  //$_SESSION['maxLevel'] = $max_level;
 	}

@@ -6,9 +6,9 @@ $pass = "root";
 $errflag = false;
 
 try {
-// Set the connection to DB
+	// Set the connection to DB
 	$conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);
-    // Set the PDO error mode to exception
+  // Set the PDO error mode to exception
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if(!$conn){
 		echo "Error! You are not connected!";
