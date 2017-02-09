@@ -2,6 +2,6 @@
    session_start();
    
    if(session_destroy()) {
-      header("Location: DBConnection/loginPage.php");
+      header("Location: DBConnection/login.php");
    }
 ?>

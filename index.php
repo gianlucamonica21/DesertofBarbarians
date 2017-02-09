@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   $current_player = $_SESSION['loggedinUser'];
 } else {
-  header("location: DBConnection/loginPage.php");
+  header("location: DBConnection/login.php");
 }
 
 
@@ -29,12 +29,13 @@ try {
   // LOAD LEVEL
   if($_SESSION["staticallyLevel"] === false){
     echo '<script>alert("Sono dentro con intensità");</script>';
-    // $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-    // $level_query->bindParam(':login', $current_player);
-    // $level_query->execute();
-    // $level_rows = $level_query->fetch();
-    // $level = $level_rows["maxlevel"];
-    // $_SESSION["level"] = $level;
+    //echo '<script>alert("sono dentro");</script>';
+    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+    $level_query->bindParam(':login', $current_player);
+    $level_query->execute();
+    $level_rows = $level_query->fetch();
+    $level = $level_rows["maxlevel"];
+    $_SESSION["level"] = $level;
   }
   // if(!empty($current_player)){
   //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
@@ -221,6 +222,7 @@ $conn = null;
                 <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
+                <script type="text/javascript"></script>
                 <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
                 <i class="fa fa-undo" aria-hidden="true"></i>
                 </button>
@@ -371,6 +373,7 @@ $conn = null;
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
+<<<<<<< HEAD
         <script type="text/javascript">
           // recuperare livello, selezionare, deselezionare correttamente i livelli
           var maxlevel;
@@ -412,6 +415,8 @@ $conn = null;
           });
 
         </script>
+=======
+>>>>>>> c3030c4988bcea5733221335b1ff8828065aa752
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!--<button type="button" id="go_to_level" class="btn btn-primary">Go!</button>-->

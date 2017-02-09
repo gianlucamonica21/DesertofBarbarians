@@ -208,8 +208,8 @@ var drawBackground = function() {
     // Black background -> gradient sky
 
     var grd=ctx.createLinearGradient(0,1000,0,0);
-    grd.addColorStop(0,"#a44");
-    grd.addColorStop(1,"#134");
+    grd.addColorStop(0,"#2473ab");
+    grd.addColorStop(1,"#1e528e");
 
     ctx.fillStyle = grd;
     ctx.fillRect( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT );
