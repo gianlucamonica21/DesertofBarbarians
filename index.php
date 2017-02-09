@@ -297,6 +297,12 @@ $conn = null;
               var clicked = true;
               clickedLevel = this.textContent;
               alert("clicked " + clickedLevel);
+
+              var data = new FormData();
+              data.append("data", clickedLevel);
+              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+              xhr.open("post", "DBConnection/load_level_x.php", true);
+              xhr.send(data);
               location.reload();
             }
           });
@@ -306,11 +312,7 @@ $conn = null;
           // var oReq = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
           // oReq.open("post", "DBConnection/load_level_x.php", true);
           // oReq.send(data);
-          var data = new FormData();
-          data.append("data", 0);
-          var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-          xhr.open("post", "DBConnection/load_level_x.php", true);
-          xhr.send(data);
+          
 
           var levelArr = document.getElementsByClassName("level-buttons");
           //alert(levelArr);
