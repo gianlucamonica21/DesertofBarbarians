@@ -2,11 +2,10 @@
 session_set_cookie_params(86400);
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-  $current_player = $_SESSION['loggedinUser'];  
+  $current_player = $_SESSION['loggedinUser'];
 } else {
   header("location: DBConnection/login.php");
 }
-
 
 //include "dbconfig.php";
 $servername = "localhost";
@@ -22,87 +21,6 @@ try {
   if(!$conn){
     echo "Error! You are not connected!";
   }
-  //retrieve of the data inputby user
-  
-
-  //check the level of the user loggedin
-  // LOAD LEVEL
-  if($_SESSION["staticallyLevel"] === false){
-    //echo '<script>alert("sono dentro");</script>';
-    $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-    $level_query->bindParam(':login', $current_player);
-    $level_query->execute();
-    $level_rows = $level_query->fetch();
-    $level = $level_rows["maxlevel"];
-    $_SESSION["level"] = $level;
-  }
-  // if(!empty($current_player)){
-  //   $user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
-  //   $user_query->bindParam(':login', $current_player);
-  //   $user_query->execute();
-  //   $user_rows = $user_query->fetch();
-  //   $total_score = $user_rows["score"];
-  //   $_SESSION['totalScore'] = $total_score;
-  //   // Estrai grado
-  //   $grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
-  //   $grade_query->bindParam(':login', $current_player);
-  //   $grade_query->execute();
-  //   $grade_rows = $grade_query->fetch();
-  //   $grade = $grade_rows["grade"];
-  //   $_SESSION['userGrade'] = $grade;
-
-  //   // Estrai massimo livello completato dal giocatore
-  //   $level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
-  //   $level_query->bindParam(':login', $current_player);
-  //   $level_query->execute();
-  //   $level_rows = $level_query->fetch();
-  //   $max_level = $level_rows["maxlevel"];
-  //   $_SESSION['maxLevel'] = $max_level;
-
-  //   /* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
-  //     allora lo score sarà zero */
-  //   $score_query = $conn->prepare("SELECT score FROM Campaign WHERE login= :login AND level= :level");
-  //   $score_query->bindParam(':login', $current_player);
-  //   $score_query->bindParam(':level', $max_level);
-  //   $score_query->execute();
-  //   $score_row = $score_query->fetch();
-  //   $max_level_record_score = $score_row["score"];
-  //   $_SESSION['maxCurrentLevelScore'] = $max_level_record_score;
-
-  //   // Estrai le righe non modificabili per il massimo livello
-  //   $constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
-  //   $constrows_query->bindParam(':level', $max_level);
-  //   $constrows_query->execute();
-  //   $constrows_rows = $constrows_query->fetchAll();
-  //   foreach ($constrows_rows as $constrow) {
-  //     /* L'array constrows conterrà i numeri di tutte le righe costanti
-  //        per il livello caricato dopo il login */
-  //     $constrows[] = $constrow["row"];
-  //   }
-
-  //   // Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
-  //   $achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
-  //   $achievements_query->bindParam(':login', $current_player);
-  //   $achievements_query->execute();
-  //   $achievements_rows = $achievements_query->fetchAll();
-  //   foreach ($achievements_rows as $achievements_row) {
-  //     /* L'array achievements conterrà i codici di tutti i badges mai
-  //        guadagnati dall'utente appena loggato */
-  //     $achievements[] = $achievements_row["achievement"];
-  //   }
-
-
-  //  }  
-
-  //   if($grade_rows > 0 and
-  //       $level_rows > 0 and
-  //       $constrows_rows > 0 and
-  //       $achievements_rows > 0) {
-  //         echo '<script>alert("Query done!")</script>';
-  //   }
-
-
-
 }
 catch(PDOException $e)
 {
@@ -112,8 +30,9 @@ catch(PDOException $e)
 $conn = null;
 ?>
 <script type="text/javascript">
+  var clickedLevel;
   var x = "<?php echo $current_player;?>"
-  var level = "<?php echo $level;?>"
+  var level = "<?php echo $_SESSION['level'];?>"
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,9 +59,9 @@ $conn = null;
   <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
   <script type="text/javascript" src="js/typed.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
-  
 
-  
+
+
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -166,12 +85,12 @@ $conn = null;
               <li>
                 <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
-                </button> 
+                </button>
               </li>
               <li>
                <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#tutorialModal">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><br> How to play
-              </button>  
+              </button>
             </li>
 
             <li>
@@ -235,9 +154,9 @@ $conn = null;
           <div class="col-lg-6 col-md-6 col-sm-7">
            <!-- Chat Panel  -->
            <div class="panel panel-default">
-            <div class="panel-heading">Level <?php echo $level ?></div>
+            <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
             <div class="panel-body">
-              <div id="chat">               
+              <div id="chat">
                 <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
@@ -270,8 +189,8 @@ $conn = null;
                 // Load base game
                  echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
                 // Start game
-                 echo '<script type="text/javascript">  missileCommand(true); </script>'; 
-                 ?> 
+                 echo '<script type="text/javascript">  missileCommand(true); </script>';
+                 ?>
 
                  Missile Command
                </canvas>
@@ -292,8 +211,8 @@ $conn = null;
         </div>
         <div class="modal-body">
           <div align="center">
-            <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div> 
-            <h2>Username</h2>  
+            <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
+            <h2>Username</h2>
             <h3>RANK: Captain</h3>
             <div class="progress">
               <div class="progress-bar" style="width: 60%"></div>
@@ -372,6 +291,39 @@ $conn = null;
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
+        <script type="text/javascript">
+          $('.level-buttons').click(function(){
+            if(!($(this).hasClass("disabled"))){
+              var clicked = true;
+              clickedLevel = this.textContent;
+              alert("clicked " + clickedLevel);
+
+              var data = new FormData();
+              data.append("data", clickedLevel);
+              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+              xhr.open("post", "DBConnection/load_level_x.php", true);
+              xhr.send(data);
+              location.reload();
+            }
+          });
+
+          // var data = new FormData();
+          // data.append("data", clickedLevel);
+          // var oReq = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+          // oReq.open("post", "DBConnection/load_level_x.php", true);
+          // oReq.send(data);
+          
+
+          var levelArr = document.getElementsByClassName("level-buttons");
+          //alert(levelArr);
+          //
+          // for(var i=0; i<levelArr.length; i++)
+          // {
+          //   if(i >= maxlevel){
+          //     levelArr[i].classList.add("disabled");
+          //   }
+          // }
+        </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!--<button type="button" id="go_to_level" class="btn btn-primary">Go!</button>-->
@@ -420,7 +372,7 @@ $conn = null;
                 <td>Column content</td>
               </tr>
             </tbody>
-          </table> 
+          </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

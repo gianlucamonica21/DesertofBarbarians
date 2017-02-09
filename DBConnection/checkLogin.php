@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $servername = "localhost";
 $user = "root";
 $pass = "root";
@@ -25,11 +25,20 @@ try {
 		$user_query->execute();
 		$user_rows = $user_query->fetch();
 
-		session_start();
+		
 		// Save the user loggedin
 		$_SESSION['loggedin'] = true;
 		$_SESSION['loggedinUser'] = $login;
-		$_SESSION["staticallyLevel"] = false;
+		//$_SESSION["staticallyLevel"] = false;
+
+	    //echo '<script>alert("sono dentro");</script>';
+		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
+		$level_query->bindParam(':login', $login);
+		$level_query->execute();
+		$level_rows = $level_query->fetch();
+		$levelstart = $level_rows["maxlevel"];
+		$_SESSION['level'] = $levelstart;
+			
 
 		if($user_rows > 0) {
 			echo "OK";
