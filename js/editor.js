@@ -42,11 +42,12 @@
   oReq.send();
   alert("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
 
-  var data = new FormData();
-  data.append("data", 0);
-  var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-  xhr.open("post", "DBConnection/load_level_x.php", true);
-  xhr.send(data);
+  // var asd = '<?php echo $_SESSION['level'] ?>';
+  // var data = new FormData();
+  // data.append("data", asd);
+  // var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+  // xhr.open("post", "DBConnection/load_level_x.php", true);
+  // xhr.send(data);
 
   function loadLevelJs(path) {
     var xhr = new XMLHttpRequest();

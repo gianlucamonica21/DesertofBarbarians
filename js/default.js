@@ -146,7 +146,7 @@ $('#evaluateButton').click(function(){
         xhr.send(data);
 
     var data = new FormData();
-    data.append("data", 0);
+    data.append("data", $_SESSION['level']);
     var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
     xhr.open("post", "DBConnection/load_level_x.php", true);
     xhr.send(data);
