@@ -68,12 +68,11 @@ $(document).ready(function() {
       xhr.open('post', 'SaveToFile.php', true);
       xhr.send(data);
       // Inject code inside the game
+      var newFunction = parseCode(window.editor.getValue());
+      console.log(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
+      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
 
-   /*   newFunction = window.editor.getValue();
-      console.log(newFunction);
-      eval(newFunction); */
-
-      location.reload();
+    //  location.reload();
       //startLevel();
     }
   });
@@ -120,9 +119,9 @@ $(document).ready(function() {
 
 // EVALUATE BUTTON
 $('#evaluateButton').click(function(){
-   finishedCoding = (new Date()).getTime();
-   difference = (finishedCoding - startedCoding) / 1000;
-   alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+ finishedCoding = (new Date()).getTime();
+ difference = (finishedCoding - startedCoding) / 1000;
+ alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
  try {
    var test = true; //userSolutionChecker();
@@ -133,18 +132,18 @@ $('#evaluateButton').click(function(){
    xhr.open( 'post', 'SaveToFile.php', true);
    xhr.send(data);
    location.reload();
-  }
-  catch(err) {
+ }
+ catch(err) {
         // var test = getTest();
-  }
+      }
 
-  if (test == true) {
-    alert ("Livello passato!");
-    var data = new FormData();
-    data.append("data" , difference);
-    var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-    xhr.open("post", "DBConnection/nextlevel.php", true);
-    xhr.send(data);
+      if (test == true) {
+        alert ("Livello passato!");
+        var data = new FormData();
+        data.append("data" , difference);
+        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+        xhr.open("post", "DBConnection/nextlevel.php", true);
+        xhr.send(data);
 
     //Code to reload and reupdate the level
     var stringa;
@@ -161,6 +160,51 @@ $('#evaluateButton').click(function(){
 
     location.reload();
   }
-  else
-    alert("Valore sbagliato: riprova ancora");
+  else {
+    $('.chat-thread').append(
+      $('<li>')
+      .addClass("generalMsg")
+      .typed({
+        strings: ["This is not working! Try again!"],
+        typeSpeed: 10
+      })
+      );
+  }
 });
+
+function parseCode(code) {
+  // Create an array where each element is one line of the code
+  var lines = code.split("\n");
+
+  // Get function name
+  var words = lines[0].split(" ");
+  var functionName = words[words.indexOf('=') - 1]; // The name will be the element before "="
+
+  // Get function arguments
+  // First split after "(". then after ")", then with "," 
+  var arguments = code.split('(')[1].split(')')[0].split(',');
+
+  // Remove first line with function name (we don't need it anymore)
+  lines.shift();
+
+  var codeLines = [];
+
+  while (lines[0].indexOf('};') === -1) {
+    // Do this for each line until the line containing the closing curly brackets
+    var currentLine = lines.shift();
+    //Remove comments
+    currentLine = currentLine.replace(/'/g, "\\'");
+    currentLine = currentLine.replace(/"/g, "\\\"");
+    currentLine = currentLine.replace(/(\/\*[\w\'\s\r\n\*]*\*\/)|(\/\/[\w\s\']*)|(\<![\-\-\s\w\>\/]*\>)/g, "");
+    codeLines.push(currentLine);
+  }
+  var lineCount = codeLines.length;
+  var body = codeLines.join(" ");
+
+  return {
+    name: functionName,
+    args: arguments,
+    body: body,
+    numLines: lineCount
+  };
+}

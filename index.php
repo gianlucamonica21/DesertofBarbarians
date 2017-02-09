@@ -371,47 +371,6 @@ $conn = null;
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
-        <script type="text/javascript">
-          // recuperare livello, selezionare, deselezionare correttamente i livelli
-          var maxlevel;
-          var oReq = new XMLHttpRequest(); //New request object
-          oReq.onload = function() {
-          //This is where you handle what to do with the response.
-          //The actual data is found on this.responseText
-          maxlevel = this.responseText; //Will alert: 42
-          };
-          oReq.open("get", "DBConnection/get_maxlevel.php", false);
-          //                               ^ block the rest of the execution.
-          //                                 Don't wait until the request finishes to 
-          //                                 continue.
-          oReq.send(); 
-          alert("MaxLevel: " + maxlevel);
-
-          var levelArr = document.getElementsByClassName("level-buttons");
-          //alert(levelArr);
-
-          for(var i=0; i<levelArr.length; i++)
-          {
-            if(i > maxlevel){
-              levelArr[i].classList.add("disabled");
-            }
-          }
-
-          $('.level-buttons').click(function(){
-            if(!($(this).hasClass("disabled"))){
-              clickedLevel = this.textContent;
-              alert("clicked " + clickedLevel);
-              var data = new FormData();
-              data.append("data" , clickedLevel);
-              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-              xhr.open( 'post', 'DBConnection/change_level.php', true);
-              xhr.send(data);
-              location.reload(); 
-            }
-
-          });
-
-        </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!--<button type="button" id="go_to_level" class="btn btn-primary">Go!</button>-->
