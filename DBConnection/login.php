@@ -2,9 +2,11 @@
 // If user is already logged in, redirect to index.php
 session_start();
 if (isset($_SESSION['loggedinUser'])) {
-    header("location: ../index.php");
+  header("location: ../index.php");
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,5 +83,21 @@ if (isset($_SESSION['loggedinUser'])) {
           </footer>
         </div>
       </body>
-        <script type="text/javascript" src="../js/loginScript.js"></script>
+      <script type="text/javascript" src="../js/loginScript.js"></script>
       </html>
+      <script type="text/javascript">
+
+      //Chiamata LOAD LEVEL
+      var data = new FormData();
+      data.append("data", 0);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/load_level_x.php", true);
+      xhr.send(data);
+
+      //Chiamata LEADERBOARD
+      
+
+
+
+
+        </script>

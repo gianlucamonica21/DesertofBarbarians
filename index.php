@@ -51,6 +51,7 @@ $conn = null;
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link href="plugin/codemirror/lib/codemirror.css" rel="stylesheet">
 
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -100,7 +101,7 @@ $conn = null;
             </li>
 
             <li>
-              <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal">
+              <button id="leaderboard" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal">
                 <span class="icon">&#xf091;</span><br> Leaderboard
               </button>
             </li>
@@ -128,7 +129,7 @@ $conn = null;
         </div>
         <div class="row">
           <!-- Editor panel  -->
-          <div class="col-lg-6 col-md-6 col-sm-7">
+          <div class="col-lg-5 col-md-6 col-sm-7">
             <div class="panel panel-default">
               <div class="panel-heading">Editor</div>
               <div class="panel-body">
@@ -137,15 +138,15 @@ $conn = null;
                   <i class="fa fa-play" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate">
-                <i class="fa fa-check" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
                 <script type="text/javascript"></script>
                 <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
-                <i class="fa fa-undo" aria-hidden="true"></i>
+                  <i class="fa fa-undo" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help">
-                <i class="fa fa-question" aria-hidden="true"></i>
+                  <i class="fa fa-question" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
@@ -291,36 +292,37 @@ $conn = null;
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
+
         <script type="text/javascript">
-        var levelArr = document.getElementsByClassName("level-buttons");
-        
-        var maxlevel = '<?php echo $_SESSION["maxLevel"]; ?>';
-        for(var i=0; i<levelArr.length; i++)
-        {
-          if(i >= maxlevel){
-            levelArr[i].classList.add("disabled");
-          }
-        } 
+          var levelArr = document.getElementsByClassName("level-buttons");
+
+          var maxlevel = '<?php echo $_SESSION['maxLevel']; ?>';
+          for(var i=0; i<levelArr.length; i++)
+          {
+            if(i >= maxlevel){
+              levelArr[i].classList.add("disabled");
+            }
+          } 
           $('.level-buttons').click(function(){
-              
+
              //alert(levelArr);
           //
           
 
 
-            if(!($(this).hasClass("disabled"))){
-              var clicked = true;
-              clickedLevel = this.textContent;
-              alert("clicked " + clickedLevel);
+          if(!($(this).hasClass("disabled"))){
+            var clicked = true;
+            clickedLevel = this.textContent;
+            alert("clicked " + clickedLevel);
 
-              var data = new FormData();
-              data.append("data", clickedLevel);
-              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-              xhr.open("post", "DBConnection/load_level_x.php", true);
-              xhr.send(data);
-              location.reload();
-            }
-          });
+            var data = new FormData();
+            data.append("data", clickedLevel);
+            var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+            xhr.open("post", "DBConnection/load_level_x.php", true);
+            xhr.send(data);
+            location.reload();
+          }
+        });
 
           // var data = new FormData();
           // data.append("data", clickedLevel);
@@ -355,52 +357,101 @@ $conn = null;
               <tr>
                 <th>#</th>
                 <th>Username</th>
-                <th>Badges</th>
                 <th>Points</th>
+                <th>Badges</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="leaderboardbody">
+              <!-- <tr>
                 <td>1</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+                <td id="td1"></td>
+                <td id="tds1"></td>
+                <td ></td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+                <td id="td2"></td>
+                <td id="tds2"></td>
+                <td></td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-              </tr>
+                <td id="td3"></td>
+                <td id="tds3"></td>
+                <td></td>
+              </tr> -->
             </tbody>
           </table>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <script type="text/javascript">
+          $('#leaderboard').click(function() {
+          
+          var stringa;
+          var oReq = new XMLHttpRequest(); //New request object
+          oReq.onload = function() {
+            stringa = this.responseText;
+          };
+          oReq.open("get", "DBConnection/leaderBoard.php", true);
+          oReq.send();
+
+          var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
+          var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
+          var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+
+          $("#leaderboardbody").empty();
+          for(var i = 0;i < number; i++){
+            console.log("n: " + i);
+            $("#leaderboardbody").append(
+              $('<tr>')
+              .attr('id','player' + i)
+              );
+                // $('#player' + i).append(
+                // $('<td>')
+                // .text((JSON.parse(leaderNames)[i]));  
+                // );
+          }
+
+
+          // alert(leaderNames);
+          // if(leaderNames != null && leaderScores != null){
+          //   var firstN = (JSON.parse(leaderNames)[0]);       
+          //   var  secondN = (JSON.parse(leaderNames)[1]);       
+          //   var thirdN = (JSON.parse(leaderNames)[2]);  
+
+          //   var firstS = (JSON.parse(leaderScores)[0]);       
+          //   var  secondS = (JSON.parse(leaderScores)[1]);       
+          //   var thirdS = (JSON.parse(leaderScores)[2]);
+
+          //    document.getElementById('td1').innerHTML = firstN;     
+          //    document.getElementById('td3').innerHTML = secondN;
+          //    document.getElementById('td2').innerHTML = thirdN;
+
+          //    document.getElementById('tds1').innerHTML = firstS;     
+          //    document.getElementById('tds3').innerHTML = secondS;
+          //    document.getElementById('tds2').innerHTML = thirdS; 
+          // }
+           }); 
+          </script>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+          <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+        </div>
+      </div>
+    </footer>
+
   </div>
 
-  <footer>
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
-      </div>
-    </div>
-  </footer>
-
-</div>
-
-<script type="text/javascript" src="js/editor.js"></script>
-<script type="text/javascript" src="js/default.js"></script>
-<noscript>You need to turn JavaScript on.</noscript>
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/default.js"></script>
+  <noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>
