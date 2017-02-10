@@ -69,11 +69,18 @@ $(document).ready(function() {
       xhr.send(data);
       // Inject code inside the game
       var newFunction = parseCode(window.editor.getValue());
-      console.log(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
-      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
+      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
 
-    //  location.reload();
-      //startLevel();
+      // CHAT MSG
+
+      $('.chat-thread').append(
+        $('<li>')
+        .addClass("consoleMsg")
+        .typed({
+          strings: ["Applied code update."],
+          typeSpeed: 10
+        })
+        );
     }
   });
 
@@ -119,11 +126,12 @@ $(document).ready(function() {
 
 // EVALUATE BUTTON
 $('#evaluateButton').click(function(){
- finishedCoding = (new Date()).getTime();
- difference = (finishedCoding - startedCoding) / 1000;
- alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+  if (attr('submit-button', 'disabled') == 'true'){
+   finishedCoding = (new Date()).getTime();
+   difference = (finishedCoding - startedCoding) / 1000;
+   alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
- try {
+   try {
    var test = true; //userSolutionChecker();
    // scrittura su file modificato nell'editor
    var data = new FormData();
@@ -145,17 +153,17 @@ $('#evaluateButton').click(function(){
         xhr.open("post", "DBConnection/nextlevel.php", true);
         xhr.send(data);
 
-    var data = new FormData();
-    data.append("data", 0);
-    var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-    var stringa;
-    xhr.onload = function() {
-       stringa = this.responseText;
-    };
-    xhr.open("post", "DBConnection/load_level_x.php", true);
-    xhr.send(data);
+        var data = new FormData();
+        data.append("data", 0);
+        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+        var stringa;
+        xhr.onload = function() {
+         stringa = this.responseText;
+       };
+       xhr.open("post", "DBConnection/load_level_x.php", true);
+       xhr.send(data);
 
-    alert("asd:" + stringa);
+       alert("asd:" + stringa);
 
     // //Code to reload and reupdate the level
     // var stringa;
@@ -182,6 +190,15 @@ $('#evaluateButton').click(function(){
       })
       );
   }
+} else {
+  $('.chat-thread').append(
+    $('<li>')
+    .addClass("soldierMsg")
+    .typed({
+      strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
+      typeSpeed: 10
+    }));
+}
 });
 
 function parseCode(code) {
@@ -204,9 +221,10 @@ function parseCode(code) {
   while (lines[0].indexOf('};') === -1) {
     // Do this for each line until the line containing the closing curly brackets
     var currentLine = lines.shift();
-    //Remove comments
+    // Escape the quotation marks
     currentLine = currentLine.replace(/'/g, "\\'");
     currentLine = currentLine.replace(/"/g, "\\\"");
+    //Remove comments
     currentLine = currentLine.replace(/(\/\*[\w\'\s\r\n\*]*\*\/)|(\/\/[\w\s\']*)|(\<![\-\-\s\w\>\/]*\>)/g, "");
     codeLines.push(currentLine);
   }

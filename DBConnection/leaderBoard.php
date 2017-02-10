@@ -28,8 +28,8 @@ try {
 	$_SESSION['leaderScores'] = $leader_scores;
 
 	if($leaders > 0) {
-		print_r($leader_names);
-		print_r($leader_scores);
+		echo ($leader_names);
+		//print_r($leader_scores);
 		//header('Location: ../index.php');
 	}
 	else {

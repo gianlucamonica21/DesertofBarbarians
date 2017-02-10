@@ -51,6 +51,7 @@ $conn = null;
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link href="plugin/codemirror/lib/codemirror.css" rel="stylesheet">
 
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -100,7 +101,7 @@ $conn = null;
             </li>
 
             <li>
-              <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal">
+              <button id="leaderboard" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal">
                 <span class="icon">&#xf091;</span><br> Leaderboard
               </button>
             </li>
@@ -128,7 +129,7 @@ $conn = null;
         </div>
         <div class="row">
           <!-- Editor panel  -->
-          <div class="col-lg-6 col-md-6 col-sm-7">
+          <div class="col-lg-5 col-md-6 col-sm-7">
             <div class="panel panel-default">
               <div class="panel-heading">Editor</div>
               <div class="panel-body">
@@ -137,15 +138,15 @@ $conn = null;
                   <i class="fa fa-play" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate">
-                <i class="fa fa-check" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
                 <script type="text/javascript"></script>
                 <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
-                <i class="fa fa-undo" aria-hidden="true"></i>
+                  <i class="fa fa-undo" aria-hidden="true"></i>
                 </button>
                 <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help">
-                <i class="fa fa-question" aria-hidden="true"></i>
+                  <i class="fa fa-question" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
@@ -291,6 +292,7 @@ $conn = null;
             <button id="button1" class="btn btn-primary level-buttons ">9</button>
           </div>
         </div>
+
         <script type="text/javascript">
 
           var levelArr = document.getElementsByClassName("level-buttons");
@@ -300,7 +302,7 @@ $conn = null;
             if(i >= maxlevel){
               levelArr[i].classList.add("disabled");
             }
-          }
+          } 
           $('.level-buttons').click(function(){
             if(!($(this).hasClass("disabled"))){
               var clicked = true;
@@ -314,7 +316,7 @@ $conn = null;
               xhr.send(data);
               location.reload();
             }
-          });
+           });
         </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -338,54 +340,70 @@ $conn = null;
           <table class="table table-striped table-hover table-bordered ">
             <thead>
               <tr>
-                <th>#</th>
+                <!-- <th>#</th> -->
                 <th>Username</th>
-                <th>Badges</th>
                 <th>Points</th>
+                <th>Badges</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-              </tr>
+            <tbody id="leaderboardbody">
+         
             </tbody>
           </table>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <script type="text/javascript">
+          $('#leaderboard').click(function() {
+          
+          var stringa;
+          var oReq = new XMLHttpRequest(); //New request object
+          oReq.onload = function() {
+            stringa = this.responseText;
+          };
+          oReq.open("get", "DBConnection/leaderBoard.php", true);
+          oReq.send();
+
+          var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
+          var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
+          var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+
+          $("#leaderboardbody").empty();
+          for(var i = 0;i < number; i++){
+            console.log("n: " + i);
+            $("#leaderboardbody").append(
+              $('<tr>')
+              .attr('id','player' + i)
+              );
+                $("#player" + i).append(
+                $('<td>')
+                .text((JSON.parse(leaderNames)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderScores)[i]))    
+                );
+               
+          }
+
+         }); 
+          </script>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+          <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+        </div>
+      </div>
+    </footer>
+
   </div>
 
-  <footer>
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
-      </div>
-    </div>
-  </footer>
-
-</div>
-
-<script type="text/javascript" src="js/editor.js"></script>
-<script type="text/javascript" src="js/default.js"></script>
-<noscript>You need to turn JavaScript on.</noscript>
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/default.js"></script>
+  <noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>

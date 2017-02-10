@@ -15,7 +15,7 @@ MISSILE = {
 
 // Variables
 var levelscore = 0,
-level = 1,
+level = 9,
 maxLevel = 1,
 levelIndex = {},
 cities = [],
@@ -136,25 +136,30 @@ var drawScore = function() {
 
 // Show message before a level begins
 var drawLevelMessage = function() {
-  ctx.fillStyle = '#6d6';
+  ctx.fillStyle = 'white';
 
-  ctx.font =  '20px monaco, consolas';
-  ctx.fillText( 'click to start fifth level.', 130, 180 );
+  ctx.font =  '25px monaco, consolas';
+  ctx.fillText( 'click to start.', 130, 180 );
+
+  ctx.font = 'bold 25px monaco, consolas';
+  ctx.fillStyle = 'white';
+  ctx.fillText( 'level ' + level, 130, 150 );
+
   ctx.font = 'bold 32px monaco, consolas';
-  ctx.fillStyle = '#d66';
+  ctx.fillStyle = '#26070A';
   ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
 };
 
 var drawStopMessage = function() {
 
-    ctx.fillStyle = '#6d6';
+  ctx.fillStyle = '#6d6';
 
-    ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'Game is now stop', 130, 180 );
-    ctx.font = 'bold 32px monaco, consolas';
-    ctx.fillStyle = '#d66';
-    ctx.fillText( '', 130, 250 );
-    stopLevel();
+  ctx.font =  '20px monaco, consolas';
+  ctx.fillText( 'Game is now stop', 130, 180 );
+  ctx.font = 'bold 32px monaco, consolas';
+  ctx.fillStyle = '#d66';
+  ctx.fillText( '', 130, 250 );
+  stopLevel();
 
 };
 
@@ -201,11 +206,13 @@ var getMultiplier = function() {
 
 // Show the basic game background
 var drawBackground = function() {
-    // Black background -> gradient sky
-
-    var grd=ctx.createLinearGradient(0,1000,0,0);
-    grd.addColorStop(0,"#2473ab");
-    grd.addColorStop(1,"#1e528e");
+    // Draw SKY
+    var grd=ctx.createLinearGradient(0,0,0,510);
+    grd.addColorStop(0,"#163C52");
+    grd.addColorStop(0.3,"#4F4F47");
+    grd.addColorStop(0.6,"#C5752D");
+    grd.addColorStop(1,"#B7490F");
+  //  grd.addColorStop(1,"#2F1107");
 
     ctx.fillStyle = grd;
     ctx.fillRect( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT );
@@ -284,7 +291,7 @@ City.prototype.draw = function() {
   var x = this.x,
   y = this.y;
 
-  ctx.fillStyle = '#833';
+  ctx.fillStyle = '#7e8341';
   ctx.beginPath();
   ctx.moveTo( x, y );
   ctx.lineTo( x, y - 10 );
@@ -299,7 +306,7 @@ City.prototype.draw = function() {
   ctx.fill();
 
     //city shadows
-    ctx.fillStyle = '#411';
+    ctx.fillStyle = '#4d4729';
     ctx.beginPath();
     x = x+5;
     y = y+5;
@@ -336,7 +343,7 @@ AntiMissileBattery.prototype.draw = function() {
     y = this.y + delta[i][1] - 10;
       //NEW GRAPHICS
       // Draw a missile-launcher
-      ctx.fillStyle = '#af6f5f';
+      ctx.fillStyle = 'black';
       ctx.beginPath();
       ctx.moveTo( x, y );
       ctx.lineTo( x - 3, y + 10);
@@ -344,7 +351,7 @@ AntiMissileBattery.prototype.draw = function() {
       ctx.closePath();
       ctx.fill();
 
-      ctx.fillStyle = '#553322';
+      ctx.fillStyle = '#4B5320';
       ctx.beginPath();
       ctx.moveTo(x,y);
       ctx.lineTo( x , y + 12);
@@ -484,6 +491,10 @@ function PlayerMissile( source, endX, endY ) {
     this.dy = yDistance / scale;
 
     amb.missilesLeft--;
+
+    if(amb.missilesLeft === 0){
+      amb.missilesLeft = 6;
+    }
 
   }
 
@@ -868,8 +879,8 @@ var stopLevel = function() {
 // Start animating a game level
 var startLevel = function() {
 
-    var fps = 30;
-    timerID = setInterval( nextFrame, 1000 / fps );
+  var fps = 30;
+  timerID = setInterval( nextFrame, 1000 / fps );
 
 };
 
@@ -896,9 +907,9 @@ var firedtoMiddleThird = function( priority1, priority2 ) {
   }
 };
 
- var whichAntiMissileBattery = function( x ) {
+var whichAntiMissileBattery = function( x ) {
 
-if( !antiMissileBatteries[0].hasMissile() &&
+  if( !antiMissileBatteries[0].hasMissile() &&
     !antiMissileBatteries[1].hasMissile() &&
     !antiMissileBatteries[2].hasMissile() ) {
     return -1;
@@ -926,8 +937,10 @@ var setupListeners = function() {
 
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
-      //playerShoot( mousePos.x, mousePos.y);
-      automaticShooting();
+      playerShoot( mousePos.x + 25, mousePos.y);
+      playerShoot( mousePos.x, mousePos.y);
+      playerShoot( mousePos.x - 25, mousePos.y);
+      
     });
   });
 };

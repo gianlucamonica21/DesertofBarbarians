@@ -24,7 +24,7 @@
     //   change.cancel();
     // }
     // alert("stai scrivendo");
-    drawStopMessage();
+ //   drawStopMessage();
     startedCoding = (new Date()).getTime();
     //console.log("Hai iniziato a scrivere :" + startCoding);
     stoppedGame = true;
