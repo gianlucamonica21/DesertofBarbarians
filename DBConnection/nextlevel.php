@@ -92,13 +92,13 @@ try {
 		$result_campaign = $query->execute( array( ':login'=>$current_player,
 																							 ':level'=>$current_level,
 																							 ':max_score_per_level'=>$max_score_per_level) );
-	  $_SESSION['level'] = $current_level;
+	}
+	if ($current_level < 9 &&
+		 $current_level < $max_level) {
+		$current_level = $current_level + 1;
 	}
 
-	if ($current_level < $max_level) {
-		$current_level = $current_level + 1;
-		$_SESSION['level'] = $current_level;
-	}
+	$_SESSION['level'] = $current_level;
 }
 catch(PDOException $e)
 {

@@ -31,8 +31,9 @@ $conn = null;
 ?>
 <script type="text/javascript">
   var clickedLevel;
-  var x = "<?php echo $current_player;?>"
-  var level = "<?php echo $_SESSION['level'];?>"
+  var x = "<?php echo $current_player;?>";
+  var level = "<?php echo $_SESSION['level'];?>";
+  var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -292,22 +293,32 @@ $conn = null;
           </div>
         </div>
         <script type="text/javascript">
-        var levelArr = document.getElementsByClassName("level-buttons");
-        
-        var maxlevel = '<?php echo $_SESSION["maxLevel"]; ?>';
-        for(var i=0; i<levelArr.length; i++)
-        {
-          if(i >= maxlevel){
-            levelArr[i].classList.add("disabled");
+        var stringa;
+        var oReq = new XMLHttpRequest(); //New request object
+        oReq.onload = function() {
+          stringa = this.responseText;
+        };
+        oReq.open("get", "DBConnection/load_player.php", false);
+        oReq.send();
+        alert("RISULTATO  CHIAMATA da INDEX(di load_player.php):" + stringa);
+        var stringa;
+        var oReq = new XMLHttpRequest(); //New request object
+        oReq.onload = function() {
+          stringa = this.responseText;
+        };
+        oReq.open("get", "DBConnection/load_level_x.php", false);
+        oReq.send();
+        alert("RISULTATO  CHIAMATA da INDEX(di load_level_x.php):" + stringa);
+
+          var levelArr = document.getElementsByClassName("level-buttons");
+
+          for(var i=0; i<levelArr.length; i++)
+          {
+            if(i >= maxlevel){
+              levelArr[i].classList.add("disabled");
+            }
           }
-        } 
           $('.level-buttons').click(function(){
-              
-             //alert(levelArr);
-          //
-          
-
-
             if(!($(this).hasClass("disabled"))){
               var clicked = true;
               clickedLevel = this.textContent;
@@ -321,15 +332,6 @@ $conn = null;
               location.reload();
             }
           });
-
-          // var data = new FormData();
-          // data.append("data", clickedLevel);
-          // var oReq = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-          // oReq.open("post", "DBConnection/load_level_x.php", true);
-          // oReq.send(data);
-          
-
-          
         </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
