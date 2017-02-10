@@ -957,7 +957,10 @@ function userSolutionChecker(){
   var distancePerFrame = 12;
   var speed = distance / distancePerFrame;
   if ( missileSpeed(5,9) == speed ) {
-    return true;
+    return {
+    passed: true,
+    errorMsg: ""
+  }
   } else {
    return {
     passed: false,
