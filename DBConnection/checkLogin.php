@@ -38,7 +38,25 @@ try {
 		$level_rows = $level_query->fetch();
 		$levelstart = $level_rows["maxlevel"];
 		$_SESSION['level'] = $levelstart;
-			
+		$_SESSION['maxLevel'] = $levelstart;
+
+		//Caricamento dati leaderboard
+		$leader_query = $conn->prepare("SELECT login, score FROM User ORDER BY score DESC LIMIT 5");
+		$leader_query->execute();
+		$leaders = $leader_query->fetchAll();
+
+		foreach ($leaders as $leader)
+		{
+			$leader_names[] = $leader["login"];
+			$leader_scores[] = $leader["score"];
+		}
+
+		session_start();
+		// Save the leaders info
+		$_SESSION['leaderNames'] = $leader_names;
+		$_SESSION['leaderScores'] = $leader_scores;
+		$_SESSION['NUMBER']	= count($leader_names);					
+
 
 		if($user_rows > 0) {
 			echo "OK";

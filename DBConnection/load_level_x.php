@@ -22,8 +22,6 @@ try {
 
 	// Check the input of data
 	if(!empty($current_player)){
-		$loaded_level = $level_to_load;
-
 		// Estrai massimo livello completato dal giocatore
 		$level_query = $conn->prepare("SELECT MAX(level) AS maxlevel FROM Campaign WHERE login= :login");
 		$level_query->bindParam(':login', $current_player);
@@ -32,11 +30,30 @@ try {
 		$max_level = $level_rows["maxlevel"];
 		$_SESSION['maxLevel'] = $max_level;
 
-		// Se il livello da caricare è 0 significa che va caricato il massimo
-		if ($level_to_load == 0) {
-			$loaded_level = $max_level;
+		$loaded_level = 0;
+		// Se è dopo il login e non c'è nessun livello caricato, carica il massimo
+		if (!isset($_SESSION['level'])) {
+			$loaded_level = $_SESSION['maxLevel'];
+			$_SESSION['level'] = $loaded_level;
 		}
-		$_SESSION['level'] = $loaded_level;
+		// Se qualche livello è stato già caricato
+		else {
+			// Ma non è stato premuto alcun bottone, allora ricarica il livello
+			if ($level_to_load < 1 || $level_to_load > 9) {
+				$loaded_level = $_SESSION['level'];
+			}
+			// Ma è stato premuto un bottone x, allroa carica l'x-esimo livello
+			else {
+				$loaded_level = $level_to_load;
+				$_SESSION['level'] = $loaded_level;
+			}
+		}
+
+		// Se il livello da caricare è 0 significa che va caricato il massimo
+		// if ($level_to_load == 0) {
+		// 	$loaded_level = $max_level;
+		// }
+		// $_SESSION['level'] = $loaded_level;
 
 		/* Estrai lo score dentro tale livello, se l'utente non lo ha mai completato
 			allora lo score sarà zero */
@@ -82,6 +99,10 @@ try {
 			$achievements[] = $achievements_row["achievement"];
 		}
 		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
+
+		$update_total_score = "UPDATE User SET score= :score WHERE login= 'maximilian'";
+		$query = $conn->prepare($update_total_score);
+		$result_update_total_score = $query->execute( array( ':score'=>$_SESSION['level']) );
 	}
 }
 catch(PDOException $e)
