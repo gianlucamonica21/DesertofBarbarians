@@ -219,7 +219,7 @@ $conn = null;
             <div class="progress">
               <div class="progress-bar" style="width: 60%"></div>
             </div>
-            <h4>Points to next rank: 7878</h4>
+            <h4>Points to next rank: TO DO </h4>
           </div>
           <div class="row">
             <div class="col-md-6 col-xs-6 follow line" align="center">
@@ -228,7 +228,7 @@ $conn = null;
               </h3>
             </div>
             <div class="col-md-6 col-xs-6 follow line" align="center">
-              <h3>125651 <br/> <span>BADGES</span>
+              <h3>TO DO <br/> <span>BADGES</span>
               </h3>
             </div>
           </div>
