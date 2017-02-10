@@ -15,7 +15,7 @@ MISSILE = {
 
 // Variables
 var levelscore = 0,
-level = 1,
+level = 8,
 maxLevel = 1,
 levelIndex = {},
 cities = [],
@@ -33,10 +33,14 @@ var undef;
 
 var elementPos = [{x: 35, y:410}, {x: 255, y:410}, {x: 475, y:410},
 {x: 80, y:430}, {x: 130, y:430}, {x: 180, y:430}, {x: 300, y:430}, {x: 350, y:430}, {x: 400, y:430} ];
+
+var shieldPos = [{x: 145, y:420},  // First shield
+                  {x: 365, y:420}]; // second shield
 // Create cities and anti missile batteries at the start of the game
 var missileCommand = function(checkLevel) {
   cities = [];
   antiMissileBatteries = [];
+  shields = [];
 
     // Bottom left position of cities
     createCities();
@@ -44,12 +48,20 @@ var missileCommand = function(checkLevel) {
     // Top middle position of anti-missile batteries
     createAntimissileBattery();
 
+    // Create shields
+    createShields();
+
     initializeLevel();
 
     levelscore = 0;
 
     setupListeners();
   };
+
+  var createShields = function () {
+    shields.push( new Shield( shieldPos[0].x, shieldPos[0].y));
+    shields.push( new Shield( shieldPos[1].x, shieldPos[1].y));
+  }
 
   var createCities = function () {
     cities.push( new City( elementPos[3].x,  elementPos[3].y) );
@@ -115,6 +127,7 @@ var rand = function( min, max ) {
 var drawGameState = function() {
   drawBackground();
   drawCities();
+  drawShields();
   drawAntiMissileBatteries();
  //   drawScore();
 };
@@ -136,25 +149,30 @@ var drawScore = function() {
 
 // Show message before a level begins
 var drawLevelMessage = function() {
-  ctx.fillStyle = '#6d6';
+  ctx.fillStyle = 'white';
 
-  ctx.font =  '20px monaco, consolas';
-  ctx.fillText( 'click to start fifth level.', 130, 180 );
+  ctx.font =  '25px monaco, consolas';
+  ctx.fillText( 'click to start.', 130, 180 );
+
+  ctx.font = 'bold 25px monaco, consolas';
+  ctx.fillStyle = 'white';
+  ctx.fillText( 'level ' + level, 130, 150 );
+
   ctx.font = 'bold 32px monaco, consolas';
-  ctx.fillStyle = '#d66';
+  ctx.fillStyle = '#26070A';
   ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
 };
 
 var drawStopMessage = function() {
 
-    ctx.fillStyle = '#6d6';
+  ctx.fillStyle = '#6d6';
 
-    ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'Game is now stop', 130, 180 );
-    ctx.font = 'bold 32px monaco, consolas';
-    ctx.fillStyle = '#d66';
-    ctx.fillText( '', 130, 250 );
-    stopLevel();
+  ctx.font =  '20px monaco, consolas';
+  ctx.fillText( 'Game is now stop', 130, 180 );
+  ctx.font = 'bold 32px monaco, consolas';
+  ctx.fillStyle = '#d66';
+  ctx.fillText( '', 130, 250 );
+  stopLevel();
 
 };
 
@@ -186,6 +204,15 @@ var drawCities = function() {
   });
 };
 
+// Draw all active shields
+var drawShields = function() {
+  $.each( shields, function( index, shield ) {
+    if( shield.active ) {
+      shield.draw();
+    }
+  });
+};
+
 // Draw missiles in all anti missile batteries
 var drawAntiMissileBatteries = function() {
   $.each( antiMissileBatteries, function( index, amb ) {
@@ -201,14 +228,16 @@ var getMultiplier = function() {
 
 // Show the basic game background
 var drawBackground = function() {
-    // Black background -> gradient sky
+    // Draw SKY
+    var grd=ctx.createLinearGradient(0,0,0,510);
+    grd.addColorStop(0,"#163C52");
+    grd.addColorStop(0.3,"#4F4F47");
+    grd.addColorStop(0.6,"#C5752D");
+    grd.addColorStop(1,"#B7490F");
+  //  grd.addColorStop(1,"#2F1107");
 
-    var grd=ctx.createLinearGradient(0,1000,0,0);
-    grd.addColorStop(0,"#a44");
-    grd.addColorStop(1,"#134");
-
-    ctx.fillStyle = grd;
-    ctx.fillRect( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT );
+  ctx.fillStyle = grd;
+  ctx.fillRect( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT );
 
     // Yellow area at bottom of screen for cities and
     // anti missile batteries
@@ -271,6 +300,24 @@ var drawBackground = function() {
     ctx.fill();
   };
 
+// Constructor for a Shield
+function Shield(x,y) {
+  this.x = x;
+  this.y = y;
+  this.active = true;
+}
+
+// Draw shields based on position
+Shield.prototype.draw = function() {
+  x = this.x;
+  y = this.y;
+
+  ctx.strokeStyle= '#00FFFF';
+  ctx.beginPath();
+  ctx.arc(x, y, 80, 1 * Math.PI, 0);
+  ctx.stroke();
+  ctx.closePath();
+}
 
 // Constructor for a City
 function City( x, y ) {
@@ -284,7 +331,7 @@ City.prototype.draw = function() {
   var x = this.x,
   y = this.y;
 
-  ctx.fillStyle = '#833';
+  ctx.fillStyle = '#7e8341';
   ctx.beginPath();
   ctx.moveTo( x, y );
   ctx.lineTo( x, y - 10 );
@@ -299,7 +346,7 @@ City.prototype.draw = function() {
   ctx.fill();
 
     //city shadows
-    ctx.fillStyle = '#411';
+    ctx.fillStyle = '#4d4729';
     ctx.beginPath();
     x = x+5;
     y = y+5;
@@ -336,7 +383,7 @@ AntiMissileBattery.prototype.draw = function() {
     y = this.y + delta[i][1] - 10;
       //NEW GRAPHICS
       // Draw a missile-launcher
-      ctx.fillStyle = '#af6f5f';
+      ctx.fillStyle = 'black';
       ctx.beginPath();
       ctx.moveTo( x, y );
       ctx.lineTo( x - 3, y + 10);
@@ -344,7 +391,7 @@ AntiMissileBattery.prototype.draw = function() {
       ctx.closePath();
       ctx.fill();
 
-      ctx.fillStyle = '#553322';
+      ctx.fillStyle = '#4B5320';
       ctx.beginPath();
       ctx.moveTo(x,y);
       ctx.lineTo( x , y + 12);
@@ -427,6 +474,7 @@ Missile.prototype.draw = function() {
 
 // Handle update to help with animating an explosion
 Missile.prototype.explode = function() {
+  console.log(this.explodeRadius);
   if( this.state === MISSILE.exploding ) {
     this.explodeRadius++;
   }
@@ -484,6 +532,10 @@ function PlayerMissile( source, endX, endY ) {
     this.dy = yDistance / scale;
 
     amb.missilesLeft--;
+
+    if(amb.missilesLeft === 0){
+      amb.missilesLeft = 6;
+    }
 
   }
 
@@ -564,6 +616,19 @@ EnemyMissile.prototype.update = function() {
       this.state = MISSILE.exploding;
       this.groundExplosion = true;
     }
+  if (shields[0].active == true ) {
+  if( distance(this.x,this.y,shieldPos[0].x,shieldPos[0].y) <= 80 ) {
+      // Missile hit shield
+      this.state = MISSILE.exploding;
+      shields[0].active = false;
+  }}
+  if (shields[1].active == true ) {
+    if( distance(this.x,this.y,shieldPos[1].x,shieldPos[1].y) <= 80 ) {
+      // Missile hit shield
+      this.state = MISSILE.exploding;
+      shields[1].active = false;
+    }};
+
     if( this.state === MISSILE.active ) {
       this.x += this.dx;
       this.y += this.dy;
@@ -617,7 +682,7 @@ BonusMissile.prototype.update = function() {
       this.y = this.endY;
       this.state = MISSILE.exploding;
       this.groundExplosion = true;
-    }
+    } 
     if( this.state === MISSILE.active ) {
       this.x += this.dx;
       this.y += this.dy;
@@ -645,7 +710,7 @@ BonusMissile.prototype.update = function() {
 
 // When a missile that did not hit the ground is exploding, check if
 // any enemy missile is in the explosion radius; if so, cause that
-// enemy missile to begin exploding too.
+// enemy missile to begin exploding too.dE
 // The bonus missiles will never explode because of a near explosion.
 var explodeOtherMissiles = function( missile, ctx ) {
   if( !missile.groundExplosion ){
@@ -868,8 +933,8 @@ var stopLevel = function() {
 // Start animating a game level
 var startLevel = function() {
 
-    var fps = 30;
-    timerID = setInterval( nextFrame, 1000 / fps );
+  var fps = 30;
+  timerID = setInterval( nextFrame, 1000 / fps );
 
 };
 
@@ -896,9 +961,9 @@ var firedtoMiddleThird = function( priority1, priority2 ) {
   }
 };
 
- var whichAntiMissileBattery = function( x ) {
+var whichAntiMissileBattery = function( x ) {
 
-if( !antiMissileBatteries[0].hasMissile() &&
+  if( !antiMissileBatteries[0].hasMissile() &&
     !antiMissileBatteries[1].hasMissile() &&
     !antiMissileBatteries[2].hasMissile() ) {
     return -1;
@@ -927,6 +992,7 @@ var setupListeners = function() {
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
       playerShoot( mousePos.x, mousePos.y);
+      
     });
   });
 };
@@ -952,4 +1018,11 @@ function userSolutionChecker(){
     else{
       return false;
     }
+  }
+
+  function distance(x1,y1,x2,y2){
+    xDistance = x2 - x1;
+    yDistance = y2 - y1;
+    var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
+    return distance;
   }

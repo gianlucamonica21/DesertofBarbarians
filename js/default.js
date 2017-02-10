@@ -70,6 +70,17 @@ $(document).ready(function() {
       // Inject code inside the game
       var newFunction = parseCode(window.editor.getValue());
       eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
+
+      // CHAT MSG
+
+      $('.chat-thread').append(
+        $('<li>')
+        .addClass("consoleMsg")
+        .typed({
+          strings: ["Applied code update."],
+          typeSpeed: 10
+        })
+        );
     }
   });
 
@@ -179,10 +190,10 @@ $('#evaluateButton').click(function() {
       strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
       typeSpeed: 10
     }));
-  }
+}
 });
 
-  function parseCode(code) {
+function parseCode(code) {
   // Create an array where each element is one line of the code
   var lines = code.split("\n");
 
@@ -202,9 +213,10 @@ $('#evaluateButton').click(function() {
   while (lines[0].indexOf('};') === -1) {
     // Do this for each line until the line containing the closing curly brackets
     var currentLine = lines.shift();
-    //Remove comments
+    // Escape the quotation marks
     currentLine = currentLine.replace(/'/g, "\\'");
     currentLine = currentLine.replace(/"/g, "\\\"");
+    //Remove comments
     currentLine = currentLine.replace(/(\/\*[\w\'\s\r\n\*]*\*\/)|(\/\/[\w\s\']*)|(\<![\-\-\s\w\>\/]*\>)/g, "");
     codeLines.push(currentLine);
   }
