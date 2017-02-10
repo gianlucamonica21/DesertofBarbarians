@@ -341,31 +341,14 @@ $conn = null;
           <table class="table table-striped table-hover table-bordered ">
             <thead>
               <tr>
-                <th>#</th>
+                <!-- <th>#</th> -->
                 <th>Username</th>
                 <th>Points</th>
                 <th>Badges</th>
               </tr>
             </thead>
             <tbody id="leaderboardbody">
-              <!-- <tr>
-                <td>1</td>
-                <td id="td1"></td>
-                <td id="tds1"></td>
-                <td ></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td id="td2"></td>
-                <td id="tds2"></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td id="td3"></td>
-                <td id="tds3"></td>
-                <td></td>
-              </tr> -->
+         
             </tbody>
           </table>
         </div>
@@ -391,32 +374,16 @@ $conn = null;
               $('<tr>')
               .attr('id','player' + i)
               );
-                // $('#player' + i).append(
-                // $('<td>')
-                // .text((JSON.parse(leaderNames)[i]));  
-                // );
+                $("#player" + i).append(
+                $('<td>')
+                .text((JSON.parse(leaderNames)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderScores)[i]))    
+                );
+               
           }
 
-
-          // alert(leaderNames);
-          // if(leaderNames != null && leaderScores != null){
-          //   var firstN = (JSON.parse(leaderNames)[0]);       
-          //   var  secondN = (JSON.parse(leaderNames)[1]);       
-          //   var thirdN = (JSON.parse(leaderNames)[2]);  
-
-          //   var firstS = (JSON.parse(leaderScores)[0]);       
-          //   var  secondS = (JSON.parse(leaderScores)[1]);       
-          //   var thirdS = (JSON.parse(leaderScores)[2]);
-
-          //    document.getElementById('td1').innerHTML = firstN;     
-          //    document.getElementById('td3').innerHTML = secondN;
-          //    document.getElementById('td2').innerHTML = thirdN;
-
-          //    document.getElementById('tds1').innerHTML = firstS;     
-          //    document.getElementById('tds3').innerHTML = secondS;
-          //    document.getElementById('tds2').innerHTML = thirdS; 
-          // }
-           }); 
+         }); 
           </script>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
