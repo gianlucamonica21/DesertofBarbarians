@@ -18,7 +18,7 @@ $(document).ready(function() {
         typeSpeed: 10
       })
 
-    );
+      );
   });
 
   var finishedCoding;
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   $('#submitButton').click(function() {
     // Remove old syntax errors
-    for (var i = 0; i < widgets.length; ++i) {
+    for (var i = 0; i < widgets.length; ++i){
       window.editor.removeLineWidget(widgets[i]);
     }
     widgets.length = 0;
@@ -58,7 +58,7 @@ $(document).ready(function() {
           strings: ["Syntax errors found. Please submit input again."],
           typeSpeed: 10
         })
-      );
+        );
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -69,7 +69,11 @@ $(document).ready(function() {
       xhr.send(data);
       // Inject code inside the game
       var newFunction = parseCode(window.editor.getValue());
-      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
+      console.log(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
+      eval(newFunction.name + " = new Function('" + newFunction.args.join(',') +"', '" + newFunction.body +"')");
+
+    //  location.reload();
+      //startLevel();
     }
   });
 
@@ -97,7 +101,7 @@ $(document).ready(function() {
           strings: [msgString],
           typeSpeed: 10
         })
-      );
+        );
     });
   });
 
@@ -114,24 +118,25 @@ $(document).ready(function() {
 });
 
 // EVALUATE BUTTON
-$('#evaluateButton').click(function() {
-  if (!($(this).hasClass("disabled"))) {
-    finishedCoding = (new Date()).getTime();
-    difference = (finishedCoding - startedCoding) / 1000;
-    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+$('#evaluateButton').click(function(){
+ finishedCoding = (new Date()).getTime();
+ difference = (finishedCoding - startedCoding) / 1000;
+ alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
-    try {
-      var test = true; //userSolutionChecker();
-      // scrittura su file modificato nell'editor
-      var data = new FormData();
-      data.append("data", window.editor.getValue());
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open('post', 'SaveToFile.php', true);
-      xhr.send(data);
-      location.reload();
-    } catch (err) {
-      // var test = getTest();
-    }
+ try {
+   var test = true; //userSolutionChecker();
+   // scrittura su file modificato nell'editor
+   var data = new FormData();
+   data.append("data" , window.editor.getValue());
+   var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+   xhr.open( 'post', 'SaveToFile.php', true);
+   xhr.send(data);
+   location.reload();
+ }
+ catch(err) {
+        // var test = getTest();
+      }
+
       if (test == true) {
         alert ("Livello passato!");
         var data = new FormData();
@@ -143,8 +148,14 @@ $('#evaluateButton').click(function() {
     var data = new FormData();
     data.append("data", 0);
     var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+    var stringa;
+    xhr.onload = function() {
+       stringa = this.responseText;
+    };
     xhr.open("post", "DBConnection/load_level_x.php", true);
     xhr.send(data);
+
+    alert("asd:" + stringa);
 
     // //Code to reload and reupdate the level
     // var stringa;
@@ -170,7 +181,6 @@ $('#evaluateButton').click(function() {
         typeSpeed: 10
       })
       );
-    }
   }
 });
 
