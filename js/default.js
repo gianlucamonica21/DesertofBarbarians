@@ -130,10 +130,10 @@ $('#evaluateButton').click(function() {
     finishedCoding = (new Date()).getTime();
     difference = (finishedCoding - startedCoding) / 1000;
     alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
-
+    var result = userSolutionChecker();
     try {
 
-      var result = UserSolutionChecker();
+      
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
