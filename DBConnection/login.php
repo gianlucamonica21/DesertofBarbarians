@@ -91,7 +91,7 @@ if (isset($_SESSION['loggedinUser'])) {
       var data = new FormData();
       data.append("data", 0);
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/load_level_x.php", true);
+      xhr.open("post", "load_level_x.php", true);
       xhr.send(data);
 
       //Chiamata LEADERBOARD

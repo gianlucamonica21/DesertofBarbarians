@@ -1,4 +1,4 @@
 {
-	"generalMsg": "The missiles aren't getting fired! Something is wrong in how we calculate ",
+	"generalMsg": "The missiles aren't getting fired! Something is wrong in how we get our missile speed... ",
 	"soldierMsg": "Oh that's funny! We have the speed, we just have to find a way to <strong>return</strong> it to whoever needs it... "
 }
