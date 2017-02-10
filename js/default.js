@@ -126,7 +126,7 @@ $(document).ready(function() {
 
 // EVALUATE BUTTON
 $('#evaluateButton').click(function(){
-  if (attr('submit-button', 'disabled') == 'true'){
+  if ($('#evaluateButton').prop('disabled', false)) {
    finishedCoding = (new Date()).getTime();
    difference = (finishedCoding - startedCoding) / 1000;
    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");

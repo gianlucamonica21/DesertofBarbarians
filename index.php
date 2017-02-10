@@ -303,7 +303,7 @@ $conn = null;
             if(i >= maxlevel){
               levelArr[i].classList.add("disabled");
             }
-          } 
+          }
           $('.level-buttons').click(function(){
             if(!($(this).hasClass("disabled"))){
               var clicked = true;
@@ -348,13 +348,13 @@ $conn = null;
               </tr>
             </thead>
             <tbody id="leaderboardbody">
-         
+
             </tbody>
           </table>
         </div>
         <script type="text/javascript">
           $('#leaderboard').click(function() {
-          
+
           var stringa;
           var oReq = new XMLHttpRequest(); //New request object
           oReq.onload = function() {
@@ -378,12 +378,12 @@ $conn = null;
                 $('<td>')
                 .text((JSON.parse(leaderNames)[i])),
                 $('<td>')
-                .text((JSON.parse(leaderScores)[i]))    
+                .text((JSON.parse(leaderScores)[i]))
                 );
-               
+
           }
 
-         }); 
+         });
           </script>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
