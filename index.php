@@ -214,7 +214,7 @@ $conn = null;
         <div class="modal-body">
           <div align="center">
             <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
-            <h2>Username</h2>
+            <h2><?php echo $current_player ?></h2>
             <h3>RANK: Captain</h3>
             <div class="progress">
               <div class="progress-bar" style="width: 60%"></div>
@@ -223,7 +223,8 @@ $conn = null;
           </div>
           <div class="row">
             <div class="col-md-6 col-xs-6 follow line" align="center">
-              <h3>125651 <br/> <span>POINTS</span>
+              <h3><?php echo $_SESSION["totalScore"] ?> <br/>
+              <span>POINTS</span>
               </h3>
             </div>
             <div class="col-md-6 col-xs-6 follow line" align="center">
