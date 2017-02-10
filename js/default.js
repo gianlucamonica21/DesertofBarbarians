@@ -132,17 +132,16 @@ $('#evaluateButton').click(function(){
    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
    try {
-   var test = true; //userSolutionChecker();
+   var result = UserSolutionChecker();
    // scrittura su file modificato nell'editor
    var data = new FormData();
    data.append("data" , window.editor.getValue());
    var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
    xhr.open( 'post', 'SaveToFile.php', true);
    xhr.send(data);
-   location.reload();
+
  }
  catch(err) {
-        // var test = getTest();
       }
 
       if (test == true) {
@@ -162,8 +161,6 @@ $('#evaluateButton').click(function(){
        };
        xhr.open("post", "DBConnection/load_level_x.php", true);
        xhr.send(data);
-
-       alert("asd:" + stringa);
 
     // //Code to reload and reupdate the level
     // var stringa;
