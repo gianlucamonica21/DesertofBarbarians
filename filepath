@@ -1,9 +1,10 @@
-var automaticShooting = function() {
+var missileSpeed = function (xDistance, yDistance) {
+    var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
 
-	for(i=0;i<enemyMissiles.length;i++){
-		if(enemyMissiles[i].delay === 0) {
-			playerShoot(enemyMissiles[i].x, enemyMissiles[i].y);
-		}
-	}
+    var distancePerFrame = 12;
 
+    var speed = distance / distancePerFrame;
+	
+	return speed;
 };
+

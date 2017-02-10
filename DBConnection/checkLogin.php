@@ -55,7 +55,8 @@ try {
 		// Save the leaders info
 		$_SESSION['leaderNames'] = $leader_names;
 		$_SESSION['leaderScores'] = $leader_scores;
-		$_SESSION['NUMBER']	= count($leader_names);					
+		$_SESSION['NUMBER']	= count($leader_names);	
+						
 
 
 		if($user_rows > 0) {
