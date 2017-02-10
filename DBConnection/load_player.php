@@ -28,7 +28,7 @@ try {
 		$total_score = $user_rows["score"];
 		$_SESSION['totalScore'] = $total_score;
 
-		// Estrai grado
+		// Estrai grado, maxim 1
 		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
 		$grade_query->bindParam(':login', $current_player);
 		$grade_query->execute();
@@ -36,19 +36,24 @@ try {
 		$grade = $grade_rows["grade"];
 		$_SESSION['userGrade'] = $grade;
 
-		// Estrai prossimo grado e requisito
+		// Estrai prossimo grado e requisito, maxim, grade 1, nextgrade 2
 		$next_grade = $grade + 1;
 		$desiderable_grade = $conn->prepare("SELECT * FROM Grade WHERE id= :id");
 		$desiderable_grade->bindParam(':id', $next_grade);
 		$desiderable_grade->execute();
 		$desiderable_grade_row = $desiderable_grade->fetch();
-		if ($desiderable_grade_row == 0)
+		if ($desiderable_grade_row == 0) {
+			// Estrai prossimo grado e requisito, maxim, grade 1, nextgrade 1
 			$next_grade = $grade;
-		$next_grade_score = $desiderable_grade_row["score"];
-		$next_grade_details = $desiderable_grade_row["type"];
+		}
+		else {
+			// Estrai prossimo grado e requisito, maxim, grade 1, nextgrade 2
+			$next_grade_score = $desiderable_grade_row["score"];
+			$next_grade_details = $desiderable_grade_row["type"];
+			$_SESSION['nextGradeScore'] = $next_grade_score;
+			$_SESSION['nextGradeDetails'] = $next_grade_details;
+		}
 		$_SESSION['nextGrade'] = $next_grade;
-		$_SESSION['nextGradeScore'] = $next_grade_score;
-		$_SESSION['nextGradeDetails'] = $next_grade_details;
 
 		// Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
 		$achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
@@ -60,6 +65,22 @@ try {
 			   guadagnati dall'utente appena loggato */
 			$achievements[] = $achievements_row["achievement"];
 		}
+		$_SESSION['achievementsQty'] = $achievements_row;
+		$_SESSION['achievementsId'] = $achievements;
+
+		foreach ($achievements as $achievement) {
+			// Estrai informazioni per ogni badge guadagnato dal giocatore
+			$achievements_query = $conn->prepare("SELECT title, descr FROM Achievement WHERE id= :id");
+			$achievements_query->bindParam(':id', $achievement);
+			$achievements_query->execute();
+			$achievements_row = $achievements_query->fetch();
+
+			$achievements_title[] = $achievments_row["title"];
+			$achievements_descr[] = $achievments_row["descr"];
+		}
+		$_SESSION['achievementsTitle'] = $achievements_title;
+		$_SESSION['achievementsDescr'] = $achievements_descr;
+
 		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade'];
 	}
 }

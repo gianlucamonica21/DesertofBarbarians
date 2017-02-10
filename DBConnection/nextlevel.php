@@ -43,10 +43,12 @@ try {
 		che viene calcolato prendendo il tempo ancora rimasto a disposizione dell'utente
 		e trasformandolo in percentuale, per poi essere moltiplicato per un Coefficiente
 		di difficoltà perstabilito per ogni livello. */
-	if ($time_to_finish > $time_limit)
+	if ($time_to_finish > $time_limit) {
 		$new_current_level_score = 0;
-	else
+	}
+	else {
 		$new_current_level_score = ((($time_limit - $time_to_finish) / $time_limit) * 100) * $points_coef;
+	}
 	if($new_current_level_score > $old_current_level_score) {
 		$update_campaign = "UPDATE Campaign SET score= :score WHERE login= :login AND level= :level";
 		$query = $conn->prepare($update_campaign);
@@ -64,7 +66,7 @@ try {
  																								':login'=>$current_player) );
 
   // Aggiornamento grado, solo se con requisiti necessari
-	if ($new_current_level_score < $next_grade_score &&
+	if ($new_total_score >= $next_grade_score &&
 			$grade < $next_grade) {
 		$update_grade = "UPDATE Graduated SET grade= :next_grade WHERE login= :login";
 		$query = $conn->prepare($update_grade);

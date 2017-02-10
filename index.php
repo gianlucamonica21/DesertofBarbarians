@@ -129,8 +129,8 @@ $conn = null;
           </div>
         </div>
         <div class="row">
-          <!-- Editor panel  -->
-          <div class="col-lg-5 col-md-6 col-sm-7">
+          <!-- Editor panel  <div class="col-lg-5 col-md-6 col-sm-7">-->
+          <div class="col-md-7">
             <div class="panel panel-default">
               <div class="panel-heading">Editor</div>
               <div class="panel-body">
@@ -153,20 +153,6 @@ $conn = null;
             </div>
 
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-7">
-           <!-- Chat Panel  -->
-           <div class="panel panel-default">
-            <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
-            <div class="panel-body">
-              <div id="chat">
-                <ul class="chat-thread">
-            <!-- <li class="generalMsg">Are we meeting today?</li>
-                  <li class="soldierMsg">yes, what time suits you?</li>
-                  <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
-                </ul>
-              </div>
-            </div>
-          </div>
           <!-- Game panel  -->
           <div >
             <div class="panel panel-default">
@@ -176,9 +162,9 @@ $conn = null;
                <div class="row" id="mc-container">
                 <canvas id="miscom" class="game center-block" width="510" height="460">
                   <?php
-                // Load the correct level of the user
+                  // Load the correct level of the user
 
-                // Convert current level number to string
+                  // Convert current level number to string
                   $levelNumber = $_SESSION["level"];
                   $levelString = "$levelNumber";
                   if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
@@ -200,8 +186,24 @@ $conn = null;
            </div>
          </div>
        </div>
-     </div>
-
+   </div>
+   <div class="row">
+     <div class="col-md-6"></div>
+     <div class="col-md-6">
+      <!-- Chat Panel  <div class="col-lg-6 col-md-6 col-sm-7">-->
+      <div class="panel panel-default">
+        <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
+        <div class="panel-body">
+          <div id="chat">
+            <ul class="chat-thread">
+       <!-- <li class="generalMsg">Are we meeting today?</li>
+             <li class="soldierMsg">yes, what time suits you?</li>
+             <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
+           </ul>
+          </div>
+        </div>
+      </div>
+    </div>
    </div>
    <!-- PROFILE MODAL -->
    <div class="modal" id="profileModal">
