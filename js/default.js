@@ -126,7 +126,7 @@ $(document).ready(function() {
 
 // EVALUATE BUTTON
 $('#evaluateButton').click(function(){
-  if (attr('submit-button', 'disabled') == 'true'){
+  if ($('#evaluateButton').prop('disabled', false)) {
    finishedCoding = (new Date()).getTime();
    difference = (finishedCoding - startedCoding) / 1000;
    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
@@ -145,7 +145,18 @@ $('#evaluateButton').click(function(){
       }
 
       if (test == true) {
-        alert ("Livello passato!");
+        
+        $('.chat-thread').append(
+          $('<li>')
+          .addClass("generalMsg")
+          .typed({
+            strings: ["Great! Everything work again! Are you ready for the next mission?"],
+            typeSpeed: 10
+          })
+          );
+
+     
+
         var data = new FormData();
         data.append("data" , difference);
         var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
@@ -161,32 +172,19 @@ $('#evaluateButton').click(function(){
        };
        xhr.open("post", "DBConnection/load_level_x.php", true);
        xhr.send(data);
-
-    // //Code to reload and reupdate the level
-    // var stringa;
-    // var oReq = new XMLHttpRequest(); //New request object
-    // oReq.onload = function() {
-    //   //This is where you handle what to do with the response.
-    //   //The actual data is found on this.responseText
-    //   stringa = this.responseText; //Will alert: 42
-    // };
-
-    // oReq.open("get", "DBConnection/load_level.php", false);
-    // oReq.send();
-    // alert("RISULTATO SECONDA CHIAMATA da default.js (di Load_level.php) :" + stringa);
-
-    location.reload();
-  }
-  else {
-    $('.chat-thread').append(
-      $('<li>')
-      .addClass("generalMsg")
-      .typed({
-        strings: ["This is not working! Try again!"],
-        typeSpeed: 10
-      })
-      );
-  }
+       setTimeout(function(){ location.reload(); }, 30);
+       
+      }
+      else {
+        $('.chat-thread').append(
+          $('<li>')
+          .addClass("generalMsg")
+          .typed({
+            strings: ["This is not working! Try again!"],
+            typeSpeed: 10
+          })
+          );
+      }
 } else {
   $('.chat-thread').append(
     $('<li>')

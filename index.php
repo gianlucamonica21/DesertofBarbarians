@@ -214,7 +214,7 @@ $conn = null;
         <div class="modal-body">
           <div align="center">
             <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
-            <h2>Username</h2>
+            <h2><?php echo $current_player ?></h2>
             <h3>RANK: Captain</h3>
             <div class="progress">
               <div class="progress-bar" style="width: 60%"></div>
@@ -223,7 +223,8 @@ $conn = null;
           </div>
           <div class="row">
             <div class="col-md-6 col-xs-6 follow line" align="center">
-              <h3>125651 <br/> <span>POINTS</span>
+              <h3><?php echo $_SESSION["totalScore"] ?> <br/>
+              <span>POINTS</span>
               </h3>
             </div>
             <div class="col-md-6 col-xs-6 follow line" align="center">
@@ -303,7 +304,7 @@ $conn = null;
             if(i >= maxlevel){
               levelArr[i].classList.add("disabled");
             }
-          } 
+          }
           $('.level-buttons').click(function(){
             if(!($(this).hasClass("disabled"))){
               var clicked = true;
@@ -341,37 +342,20 @@ $conn = null;
           <table class="table table-striped table-hover table-bordered ">
             <thead>
               <tr>
-                <th>#</th>
+                <!-- <th>#</th> -->
                 <th>Username</th>
                 <th>Points</th>
                 <th>Badges</th>
               </tr>
             </thead>
             <tbody id="leaderboardbody">
-              <!-- <tr>
-                <td>1</td>
-                <td id="td1"></td>
-                <td id="tds1"></td>
-                <td ></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td id="td2"></td>
-                <td id="tds2"></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td id="td3"></td>
-                <td id="tds3"></td>
-                <td></td>
-              </tr> -->
+
             </tbody>
           </table>
         </div>
         <script type="text/javascript">
           $('#leaderboard').click(function() {
-          
+
           var stringa;
           var oReq = new XMLHttpRequest(); //New request object
           oReq.onload = function() {
@@ -391,32 +375,16 @@ $conn = null;
               $('<tr>')
               .attr('id','player' + i)
               );
-                // $('#player' + i).append(
-                // $('<td>')
-                // .text((JSON.parse(leaderNames)[i]));  
-                // );
+                $("#player" + i).append(
+                $('<td>')
+                .text((JSON.parse(leaderNames)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderScores)[i]))
+                );
+
           }
 
-
-          // alert(leaderNames);
-          // if(leaderNames != null && leaderScores != null){
-          //   var firstN = (JSON.parse(leaderNames)[0]);       
-          //   var  secondN = (JSON.parse(leaderNames)[1]);       
-          //   var thirdN = (JSON.parse(leaderNames)[2]);  
-
-          //   var firstS = (JSON.parse(leaderScores)[0]);       
-          //   var  secondS = (JSON.parse(leaderScores)[1]);       
-          //   var thirdS = (JSON.parse(leaderScores)[2]);
-
-          //    document.getElementById('td1').innerHTML = firstN;     
-          //    document.getElementById('td3').innerHTML = secondN;
-          //    document.getElementById('td2').innerHTML = thirdN;
-
-          //    document.getElementById('tds1').innerHTML = firstS;     
-          //    document.getElementById('tds3').innerHTML = secondS;
-          //    document.getElementById('tds2').innerHTML = thirdS; 
-          // }
-           }); 
+         });
           </script>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
