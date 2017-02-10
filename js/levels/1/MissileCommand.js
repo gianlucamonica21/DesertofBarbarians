@@ -14,7 +14,9 @@ MISSILE = {
 };
 
 // Variables
-var level = 1,
+var levelscore = 0,
+level = 1,
+maxLevel = 1,
 levelIndex = {},
 cities = [],
 antiMissileBatteries = [],
@@ -71,9 +73,9 @@ var missileCommand = function(checkLevel) {
   };
 
   var rechargeAntiMissileBatteries = function () {
-    for(i=0;i<3;i++){
-      antiMissileBatteries[i].missilesLeft = 6;
-    }
+
+    antiMissileBatteries[1].missilesLeft = 6;
+
   };
 
 // Reset various variables at the start of a new level
@@ -460,8 +462,7 @@ Missile.prototype.explode = function() {
 
 // Calculate the missile speed
 // the time with missile reach the point
-
-/* var missileSpeed = function (xDistance, yDistance) {
+/*var missileSpeed = function (xDistance, yDistance) {
   var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
 
   var distancePerFrame = 12;
@@ -490,10 +491,6 @@ function PlayerMissile( source, endX, endY ) {
     this.dy = yDistance / scale;
 
     amb.missilesLeft--;
-
-    if(amb.missilesLeft === 0){
-      amb.missilesLeft = 6;
-    }
 
   }
 
@@ -936,9 +933,7 @@ var setupListeners = function() {
 
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
-      playerShoot( mousePos.x + 25, mousePos.y);
       playerShoot( mousePos.x, mousePos.y);
-      playerShoot( mousePos.x - 25, mousePos.y);
       
     });
   });
@@ -961,14 +956,12 @@ function userSolutionChecker(){
   var distance = Math.sqrt( Math.pow(5, 2) + Math.pow(9, 2) );
   var distancePerFrame = 12;
   var speed = distance / distancePerFrame;
-  if ( missileSpeed(5,9) == speed){
-    return {
-      result: true,
-      errorMsg: ""
-    };
+  if ( missileSpeed(5,9) == speed ) {
+    return true;
   } else {
    return {
-    result: false,
-    errorMsg: "The missiles still aren't firing!"
-  };
+    passed: false,
+    errorMsg: "The missiles still aren't firing! Do you think the enemy is going to wait for us to be ready? Get it together recruit!"
+  }
+  }
 }

@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "The missiles aren't getting fired! Something is wrong in how we calculate ",
+	"soldierMsg": "Oh that's funny! We have the speed, we just have to find a way to <strong>return</strong> it to whoever needs it... "
 }

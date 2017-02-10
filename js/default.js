@@ -18,7 +18,7 @@ $(document).ready(function() {
         typeSpeed: 10
       })
 
-      );
+    );
   });
 
   var finishedCoding;
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   $('#submitButton').click(function() {
     // Remove old syntax errors
-    for (var i = 0; i < widgets.length; ++i){
+    for (var i = 0; i < widgets.length; ++i) {
       window.editor.removeLineWidget(widgets[i]);
     }
     widgets.length = 0;
@@ -58,7 +58,7 @@ $(document).ready(function() {
           strings: ["Syntax errors found. Please submit input again."],
           typeSpeed: 10
         })
-        );
+      );
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -80,7 +80,7 @@ $(document).ready(function() {
           strings: ["Applied code update."],
           typeSpeed: 10
         })
-        );
+      );
     }
   });
 
@@ -108,7 +108,7 @@ $(document).ready(function() {
           strings: [msgString],
           typeSpeed: 10
         })
-        );
+      );
     });
   });
 
@@ -125,75 +125,74 @@ $(document).ready(function() {
 });
 
 // EVALUATE BUTTON
-$('#evaluateButton').click(function(){
+$('#evaluateButton').click(function() {
   if ($('#evaluateButton').prop('disabled', false)) {
-   finishedCoding = (new Date()).getTime();
-   difference = (finishedCoding - startedCoding) / 1000;
-   alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+    finishedCoding = (new Date()).getTime();
+    difference = (finishedCoding - startedCoding) / 1000;
+    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
-   try {
-   var result = UserSolutionChecker();
-   // scrittura su file modificato nell'editor
-   var data = new FormData();
-   data.append("data" , window.editor.getValue());
-   var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-   xhr.open( 'post', 'SaveToFile.php', true);
-   xhr.send(data);
+    try {
 
- }
- catch(err) {
-      }
+      var result = UserSolutionChecker();
+      // scrittura su file modificato nell'editor
+      var data = new FormData();
+      data.append("data", window.editor.getValue());
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open('post', 'SaveToFile.php', true);
+      xhr.send(data);
 
-      if (test == true) {
-        
-        $('.chat-thread').append(
-          $('<li>')
-          .addClass("generalMsg")
-          .typed({
-            strings: ["Great! Everything work again! Are you ready for the next mission?"],
-            typeSpeed: 10
-          })
-          );
+    } catch (err) {}
 
-     
+    if (result.passed == true) {
 
-        var data = new FormData();
-        data.append("data" , difference);
-        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-        xhr.open("post", "DBConnection/nextlevel.php", true);
-        xhr.send(data);
+      $('.chat-thread').append(
+        $('<li>')
+        .addClass("generalMsg")
+        .typed({
+          strings: ["Great! Everything works again! Are you ready for the next mission?"],
+          typeSpeed: 10
+        })
+      );
 
-        var data = new FormData();
-        data.append("data", 0);
-        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-        var stringa;
-        xhr.onload = function() {
-         stringa = this.responseText;
-       };
-       xhr.open("post", "DBConnection/load_level_x.php", true);
-       xhr.send(data);
-       setTimeout(function(){ location.reload(); }, 30);
-       
-      }
-      else {
-        $('.chat-thread').append(
-          $('<li>')
-          .addClass("generalMsg")
-          .typed({
-            strings: ["This is not working! Try again!"],
-            typeSpeed: 10
-          })
-          );
-      }
-} else {
-  $('.chat-thread').append(
-    $('<li>')
-    .addClass("soldierMsg")
-    .typed({
-      strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
-      typeSpeed: 10
-    }));
-}
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
+
+      var data = new FormData();
+      data.append("data", 0);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      var stringa;
+      xhr.onload = function() {
+        stringa = this.responseText;
+      };
+      xhr.open("post", "DBConnection/load_level_x.php", true);
+      xhr.send(data);
+      setTimeout(function() {
+        location.reload();
+      }, 3000);
+
+    } else {
+
+      $('.chat-thread').append(
+        $('<li>')
+        .addClass("generalMsg")
+        .typed({
+          strings: [result.errorMsg],
+          typeSpeed: 10
+        })
+      );
+    }
+  } else {
+    $('.chat-thread').append(
+      $('<li>')
+      .addClass("soldierMsg")
+      .typed({
+        strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
+        typeSpeed: 10
+      }));
+  }
 });
 
 function parseCode(code) {

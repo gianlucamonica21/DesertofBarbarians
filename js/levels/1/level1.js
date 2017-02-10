@@ -6,3 +6,4 @@ var missileSpeed = function (xDistance, yDistance) {
     var speed = distance / distancePerFrame;
 
 };
+
