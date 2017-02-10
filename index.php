@@ -33,7 +33,6 @@ $conn = null;
   var clickedLevel;
   var x = "<?php echo $current_player;?>";
   var level = "<?php echo $_SESSION['level'];?>";
-  var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -293,22 +292,6 @@ $conn = null;
           </div>
         </div>
         <script type="text/javascript">
-        var stringa;
-        var oReq = new XMLHttpRequest(); //New request object
-        oReq.onload = function() {
-          stringa = this.responseText;
-        };
-        oReq.open("get", "DBConnection/load_player.php", false);
-        oReq.send();
-        alert("RISULTATO  CHIAMATA da INDEX(di load_player.php):" + stringa);
-        var stringa;
-        var oReq = new XMLHttpRequest(); //New request object
-        oReq.onload = function() {
-          stringa = this.responseText;
-        };
-        oReq.open("get", "DBConnection/load_level_x.php", false);
-        oReq.send();
-        alert("RISULTATO  CHIAMATA da INDEX(di load_level_x.php):" + stringa);
 
           var levelArr = document.getElementsByClassName("level-buttons");
 
