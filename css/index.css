@@ -42,3 +42,83 @@ span.icon {
     padding: 0 3px; 
     margin-right: 7px;
 }
+
+.container{
+    width: 1900px;
+}
+
+body {
+    padding-top: 140px; 
+    font-size: 17px;
+}
+
+#gamepanel{
+    width: 520px;
+}
+
+#divchat{
+   width: 520px;   
+   height: 550px;  
+
+}
+
+#divchatmain{
+   width: 520px; 
+   height: 550px;  
+   margin-left: 30px;
+}
+
+#chat{
+   height: 550px;  
+
+}
+
+#chatthread{
+   height: 520px;  
+
+}
+
+#gamediv{
+   width: 520px;   
+}
+
+#console{
+   width: 500px;   
+}
+
+#submitButton{
+   width: 186px;  
+   height: 60px; 
+}
+
+#evaluateButton{
+   width: 186px;   
+   height: 60px;
+}
+
+#hintButton{
+   width: 186px; 
+   height: 60px;  
+}
+
+#refreshButton{
+   width: 186px; 
+   height: 60px;  
+}
+
+#returnButton{
+    width: 509px;
+     height: 60px;   
+}
+
+#controllerbody{
+   width: 516px;   
+}
+
+#progressbar{
+   width: 510px;   
+}
+.progress.active .progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
+}

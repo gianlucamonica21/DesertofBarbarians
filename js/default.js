@@ -1,5 +1,8 @@
-$(document).ready(function() {
-  console.log(document.body.getAttribute("level"));
+  var contHint = 0;
+
+
+  $(document).ready(function() {
+    console.log(document.body.getAttribute("level"));
   // Initialize tooltips
   $('.btn').tooltip();
 
@@ -18,7 +21,7 @@ $(document).ready(function() {
         typeSpeed: 10
       })
 
-    );
+      );
   });
 
   var finishedCoding;
@@ -58,7 +61,7 @@ $(document).ready(function() {
           strings: ["Syntax errors found. Please submit input again."],
           typeSpeed: 10
         })
-      );
+        );
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -80,12 +83,13 @@ $(document).ready(function() {
           strings: ["Applied code update."],
           typeSpeed: 10
         })
-      );
+        );
     }
   });
 
   // RESTART GAME BUTTON
   $('#returnButton').click(function() {
+
     //nextFrame();
     if (stoppedGame) {
       startLevel();
@@ -95,8 +99,10 @@ $(document).ready(function() {
   });
 
   // HINT BUTTON
-
+  
   $('#hintButton').click(function() {
+    contHint++;
+    console.log("numero  aiuti: " + contHint);
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/dialogues.json";
     $.getJSON(filepath, function(result) {
@@ -108,7 +114,7 @@ $(document).ready(function() {
           strings: [msgString],
           typeSpeed: 10
         })
-      );
+        );
     });
   });
 
@@ -129,11 +135,12 @@ $('#evaluateButton').click(function() {
   if ($('#evaluateButton').prop('disabled', false)) {
     finishedCoding = (new Date()).getTime();
     difference = (finishedCoding - startedCoding) / 1000;
-    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+    console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
+    var result = true;//userSolutionChecker();
     try {
 
-      var result = UserSolutionChecker();
+
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
@@ -143,7 +150,8 @@ $('#evaluateButton').click(function() {
 
     } catch (err) {}
 
-    if (result.passed == true) {
+    if (result == true) {
+
 
       $('.chat-thread').append(
         $('<li>')
@@ -152,7 +160,12 @@ $('#evaluateButton').click(function() {
           strings: ["Great! Everything works again! Are you ready for the next mission?"],
           typeSpeed: 10
         })
-      );
+        );
+
+      //console.log("jbhuyv" + contHint);
+
+
+      badge();
 
       var data = new FormData();
       data.append("data", difference);
@@ -168,10 +181,13 @@ $('#evaluateButton').click(function() {
         stringa = this.responseText;
       };
       xhr.open("post", "DBConnection/load_level_x.php", true);
+
+      
       xhr.send(data);
       setTimeout(function() {
         location.reload();
-      }, 3000);
+      }, 10000);
+
 
     } else {
 
@@ -182,7 +198,7 @@ $('#evaluateButton').click(function() {
           strings: [result.errorMsg],
           typeSpeed: 10
         })
-      );
+        );
     }
   } else {
     $('.chat-thread').append(
