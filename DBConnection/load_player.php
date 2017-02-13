@@ -36,11 +36,11 @@ try {
 		$grade = $grade_rows["grade"];
 		$_SESSION['userGrade'] = $grade;
 
-		$desiderable_grade = $conn->prepare("SELECT * FROM Grade WHERE id= :id");
-		$desiderable_grade->bindParam(':id', $grade);
-		$desiderable_grade->execute();
-		$desiderable_grade_row = $desiderable_grade->fetch();
-		$type = $grade_rows["type"];
+		$grade_type = $conn->prepare("SELECT * FROM Grade WHERE id= :id");
+		$grade_type->bindParam(':id', $grade);
+		$grade_type->execute();
+		$grade_type_row = $grade_type->fetch();
+		$type = $grade_type_row["type"];
 		$_SESSION['gradeType'] = $type;
 
 		// Estrai prossimo grado e requisito
