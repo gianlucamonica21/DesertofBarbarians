@@ -36,6 +36,7 @@
     </div>
     <script src="js/registration.script.js">
     </script>​
+ 
     <?php
 
   //include "dbconfig.php";
@@ -97,9 +98,9 @@
      if ( $result_user and $result_campaign and $result_arch and $result_grade){
           //header('location: registered.php');
 
-          $_SESSION['loggedin'] = true;
-          $_SESSION['loggedinUser'] = $username;
-          header('Location: ../index.php');
+          // $_SESSION['loggedin'] = true;
+          // $_SESSION['loggedinUser'] = $username;
+          header('Location: login.php');
       }
     }
 }
@@ -113,7 +114,7 @@ $conn = null;
 ?>
 
 </body>
- <script type="text/javascript">
+    <script type="text/javascript">
 
       //Chiamata LOAD LEVEL
       // var data = new FormData();
@@ -123,10 +124,6 @@ $conn = null;
       // xhr.send(data);
 
       //Chiamata LEADERBOARD
-      
-
-
-
 
         </script>
 </html>
