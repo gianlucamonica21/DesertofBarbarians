@@ -142,7 +142,7 @@ $conn = null;
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
         <li>
           <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
-            <span id="spanUser">Rank: <?php echo $_SESSION["userGrade"] ?>
+            <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"] ?>
             <br>Score: <?php echo $_SESSION["totalScore"] ?></span>
           </a>
 
@@ -287,7 +287,7 @@ $conn = null;
               <div align="center">
                 <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
                 <h2><?php echo $current_player ?></h2>
-                <h3>RANK: Captain</h3>
+                <h3><?php echo $_SESSION["gradeType"]?></h3>
                 <div class="progress">
                   <div class="progress-bar" style="width: 0%"></div>
                 </div>
