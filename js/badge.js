@@ -32,7 +32,7 @@ function showModal(id){
 		$("#modal-text").text('YOU FINISH THE GAME!');
 		$("#image-modal").attr('src', '');
 		$("#notificationModal").modal('show');
-		
+
 		break;}
 		case 5:
 		case 6:
@@ -55,7 +55,7 @@ function showModal(id){
 		$("#modal-text").text('YOU FINISHED THE DESIGNING LEVELS!');
 		$("#image-modal").attr('src', '');
 		$("#notificationModal").modal('show');
-		 
+
 		break;}
 
 
@@ -70,32 +70,32 @@ function badge(){
 
 	var badgeQueue = [];
 	var unlockedbadgeQueue = [];
-	if (contHint == 0){
+	if (contHint == 0) {
 		badgeQueue.push(3);
-		unlockedbadgeQueue.push(3);	
+		unlockedbadgeQueue.push(3);
 
 	}
-	if (document.body.getAttribute("level") == 1){
+	if (document.body.getAttribute("level") == 1 && maxlevel == 1){
 		badgeQueue.push(1);
 		unlockedbadgeQueue.push(1);
 	}
-	if (document.body.getAttribute("level") == 4){
+	if (document.body.getAttribute("level") == 4 && maxlevel == 4){
 		badgeQueue.push(2);
 		unlockedbadgeQueue.push(2);
 	}
-	if (document.body.getAttribute("level") == 9){
+	if (document.body.getAttribute("level") == 9 && maxlevel == 9){
 		badgeQueue.push(4);
 		unlockedbadgeQueue.push(4);
 	}
-	if (document.body.getAttribute("level") == 3){
+	if (document.body.getAttribute("level") == 3 && maxlevel == 3){
 		badgeQueue.push(7);
 		unlockedbadgeQueue.push(7);
 	}
-	if (document.body.getAttribute("level") == 6){
+	if (document.body.getAttribute("level") == 6 && maxlevel == 6){
 		badgeQueue.push(8);
 		unlockedbadgeQueue.push(8);
 	}
-	if (document.body.getAttribute("level") == 9){
+	if (document.body.getAttribute("level") == 9 && maxlevel == 9){
 		badgeQueue.push(9);
 		unlockedbadgeQueue.push(9);
 	}
@@ -111,8 +111,8 @@ function badge(){
 
 		if(badgeQueue.length > 0 ){
 			showModal(badgeQueue.shift());
-			
-		
+
+
 		}
 		else{
 			$("#notificationModal").modal('hide');
@@ -123,6 +123,3 @@ function badge(){
 	return unlockedbadgeQueue;
 
 }
-
-
-

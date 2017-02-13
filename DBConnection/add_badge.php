@@ -17,24 +17,22 @@ try {
 	// Retrieve of the data inputby user
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 		$current_player = $_SESSION['loggedinUser'];
-		$badges = $_POST['data'];
+		$badge = $_POST['data'];
 	} else {
 		echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
 
-  foreach ($badges as $badge) {
-    $check_badge = $conn->prepare("SELECT * FROM Achieved WHERE login= :login AND achievement= :badge");
-		$check_badge->bindParam(':login', $current_player);
-    $check_badge->bindParam(':badge', $badge);
-		$check_badge->execute();
-		$checked_badge = $check_badge->fetch();
+  $check_badge = $conn->prepare("SELECT * FROM Achieved WHERE login= :login AND achievement= :badge");
+	$check_badge->bindParam(':login', $current_player);
+  $check_badge->bindParam(':badge', $badge);
+	$check_badge->execute();
+	$checked_badge = $check_badge->fetch();
 
-    if ($checked_badge == 0) {
-      $add_badge = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :achievement )";
-  		$query = $conn->prepare($add_badge);
-  		$result = $query->execute( array( ':login'=>$current_player,
-  	 																		':achievement'=>$badge) );
-    }
+  if ($checked_badge == 0) {
+    $add_badge = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :achievement )";
+		$query = $conn->prepare($add_badge);
+		$result = $query->execute( array( ':login'=>$current_player,
+	 																		':achievement'=>$badge) );
   }
 }
 catch(PDOException $e)

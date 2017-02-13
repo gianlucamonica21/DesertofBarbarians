@@ -77,7 +77,7 @@ try {
 		$_SESSION['pointsCoef'] = $points_coef;
 		$_SESSION['timeLimit'] = $time_limit;
 
-		// Estrai le righe non modificabili per il massimo livello
+		// Estrai le righe non modificabili per il livello attuale
 		$constrows_query = $conn->prepare("SELECT * FROM ConstRow WHERE level= :level");
 		$constrows_query->bindParam(':level', $loaded_level);
 		$constrows_query->execute();
@@ -87,22 +87,9 @@ try {
 			   per il livello caricato dopo il login */
 			$constrows[] = $constrow["row"];
 		}
+		$_SESSION['constRows'] = $constrows;
 
-		// Estrai tutti gli achievement (o badge) mai guadagnati dal giocatore
-		$achievements_query = $conn->prepare("SELECT * FROM Achieved WHERE login= :login");
-		$achievements_query->bindParam(':login', $current_player);
-		$achievements_query->execute();
-		$achievements_rows = $achievements_query->fetchAll();
-		foreach ($achievements_rows as $achievements_row) {
-			/* L'array achievements conterrà i codici di tutti i badges mai
-			   guadagnati dall'utente appena loggato */
-			$achievements[] = $achievements_row["achievement"];
-		}
 		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
-
-		$update_total_score = "UPDATE User SET score= :score WHERE login= 'maximilian'";
-		$query = $conn->prepare($update_total_score);
-		$result_update_total_score = $query->execute( array( ':score'=>$_SESSION['level']) );
 	}
 }
 catch(PDOException $e)

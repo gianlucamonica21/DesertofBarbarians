@@ -36,6 +36,9 @@ $conn = null;
   var level = "<?php echo $_SESSION['level'];?>";
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
+  console.log("Livello massimo: " + maxlevel);
+  var nohint = "<?php echo $_SESSION['noHint'];?>";
+  console.log("Sei cresciuto: " + nohint);
 </script>
 <!DOCTYPE html>
 <html lang="en">

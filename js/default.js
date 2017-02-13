@@ -165,17 +165,13 @@ $('#evaluateButton').click(function() {
       unlockedbadgeQueue = badge();
       console.log("unlockedbadgeQueue: " + unlockedbadgeQueue);
 
-<<<<<<< HEAD
-      var data = new FormData();
-      data.append("data", unlockedbadgeQueue);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/add_badge.php", true);
-      xhr.send(data);
-=======
-      var unlockedbadgeQueue = [];
-      unlockedbadgeQueue = badge();
-      console.log("unlockedbadgeQueue: " + unlockedbadgeQueue);
->>>>>>> 023203fa666c8bca2e5b3c06d25aa8575f8e93a5
+      for(var i = 0; i < unlockedbadgeQueue.length; i++) {
+        var data = new FormData();
+        data.append("data", unlockedbadgeQueue[i]);
+        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+        xhr.open("post", "DBConnection/add_badge.php", true);
+        xhr.send(data);
+      }
 
       var data = new FormData();
       data.append("data", difference);

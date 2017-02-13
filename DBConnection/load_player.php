@@ -28,15 +28,17 @@ try {
 		$total_score = $user_rows["score"];
 		$_SESSION['totalScore'] = $total_score;
 
-		// Estrai grado, maxim 1
+		// Estrai grado
 		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
 		$grade_query->bindParam(':login', $current_player);
 		$grade_query->execute();
 		$grade_rows = $grade_query->fetch();
 		$grade = $grade_rows["grade"];
+		$type = $grade_rows["type"];
 		$_SESSION['userGrade'] = $grade;
+		$_SESSION['gradeType'] = $type;
 
-		// Estrai prossimo grado e requisito, maxim, grade 1, nextgrade 2
+		// Estrai prossimo grado e requisito
 		$next_grade = $grade + 1;
 		$desiderable_grade = $conn->prepare("SELECT * FROM Grade WHERE id= :id");
 		$desiderable_grade->bindParam(':id', $next_grade);
@@ -67,6 +69,11 @@ try {
 		}
 		$_SESSION['achievementsQty'] = $achievements_row;
 		$_SESSION['achievementsId'] = $achievements;
+
+		$_SESSION['noHint'] = false;
+		if (true) {
+			$_SESSION['noHint'] = true;
+		}
 
 		foreach ($achievements as $achievement) {
 			// Estrai informazioni per ogni badge guadagnato dal giocatore
