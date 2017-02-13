@@ -159,7 +159,7 @@ $conn = null;
             <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" data-step="8" data-intro="Click here to evaluate your code!">
               <i class="fa fa-check" aria-hidden="true"></i>
             </button>
-         
+
             <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" data-step="10" data-intro="Click here to refresh your code! (ctrl + z)">
               <i class="fa fa-undo" aria-hidden="true"></i>
             </button>
@@ -186,9 +186,9 @@ $conn = null;
         </div>
 
         <div class="col-lg-6 col-md-2 col-sm-7" id="gamediv">
-         
+
           <!-- Game panel  -->
-          
+
           <div class="panel panel-default" id="gamepanel">
             <div class="panel-heading">Console</div>
             <div class="panel-body">
@@ -216,7 +216,7 @@ $conn = null;
 
                Missile Command
              </canvas>
-             
+
              <!--CONSOLE -->
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
 
@@ -227,7 +227,7 @@ $conn = null;
               <div id="controllerbody" class="panel-body">
                   <button  class="btn btn-default disabled" id="returnButton" data-step="9" data-intro="Click here to restart game when it is stopped!">Restart Game</button>
             <script type="text/javascript"></script>
-                
+
 
               </div>
             </div>
@@ -235,7 +235,7 @@ $conn = null;
           </div>
         </div>
       </div>
-      
+
     </div>
 
 
@@ -256,7 +256,7 @@ $conn = null;
               </div>
             </div>
           </div>
-          
+
         </div>
 
       </div>
@@ -393,7 +393,7 @@ $conn = null;
           $('.level-buttons').click(function(){
             //clicked = true;
             if(!($(this).hasClass("disabled"))){
-              
+
               clickedLevel = this.textContent;
               //alert("clicked " + clickedLevel);
               //console.log("hai cliccato: " + clicked);
@@ -403,7 +403,7 @@ $conn = null;
               xhr.open("post", "DBConnection/load_level_x.php", true);
               xhr.send(data);
               location.reload();
-              
+
             }
           });
         </script>
@@ -442,14 +442,6 @@ $conn = null;
         </div>
         <script type="text/javascript">
           $('#leaderboard').click(function() {
-
-            var stringa;
-          var oReq = new XMLHttpRequest(); //New request object
-          oReq.onload = function() {
-            stringa = this.responseText;
-          };
-          oReq.open("get", "DBConnection/leaderBoard.php", true);
-          oReq.send();
 
           var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
           var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';

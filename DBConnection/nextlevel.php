@@ -75,16 +75,6 @@ try {
 																		 ':login'=>$current_player) );
 	}
 
-	// Aggiornamento achievements
-	/*
-	if (true) {
-		$add_badge = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :achievement )";
-		$query = $conn->prepare($add_badge);
-		$result = $query->execute( array( ':login'=>$current_player,
-	 																		':achievement'=>$badge) );
-	}
-	*/
-
 	// Inserzione nuovo livello sbloccato
 	if ($current_level < 9 &&
 		$current_level == $max_level) {
@@ -101,7 +91,19 @@ try {
 		$current_level = $current_level + 1;
 	}
 
-$_SESSION['level'] = $current_level;
+	$_SESSION['level'] = $current_level;
+
+	$leader_query = $conn->prepare("SELECT login, score FROM User ORDER BY score DESC LIMIT 5");
+	$leader_query->execute();
+	$leaders = $leader_query->fetchAll();
+	foreach ($leaders as $leader)
+	{
+		$leader_names[] = $leader["login"];
+		$leader_scores[] = $leader["score"];
+	}
+	// Save the leaders info
+	$_SESSION['leaderNames'] = $leader_names;
+	$_SESSION['leaderScores'] = $leader_scores;
 }
 catch(PDOException $e)
 {

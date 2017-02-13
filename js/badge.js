@@ -69,26 +69,35 @@ function showModal(id){
 function badge(){
 
 	var badgeQueue = [];
+	var unlockedbadgeQueue = [];
 	if (contHint == 0){
 		badgeQueue.push(3);
+		unlockedbadgeQueue.push(3);	
+
 	}
 	if (document.body.getAttribute("level") == 1){
 		badgeQueue.push(1);
+		unlockedbadgeQueue.push(1);
 	}
 	if (document.body.getAttribute("level") == 4){
 		badgeQueue.push(2);
+		unlockedbadgeQueue.push(2);
 	}
 	if (document.body.getAttribute("level") == 9){
 		badgeQueue.push(4);
+		unlockedbadgeQueue.push(4);
 	}
 	if (document.body.getAttribute("level") == 3){
 		badgeQueue.push(7);
+		unlockedbadgeQueue.push(7);
 	}
 	if (document.body.getAttribute("level") == 6){
 		badgeQueue.push(8);
+		unlockedbadgeQueue.push(8);
 	}
 	if (document.body.getAttribute("level") == 9){
 		badgeQueue.push(9);
+		unlockedbadgeQueue.push(9);
 	}
 
 	console.log(badgeQueue);
@@ -111,6 +120,7 @@ function badge(){
 		}
 	});
 
+	return unlockedbadgeQueue;
 
 }
 

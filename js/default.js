@@ -99,7 +99,7 @@
   });
 
   // HINT BUTTON
-  
+
   $('#hintButton').click(function() {
     contHint++;
     console.log("numero  aiuti: " + contHint);
@@ -139,7 +139,7 @@ $('#evaluateButton').click(function() {
 
     var result = true;//userSolutionChecker();
     try {
-    
+
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
@@ -161,10 +161,15 @@ $('#evaluateButton').click(function() {
         })
         );
 
-      //console.log("jbhuyv" + contHint);
+      var unlockedbadgeQueue = [];
+      unlockedbadgeQueue = badge();
+      console.log("unlockedbadgeQueue: " + unlockedbadgeQueue);
 
-
-      badge();
+      var data = new FormData();
+      data.append("data", unlockedbadgeQueue);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/add_badge.php", true);
+      xhr.send(data);
 
       var data = new FormData();
       data.append("data", difference);
@@ -181,7 +186,7 @@ $('#evaluateButton').click(function() {
       };
       xhr.open("post", "DBConnection/load_level_x.php", true);
 
-      
+
       xhr.send(data);
       setTimeout(function() {
         location.reload();
