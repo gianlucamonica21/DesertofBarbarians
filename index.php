@@ -140,11 +140,15 @@ $conn = null;
         </ul>
 
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
-          <li>
-            <a type="button" class="btn btn-default btn-lg navbar-btn text-center"  > 
-              <span id="spanUser">To the next rank: 
-                <br><br>
-                <div id="progress-score2" class="progress">
+           <li>
+            <ul>
+              <a id="displayscorerank" type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+                <ul id="ul">
+                <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
+                
+                 <span> Score:  <?php echo intval($_SESSION["totalScore"]); ?> </span>
+                </ul> 
+                  <div id="progress-score2" class="progress">
 
                   <div id="scorebar2" class="progress-bar" style="width:9 %"></div>
                   <script type="text/javascript">
@@ -178,16 +182,8 @@ $conn = null;
                       document.getElementById("scorebar2").style="width:"+(100-percent)+"%";
                     </script>
                   </div>
-
-                </span>
-              </a>
-            </li>
-            <li>
-              <a type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
-                <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"]; ?>
-                  <br>Score: <?php echo intval($_SESSION["totalScore"]); ?></span><br>
                 </a>
-
+                </ul>
               </li>
               <li>
                 <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
@@ -203,31 +199,69 @@ $conn = null;
 
         <div>
           <div id="progressbar" class="progress" >
-          <div id="myBar" class="progress-bar progress-bar-danger" style="width: 50%"></div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- Editor panel  -->
-          <div class="col-lg-5 col-md-8 col-sm-7">
-            <div id="editorpanel" class="panel panel-default">
-              <div  class="panel-heading">Editor</div>
-              <div class="panel-body" >
-                <textarea id="editor"></textarea>
-                <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
-                  <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
-                  <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
-                  <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
-                  <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
-                  <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
-                </button>
+          <div id="timebar" class="progress-bar progress-bar-danger" style="width:100%"></div>
+            <script type="text/javascript">
+              var $progress = $('#progressbar');
+              var $progressBar = $('#timebar');
+              // var $alert = $('.alert');
+              var sec = 10100;
+                setTimeout(function() {
+                  $progressBar.css('width', '90%');
+                  setTimeout(function() {
+                    $progressBar.css('width', '80%');
+                    setTimeout(function() {
+                      $progressBar.css('width', '70%');
+                      setTimeout(function() {
+                        $progressBar.css('width', '60%');
+                          setTimeout(function() {
+                           $progressBar.css('width', '50%');
+                              setTimeout(function() {
+                                $progressBar.css('width', '40%');
+                                  setTimeout(function() {
+                                    $progressBar.css('width', '30%');
+                                      setTimeout(function() {
+                                        $progressBar.css('width', '20%');
+                                          setTimeout(function() {
+                                           $progressBar.css('width', '10%');
+                                              setTimeout(function() {
+                                                $progressBar.css('width', '0%');
+                        
+                                                   },sec);
+                                                },sec);
+                                              },sec);
+                                            },sec);
+                                          },sec);
+                                        },sec);  
+                                      },sec); 
+                                  }, sec); 
+                              }, sec); 
+                          }, sec); 
+              
+</script>
+</div>
+</div>
+<div class="row">
+  <!-- Editor panel  -->
+  <div class="col-lg-5 col-md-8 col-sm-7">
+    <div id="editorpanel" class="panel panel-default">
+      <div  class="panel-heading">Editor</div>
+      <div class="panel-body" >
+        <textarea id="editor"></textarea>
+        <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
+          <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+          <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
+          <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+          <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+          <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+        </button>
               <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
                 <i class="fa fa-play" aria-hidden="true"></i>
               </button>
