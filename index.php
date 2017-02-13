@@ -84,7 +84,7 @@ $conn = null;
     <body level = <?php echo $_SESSION['level']?> >
       <!-- NAVBAR -->
       <div class="navbar navbar-default navbar-fixed-top">
-     <!--   <li>
+   <!--     <li>
         <a type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal" data-intro="Click in to look your profile features!">
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
         </a>
@@ -102,7 +102,7 @@ $conn = null;
           <ul class="nav navbar-nav">
 
             <li>
-              <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" >
+              <button id="profileTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
               </button>
             </li>
@@ -122,13 +122,13 @@ $conn = null;
           </li>
 
           <li>
-            <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal" >
+            <button  id="levelsTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal" >
               <span class="glyphicon glyphicon-forward" aria-hidden="true"></span><br> Levels
             </button>
           </li>
 
           <li>
-            <button id="leaderboard" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" >
+            <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" >
               <span class="icon">&#xf091;</span><br> Leaderboard
             </button>
           </li>
@@ -136,10 +136,19 @@ $conn = null;
 
         </ul>
 
-        <ul id="logout" class="nav navbar-nav navbar-right">
+        <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
+        <li>
+          <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
+            <span id="spanUser">Rank: <?php echo $_SESSION["userGrade"] ?>
+            <br>Score: <?php echo $_SESSION["totalScore"] ?></span>
+          </a>
+
+        </li>
+        <li>
           <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
             <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
           </a>
+        </li>
         </ul>
       </div>
     </div>
@@ -229,7 +238,7 @@ $conn = null;
                 <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
               </div>
               <div id="controllerbody" class="panel-body">
-                  <button  class="btn btn-default disabled" id="returnButton" >Restart Game</button>
+                  <button  class="btn btn-default disabled" id="returnButton" >Resume Game</button>
             <script type="text/javascript"></script>
                 
 
@@ -252,6 +261,7 @@ $conn = null;
       <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
       <div class="panel-body">
         <div id="chat" >
+              <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
@@ -264,12 +274,12 @@ $conn = null;
 
       </div>
       <!-- PROFILE MODAL -->
-      <div class="modal" >
+      <div id="profileModal" class="modal" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <button  type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
-              <h4 id="profileModal" class="modal-title" >Profile</h4>
+              <h4  class="modal-title" >Profile</h4>
             </div>
             <div class="modal-body">
               <div align="center">
@@ -444,7 +454,7 @@ $conn = null;
           </table>
         </div>
         <script type="text/javascript">
-          $('#leaderboard').click(function() {
+          $('#leaderboardTutorial').click(function() {
 
           //   var stringa;
           // var oReq = new XMLHttpRequest(); //New request object
@@ -457,6 +467,7 @@ $conn = null;
           var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
           var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
           var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+          console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores);
 
           $("#leaderboardbody").empty();
           for(var i = 0;i < number; i++){
@@ -505,78 +516,78 @@ $conn = null;
           intro.setOptions({
             steps: [
               { 
-                intro: "WELCOME!!<br> INTRODUCTION"
+                intro: "WELCOME!!<br> "
               }
               ,
              
               {
                 element: document.querySelector('#chat'),
                 position: 'left',
-                intro: "This is a tooltip."
+                intro: "This is where you can read the messages with the instructions from the general or the soldier hint!"  
               },
               {
                 element: document.querySelector('#editorpanel'),
-                intro: "Ok, wasn't that fun?",
+                intro: "This is where you code to fix the bugs!",
                 position: 'right'
               },
               {
                 element: document.querySelector('#gamepanel'),
-                intro: 'More features, more fun.',
+                intro: 'This is the game, play to see your changes!',
                 position: 'left'
               },
               {
                 element: document.querySelector('#submitButton'),
-                intro: 'More features, more fun.',
+                intro: 'Click here to update the game code!',
                 position: 'top'
               },
               {
                 element: document.querySelector('#evaluateButton'),
-                intro: 'More features, more fun.',
+                intro: 'Click here to evaluate your code, if the solution is right you will go to the next level!',
                 position: 'top'
               },
               {
                 element: document.querySelector('#refreshButton'),
-                intro: 'More features, more fun.',
+                intro: 'Click here to remove your last updates in the code!',
                 position: 'top'
               },
               {
                 element: document.querySelector('#hintButton'),
-                intro: 'More features, more fun.',
+                intro: 'Click here to ask for help to the old programmer assistant!',
                 position: 'top'
               },
               {
                 element: document.querySelector('#docButton'),
-                intro: 'More features, more fun.',
+                intro: 'Click here to read the surviving documentation!',
                 position: 'top'
               },
               {
                 element: document.querySelector('#returnButton'),
-                intro: 'More features, more fun.',
+                intro: 'Click here to resume the game from the pause!',
                 position: 'top'
               },
               {
-                element: document.querySelector('#profileModal'),
-                intro: 'More features, more fun.',
-                position: 'down'
-              },
-              {
-                element: document.querySelector('#levelsModal'),
-                intro: 'More features, more fun.',
+                element: document.querySelector('#profileTutorial'),
+                intro: 'Click here to view your statistics!',
                 position: 'bottom'
               },
               {
-                element: document.querySelector('#leaderboardModal'),
-                intro: 'More features, more fun.',
+                element: document.querySelector('#levelsTutorial'),
+                intro: 'Click here to view the locked and unlocked levels!',
                 position: 'bottom'
               },
               {
-                element: document.querySelector('#logout'),
-                intro: 'More features, more fun.',
+                element: document.querySelector('#leaderboardTutorial'),
+                intro: 'Click here to view the leaderboard, check your ranking!',
                 position: 'bottom'
               },
               {
-                element: document.querySelector('#howtoplay'),
-                intro: 'More features, more fun.',
+                element: document.querySelector('#logoutTutorial'),
+                intro: 'Click here to logout :(',
+                position: 'bottom'
+              },
+              {
+                element: document.querySelector('#tutorialbutton'),
+                intro: 'Click here if you want to see the tutorial again!',
                 position: 'bottom'
               }
 

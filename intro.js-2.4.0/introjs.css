@@ -14,20 +14,20 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
   -webkit-transition: all 0.3s ease-out;
-     -moz-transition: all 0.3s ease-out;
-      -ms-transition: all 0.3s ease-out;
-       -o-transition: all 0.3s ease-out;
-          transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .introjs-fixParent {
   z-index: auto !important;
   opacity: 1.0 !important;
   -webkit-transform: none !important;
-     -moz-transform: none !important;
-      -ms-transform: none !important;
-       -o-transform: none !important;
-          transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
+  transform: none !important;
 }
 
 .introjs-showElement,
@@ -56,16 +56,16 @@ tr.introjs-showElement > th {
   bottom: 20px;
   z-index: 9999998;
   background-color: transparent;
- /* background-color: rgba55,255,255,.9);*/
+  /* background-color: rgba55,255,255,.9);*/
   border: 1px solid #777; 
   order: 1px solid rgba(0,0,0,.5);
   border-radius: 4px;
   box-shadow: 0 2px 15px rgba(0,0,0,.4);
   -webkit-transition: all 0.3s ease-out;
-     -moz-transition: all 0.3s ease-out;
-      -ms-transition: all 0.3s ease-out;
-       -o-transition: all 0.3s ease-out;
-          transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .introjs-tooltipReferenceLayer {
@@ -75,20 +75,20 @@ tr.introjs-showElement > th {
   z-index: 10000000;
   background-color: transparent;
   -webkit-transition: all 0.3s ease-out;
-     -moz-transition: all 0.3s ease-out;
-      -ms-transition: all 0.3s ease-out;
-       -o-transition: all 0.3s ease-out;
-          transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .introjs-helperLayer *,
 .introjs-helperLayer *:before,
 .introjs-helperLayer *:after {
   -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-      -ms-box-sizing: content-box;
-       -o-box-sizing: content-box;
-          box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -ms-box-sizing: content-box;
+  -o-box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 .introjs-helperNumberLayer {
@@ -197,29 +197,36 @@ tr.introjs-showElement > th {
   visibility: visible;
   padding: 10px;
   background-color: beige;
-  min-width: 200px;
-  max-width: 300px;
+  font-size: 23px;
+  min-width: 500px;
+  max-width: 500px;
   border-radius: 3px;
   box-shadow: 0 1px 10px rgba(0,0,0,.4);
   -webkit-transition: opacity 0.1s ease-out;
-     -moz-transition: opacity 0.1s ease-out;
-      -ms-transition: opacity 0.1s ease-out;
-       -o-transition: opacity 0.1s ease-out;
-          transition: opacity 0.1s ease-out;
+  -moz-transition: opacity 0.1s ease-out;
+  -ms-transition: opacity 0.1s ease-out;
+  -o-transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
 }
 
 .introjs-tooltipbuttons {
   text-align: right;
   white-space: nowrap;
+  
+  /*width: 45px;
+  height: 50px;*/
 }
 
 /*
  Buttons style by http://nicolasgallagher.com/lab/css3-github-buttons/
  Changed by Afshin Mehrabani
-*/
-.introjs-button {
+ */
+ .introjs-button {
   box-sizing: content-box;
+  width: 60px;
+  height: 25px;
   position: relative;
+  
   overflow: visible;
   display: inline-block;
   padding: 0.3em 0.8em;
@@ -274,6 +281,7 @@ tr.introjs-showElement > th {
   box-sizing: content-box;
   margin-right: 5px;
   color: #7a7a7a;
+  font-size: 20px;
 }
 
 .introjs-prevbutton {
@@ -281,6 +289,7 @@ tr.introjs-showElement > th {
   -moz-border-radius: 0.2em 0 0 0.2em;
   border-radius: 0.2em 0 0 0.2em;
   border-right: none;
+    font-size: 20px;
 }
 
 .introjs-prevbutton.introjs-fullbutton {
@@ -294,12 +303,14 @@ tr.introjs-showElement > th {
   -webkit-border-radius: 0 0.2em 0.2em 0;
   -moz-border-radius: 0 0.2em 0.2em 0;
   border-radius: 0 0.2em 0.2em 0;
+    font-size: 20px;
 }
 
 .introjs-nextbutton.introjs-fullbutton {
   -webkit-border-radius: 0.2em;
   -moz-border-radius: 0.2em;
   border-radius: 0.2em;
+  font-size: 15px;
 }
 
 .introjs-disabled, .introjs-disabled:hover, .introjs-disabled:focus {
@@ -313,11 +324,12 @@ tr.introjs-showElement > th {
 }
 
 .introjs-hidden {
-     display: none;
+ display: none;
 }
 
 .introjs-bullets {
   text-align: center;
+  size: 100px;
 }
 .introjs-bullets ul {
   box-sizing: content-box;
@@ -391,8 +403,8 @@ tr.introjs-showElement > th {
   cursor: pointer;
 }
 .introjs-hint:focus {
-    border: 0;
-    outline: 0;
+  border: 0;
+  outline: 0;
 }
 .introjs-hidehint {
   display: none;
@@ -418,10 +430,10 @@ tr.introjs-showElement > th {
   z-index: 10;
   position: absolute;
   -webkit-transition: all 0.2s ease-out;
-     -moz-transition: all 0.2s ease-out;
-      -ms-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 .introjs-hint-no-anim .introjs-hint-dot {
   -webkit-animation: none;
@@ -452,46 +464,46 @@ tr.introjs-showElement > th {
 
 @-moz-keyframes introjspulse {
  0% {
-    -moz-transform: scale(0);
-    opacity: 0.0;
- }
- 25% {
-    -moz-transform: scale(0);
-    opacity: 0.1;
- }
- 50% {
-    -moz-transform: scale(0.1);
-    opacity: 0.3;
- }
- 75% {
-    -moz-transform: scale(0.5);
-    opacity: 0.5;
- }
- 100% {
-    -moz-transform: scale(1);
-    opacity: 0.0;
- }
+  -moz-transform: scale(0);
+  opacity: 0.0;
+}
+25% {
+  -moz-transform: scale(0);
+  opacity: 0.1;
+}
+50% {
+  -moz-transform: scale(0.1);
+  opacity: 0.3;
+}
+75% {
+  -moz-transform: scale(0.5);
+  opacity: 0.5;
+}
+100% {
+  -moz-transform: scale(1);
+  opacity: 0.0;
+}
 }
 
 @-webkit-keyframes introjspulse {
  0% {
-    -webkit-transform: scale(0);
-    opacity: 0.0;
- }
- 25% {
-    -webkit-transform: scale(0);
-    opacity: 0.1;
- }
- 50% {
-    -webkit-transform: scale(0.1);
-    opacity: 0.3;
- }
- 75% {
-    -webkit-transform: scale(0.5);
-    opacity: 0.5;
- }
- 100% {
-    -webkit-transform: scale(1);
-    opacity: 0.0;
- }
+  -webkit-transform: scale(0);
+  opacity: 0.0;
+}
+25% {
+  -webkit-transform: scale(0);
+  opacity: 0.1;
+}
+50% {
+  -webkit-transform: scale(0.1);
+  opacity: 0.3;
+}
+75% {
+  -webkit-transform: scale(0.5);
+  opacity: 0.5;
+}
+100% {
+  -webkit-transform: scale(1);
+  opacity: 0.0;
+}
 }
