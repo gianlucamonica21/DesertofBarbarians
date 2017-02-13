@@ -69,7 +69,7 @@ body {
 }
 
 #chat{
-   height: 550px;  
+   height: 498px;  
 
 }
 
@@ -149,8 +149,17 @@ body {
    width: 516px;   
 }
 
+#scorebar2{
+  background-color: limegreen;
+
+}
+
+#mybar{
+  width: 1000px;
+}
+
 #progressbar{
-   width: 510px;   
+   width: 1855px;   
 }
 .progress.active .progress-bar {
     -webkit-transition: none !important;

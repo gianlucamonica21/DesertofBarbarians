@@ -140,47 +140,94 @@ $conn = null;
         </ul>
 
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
-        <li>
-          <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
-            <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"] ?>
-            <br>Score: <?php echo $_SESSION["totalScore"] ?></span>
-          </a>
+          <li>
+            <a type="button" class="btn btn-default btn-lg navbar-btn text-center"  > 
+              <span id="spanUser">To the next rank: 
+                <br><br>
+                <div id="progress-score2" class="progress">
 
-        </li>
-        <li>
-          <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
-            <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
-          </a>
-        </li>
-        </ul>
+                  <div id="scorebar2" class="progress-bar" style="width:9 %"></div>
+                  <script type="text/javascript">
+
+                    var total = <?php echo intval($_SESSION["totalScore"])?>;
+                    var percent;
+                    var diff;
+                    if( total == 0){
+                      percent = 100;
+                    }
+                    else
+                      if( total <= 250)
+                      {
+                        diff = 250 - total;
+                        percent = (100 * diff) / 250;
+                      }else    
+                      if( total > 250 && total <= 500)
+                      {
+                        diff = 500 - total;
+                        percent = (100 * diff) / 250;
+                      }else          
+                      if( total > 500 && total <= 750)
+                      {
+                        diff = 750 - total;
+                        percent = (100 * diff) / 250;
+                      }else{
+                        percent = 100;
+                      }
+
+
+                      document.getElementById("scorebar2").style="width:"+(100-percent)+"%";
+                    </script>
+                  </div>
+
+                </span>
+              </a>
+            </li>
+            <li>
+              <a type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+                <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"]; ?>
+                  <br>Score: <?php echo intval($_SESSION["totalScore"]); ?></span><br>
+                </a>
+
+              </li>
+              <li>
+                <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
+                  <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="container">
+      <div class="container">
 
-    <div class="row">
-      <!-- Editor panel  -->
-      <div class="col-lg-5 col-md-8 col-sm-7">
-        <div id="editorpanel" class="panel panel-default">
-          <div  class="panel-heading">Editor</div>
-          <div class="panel-body" >
-            <textarea id="editor"></textarea>
-            <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
-              <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
-              <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
-              <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
-              <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
-              <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
-            </button>
+        <div>
+          <div id="progressbar" class="progress" >
+          <div id="myBar" class="progress-bar progress-bar-danger" style="width: 50%"></div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Editor panel  -->
+          <div class="col-lg-5 col-md-8 col-sm-7">
+            <div id="editorpanel" class="panel panel-default">
+              <div  class="panel-heading">Editor</div>
+              <div class="panel-body" >
+                <textarea id="editor"></textarea>
+                <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
+                  <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+                  <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
+                  <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+                  <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+                  <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+                </button>
               <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
                 <i class="fa fa-play" aria-hidden="true"></i>
               </button>
@@ -236,12 +283,12 @@ $conn = null;
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
 
                <div class="panel-heading"></div>
-               <div id="progressbar" class="progress" >
+              <!--  <div id="progressbar" class="progress" >
                 <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
-              </div>
+              </div> -->
               <div id="controllerbody" class="panel-body">
-                  <button  class="btn btn-default disabled" id="returnButton" >Resume Game</button>
-            <script type="text/javascript"></script>
+                <button  class="btn btn-default disabled" id="returnButton" >Resume Game</button>
+                <script type="text/javascript"></script>
 
 
               </div>
@@ -263,7 +310,7 @@ $conn = null;
       <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
       <div class="panel-body">
         <div id="chat" >
-              <ul class="chat-thread">
+          <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
@@ -289,66 +336,129 @@ $conn = null;
                 <h2><?php echo $current_player ?></h2>
                 <h3><?php echo $_SESSION["gradeType"]?></h3>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 0%"></div>
+
+                  <div id="scorebar" class="progress-bar" style="width: %"></div>
+                  <script type="text/javascript">
+
+                    var total = <?php echo intval($_SESSION["totalScore"])?>;
+                    var percent;
+                    var diff;
+                    if( total == 0){
+                      percent = 100;
+                    }
+                    else
+                      if( total <= 250)
+                      {
+                        diff = 250 - total;
+                        percent = (100 * diff) / 250;
+                      }else    
+                      if( total > 250 && total <= 500)
+                      {
+                        diff = 500 - total;
+                        percent = (100 * diff) / 250;
+                      }else          
+                      if( total > 500 && total <= 750)
+                      {
+                        diff = 750 - total;
+                        percent = (100 * diff) / 250;
+                      }else{
+                        percent = 100;
+                      }
+
+
+                      document.getElementById("scorebar").style="width:"+(100-percent)+"%";
+                    </script>
+                  </div>
+                  <script type="text/javascript"> 
+                    var nowscore = <?php echo intval($_SESSION["totalScore"])?>;
+                  </script>
+                  <h4>
+                    <?php
+                    if ( intval($_SESSION["totalScore"]) == 0)
+                    {
+                      $zero = 250;
+                      echo "Points to the next rank: ".$zero;
+                    }
+                    else
+                      if( intval($_SESSION["totalScore"]) <= 250 )
+                      {
+                        echo "Points to the next rank: ".intval(250 - $_SESSION["totalScore"]);
+                      }
+                      else if 
+                        ( intval($_SESSION["totalScore"]) > 250 && intval($_SESSION["totalScore"]) <= 500)
+                      {
+                        echo "Points to the next rank: ".intval(500 - $_SESSION["totalScore"]); 
+                      }else 
+                      if( intval($_SESSION["totalScore"]) > 500 && intval($_SESSION["totalScore"]) <= 750 ){
+                        echo "Points to the next rank: ".intval(750 - $_SESSION["totalScore"]);
+                      }else
+                      {
+                        echo "You are at the max rank!";
+                      }
+
+
+
+                      ?>
+
+
+
+                    </h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-xs-6 follow line" align="center">
+                      <h3><?php echo intval($_SESSION["totalScore"]) ?> <br/>
+                        <span>POINTS</span>
+                      </h3>
+                    </div>
+                    <div class="col-md-6 col-xs-6 follow line" align="center">
+                      <h3>TO DO <br/> <span>BADGES</span>
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-                <script type="text/javascript"> ;</script>
-                <h4>Points to next rank: TO DO </h4>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
               </div>
-              <div class="row">
-                <div class="col-md-6 col-xs-6 follow line" align="center">
-                  <h3><?php echo $_SESSION["totalScore"] ?> <br/>
-                    <span>POINTS</span>
-                  </h3>
-                </div>
-                <div class="col-md-6 col-xs-6 follow line" align="center">
-                  <h3>TO DO <br/> <span>BADGES</span>
-                  </h3>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- TUTORIAL MODAL -->
-      <div class="modal" id="tutorialModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">How to Play</h4>
-            </div>
-            <div class="modal-body">
-              <p>One fine body…</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+          <!-- TUTORIAL MODAL -->
+          <div class="modal" id="tutorialModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">How to Play</h4>
+                </div>
+                <div class="modal-body">
+                  <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- NOTIFICATION LEVEL MODAL -->
-      <div class="modal" id="notificationModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
-            </div>
-            <div class="modal-body" style="text-align : center;">
-              <image id="image-modal" src=""  align="center"> </image>
-              <!-- src="img/general.png" -->
-              <p id="modal-text" ></p>
-            </div>
-            <div class="modal-footer">
-             <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
+          <!-- NOTIFICATION LEVEL MODAL -->
+          <div class="modal" id="notificationModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
+                </div>
+                <div class="modal-body" style="text-align : center;">
+                  <image id="image-modal" src=""  align="center"> </image>
+                  <!-- src="img/general.png" -->
+                  <p id="modal-text" ></p>
+                </div>
+                <div class="modal-footer">
+                 <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
+               </div>
+             </div>
            </div>
          </div>
-       </div>
-     </div>
-     <script type="text/javascript">
+         <script type="text/javascript">
 
     //$('#notificationModal').modal('toggle');
     // $('#notificationModal').modal('show');
@@ -514,89 +624,89 @@ $conn = null;
 <script type="text/javascript">
 
   function startIntro(){
-        var intro = introJs();
-          intro.setOptions({
-            steps: [
-              {
-                intro: "WELCOME!!<br> "
-              }
-              ,
-
-              {
-                element: document.querySelector('#chat'),
-                position: 'left',
-                intro: "This is where you can read the messages with the instructions from the general or the soldier hint!"
-              },
-              {
-                element: document.querySelector('#editorpanel'),
-                intro: "This is where you code to fix the bugs!",
-                position: 'right'
-              },
-              {
-                element: document.querySelector('#gamepanel'),
-                intro: 'This is the game, play to see your changes!',
-                position: 'left'
-              },
-              {
-                element: document.querySelector('#submitButton'),
-                intro: 'Click here to update the game code!',
-                position: 'top'
-              },
-              {
-                element: document.querySelector('#evaluateButton'),
-                intro: 'Click here to evaluate your code, if the solution is right you will go to the next level!',
-                position: 'top'
-              },
-              {
-                element: document.querySelector('#refreshButton'),
-                intro: 'Click here to remove your last updates in the code!',
-                position: 'top'
-              },
-              {
-                element: document.querySelector('#hintButton'),
-                intro: 'Click here to ask for help to the old programmer assistant!',
-                position: 'top'
-              },
-              {
-                element: document.querySelector('#docButton'),
-                intro: 'Click here to read the surviving documentation!',
-                position: 'top'
-              },
-              {
-                element: document.querySelector('#returnButton'),
-                intro: 'Click here to resume the game from the pause!',
-                position: 'top'
-              },
-              {
-                element: document.querySelector('#profileTutorial'),
-                intro: 'Click here to view your statistics!',
-                position: 'bottom'
-              },
-              {
-                element: document.querySelector('#levelsTutorial'),
-                intro: 'Click here to view the locked and unlocked levels!',
-                position: 'bottom'
-              },
-              {
-                element: document.querySelector('#leaderboardTutorial'),
-                intro: 'Click here to view the leaderboard, check your ranking!',
-                position: 'bottom'
-              },
-              {
-                element: document.querySelector('#logoutTutorial'),
-                intro: 'Click here to logout :(',
-                position: 'bottom'
-              },
-              {
-                element: document.querySelector('#tutorialbutton'),
-                intro: 'Click here if you want to see the tutorial again!',
-                position: 'bottom'
-              }
-
-            ]
-          });
-          intro.start();
+    var intro = introJs();
+    intro.setOptions({
+      steps: [
+      {
+        intro: "WELCOME!!<br> "
       }
+      ,
+
+      {
+        element: document.querySelector('#chat'),
+        position: 'left',
+        intro: "This is where you can read the messages with the instructions from the general or the soldier hint!"
+      },
+      {
+        element: document.querySelector('#editorpanel'),
+        intro: "This is where you code to fix the bugs!",
+        position: 'right'
+      },
+      {
+        element: document.querySelector('#gamepanel'),
+        intro: 'This is the game, play to see your changes!',
+        position: 'left'
+      },
+      {
+        element: document.querySelector('#submitButton'),
+        intro: 'Click here to update the game code!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#evaluateButton'),
+        intro: 'Click here to evaluate your code, if the solution is right you will go to the next level!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#refreshButton'),
+        intro: 'Click here to remove your last updates in the code!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#hintButton'),
+        intro: 'Click here to ask for help to the old programmer assistant!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#docButton'),
+        intro: 'Click here to read the surviving documentation!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#returnButton'),
+        intro: 'Click here to resume the game from the pause!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#profileTutorial'),
+        intro: 'Click here to view your statistics!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#levelsTutorial'),
+        intro: 'Click here to view the locked and unlocked levels!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#leaderboardTutorial'),
+        intro: 'Click here to view the leaderboard, check your ranking!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#logoutTutorial'),
+        intro: 'Click here to logout :(',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#tutorialbutton'),
+        intro: 'Click here if you want to see the tutorial again!',
+        position: 'bottom'
+      }
+
+      ]
+    });
+    intro.start();
+  }
 
 </script>
 <noscript>You need to turn JavaScript on.</noscript>

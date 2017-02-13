@@ -67,10 +67,10 @@ if (isset($_SESSION['loggedinUser'])) {
                   <button type="submit" id="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
                 <div id="etc-logo" class="etc-login-form">
-                <a id="newuser" type="button" class="btn btn-default btn-lg navbar-btn text-center" href="registration.php">
-            <span id="spanUser">New user? Create new account</span><br>
-            </a>
-                 
+                  <a id="newuser" type="button" class="btn btn-default btn-lg navbar-btn text-center" href="registration.php">
+                    <span id="spanUser">New user? Create new account</span><br>
+                  </a>
+
                 </div>
               </form>
             </div>
@@ -90,6 +90,18 @@ if (isset($_SESSION['loggedinUser'])) {
       </html>
       <script type="text/javascript">
 
+
+       //Chiamata LOAD PLAYER
+      
+      var stringa;
+      var oReq = new XMLHttpRequest(); //New request object
+      oReq.onload = function() {
+        stringa = this.responseText;
+      };
+      oReq.open("get", "load_player.php", true);
+      oReq.send();
+      console.log("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
+       
       //Chiamata LOAD LEVEL
       var data = new FormData();
       data.append("data", 0);
@@ -97,10 +109,9 @@ if (isset($_SESSION['loggedinUser'])) {
       xhr.open("post", "load_level_x.php", true);
       xhr.send(data);
 
-      //Chiamata LEADERBOARD
       
 
 
 
 
-        </script>
+</script>
