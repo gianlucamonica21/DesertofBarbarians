@@ -139,8 +139,7 @@ $('#evaluateButton').click(function() {
 
     var result = true;//userSolutionChecker();
     try {
-
-
+    
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());

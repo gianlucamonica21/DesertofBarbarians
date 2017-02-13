@@ -108,7 +108,7 @@ DROP TABLE IF EXISTS `desertdb`.`Achievement` ;
 CREATE TABLE IF NOT EXISTS `desertdb`.`Achievement` (
   `id` INT NOT NULL,
   `title` VARCHAR(64) NOT NULL,
-  `desc` VARCHAR(256) NOT NULL,
+  `descr` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `details_UNIQUE` (`title` ASC))
 ENGINE = InnoDB;
@@ -224,16 +224,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `desertdb`;
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (1, 'Ti fai valere', 'Qualcuno aveva dei dubbi su di te, ma hai dimostrato di saperci fare affrontando la prima minaccia');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (2, 'A metà strada', 'Se ce l\'hai fatta ad arrivare qui, ce la farai anche a finire. Hai completato più della metà dei livelli');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (3, 'Programmatore Indie', 'Suggerimento? Non fa parte del tuo vocabolario, ti piace a modo tuo. Hai completato il livello senza alcuna dritta');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (4, 'Fino alla Fine', 'Hai saputo risolvere ogni minaccia nel migliore dei modi! Tutti i livelli sono stati completati');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (5, 'Fra i Migliori', 'Sei entrato a far parte della TOP 3, verifica tu stesso!');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (6, 'Generale Supremo', 'Hai superato chiunque nella tua corsa di salvare il mondo programmando! Ma attenzione, anche gli altri sono affamati di successo');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (7, 'Investigatore dei Bug', 'Là dove gli altri non vedono niente, tu scopri le insidie! Hai completato tutti i livelli di debugging');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (8, 'Maestro del Refactoring', 'Quando le cose devono essere cambiate per il meglio, sei la persona giusta a cui rivolgersi. Hai completato tutti i livelli di refactoring');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (9, 'Artista del Codice', 'Tutti i livelli di Designing sono stati completati');
-INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `desc`) VALUES (10, 'Dio della Guerra', 'Non è ancora nota una missione che tu non possa portare a termine, hai completato tutti i livelli');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (1, 'Ti fai valere', 'Qualcuno aveva dei dubbi su di te, ma hai dimostrato di saperci fare affrontando la prima minaccia');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (2, 'A metà strada', 'Se ce l\'hai fatta ad arrivare qui, ce la farai anche a finire. Hai completato più della metà dei livelli');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (3, 'Programmatore Indie', 'Suggerimento? Non fa parte del tuo vocabolario, ti piace a modo tuo. Hai completato il livello senza alcuna dritta');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (4, 'Fino alla Fine', 'Hai saputo risolvere ogni minaccia nel migliore dei modi! Tutti i livelli sono stati completati');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (5, 'Fra i Migliori', 'Sei entrato a far parte della TOP 3, verifica tu stesso!');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (6, 'Generale Supremo', 'Hai superato chiunque nella tua corsa di salvare il mondo programmando! Ma attenzione, anche gli altri sono affamati di successo');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (7, 'Investigatore dei Bug', 'Là dove gli altri non vedono niente, tu scopri le insidie! Hai completato tutti i livelli di debugging');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (8, 'Maestro del Refactoring', 'Quando le cose devono essere cambiate per il meglio, sei la persona giusta a cui rivolgersi. Hai completato tutti i livelli di refactoring');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (9, 'Artista del Codice', 'Tutti i livelli di Designing sono stati completati');
+INSERT INTO `desertdb`.`Achievement` (`id`, `title`, `descr`) VALUES (10, 'Dio della Guerra', 'Non è ancora nota una missione che tu non possa portare a termine, hai completato tutti i livelli');
 
 COMMIT;
 
@@ -247,5 +247,3 @@ INSERT INTO `desertdb`.`Achieved` (`login`, `achievement`) VALUES ('gan', 3);
 INSERT INTO `desertdb`.`Achieved` (`login`, `achievement`) VALUES ('maghi', 1);
 
 COMMIT;
-
-
