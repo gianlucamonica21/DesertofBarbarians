@@ -59,12 +59,12 @@ try {
   }
 
 	// E una volta finito il livello aggiorna anche lo score totale
-		$new_total_score = $old_total_score + $new_current_level_score;
-		$_SESSION['totalScore'] = $new_total_score;
-		$update_total_score = "UPDATE User SET score= :score WHERE login= :login";
-		$query = $conn->prepare($update_total_score);
-		$result_update_total_score = $query->execute( array( ':score'=>$new_total_score,
-			':login'=>$current_player) );
+	$new_total_score = $old_total_score + $new_current_level_score;
+	$_SESSION['totalScore'] = $new_total_score;
+	$update_total_score = "UPDATE User SET score= :score WHERE login= :login";
+	$query = $conn->prepare($update_total_score);
+	$result_update_total_score = $query->execute( array( ':score'=>$new_total_score,
+																											 ':login'=>$current_player) );
 
   // Aggiornamento grado, solo se con requisiti necessari
 	if ($new_total_score >= $next_grade_score &&
@@ -72,7 +72,7 @@ try {
 			$update_grade = "UPDATE Graduated SET grade= :next_grade WHERE login= :login";
 		$query = $conn->prepare($update_grade);
 		$result = $query->execute( array(':next_grade'=>$next_grade,
-			':login'=>$current_player) );
+																		 ':login'=>$current_player) );
 	}
 
 	// Aggiornamento achievements
@@ -89,17 +89,17 @@ try {
 	if ($current_level < 9 &&
 		$current_level == $max_level) {
 		$current_level = $current_level + 1;
-	$max_score_per_level = 0;
-	$sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :level, :max_score_per_level)";
-	$query = $conn->prepare($sql_campaign_insertion);
-	$result_campaign = $query->execute( array( ':login'=>$current_player,
-		':level'=>$current_level,
-		':max_score_per_level'=>$max_score_per_level) );
-}
-if ($current_level < 9 &&
-	$current_level < $max_level) {
-	$current_level = $current_level + 1;
-}
+		$max_score_per_level = 0;
+		$sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :level, :max_score_per_level)";
+		$query = $conn->prepare($sql_campaign_insertion);
+		$result_campaign = $query->execute( array( ':login'=>$current_player,
+			':level'=>$current_level,
+			':max_score_per_level'=>$max_score_per_level) );
+		}
+
+	if ($current_level < 9 && $current_level < $max_level) {
+		$current_level = $current_level + 1;
+	}
 
 $_SESSION['level'] = $current_level;
 }
