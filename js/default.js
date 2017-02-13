@@ -163,8 +163,9 @@ $('#evaluateButton').click(function() {
 
       //console.log("jbhuyv" + contHint);
 
-
-      badge();
+      var unlockedbadgeQueue = [];
+      unlockedbadgeQueue = badge();
+      console.log("unlockedbadgeQueue: " + unlockedbadgeQueue);
 
       var data = new FormData();
       data.append("data", difference);

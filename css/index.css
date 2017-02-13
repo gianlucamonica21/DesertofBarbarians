@@ -87,29 +87,63 @@ body {
 }
 
 #submitButton{
-   width: 186px;  
+   width: 146px;  
    height: 60px; 
 }
 
+#submitButtonSymbol{
+  font-size: 25px;
+}
+
 #evaluateButton{
-   width: 186px;   
+   width: 148px;   
    height: 60px;
 }
 
+#evaluateButtonSymbol{
+  font-size: 25px;
+}
+
 #hintButton{
-   width: 186px; 
+   width: 148px; 
    height: 60px;  
 }
 
+#hintButtonSymbol{
+  font-size: 25px;
+
+}
+
 #refreshButton{
-   width: 186px; 
+   width: 148px; 
    height: 60px;  
+}
+
+#refreshButtonSymbol{
+  font-size: 25px;
+
 }
 
 #returnButton{
     width: 509px;
-     height: 60px;   
+     height: 60px;  
+     font-size: 25px; 
 }
+
+#docButton{
+    width: 148px;
+     height: 60px;  
+     font-size: 25px; 
+     background-color: green;
+     border-color: green;
+}
+
+
+
+/*#returnButtonSymbol{
+  font-size: 25px;
+
+}*/
 
 #controllerbody{
    width: 516px;   
