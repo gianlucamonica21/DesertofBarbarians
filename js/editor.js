@@ -1,6 +1,14 @@
   var stoppedGame = false;
   var widgets = [];
-  var readOnlyLinesArray = [0,7];
+  var readOnlyLinesArray = [];
+  // Get read only lines array
+  $.getJSON('getReadOnlyLines.php', function (data) {
+    $.each(data, function(key, val) {
+      readOnlyLinesArray[key] = val;
+    });
+  });
+
+  
   // set editor by CodeMirror function
   var editor =
     CodeMirror.fromTextArea(document.getElementById("editor"), {
@@ -22,7 +30,7 @@
   var startedCoding;
   editor.setSize(750,700);
   editor.on('change', function(cm, change) {
-    drawStopMessage();
+  drawStopMessage();
 
     startedCoding = (new Date()).getTime();
 
@@ -63,10 +71,16 @@
         if (xhr.status === 200) {
           //Read the file content and set in the editor
           editor.setValue(xhr.responseText);
-          editor.on('beforeChange',readOnlyLinesHandler);
-          for (i=0;i<readOnlyLinesArray.length;i++){
-            editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
-          }
+
+          $.getJSON('getReadOnlyLines.php', function (data) {
+            $.each(data, function(key, val) {
+              readOnlyLinesArray[key] = val;
+              editor.on('beforeChange',readOnlyLinesHandler);
+              for (i=0;i<readOnlyLinesArray.length;i++){
+                editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
+              }
+            });
+          });
         } else {
           console.error(xhr.statusText);
         }
