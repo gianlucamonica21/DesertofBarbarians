@@ -162,14 +162,7 @@ try {
 
       var data = new FormData();
       data.append("data", 0);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      // request.onreadystatechange = function()
-      // {
-      //   if (request.readyState == 4 && request.status == 200)
-      //   {
-      //       upgradeLevelBar(); // Another callback here
-      //     }
-      //   }; 
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
       var stringa;
       xhr.onload = function() {
         stringa = this.responseText;
@@ -183,7 +176,7 @@ try {
 
 
       xhr.send(data);
-      //upgradeLevelBar();
+      
 
 
     } else {
