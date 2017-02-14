@@ -67,7 +67,7 @@
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
   margin-left: 80px;
-  color: #0AD5C1;
+  color: white;
 }
 
 .chat-thread li.generalMsg:before {

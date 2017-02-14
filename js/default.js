@@ -233,7 +233,7 @@ function writeChatMessage(msgString, sender, goToNextLevel){
     .addClass(sender)
     .typed({
       strings: [msgString],
-      typeSpeed: 10,
+      typeSpeed: 100,
       callback: function() {
         $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
         if (goToNextLevel){
