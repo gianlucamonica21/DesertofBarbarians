@@ -14,6 +14,7 @@ MISSILE = {
 };
 
 // Variables
+var gamestarted = false;
 var levelscore = 0,
 level = 4,
 maxLevel = 1,
@@ -152,15 +153,25 @@ var drawLevelMessage = function() {
 
 var drawStopMessage = function() {
 
-  ctx.fillStyle = '#6d6';
+  if( gamestarted == true){
+    ctx.fillStyle = '#FFFFFF';
 
-  ctx.font =  '20px monaco, consolas';
-  ctx.fillText( 'Game is now stop', 130, 180 );
-  ctx.font = 'bold 32px monaco, consolas';
-  ctx.fillStyle = '#d66';
-  ctx.fillText( '', 130, 250 );
-  stopLevel();
+    ctx.font =  '20px monaco, consolas';
+    ctx.fillText( 'Game is now stopped, click to resume!', 130, 180 );
+    ctx.font = 'bold 32px monaco, consolas';
+    ctx.fillStyle = '#d66';
+    ctx.fillText( '', 130, 250 );
+    stopLevel();
+    $( '#mc-container' ).one( 'click', function() {
+      startLevel();
 
+      $( '#miscom' ).unbind().click(function( event ) {
+        var mousePos = getMousePos(this, event);
+        playerShoot( mousePos.x, mousePos.y);
+        
+      });
+    });
+  }
 };
 
 // Show bonus points at end of a level
@@ -876,8 +887,11 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
-
+  gamestarted = true;
   var fps = 30;
+  if (timerID != undefined){
+    clearInterval( timerID );
+  }
   timerID = setInterval( nextFrame, 1000 / fps );
 
 };

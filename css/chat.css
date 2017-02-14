@@ -67,7 +67,7 @@
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
   margin-left: 80px;
-  color: #0AD5C1;
+  color: white;
 }
 
 .chat-thread li.generalMsg:before {
@@ -139,7 +139,7 @@
 @media all and (min-width: 768px) {
   .chat-thread {
     width: 90%;
-    height: 470px;
+    height: 723px;
   }
 
   .chat-window {

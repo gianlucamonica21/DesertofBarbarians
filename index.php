@@ -37,6 +37,7 @@ $conn = null;
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
   console.log("Livello massimo: " + maxlevel);
+ 
   var ownedBadges = '<?php echo json_encode($_SESSION['achievementsId']);?>';
   console.log("Owned: " + ownedBadges);
   var top = '<?php echo $_SESSION['top'];?>';
@@ -126,11 +127,11 @@ $conn = null;
             </button>
           </li>
 
-          <li>
+          <!-- <li>
             <button  id="levelsTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal" >
               <span class="glyphicon glyphicon-forward" aria-hidden="true"></span><br> Levels
             </button>
-          </li>
+          </li> -->
 
           <li>
             <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" >
@@ -220,93 +221,94 @@ $conn = null;
          <div id="col7" class="seven"></div>
          <div id="col8" class="eight "></div>
 
-          <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <div class="one"></div>
-            <span id="textbarlv1">Level: &nbsp&nbsp 1</span>
-          </div>
-
-          <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv2"> 2 </span>
-          </div>
-          <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv3"> 3 </span>
-          </div>
-          <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv4"> 4 </span>
-          </div>
-          <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv5"> 5 </span>
-          </div>
-          <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv6"> 6 </span>
-          </div>
-          <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv7"> 7 </span>
-          </div>
-          <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv8"> 8 </span>
-          </div>
-          <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
-            <span id="textbarlv9"> 9 </span>
-          </div>
-          <script type="text/javascript">
-              // var $progress = $('#progressbar');
-              // var $progressBar = $('#timebar');
-              var lmax = maxlevel;
-
-              for(var i=1; i<=9; i++){
-                if( i >= 1 && i <= 3){
-                  document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
-                document.getElementById("col"+i).style.backgroundColor="indianred";
-                }else
-                if( i >= 4 && i <= 6){
-                  document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
-                  document.getElementById("col"+i).style.backgroundColor="steelblue";
-
-                }else
-                if( i >= 7 && i <= 9){
-                  document.getElementById("timebarlv"+i).style.backgroundColor="coral";
-                  if(i<9){
-                document.getElementById("col"+i).style.backgroundColor="coral";
-                  }
-                }
-                if(i > lmax){
-                 document.getElementById("textbarlv"+i).style.color="#2c3e50";
-                 document.getElementById("timebarlv"+i).style.backgroundColor="beige";
-                 if(i<9){
-                document.getElementById("col"+i).style.backgroundColor="beige";
-                  }
-               }
-             }
+         
 
 
+         <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
 
-           </script>
+           <span type="button"  class="level-buttons" id="textbarlv1">1</span>
          </div>
-       </div>
-     </div>
-     <div class="row">
-      <!-- Editor panel  -->
-      <div class="col-lg-5 col-md-8 col-sm-7">
-        <div id="editorpanel" class="panel panel-default">
-          <div  class="panel-heading">Editor</div>
-          <div class="panel-body" >
-            <textarea id="editor"></textarea>
-            <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
-              <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
-              <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
-              <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
-              <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
-            </button>
-            <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
-              <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
-            </button>
+
+         <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv2">2</span>
+        </div>
+        <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv3">3</span>
+        </div>
+        <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv4">4</span>
+        </div>
+        <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv5">5</span>
+        </div>
+        <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv6">6</span>
+        </div>
+        <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv7">7</span>
+        </div>
+        <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span  class="level-buttons" id="textbarlv8">8</span>
+        </div>
+        <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv9">9</span>
+        </div>
+        <script type="text/javascript">
+          var levelArr = document.getElementsByClassName("level-buttons");
+          // console.log("levelarr" + levelArr);
+          // console.log("levelarr" + levelArr[0].textContent);
+          for(var i=0; i<levelArr.length; i++)
+          {
+            if(i >= maxlevel){
+              levelArr[i].classList.add("disabled");
+            }
+          }
+          $('.level-buttons').click(function(){
+            //clicked = true;
+            if(!($(this).hasClass("disabled"))){
+
+              clickedLevel = this.textContent;
+              // alert("clickedLevel" + clickedLevel);
+              //alert("clicked " + clickedLevel);
+              //console.log("hai cliccato: " + clicked);
+              var data = new FormData();
+              data.append("data", clickedLevel);
+              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+              xhr.open("post", "DBConnection/load_level_x.php", true);
+              xhr.send(data);
+              location.reload();
+
+            }
+          });
+        
+
+
+      </script>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <!-- Editor panel  -->
+  <div class="col-lg-5 col-md-8 col-sm-7">
+    <div id="editorpanel" class="panel panel-default">
+      <div  class="panel-heading">Editor</div>
+      <div class="panel-body" >
+        <textarea id="editor"></textarea>
+        <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
+          <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+          <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
+          <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+          <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+          <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+        </button>
               <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
                 <i class="fa fa-play" aria-hidden="true"></i>
               </button>
@@ -361,34 +363,48 @@ $conn = null;
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
 
                <div class="panel-heading"></div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+       <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+            <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+          </div>
+        </div>
+      </footer>
               <!--  <div id="progressbar" class="progress" >
                 <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
               </div> -->
-              <div id="controllerbody" class="panel-body">
+              <!-- <div id="controllerbody" class="panel-body">
                 <button  class="btn btn-default disabled" id="returnButton" >Resume Game</button>
                 <script type="text/javascript"></script>
 
 
-              </div>
+              </div> -->
+
+
+
+
+
+
             </div>
 
-          </div>
-        </div>
-      </div>
-
-    </div>
 
 
 
 
-
-    <!-- Chat Panel  -->
-    <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
-     <div class="panel panel-default" id="divchat">
-      <div class="panel-heading">Chat</div>
-      <div class="panel-body">
-        <div id="chat" >
-          <ul class="chat-thread">
+            <!-- Chat Panel  -->
+            <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
+             <div class="panel panel-default" id="divchat">
+              <div class="panel-heading">Chat</div>
+              <div class="panel-body">
+                <div id="chat" >
+                  <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
@@ -410,7 +426,7 @@ $conn = null;
             </div>
             <div class="modal-body">
               <div align="center">
-                <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
+                <div class="outter"><img src="img/avatar.gif" class="image-circle"/></div>
                 <h2><?php echo $current_player ?></h2>
                 <h3><?php echo $_SESSION["gradeType"]?></h3>
                 <div class="progress">
@@ -554,32 +570,32 @@ $conn = null;
         </div>
         <div class="buttons">
           <div class="btn-group">
-            <button   id="button1" class="btn btn-primary level-buttons">1</button>
+            <!-- <span   id="button1" class="btn btn-primary level-buttons">1</span>
           </div>
           <div class="btn-group">
-            <button  id="button1" class="btn btn-primary level-buttons">2</button>
+            <span  id="button1" class="btn btn-primary level-buttons">2</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons">3</button>
+            <span id="button1" class="btn btn-primary level-buttons">3</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons">4</button>
+            <span id="button1" class="btn btn-primary level-buttons">4</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons">5</button>
+            <span id="button1" class="btn btn-primary level-buttons">5</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">6</button>
+            <span id="button1" class="btn btn-primary level-buttons ">6</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">7</button>
+            <span id="button1" class="btn btn-primary level-buttons ">7</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">8</button>
+            <span id="button1" class="btn btn-primary level-buttons ">8</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">9</button>
-          </div>
+            <span id="button1" class="btn btn-primary level-buttons ">9</span>
+          </div> -->
         </div>
 
         <script type="text/javascript">
@@ -617,7 +633,7 @@ $conn = null;
       </div>
     </div>
   </div>
-
+</div>
 
   <!-- LEADERBOARD MODAL -->
   <div class="modal" id="leaderboardModal">
@@ -668,24 +684,24 @@ $conn = null;
             }
             clicked = false;
           });
-      </script>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </script>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer>
-  <div class="row">
-    <div class="col-lg-12">
-      <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-      <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+  <!-- <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer> -->
 
-</div>
+
 
 <script type="text/javascript" src="js/editor.js"></script>
 <script type="text/javascript" src="js/default.js"></script>
@@ -698,14 +714,16 @@ $conn = null;
     intro.setOptions({
       steps: [
       {
-        intro: "WELCOME!!<br> "
+        intro: "<img src='img/general.png' class='image-general center-block'/> <br>" +
+        " <h3>Welcome to the Bastiani Fortress, recruit!</h3>" + 
+        "I am General Drogo, and I have been guarding this encampment for many years from the barbarian horde rumored to live beyond this desert. I had begun to believe it was just that - a rumor. But now, after decades, suddenly the horde has decided to attack our old and unmaintaned fortress. And let me tell you - they are not the kind of barbarian horde you see in the movies, recruit. They have missiles, and an automated system which is light years ahead of ours. Our old lead developer is long gone now, so we need someone to fix and update our anti-missile system quickly before our camp is completely destroyed. You have been called here because you are the only one who knows anything about this new technology and programming stuff. Our survival depends on you, recruit! "
       }
       ,
 
       {
         element: document.querySelector('#chat'),
         position: 'left',
-        intro: "This is where you can read the messages with the instructions from the general or the soldier hint!"
+        intro: "This is where you will receive your instructions and/or hints."
       },
       {
         element: document.querySelector('#editorpanel'),
@@ -734,7 +752,7 @@ $conn = null;
       },
       {
         element: document.querySelector('#hintButton'),
-        intro: 'Click here to ask for help to the old programmer assistant!',
+        intro: "If you are stuck, you can ask for help to a soldier which had been assigned as our old lead developer's assistant. Maybe he has more of an idea on how the system works!",
         position: 'top'
       },
       {
@@ -778,6 +796,37 @@ $conn = null;
     intro.start();
   }
 
+</script>
+<script type="text/javascript">
+    upgradeLevelBar();      
+        function upgradeLevelBar(){
+          var lmax = maxlevel;
+          console.log("lmax"+lmax);
+          for(var i=1; i<=9; i++){
+            if( i >= 1 && i <= 3){
+              document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
+              document.getElementById("col"+i).style.backgroundColor="indianred";
+            }else
+            if( i >= 4 && i <= 6){
+              document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
+              document.getElementById("col"+i).style.backgroundColor="steelblue";
+
+            }else
+            if( i >= 7 && i <= 9){
+              document.getElementById("timebarlv"+i).style.backgroundColor="coral";
+              if(i<9){
+                document.getElementById("col"+i).style.backgroundColor="coral";
+              }
+            }
+            if(i > lmax){
+             document.getElementById("textbarlv"+i).style.color="#2c3e50";
+             document.getElementById("timebarlv"+i).style.backgroundColor="beige";
+             if(i<9){
+              document.getElementById("col"+i).style.backgroundColor="beige";
+            }
+          }
+        }
+       };
 </script>
 <noscript>You need to turn JavaScript on.</noscript>
 </body>

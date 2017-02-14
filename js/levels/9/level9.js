@@ -1,4 +1,3 @@
 var decipher = function(string) {
 
-
 };
