@@ -135,6 +135,9 @@ try {
       unlockedbadgeQueue = badge();
       console.log("unlockedbadgeQueue LENGTH: " + unlockedbadgeQueue.length);
 
+      if(level == 9){
+        gameOver(); 
+      }
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
         var data = new FormData();
         data.append("data", unlockedbadgeQueue[i]);

@@ -54,11 +54,14 @@ body {
 
 #gamepanel{
   width: 520px;
+  height: 514px;
 }
 
+.panel-body{
+}
 #divchat{
  width: 520px;
- height: 750px;
+ height: 820px;
 }
 
 #divchatmain{
@@ -67,8 +70,12 @@ body {
  margin-left: 30px;
 }
 
+#leaderboardTutorial{
+  height: 81px;
+}
+
 #chat{
- height: 750px;
+ height: 765px;
 }
 
 #chatthread{
