@@ -633,7 +633,7 @@ $conn = null;
       </div>
     </div>
   </div>
-
+</div>
 
   <!-- LEADERBOARD MODAL -->
   <div class="modal" id="leaderboardModal">
@@ -692,16 +692,16 @@ $conn = null;
     </div>
   </div>
 
-  <footer>
+  <!-- <footer>
     <div class="row">
       <div class="col-lg-12">
         <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
         <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-</div>
+
 
 <script type="text/javascript" src="js/editor.js"></script>
 <script type="text/javascript" src="js/default.js"></script>
