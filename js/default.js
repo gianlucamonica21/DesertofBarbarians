@@ -160,10 +160,16 @@ $('#evaluateButton').click(function() {
           typeSpeed: 10
         })
         );
+        
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
 
       var unlockedbadgeQueue = [];
       unlockedbadgeQueue = badge();
-      console.log("unlockedbadgeQueue: " + unlockedbadgeQueue);
+      console.log("unlockedbadgeQueue LENGTH: " + unlockedbadgeQueue.length);
 
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
         var data = new FormData();
@@ -173,11 +179,14 @@ $('#evaluateButton').click(function() {
         xhr.send(data);
       }
 
-      var data = new FormData();
-      data.append("data", difference);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/nextlevel.php", true);
-      xhr.send(data);
+      // Code to reload and reupdate the level
+      var stringa;
+      var oReq = new XMLHttpRequest(); //New request object
+      oReq.onload = function() {
+        stringa = this.responseText;
+      };
+      oReq.open("get", "DBConnection/load_player.php", true);
+      oReq.send();
 
       var data = new FormData();
       data.append("data", 0);

@@ -15,8 +15,8 @@
     height: 200px;
 }
 
-span.icon { 
-  font-family: FontAwesome; 
+span.icon {
+  font-family: FontAwesome;
 }
 
 .table {
@@ -25,8 +25,8 @@ span.icon {
 
 .lint-error {
   font: 13px 'Noto Sans', sans-serif;
-  color: red; 
-  padding: 2px 5px 3px; 
+  color: red;
+  padding: 2px 5px 3px;
 }
 .lint-error-icon:before {
     content: "\f06a";
@@ -37,9 +37,9 @@ span.icon {
 
     color: red;
     font-size: 15px;
-    font-weight: bold; 
-    border-radius: 50%; 
-    padding: 0 3px; 
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 0 3px;
     margin-right: 7px;
 }
 
@@ -57,38 +57,38 @@ body {
 }
 
 #divchat{
-   width: 520px;   
-   height: 550px;  
+   width: 520px;
+   height: 550px;
 
 }
 
 #divchatmain{
-   width: 520px; 
-   height: 550px;  
+   width: 520px;
+   height: 550px;
    margin-left: 30px;
 }
 
 #chat{
-   height: 550px;  
+   height: 550px;
 
 }
 
 #chatthread{
-   height: 520px;  
+   height: 520px;
 
 }
 
 #gamediv{
-   width: 520px;   
+   width: 520px;
 }
 
 #console{
-   width: 500px;   
+   width: 500px;
 }
 
 #submitButton{
-   width: 146px;  
-   height: 60px; 
+   width: 146px;
+   height: 60px;
 }
 
 #submitButtonSymbol{
@@ -96,7 +96,7 @@ body {
 }
 
 #evaluateButton{
-   width: 148px;   
+   width: 148px;
    height: 60px;
 }
 
@@ -105,8 +105,8 @@ body {
 }
 
 #hintButton{
-   width: 148px; 
-   height: 60px;  
+   width: 148px;
+   height: 60px;
 }
 
 #hintButtonSymbol{
@@ -115,8 +115,8 @@ body {
 }
 
 #refreshButton{
-   width: 148px; 
-   height: 60px;  
+   width: 148px;
+   height: 60px;
 }
 
 #refreshButtonSymbol{
@@ -126,14 +126,14 @@ body {
 
 #returnButton{
     width: 509px;
-     height: 60px;  
-     font-size: 25px; 
+     height: 60px;
+     font-size: 25px;
 }
 
 #docButton{
     width: 148px;
-     height: 60px;  
-     font-size: 25px; 
+     height: 60px;
+     font-size: 25px;
      background-color: green;
      border-color: green;
 }
@@ -146,11 +146,11 @@ body {
 }*/
 
 #controllerbody{
-   width: 516px;   
+   width: 516px;
 }
 
 #progressbar{
-   width: 510px;   
+   width: 510px;
 }
 .progress.active .progress-bar {
     -webkit-transition: none !important;

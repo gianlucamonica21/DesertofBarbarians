@@ -37,8 +37,10 @@ $conn = null;
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
   console.log("Livello massimo: " + maxlevel);
-  var nohint = "<?php echo $_SESSION['noHint'];?>";
-  console.log("Sei cresciuto: " + nohint);
+  var ownedBadges = '<?php echo json_encode($_SESSION['achievementsId']);?>';
+  console.log("Owned: " + ownedBadges);
+  var top = '<?php echo $_SESSION['top'];?>';
+  var champion = '<?php echo $_SESSION['isChampion'];?>';
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -292,16 +294,25 @@ $conn = null;
                   <div class="progress-bar" style="width: 0%"></div>
                 </div>
                 <script type="text/javascript"> ;</script>
-                <h4>Points to next rank: TO DO </h4>
+                <h4>Points to next rank:
+                  <?php
+                    if ($_SESSION["totalScore"] < $_SESSION["nextGradeScore"]) {
+                      echo ($_SESSION["nextGradeScore"] - $_SESSION["totalScore"]);
+                    }
+                    else {
+                      echo 0;
+                    }
+                  ?>
+                </h4>
               </div>
               <div class="row">
                 <div class="col-md-6 col-xs-6 follow line" align="center">
-                  <h3><?php echo $_SESSION["totalScore"] ?> <br/>
+                  <h3><?php echo $_SESSION["totalScore"];?> <br/>
                     <span>POINTS</span>
                   </h3>
                 </div>
                 <div class="col-md-6 col-xs-6 follow line" align="center">
-                  <h3>TO DO <br/> <span>BADGES</span>
+                  <h3><?php echo $_SESSION['achievementsQty'];?> <br/> <span>BADGES</span>
                   </h3>
                 </div>
               </div>
@@ -457,37 +468,30 @@ $conn = null;
         </div>
         <script type="text/javascript">
           $('#leaderboardTutorial').click(function() {
+            var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
+            var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
+            var leaderBadges = '<?php  echo json_encode($_SESSION['leaderBadges']); ?>';
+            var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+            console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores + "leaderBadges: " + leaderBadges);
 
-          //   var stringa;
-          // var oReq = new XMLHttpRequest(); //New request object
-          // oReq.onload = function() {
-          //   stringa = this.responseText;
-          // };
-          // oReq.open("get", "DBConnection/leaderBoard.php", true);
-          // oReq.send();
-
-          var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
-          var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
-          var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
-          console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores);
-
-          $("#leaderboardbody").empty();
-          for(var i = 0;i < number; i++){
-            console.log("n: " + i);
-            $("#leaderboardbody").append(
-              $('<tr>')
-              .attr('id','player' + i)
-              );
-            $("#player" + i).append(
-              $('<td>')
-              .text((JSON.parse(leaderNames)[i])),
-              $('<td>')
-              .text((JSON.parse(leaderScores)[i]))
-              );
-
-          }
-          clicked = false;
-        });
+            $("#leaderboardbody").empty();
+            for(var i = 0;i < number; i++){
+              console.log("n: " + i);
+              $("#leaderboardbody").append(
+                $('<tr>')
+                .attr('id','player' + i)
+                );
+              $("#player" + i).append(
+                $('<td>')
+                .text((JSON.parse(leaderNames)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderScores)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderBadges)[i]))
+                );
+            }
+            clicked = false;
+          });
       </script>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
