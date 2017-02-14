@@ -161,7 +161,13 @@ body {
 #progressbar{
  width: 1855px; 
  margin-top: 5px;
+ height: 20px;
 }
+
+
+/*#textbar{
+  font-color: white;
+}*/
 
 #ul{
   margin-right: 45px;
@@ -178,3 +184,49 @@ body {
 .disabled{
   background-color: #D3D3D3 !important;
   background: #D3D3D3 !important;
+}
+
+
+.one, .two, .three, .four, .five, .six, .seven, .eight{
+    position:absolute;
+  margin-top:-10px;
+  z-index:1;
+  height:40px;
+  width:40px;
+  border-radius:25px;
+  background-color: indianred;
+  
+}
+.one{
+  left:11.1%;
+}
+.two{
+  left:22.2%;
+}
+.three{
+  left:33.3%;
+}
+.four{
+  left:44.4%;
+}
+.five{
+  left:55.5%;
+}
+.six{
+  left:66.6%;
+}
+.seven{
+  left:77.7%;
+}
+.eight{
+  left:88.8%;
+}
+
+.primary-color{
+ background-color: indianred;
+}
+
+.col-md-12{
+  left: -13px;
+    bottom: 15px;
+}

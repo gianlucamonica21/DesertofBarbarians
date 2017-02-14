@@ -14,6 +14,7 @@ MISSILE = {
 };
 
 // Variables
+var gamestarted = false;
 var levelscore = 0,
 level = 1,
 maxLevel = 1,
@@ -152,6 +153,7 @@ var drawLevelMessage = function() {
 
 var drawStopMessage = function() {
 
+  if( gamestarted == true){
   ctx.fillStyle = '#6d6';
 
   ctx.font =  '20px monaco, consolas';
@@ -160,7 +162,7 @@ var drawStopMessage = function() {
   ctx.fillStyle = '#d66';
   ctx.fillText( '', 130, 250 );
   stopLevel();
-
+  }
 };
 
 // Show bonus points at end of a level
@@ -875,7 +877,7 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
-
+  gamestarted = true;
   var fps = 30;
   timerID = setInterval( nextFrame, 1000 / fps );
 

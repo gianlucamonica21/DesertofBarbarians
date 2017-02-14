@@ -22,7 +22,7 @@
   var startedCoding;
   editor.setSize(750,700);
   editor.on('change', function(cm, change) {
- //   drawStopMessage();
+    drawStopMessage();
 
     startedCoding = (new Date()).getTime();
     
