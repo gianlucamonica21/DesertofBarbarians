@@ -37,7 +37,7 @@ $conn = null;
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
   console.log("Livello massimo: " + maxlevel);
- 
+  
   var ownedBadges = '<?php echo json_encode($_SESSION['achievementsId']);?>';
   console.log("Owned: " + ownedBadges);
   var top = '<?php echo $_SESSION['top'];?>';
@@ -280,6 +280,37 @@ $conn = null;
 
             }
           });
+
+          upgradeLevelBar();      
+          function upgradeLevelBar(){
+            var lmax = maxlevel;
+            console.log("lmax"+lmax);
+            for(var i=1; i<=9; i++){
+              if( i >= 1 && i <= 3){
+                document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
+                document.getElementById("col"+i).style.backgroundColor="indianred";
+              }else
+              if( i >= 4 && i <= 6){
+                document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
+                document.getElementById("col"+i).style.backgroundColor="steelblue";
+
+              }else
+              if( i >= 7 && i <= 9){
+                document.getElementById("timebarlv"+i).style.backgroundColor="coral";
+                if(i<9){
+                  document.getElementById("col"+i).style.backgroundColor="coral";
+                }
+              }
+              if(i > lmax){
+               document.getElementById("textbarlv"+i).style.color="#2c3e50";
+               document.getElementById("timebarlv"+i).style.backgroundColor="beige";
+               if(i<9){
+                document.getElementById("col"+i).style.backgroundColor="beige";
+              }
+            }
+          }
+        };
+
         
 
 
@@ -310,14 +341,14 @@ $conn = null;
           <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
         </button>
         <script type="text/javascript">
-        $("#docButton").click(function() {
+          $("#docButton").click(function() {
 
-                  javascript:
+            javascript:
                   //introJs().
                   startDoc();
                 });
 
-        </script>
+              </script>
               <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
                 <i class="fa fa-play" aria-hidden="true"></i>
               </button>
@@ -644,62 +675,62 @@ $conn = null;
   </div>
 </div>
 
-  <!-- LEADERBOARD MODAL -->
-  <div class="modal" id="leaderboardModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Leaderboard</h4>
-        </div>
-        <div class="modal-body">
-          <table class="table table-striped table-hover table-bordered ">
-            <thead>
-              <tr>
-                <!-- <th>#</th> -->
-                <th>Username</th>
-                <th>Points</th>
-                <th>Badges</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboardbody">
+<!-- LEADERBOARD MODAL -->
+<div class="modal" id="leaderboardModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Leaderboard</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-hover table-bordered ">
+          <thead>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>Username</th>
+              <th>Points</th>
+              <th>Badges</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardbody">
 
-            </tbody>
-          </table>
-        </div>
-        <script type="text/javascript">
-          $('#leaderboardTutorial').click(function() {
-            var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
-            var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
-            var leaderBadges = '<?php  echo json_encode($_SESSION['leaderBadges']); ?>';
-            var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
-            console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores + "leaderBadges: " + leaderBadges);
+          </tbody>
+        </table>
+      </div>
+      <script type="text/javascript">
+        $('#leaderboardTutorial').click(function() {
+          var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
+          var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
+          var leaderBadges = '<?php  echo json_encode($_SESSION['leaderBadges']); ?>';
+          var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+          console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores + "leaderBadges: " + leaderBadges);
 
-            $("#leaderboardbody").empty();
-            for(var i = 0;i < number; i++){
-              console.log("n: " + i);
-              $("#leaderboardbody").append(
-                $('<tr>')
-                .attr('id','player' + i)
-                );
-              $("#player" + i).append(
-                $('<td>')
-                .text((JSON.parse(leaderNames)[i])),
-                $('<td>')
-                .text((JSON.parse(leaderScores)[i])),
-                $('<td>')
-                .text((JSON.parse(leaderBadges)[i]))
-                );
-            }
-            clicked = false;
-          });
-        </script>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+          $("#leaderboardbody").empty();
+          for(var i = 0;i < number; i++){
+            console.log("n: " + i);
+            $("#leaderboardbody").append(
+              $('<tr>')
+              .attr('id','player' + i)
+              );
+            $("#player" + i).append(
+              $('<td>')
+              .text((JSON.parse(leaderNames)[i])),
+              $('<td>')
+              .text((JSON.parse(leaderScores)[i])),
+              $('<td>')
+              .text((JSON.parse(leaderBadges)[i]))
+              );
+          }
+          clicked = false;
+        });
+      </script>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
   <!-- <footer>
     <div class="row">
@@ -712,51 +743,21 @@ $conn = null;
 
 
 
-<script type="text/javascript" src="js/editor.js"></script>
-<script type="text/javascript" src="js/default.js"></script>
-<script type="text/javascript" src="js/badge.js"></script>
-<script type="text/javascript" src="js/startDoc.js"></script>
-<script type="text/javascript" src="js/startIntro.js"></script>
-<script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/default.js"></script>
+  <script type="text/javascript" src="js/badge.js"></script>
+  <script type="text/javascript" src="js/startDoc.js"></script>
+  <script type="text/javascript" src="js/startIntro.js"></script>
+  <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
 
-<script type="text/javascript">
-  var score =  '<?php echo intval($_SESSION["totalScore"]) ?>'  ;
-  if(score == 0){
-    startIntro();
-  }
-</script>
+  <script type="text/javascript">
+    var score =  '<?php echo intval($_SESSION["totalScore"]) ?>'  ;
+    if(score == 0){
+      startIntro();
+    }
+  </script>
 
-<script type="text/javascript">
-    upgradeLevelBar();      
-        function upgradeLevelBar(){
-          var lmax = maxlevel;
-          console.log("lmax"+lmax);
-          for(var i=1; i<=9; i++){
-            if( i >= 1 && i <= 3){
-              document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
-              document.getElementById("col"+i).style.backgroundColor="indianred";
-            }else
-            if( i >= 4 && i <= 6){
-              document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
-              document.getElementById("col"+i).style.backgroundColor="steelblue";
 
-            }else
-            if( i >= 7 && i <= 9){
-              document.getElementById("timebarlv"+i).style.backgroundColor="coral";
-              if(i<9){
-                document.getElementById("col"+i).style.backgroundColor="coral";
-              }
-            }
-            if(i > lmax){
-             document.getElementById("textbarlv"+i).style.color="#2c3e50";
-             document.getElementById("timebarlv"+i).style.backgroundColor="beige";
-             if(i<9){
-              document.getElementById("col"+i).style.backgroundColor="beige";
-            }
-          }
-        }
-       };
-</script>
-<noscript>You need to turn JavaScript on.</noscript>
+  <noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>
