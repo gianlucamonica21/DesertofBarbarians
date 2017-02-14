@@ -178,3 +178,10 @@ body {
 .disabled{
   background-color: #D3D3D3 !important;
   background: #D3D3D3 !important;
+}
+
+.image-general{
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}

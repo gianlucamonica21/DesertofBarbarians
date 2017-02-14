@@ -365,7 +365,7 @@ $conn = null;
             </div>
             <div class="modal-body">
               <div align="center">
-                <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
+                <div class="outter"><img src="img/avatar.gif" class="image-circle"/></div>
                 <h2><?php echo $current_player ?></h2>
                 <h3><?php echo $_SESSION["gradeType"]?></h3>
                 <div class="progress">
@@ -661,14 +661,16 @@ $conn = null;
     intro.setOptions({
       steps: [
       {
-        intro: "WELCOME!!<br> "
+        intro: "<img src='img/general.png' class='image-general center-block'/> <br>" +
+        " <h3>Welcome to the Bastiani Fortress, recruit!</h3>" + 
+        "I am General Drogo, and I have been guarding this encampment for many years from the barbarian horde rumored to live beyond this desert. I had begun to believe it was just that - a rumor. But now, after decades, suddenly the horde has decided to attack our old and unmaintaned fortress. And let me tell you - they are not the kind of barbarian horde you see in the movies, recruit. They have missiles, and an automated system which is light years ahead of ours. Our old lead developer is long gone now, so we need someone to fix and update our anti-missile system quickly before our camp is completely destroyed. You have been called here because you are the only one who knows anything about this new technology and programming stuff. Our survival depends on you, recruit! "
       }
       ,
 
       {
         element: document.querySelector('#chat'),
         position: 'left',
-        intro: "This is where you can read the messages with the instructions from the general or the soldier hint!"
+        intro: "This is where you will receive your instructions and/or hints."
       },
       {
         element: document.querySelector('#editorpanel'),
@@ -697,7 +699,7 @@ $conn = null;
       },
       {
         element: document.querySelector('#hintButton'),
-        intro: 'Click here to ask for help to the old programmer assistant!',
+        intro: "If you are stuck, you can ask for help to a soldier which had been assigned as our old lead developer's assistant. Maybe he has more of an idea on how the system works!",
         position: 'top'
       },
       {

@@ -1,6 +1,5 @@
   var contHint = 0;
 
-
   $(document).ready(function() {
     console.log(document.body.getAttribute("level"));
   // Initialize tooltips
