@@ -27,6 +27,17 @@ try {
 	$_SESSION['leaderNames'] = $leader_names;
 	$_SESSION['leaderScores'] = $leader_scores;
 
+	foreach ($leader_names as $name) {
+		// Estrai tutti i badge mai guadagnati dai giocatori nella leaderboard
+		$achievements_query = $conn->prepare("SELECT COUNT(*) AS Badges FROM Achieved WHERE login= :login");
+		$achievements_query->bindParam(':login', $name);
+		$achievements_query->execute();
+		$achievements_row = $achievements_query->fetch();
+
+		$badges[] = $achievements_row["Badges"];
+	}
+	$_SESSION['leaderBadges'] = $badges;
+
 	if($leaders > 0) {
 		echo ($leader_names);
 		//print_r($leader_scores);

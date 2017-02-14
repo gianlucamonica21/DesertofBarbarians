@@ -33,7 +33,7 @@
   drawStopMessage();
 
     startedCoding = (new Date()).getTime();
-    
+
     //console.log("Hai iniziato a scrivere :" + startCoding);
     stoppedGame = true;
     $('#returnButton').removeClass("disabled");
@@ -48,9 +48,8 @@
   oReq.onload = function() {
     stringa = this.responseText;
   };
-  oReq.open("get", "DBConnection/load_player.php", false);
+  oReq.open("get", "DBConnection/load_player.php", true);
   oReq.send();
-  console.log("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
 
   var data = new FormData();
   data.append("data", 0);

@@ -72,13 +72,8 @@ try {
 			   guadagnati dall'utente appena loggato */
 			$achievements[] = $achievements_row["achievement"];
 		}
-		$_SESSION['achievementsQty'] = $achievements_row;
+		$_SESSION['achievementsQty'] = count($achievements_rows);
 		$_SESSION['achievementsId'] = $achievements;
-
-		$_SESSION['noHint'] = false;
-		if (true) {
-			$_SESSION['noHint'] = true;
-		}
 
 		foreach ($achievements as $achievement) {
 			// Estrai informazioni per ogni badge guadagnato dal giocatore

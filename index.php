@@ -37,8 +37,11 @@ $conn = null;
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
   console.log("Livello massimo: " + maxlevel);
-  var nohint = "<?php echo $_SESSION['noHint'];?>";
-  console.log("Sei cresciuto: " + nohint);
+ 
+  var ownedBadges = '<?php echo json_encode($_SESSION['achievementsId']);?>';
+  console.log("Owned: " + ownedBadges);
+  var top = '<?php echo $_SESSION['top'];?>';
+  var champion = '<?php echo $_SESSION['isChampion'];?>';
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,11 +127,11 @@ $conn = null;
             </button>
           </li>
 
-          <li>
+          <!-- <li>
             <button  id="levelsTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal" >
               <span class="glyphicon glyphicon-forward" aria-hidden="true"></span><br> Levels
             </button>
-          </li>
+          </li> -->
 
           <li>
             <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" >
@@ -140,105 +143,149 @@ $conn = null;
         </ul>
 
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
-           <li>
-            <ul>
-              <a id="displayscorerank" type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
-                <ul id="ul">
-                <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
-                
-                 <span> Score:  <?php echo intval($_SESSION["totalScore"]); ?> </span>
-                </ul> 
-                  <div id="progress-score2" class="progress">
+          <li>
+           <a  type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+            <span ><?php echo "Level: ".$_SESSION['level']; ?></span>
+          </a>
+        </li>
+        <li>
 
-                  <div id="scorebar2" class="progress-bar" style="width:9 %"></div>
-                  <script type="text/javascript">
+          <ul>
+            <a id="displayscorerank" type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+              <ul id="ul">
+                <span id="spanUser"><?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
 
-                    var total = <?php echo intval($_SESSION["totalScore"])?>;
-                    var percent;
-                    var diff;
-                    if( total == 0){
+                <span> Score:  <?php echo intval($_SESSION["totalScore"]); ?> </span>
+              </ul>
+              <div id="progress-score2" class="progress">
+
+                <div id="scorebar2" class="progress-bar" style="width:9 %"></div>
+                <script type="text/javascript">
+
+                  var total = <?php echo intval($_SESSION["totalScore"])?>;
+                  var percent;
+                  var diff;
+                  if( total == 0){
+                    percent = 100;
+                  }
+                  else
+                    if( total <= 250)
+                    {
+                      diff = 250 - total;
+                      percent = (100 * diff) / 250;
+                    }else
+                    if( total > 250 && total <= 500)
+                    {
+                      diff = 500 - total;
+                      percent = (100 * diff) / 250;
+                    }else
+                    if( total > 500 && total <= 750)
+                    {
+                      diff = 750 - total;
+                      percent = (100 * diff) / 250;
+                    }else{
                       percent = 100;
                     }
-                    else
-                      if( total <= 250)
-                      {
-                        diff = 250 - total;
-                        percent = (100 * diff) / 250;
-                      }else    
-                      if( total > 250 && total <= 500)
-                      {
-                        diff = 500 - total;
-                        percent = (100 * diff) / 250;
-                      }else          
-                      if( total > 500 && total <= 750)
-                      {
-                        diff = 750 - total;
-                        percent = (100 * diff) / 250;
-                      }else{
-                        percent = 100;
-                      }
 
 
-                      document.getElementById("scorebar2").style="width:"+(100-percent)+"%";
-                    </script>
-                  </div>
-                </a>
-                </ul>
-              </li>
-              <li>
-                <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
-                  <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
-                </a>
-              </li>
+                    document.getElementById("scorebar2").style="width:"+(100-percent)+"%";
+                  </script>
+                </div>
+              </a>
             </ul>
-          </div>
-        </div>
+          </li>
+          <li>
+            <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
+              <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </div>
 
-      <div class="container">
 
-        <div>
-          <div id="progressbar" class="progress" >
-          <div id="timebar" class="progress-bar progress-bar-danger" style="width:100%"></div>
-            <script type="text/javascript">
-              var $progress = $('#progressbar');
-              var $progressBar = $('#timebar');
-              // var $alert = $('.alert');
-              var sec = 10100;
-                setTimeout(function() {
-                  $progressBar.css('width', '90%');
-                  setTimeout(function() {
-                    $progressBar.css('width', '80%');
-                    setTimeout(function() {
-                      $progressBar.css('width', '70%');
-                      setTimeout(function() {
-                        $progressBar.css('width', '60%');
-                          setTimeout(function() {
-                           $progressBar.css('width', '50%');
-                              setTimeout(function() {
-                                $progressBar.css('width', '40%');
-                                  setTimeout(function() {
-                                    $progressBar.css('width', '30%');
-                                      setTimeout(function() {
-                                        $progressBar.css('width', '20%');
-                                          setTimeout(function() {
-                                           $progressBar.css('width', '10%');
-                                              setTimeout(function() {
-                                                $progressBar.css('width', '0%');
-                        
-                                                   },sec);
-                                                },sec);
-                                              },sec);
-                                            },sec);
-                                          },sec);
-                                        },sec);  
-                                      },sec); 
-                                  }, sec); 
-                              }, sec); 
-                          }, sec); 
-              
-</script>
-</div>
+  <div class="container">
+
+    <div>
+      <div class="col-md-12">
+
+        <div id="progressbar" class="progress" >
+
+         <div id="col1" class="one "></div>
+         <div id="col2" class="two "></div>
+         <div id="col3" class="three"></div>
+         <div id="col4"  class="four"></div>
+         <div id="col5"  class="five"></div>
+         <div id="col6" class="six"></div>
+         <div id="col7" class="seven"></div>
+         <div id="col8" class="eight "></div>
+
+         
+
+
+         <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
+
+           <span type="button"  class="level-buttons" id="textbarlv1">1</span>
+         </div>
+
+         <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv2">2</span>
+        </div>
+        <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv3">3</span>
+        </div>
+        <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv4">4</span>
+        </div>
+        <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv5">5</span>
+        </div>
+        <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv6">6</span>
+        </div>
+        <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv7">7</span>
+        </div>
+        <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span  class="level-buttons" id="textbarlv8">8</span>
+        </div>
+        <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
+          <span class="level-buttons" id="textbarlv9">9</span>
+        </div>
+        <script type="text/javascript">
+          var levelArr = document.getElementsByClassName("level-buttons");
+          // console.log("levelarr" + levelArr);
+          // console.log("levelarr" + levelArr[0].textContent);
+          for(var i=0; i<levelArr.length; i++)
+          {
+            if(i >= maxlevel){
+              levelArr[i].classList.add("disabled");
+            }
+          }
+          $('.level-buttons').click(function(){
+            //clicked = true;
+            if(!($(this).hasClass("disabled"))){
+
+              clickedLevel = this.textContent;
+              // alert("clickedLevel" + clickedLevel);
+              //alert("clicked " + clickedLevel);
+              //console.log("hai cliccato: " + clicked);
+              var data = new FormData();
+              data.append("data", clickedLevel);
+              var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+              xhr.open("post", "DBConnection/load_level_x.php", true);
+              xhr.send(data);
+              location.reload();
+
+            }
+          });
+        
+
+
+      </script>
+    </div>
+  </div>
 </div>
 <div class="row">
   <!-- Editor panel  -->
@@ -316,34 +363,48 @@ $conn = null;
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
 
                <div class="panel-heading"></div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+       <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+            <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+          </div>
+        </div>
+      </footer>
               <!--  <div id="progressbar" class="progress" >
                 <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
               </div> -->
-              <div id="controllerbody" class="panel-body">
+              <!-- <div id="controllerbody" class="panel-body">
                 <button  class="btn btn-default disabled" id="returnButton" >Resume Game</button>
                 <script type="text/javascript"></script>
 
 
-              </div>
+              </div> -->
+
+
+
+
+
+
             </div>
 
-          </div>
-        </div>
-      </div>
-
-    </div>
 
 
 
 
-
-    <!-- Chat Panel  -->
-    <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
-     <div class="panel panel-default" id="divchat">
-      <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
-      <div class="panel-body">
-        <div id="chat" >
-          <ul class="chat-thread">
+            <!-- Chat Panel  -->
+            <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
+             <div class="panel panel-default" id="divchat">
+              <div class="panel-heading">Chat</div>
+              <div class="panel-body">
+                <div id="chat" >
+                  <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
@@ -369,7 +430,6 @@ $conn = null;
                 <h2><?php echo $current_player ?></h2>
                 <h3><?php echo $_SESSION["gradeType"]?></h3>
                 <div class="progress">
-
                   <div id="scorebar" class="progress-bar" style="width: %"></div>
                   <script type="text/javascript">
 
@@ -384,12 +444,12 @@ $conn = null;
                       {
                         diff = 250 - total;
                         percent = (100 * diff) / 250;
-                      }else    
+                      }else
                       if( total > 250 && total <= 500)
                       {
                         diff = 500 - total;
                         percent = (100 * diff) / 250;
-                      }else          
+                      }else
                       if( total > 500 && total <= 750)
                       {
                         diff = 750 - total;
@@ -402,7 +462,7 @@ $conn = null;
                       document.getElementById("scorebar").style="width:"+(100-percent)+"%";
                     </script>
                   </div>
-                  <script type="text/javascript"> 
+                  <script type="text/javascript">
                     var nowscore = <?php echo intval($_SESSION["totalScore"])?>;
                   </script>
                   <h4>
@@ -417,11 +477,11 @@ $conn = null;
                       {
                         echo "Points to the next rank: ".intval(250 - $_SESSION["totalScore"]);
                       }
-                      else if 
+                      else if
                         ( intval($_SESSION["totalScore"]) > 250 && intval($_SESSION["totalScore"]) <= 500)
                       {
-                        echo "Points to the next rank: ".intval(500 - $_SESSION["totalScore"]); 
-                      }else 
+                        echo "Points to the next rank: ".intval(500 - $_SESSION["totalScore"]);
+                      }else
                       if( intval($_SESSION["totalScore"]) > 500 && intval($_SESSION["totalScore"]) <= 750 ){
                         echo "Points to the next rank: ".intval(750 - $_SESSION["totalScore"]);
                       }else
@@ -444,7 +504,7 @@ $conn = null;
                       </h3>
                     </div>
                     <div class="col-md-6 col-xs-6 follow line" align="center">
-                      <h3>TO DO <br/> <span>BADGES</span>
+                      <h3><?php echo $_SESSION['achievementsQty'];?> <br/> <span>BADGES</span>
                       </h3>
                     </div>
                   </div>
@@ -510,32 +570,32 @@ $conn = null;
         </div>
         <div class="buttons">
           <div class="btn-group">
-            <button   id="button1" class="btn btn-primary level-buttons">1</button>
+            <!-- <span   id="button1" class="btn btn-primary level-buttons">1</span>
           </div>
           <div class="btn-group">
-            <button  id="button1" class="btn btn-primary level-buttons">2</button>
+            <span  id="button1" class="btn btn-primary level-buttons">2</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons">3</button>
+            <span id="button1" class="btn btn-primary level-buttons">3</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons">4</button>
+            <span id="button1" class="btn btn-primary level-buttons">4</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons">5</button>
+            <span id="button1" class="btn btn-primary level-buttons">5</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">6</button>
+            <span id="button1" class="btn btn-primary level-buttons ">6</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">7</button>
+            <span id="button1" class="btn btn-primary level-buttons ">7</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">8</button>
+            <span id="button1" class="btn btn-primary level-buttons ">8</span>
           </div>
           <div class="btn-group">
-            <button id="button1" class="btn btn-primary level-buttons ">9</button>
-          </div>
+            <span id="button1" class="btn btn-primary level-buttons ">9</span>
+          </div> -->
         </div>
 
         <script type="text/javascript">
@@ -600,53 +660,46 @@ $conn = null;
         </div>
         <script type="text/javascript">
           $('#leaderboardTutorial').click(function() {
+            var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
+            var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
+            var leaderBadges = '<?php  echo json_encode($_SESSION['leaderBadges']); ?>';
+            var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+            console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores + "leaderBadges: " + leaderBadges);
 
-          //   var stringa;
-          // var oReq = new XMLHttpRequest(); //New request object
-          // oReq.onload = function() {
-          //   stringa = this.responseText;
-          // };
-          // oReq.open("get", "DBConnection/leaderBoard.php", true);
-          // oReq.send();
-
-          var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
-          var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
-          var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
-          console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores);
-
-          $("#leaderboardbody").empty();
-          for(var i = 0;i < number; i++){
-            console.log("n: " + i);
-            $("#leaderboardbody").append(
-              $('<tr>')
-              .attr('id','player' + i)
-              );
-            $("#player" + i).append(
-              $('<td>')
-              .text((JSON.parse(leaderNames)[i])),
-              $('<td>')
-              .text((JSON.parse(leaderScores)[i]))
-              );
-
-          }
-          clicked = false;
-        });
-      </script>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            $("#leaderboardbody").empty();
+            for(var i = 0;i < number; i++){
+              console.log("n: " + i);
+              $("#leaderboardbody").append(
+                $('<tr>')
+                .attr('id','player' + i)
+                );
+              $("#player" + i).append(
+                $('<td>')
+                .text((JSON.parse(leaderNames)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderScores)[i])),
+                $('<td>')
+                .text((JSON.parse(leaderBadges)[i]))
+                );
+            }
+            clicked = false;
+          });
+        </script>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer>
-  <div class="row">
-    <div class="col-lg-12">
-      <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-      <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+  <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
 </div>
 
@@ -743,6 +796,37 @@ $conn = null;
     intro.start();
   }
 
+</script>
+<script type="text/javascript">
+    upgradeLevelBar();      
+        function upgradeLevelBar(){
+          var lmax = maxlevel;
+          console.log("lmax"+lmax);
+          for(var i=1; i<=9; i++){
+            if( i >= 1 && i <= 3){
+              document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
+              document.getElementById("col"+i).style.backgroundColor="indianred";
+            }else
+            if( i >= 4 && i <= 6){
+              document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
+              document.getElementById("col"+i).style.backgroundColor="steelblue";
+
+            }else
+            if( i >= 7 && i <= 9){
+              document.getElementById("timebarlv"+i).style.backgroundColor="coral";
+              if(i<9){
+                document.getElementById("col"+i).style.backgroundColor="coral";
+              }
+            }
+            if(i > lmax){
+             document.getElementById("textbarlv"+i).style.color="#2c3e50";
+             document.getElementById("timebarlv"+i).style.backgroundColor="beige";
+             if(i<9){
+              document.getElementById("col"+i).style.backgroundColor="beige";
+            }
+          }
+        }
+       };
 </script>
 <noscript>You need to turn JavaScript on.</noscript>
 </body>

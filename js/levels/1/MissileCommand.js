@@ -154,23 +154,23 @@ var drawLevelMessage = function() {
 var drawStopMessage = function() {
 
   if( gamestarted == true){
-    ctx.fillStyle = '#FFFFFF';
+  ctx.fillStyle = '#FFFFFF';
 
-    ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'Game is now stopped, click to resume!', 130, 180 );
-    ctx.font = 'bold 32px monaco, consolas';
-    ctx.fillStyle = '#d66';
-    ctx.fillText( '', 130, 250 );
-    stopLevel();
+  ctx.font =  '20px monaco, consolas';
+  ctx.fillText( 'Game is now stopped, click to resume!', 130, 180 );
+  ctx.font = 'bold 32px monaco, consolas';
+  ctx.fillStyle = '#d66';
+  ctx.fillText( '', 130, 250 );
+  stopLevel();
     $( '#mc-container' ).one( 'click', function() {
-      startLevel();
+    startLevel();
 
-      $( '#miscom' ).unbind().click(function( event ) {
-        var mousePos = getMousePos(this, event);
-        playerShoot( mousePos.x, mousePos.y);
-        
-      });
+    $( '#miscom' ).unbind().click(function( event ) {
+      var mousePos = getMousePos(this, event);
+      playerShoot( mousePos.x, mousePos.y);
+      
     });
+  });
   }
 };
 
@@ -974,7 +974,7 @@ function userSolutionChecker(){
   if ( missileSpeed(5,9) == speed ) {
     return {
     passed: true,
-    msg: "GReat!"
+    msg: "Great!"
   }
   } else {
    return {

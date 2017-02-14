@@ -90,7 +90,6 @@ try {
 	if ($current_level < 9 && $current_level < $max_level) {
 		$current_level = $current_level + 1;
 	}
-
 	$_SESSION['level'] = $current_level;
 
 	$leader_query = $conn->prepare("SELECT login, score FROM User ORDER BY score DESC LIMIT 5");
@@ -104,6 +103,34 @@ try {
 	// Save the leaders info
 	$_SESSION['leaderNames'] = $leader_names;
 	$_SESSION['leaderScores'] = $leader_scores;
+
+	$leader_query = $conn->prepare("SELECT login, score FROM User ORDER BY score DESC LIMIT 3");
+	$leader_query->execute();
+	$leaders = $leader_query->fetchAll();
+	foreach ($leaders as $leader)
+	{
+		if ($leader["login"] == $current_player) {
+			$_SESSION['top'] = true;
+		}
+	}
+
+	$leader_query = $conn->prepare("SELECT login, score FROM User ORDER BY score DESC LIMIT 1");
+	$leader_query->execute();
+	$champion = $leader_query->fetch();
+	if ($champion["login"] == $current_player) {
+		$_SESSION['isChampion'] = true;
+	}
+
+	foreach ($leader_names as $name) {
+		// Estrai tutti i badge mai guadagnati dai giocatori nella leaderboard
+		$achievements_query = $conn->prepare("SELECT COUNT(*) AS Badges FROM Achieved WHERE login= :login");
+		$achievements_query->bindParam(':login', $name);
+		$achievements_query->execute();
+		$achievements_row = $achievements_query->fetch();
+
+		$badges[] = $achievements_row["Badges"];
+	}
+	$_SESSION['leaderBadges'] = $badges;
 }
 catch(PDOException $e)
 {
