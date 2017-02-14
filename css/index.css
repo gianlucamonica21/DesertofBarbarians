@@ -166,8 +166,9 @@ body {
 #progressbar{
  width: 1855px;
  margin-top: 5px;
- height: 20px;
+ height: 17px;
 }
+
 
 
 /*#textbar{
@@ -176,6 +177,7 @@ body {
 
 #ul{
   margin-right: 45px;
+  color: white;
 }
 .progress.active .progress-bar {
   -webkit-transition: none !important;
@@ -191,13 +193,18 @@ body {
   background: beige !important;
 }
 
-
+#lev{
+  height: 82.97px;
+}
+.level-buttons{
+  font-size: 19px;
+}
 .one, .two, .three, .four, .five, .six, .seven, .eight{
     position:absolute;
   margin-top:-10px;
   z-index:1;
-  height:40px;
-  width:40px;
+  height:35px;
+  width:35px;
   border-radius:25px;
   background-color: indianred;
 

@@ -144,14 +144,14 @@ $conn = null;
 
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
-           <a  type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+           <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
             <span ><?php echo "Level: ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
 
           <ul>
-            <a id="displayscorerank" type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+            <a id="displayscorerank"  class="btn btn-lg navbar-btn text-center"  >
               <ul id="ul">
                 <span id="spanUser"><?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
 
@@ -195,7 +195,7 @@ $conn = null;
             </ul>
           </li>
           <li>
-            <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
+            <a id="bye" type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
               <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
             </a>
           </li>

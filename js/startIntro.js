@@ -13,18 +13,23 @@
       ,
 
       {
-        element: document.querySelector('#chat'),
+        element: document.querySelector('#miscom'),
         position: 'left',
-        intro: "This is where you will receive your instructions and/or hints."
+        intro: "This is the game!"
       },
       {
         element: document.querySelector('#editorpanel'),
-        intro: "This is where you code to fix the bugs!",
+        intro: "This is where you code to fix the bugs! When you start coding the game will pause!",
         position: 'right'
       },
       {
-        element: document.querySelector('#gamepanel'),
-        intro: 'This is the game, play to see your changes!',
+        element: document.querySelector('#miscom'),
+        intro: 'Reclick here to resume the game from the pause!',
+        position: 'left'
+      },
+      {
+        element: document.querySelector('#chat'),
+        intro: 'This is the chat! Obey orders and listen the helps of the general.',
         position: 'left'
       },
       {
@@ -34,13 +39,28 @@
       },
       {
         element: document.querySelector('#evaluateButton'),
-        intro: 'Click here to evaluate your code, if the solution is right you will go to the next level!',
+        intro: 'Click here to evaluate your code, if the solution is right you will go to the next level! Until you do not click the execute button this button will be locked!',
         position: 'top'
       },
       {
-        element: document.querySelector('#refreshButton'),
-        intro: 'Click here to remove your last updates in the code!',
-        position: 'top'
+        element: document.querySelector('#lev'),
+        intro: 'This is your current level!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#timebarlv2'),
+        intro: 'This is the next level! It is not yet unlocked!',
+        position: 'right'
+      },
+      {
+        element: document.querySelector('.col-md-12'),
+        intro: 'This bar shows you the locked and unlocked levels!Click the unlocked levels you want to play!',
+        position: 'down'
+      },
+      {
+        element: document.querySelector('#timebarlv9'),
+        intro: 'The more you pass the levels the more this bar fill, until you reach the last level. The levels will be colored with different color according to the type of the problem to solve.',
+        position: 'down'
       },
       {
         element: document.querySelector('#hintButton'),
@@ -49,34 +69,32 @@
       },
       {
         element: document.querySelector('#docButton'),
-        intro: 'Click here to read the surviving documentation!',
+        intro: 'There is a rumour around! The ghost of the lead developer passed away long time ago is back in town! Ask him for further information, it sound weird but why you shouldn\'t try? ',
         position: 'top'
       },
+      
       {
-        element: document.querySelector('#returnButton'),
-        intro: 'Click here to resume the game from the pause!',
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#profileTutorial'),
-        intro: 'Click here to view your statistics!',
+        element: document.querySelector('#displayscorerank'),
+        intro: 'Here you see your rank, your score and a bar displaying how close you are to the next rank!',
         position: 'bottom'
       },
       {
-        element: document.querySelector('#levelsTutorial'),
-        intro: 'Click here to view the locked and unlocked levels!',
+        element: document.querySelector('#profileTutorial'),
+        intro: 'Click here to watch closer your statistics, your badges and your wonderful avatar!',
         position: 'bottom'
       },
       {
         element: document.querySelector('#leaderboardTutorial'),
-        intro: 'Click here to view the leaderboard, check your ranking!',
+        intro: 'Click here to watch the best scores list! Check your presence!',
         position: 'bottom'
       },
+
       {
-        element: document.querySelector('#logoutTutorial'),
-        intro: 'Click here to logout :(',
+        element: document.querySelector('#bye'),
+        intro: 'Click here to logout! Bye :(',
         position: 'bottom'
       },
+    
       {
         element: document.querySelector('#tutorialbutton'),
         intro: 'Click here if you want to see the tutorial again!',
