@@ -1,5 +1,8 @@
-$(document).ready(function() {
-  console.log(document.body.getAttribute("level"));
+  var contHint = 0;
+
+
+  $(document).ready(function() {
+    console.log(document.body.getAttribute("level"));
   // Initialize tooltips
   $('.btn').tooltip();
 
@@ -10,7 +13,6 @@ $(document).ready(function() {
 
     msgString = result.generalMsg;
     writeChatMessage(msgString, "generalMsg",false);
-
   });
 
   var finishedCoding;
@@ -42,7 +44,7 @@ $(document).ready(function() {
           noHScroll: true
         }));
       }
-      // CHAT ANIMATION
+      // CHAT ANIMATIOND
       writeChatMessage("Syntax errors found. Please submit input again.","consoleMsg",false);
     } else {
       $('#evaluateButton').removeClass("disabled");
@@ -57,13 +59,13 @@ $(document).ready(function() {
       eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
 
       // CHAT MSG
-
       writeChatMessage("Applied code update.", "consoleMsg",false);
     }
   });
 
   // RESTART GAME BUTTON
   $('#returnButton').click(function() {
+
     //nextFrame();
     if (stoppedGame) {
       startLevel();
@@ -75,6 +77,8 @@ $(document).ready(function() {
   // HINT BUTTON
 
   $('#hintButton').click(function() {
+    contHint++;
+    console.log("numero  aiuti: " + contHint);
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/dialogues.json";
     $.getJSON(filepath, function(result) {
@@ -105,8 +109,14 @@ $('#evaluateButton').click(function() {
   if (!($('#evaluateButton').hasClass('disabled'))) {
     finishedCoding = (new Date()).getTime();
     difference = (finishedCoding - startedCoding) / 1000;
-    alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
-    var result = userSolutionChecker();
+    console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
+
+ //   var result = userSolutionChecker();
+
+     var result = {
+      passed: true,
+      msg: "DEBUG"
+     };
     try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
@@ -119,11 +129,23 @@ $('#evaluateButton').click(function() {
       console.log("Cannot save file.");
     }
 
-    result.passed = true; // DEBUG
     if (result.passed == true) {
 
       writeChatMessage(result.msg,"generalMsg",true);
+      // Unlock badges (if necessary)
+      var unlockedbadgeQueue = [];
+      unlockedbadgeQueue = badge();
+      console.log("unlockedbadgeQueue: " + unlockedbadgeQueue);
 
+      for(var i = 0; i < unlockedbadgeQueue.length; i++) {
+        var data = new FormData();
+        data.append("data", unlockedbadgeQueue[i]);
+        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+        xhr.open("post", "DBConnection/add_badge.php", true);
+        xhr.send(data);
+      }
+
+      // Carica dati del prossimo livello
       var data = new FormData();
       data.append("data", difference);
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
@@ -138,10 +160,12 @@ $('#evaluateButton').click(function() {
         stringa = this.responseText;
       };
       xhr.open("post", "DBConnection/load_level_x.php", true);
+
+
       xhr.send(data);
 
     } else {
-
+      // Level not passed
       writeChatMessage(result.msg, "generalMsg",false);
     }
   } else {

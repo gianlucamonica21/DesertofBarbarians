@@ -31,9 +31,14 @@ $conn = null;
 ?>
 <script type="text/javascript">
   var clickedLevel;
+  var clicked;
   var x = "<?php echo $current_player;?>";
   var level = "<?php echo $_SESSION['level'];?>";
+  console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
+  console.log("Livello massimo: " + maxlevel);
+  var nohint = "<?php echo $_SESSION['noHint'];?>";
+  console.log("Sei cresciuto: " + nohint);
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +47,7 @@ $conn = null;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Barbarian's Desert</title>
+  <title  >Barbarian's Desert</title>
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.css" rel="stylesheet">
@@ -52,20 +57,28 @@ $conn = null;
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link href="plugin/codemirror/lib/codemirror.css" rel="stylesheet">
 
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
-  <script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
-  <script type="text/javascript" src="js/typed.js"></script>
-  <script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
+  <!-- TUTORIAL -->
+  <!-- <link href="intro.js-2.4.0/example/assets/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link href="intro.js-2.4.0/example/assets/css/demo.css" rel="stylesheet">
+ <!--  <link href="intro.js-2.4.0/example/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+-->  <link href="intro.js-2.4.0/introjs.css" rel="stylesheet">
 
 
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="js/typed.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -74,92 +87,263 @@ $conn = null;
     <body level = <?php echo $_SESSION['level']?> >
       <!-- NAVBAR -->
       <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+   <!--     <li>
+        <a type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal" data-intro="Click in to look your profile features!">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
+        </a>
+      </li> -->
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+
+          <ul class="nav navbar-nav">
+
+            <li>
+              <button id="profileTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
+              </button>
+            </li>
+            <li>
+             <button id="tutorialbutton" type="button" class="btn btn-default btn-lg navbar-btn text-center"  data-target="#tutorialModal"  href="" onclick="">
+               <script type="text/javascript">
+
+                 $("#tutorialbutton").click(function() {
+
+                  javascript:
+                  //introJs().
+                  startIntro();
+                });
+              </script>
+              <span class="glyphicon glyphicon-question-sign" aria-hidden="true" ></span><br> How to play
             </button>
-          </div>
-          <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-              <li>
-                <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal">
-                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
-                </button>
+          </li>
+
+          <li>
+            <button  id="levelsTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal" >
+              <span class="glyphicon glyphicon-forward" aria-hidden="true"></span><br> Levels
+            </button>
+          </li>
+
+          <li>
+            <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" >
+              <span class="icon">&#xf091;</span><br> Leaderboard
+            </button>
+          </li>
+
+
+        </ul>
+
+        <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
+           <li>
+            <ul>
+              <a id="displayscorerank" type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+                <ul id="ul">
+                <span id="spanUser">Rank: <?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
+                
+                 <span> Score:  <?php echo intval($_SESSION["totalScore"]); ?> </span>
+                </ul> 
+                  <div id="progress-score2" class="progress">
+
+                  <div id="scorebar2" class="progress-bar" style="width:9 %"></div>
+                  <script type="text/javascript">
+
+                    var total = <?php echo intval($_SESSION["totalScore"])?>;
+                    var percent;
+                    var diff;
+                    if( total == 0){
+                      percent = 100;
+                    }
+                    else
+                      if( total <= 250)
+                      {
+                        diff = 250 - total;
+                        percent = (100 * diff) / 250;
+                      }else    
+                      if( total > 250 && total <= 500)
+                      {
+                        diff = 500 - total;
+                        percent = (100 * diff) / 250;
+                      }else          
+                      if( total > 500 && total <= 750)
+                      {
+                        diff = 750 - total;
+                        percent = (100 * diff) / 250;
+                      }else{
+                        percent = 100;
+                      }
+
+
+                      document.getElementById("scorebar2").style="width:"+(100-percent)+"%";
+                    </script>
+                  </div>
+                </a>
+                </ul>
               </li>
               <li>
-               <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#tutorialModal">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><br> How to play
-              </button>
-            </li>
-
-            <li>
-              <button type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal">
-                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span><br> Levels
-              </button>
-            </li>
-
-            <li>
-              <button id="leaderboard" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal">
-                <span class="icon">&#xf091;</span><br> Leaderboard
-              </button>
-            </li>
-
-
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php">
-              <span id="spanUser">Welcome <?php echo $current_player ?> !</span><br> Logout
-            </a>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-
-      <div class="page-header" id="banner">
-        <div class="row">
-          <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>The Barbarian's Desert</h1>
-            <p class="lead">A meta-Javascript game adventure to learn programming.</p>
+                <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
+                  <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="row">
-          <!-- Editor panel  -->
-          <div class="col-lg-5 col-md-4 col-sm-7">
-            <div class="panel panel-default">
-              <div class="panel-heading">Editor</div>
-              <div class="panel-body">
-                <textarea id="editor"></textarea>
-                <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute">
-                  <i class="fa fa-play" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate">
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
+      </div>
+
+      <div class="container">
+
+        <div>
+          <div id="progressbar" class="progress" >
+          <div id="timebar" class="progress-bar progress-bar-danger" style="width:100%"></div>
+            <script type="text/javascript">
+              var $progress = $('#progressbar');
+              var $progressBar = $('#timebar');
+              // var $alert = $('.alert');
+              var sec = 10100;
+                setTimeout(function() {
+                  $progressBar.css('width', '90%');
+                  setTimeout(function() {
+                    $progressBar.css('width', '80%');
+                    setTimeout(function() {
+                      $progressBar.css('width', '70%');
+                      setTimeout(function() {
+                        $progressBar.css('width', '60%');
+                          setTimeout(function() {
+                           $progressBar.css('width', '50%');
+                              setTimeout(function() {
+                                $progressBar.css('width', '40%');
+                                  setTimeout(function() {
+                                    $progressBar.css('width', '30%');
+                                      setTimeout(function() {
+                                        $progressBar.css('width', '20%');
+                                          setTimeout(function() {
+                                           $progressBar.css('width', '10%');
+                                              setTimeout(function() {
+                                                $progressBar.css('width', '0%');
+                        
+                                                   },sec);
+                                                },sec);
+                                              },sec);
+                                            },sec);
+                                          },sec);
+                                        },sec);  
+                                      },sec); 
+                                  }, sec); 
+                              }, sec); 
+                          }, sec); 
+              
+</script>
+</div>
+</div>
+<div class="row">
+  <!-- Editor panel  -->
+  <div class="col-lg-5 col-md-8 col-sm-7">
+    <div id="editorpanel" class="panel panel-default">
+      <div  class="panel-heading">Editor</div>
+      <div class="panel-body" >
+        <textarea id="editor"></textarea>
+        <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
+          <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+          <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
+          <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+          <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+        </button>
+        <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+          <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+        </button>
+              <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
+                <i class="fa fa-play" aria-hidden="true"></i>
+              </button>
+              <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" data-step="9" data-intro="Click here to evaluate your code!">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
+              <script type="text/javascript"></script>
+              <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+              </button>
+              <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help">
+                <i class="fa fa-question" aria-hidden="true"></i>
+              </button> -->
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6 col-md-2 col-sm-7" id="gamediv">
+
+          <!-- Game panel  -->
+
+          <div class="panel panel-default" id="gamepanel">
+            <div class="panel-heading">Console</div>
+            <div class="panel-body">
+
+             <div class="row" id="mc-container" >
+              <canvas id="miscom" class="game center-block" width="510" height="460" >
+                <?php
+                // Load the correct level of the user
+
+                // Convert current level number to string
+                $levelNumber = $_SESSION["level"];
+                $levelString = "$levelNumber";
+                if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
+                  // Load user solution file
+                  echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
+                } else {
+                  // Load default file
+                 echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
+               }
+                // Load base game
+               echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
+                // Start game
+               echo '<script type="text/javascript">  missileCommand(true); </script>';
+               ?>
+
+               Missile Command
+             </canvas>
+             <!--CONSOLE -->
+             <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
+
+               <div class="panel-heading"></div>
+              <!--  <div id="progressbar" class="progress" >
+                <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
+              </div> -->
+              <div id="controllerbody" class="panel-body">
+                <button  class="btn btn-default disabled" id="returnButton" >Resume Game</button>
                 <script type="text/javascript"></script>
-                <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
-                  <i class="fa fa-undo" aria-hidden="true"></i>
-                </button>
-                <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help">
-                  <i class="fa fa-question" aria-hidden="true"></i>
-                </button>
+
+
               </div>
             </div>
 
           </div>
-           <!-- Chat Panel  -->
-           <div class="col-lg-5 col-md-4 col-sm-7">
-           <div class="panel panel-default">
-            <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
-            <div class="panel-body">
-              <div id="chat">
-                <ul class="chat-thread">
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- Chat Panel  -->
+    <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
+     <div class="panel panel-default" id="divchat">
+      <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
+      <div class="panel-body">
+        <div id="chat" >
+          <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
@@ -167,97 +351,154 @@ $conn = null;
               </div>
             </div>
           </div>
+
+        </div>
+
+      </div>
+      <!-- PROFILE MODAL -->
+      <div id="profileModal" class="modal" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button  type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
+              <h4  class="modal-title" >Profile</h4>
+            </div>
+            <div class="modal-body">
+              <div align="center">
+                <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
+                <h2><?php echo $current_player ?></h2>
+                <h3><?php echo $_SESSION["gradeType"]?></h3>
+                <div class="progress">
+
+                  <div id="scorebar" class="progress-bar" style="width: %"></div>
+                  <script type="text/javascript">
+
+                    var total = <?php echo intval($_SESSION["totalScore"])?>;
+                    var percent;
+                    var diff;
+                    if( total == 0){
+                      percent = 100;
+                    }
+                    else
+                      if( total <= 250)
+                      {
+                        diff = 250 - total;
+                        percent = (100 * diff) / 250;
+                      }else    
+                      if( total > 250 && total <= 500)
+                      {
+                        diff = 500 - total;
+                        percent = (100 * diff) / 250;
+                      }else          
+                      if( total > 500 && total <= 750)
+                      {
+                        diff = 750 - total;
+                        percent = (100 * diff) / 250;
+                      }else{
+                        percent = 100;
+                      }
+
+
+                      document.getElementById("scorebar").style="width:"+(100-percent)+"%";
+                    </script>
+                  </div>
+                  <script type="text/javascript"> 
+                    var nowscore = <?php echo intval($_SESSION["totalScore"])?>;
+                  </script>
+                  <h4>
+                    <?php
+                    if ( intval($_SESSION["totalScore"]) == 0)
+                    {
+                      $zero = 250;
+                      echo "Points to the next rank: ".$zero;
+                    }
+                    else
+                      if( intval($_SESSION["totalScore"]) <= 250 )
+                      {
+                        echo "Points to the next rank: ".intval(250 - $_SESSION["totalScore"]);
+                      }
+                      else if 
+                        ( intval($_SESSION["totalScore"]) > 250 && intval($_SESSION["totalScore"]) <= 500)
+                      {
+                        echo "Points to the next rank: ".intval(500 - $_SESSION["totalScore"]); 
+                      }else 
+                      if( intval($_SESSION["totalScore"]) > 500 && intval($_SESSION["totalScore"]) <= 750 ){
+                        echo "Points to the next rank: ".intval(750 - $_SESSION["totalScore"]);
+                      }else
+                      {
+                        echo "You are at the max rank!";
+                      }
+
+
+
+                      ?>
+
+
+
+                    </h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-xs-6 follow line" align="center">
+                      <h3><?php echo intval($_SESSION["totalScore"]) ?> <br/>
+                        <span>POINTS</span>
+                      </h3>
+                    </div>
+                    <div class="col-md-6 col-xs-6 follow line" align="center">
+                      <h3>TO DO <br/> <span>BADGES</span>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- Game panel  -->
-          <div class="col-lg-5 col-md-4 col-sm-7">
-            <div class="panel panel-default">
-              <div class="panel-heading">Console</div>
-              <div class="panel-body">
-
-               <div class="row" id="mc-container">
-                <canvas id="miscom" class="game center-block" width="510" height="460">
-                  <?php
-                // Load the correct level of the user
-
-                // Convert current level number to string
-                  $levelNumber = $_SESSION["level"];
-                  $levelString = "$levelNumber";
-                  if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
-                  // Load user solution file
-                    echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
-                  } else {
-                  // Load default file
-                   echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
-                 }
-                // Load base game
-                 echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
-                // Start game
-                 echo '<script type="text/javascript">  missileCommand(true); </script>';
-                 ?>
-
-                 Missile Command
-               </canvas>
+          <!-- TUTORIAL MODAL -->
+          <div class="modal" id="tutorialModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">How to Play</h4>
+                </div>
+                <div class="modal-body">
+                  <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- NOTIFICATION LEVEL MODAL -->
+          <div class="modal" id="notificationModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
+                </div>
+                <div class="modal-body" style="text-align : center;">
+                  <image id="image-modal" src=""  align="center"> </image>
+                  <!-- src="img/general.png" -->
+                  <p id="modal-text" ></p>
+                </div>
+                <div class="modal-footer">
+                 <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
+               </div>
              </div>
            </div>
          </div>
-         </div>
-       </div>
-     
+         <script type="text/javascript">
 
-   </div>
-   <!-- PROFILE MODAL -->
-   <div class="modal" id="profileModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Profile</h4>
-        </div>
-        <div class="modal-body">
-          <div align="center">
-            <div class="outter"><img src="http://lorempixel.com/output/cats-q-c-100-100-3.jpg" class="image-circle"/></div>
-            <h2><?php echo $current_player ?></h2>
-            <h3>RANK: Captain</h3>
-            <div class="progress">
-              <div class="progress-bar" style="width: 60%"></div>
-            </div>
-            <h4>Points to next rank: TO DO </h4>
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-xs-6 follow line" align="center">
-              <h3><?php echo $_SESSION["totalScore"] ?> <br/>
-              <span>POINTS</span>
-              </h3>
-            </div>
-            <div class="col-md-6 col-xs-6 follow line" align="center">
-              <h3>TO DO <br/> <span>BADGES</span>
-              </h3>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- TUTORIAL MODAL -->
-  <div class="modal" id="tutorialModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">How to Play</h4>
-        </div>
-        <div class="modal-body">
-          <p>One fine body…</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    //$('#notificationModal').modal('toggle');
+    // $('#notificationModal').modal('show');
+    // $('#notificationModal').modal('hide');
+
+
+  </script>
 
   <!-- LEVELS MODAL -->
   <div class="modal" id="levelsModal">
@@ -308,19 +549,21 @@ $conn = null;
             }
           }
           $('.level-buttons').click(function(){
+            //clicked = true;
             if(!($(this).hasClass("disabled"))){
-              var clicked = true;
-              clickedLevel = this.textContent;
-              alert("clicked " + clickedLevel);
 
+              clickedLevel = this.textContent;
+              //alert("clicked " + clickedLevel);
+              //console.log("hai cliccato: " + clicked);
               var data = new FormData();
               data.append("data", clickedLevel);
               var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
               xhr.open("post", "DBConnection/load_level_x.php", true);
               xhr.send(data);
               location.reload();
+
             }
-           });
+          });
         </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -356,19 +599,20 @@ $conn = null;
           </table>
         </div>
         <script type="text/javascript">
-          $('#leaderboard').click(function() {
+          $('#leaderboardTutorial').click(function() {
 
-          var stringa;
-          var oReq = new XMLHttpRequest(); //New request object
-          oReq.onload = function() {
-            stringa = this.responseText;
-          };
-          oReq.open("get", "DBConnection/leaderBoard.php", true);
-          oReq.send();
+          //   var stringa;
+          // var oReq = new XMLHttpRequest(); //New request object
+          // oReq.onload = function() {
+          //   stringa = this.responseText;
+          // };
+          // oReq.open("get", "DBConnection/leaderBoard.php", true);
+          // oReq.send();
 
           var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
           var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
           var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+          console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores);
 
           $("#leaderboardbody").empty();
           for(var i = 0;i < number; i++){
@@ -377,37 +621,127 @@ $conn = null;
               $('<tr>')
               .attr('id','player' + i)
               );
-                $("#player" + i).append(
-                $('<td>')
-                .text((JSON.parse(leaderNames)[i])),
-                $('<td>')
-                .text((JSON.parse(leaderScores)[i]))
-                );
+            $("#player" + i).append(
+              $('<td>')
+              .text((JSON.parse(leaderNames)[i])),
+              $('<td>')
+              .text((JSON.parse(leaderScores)[i]))
+              );
 
           }
-
-         });
-          </script>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+          clicked = false;
+        });
+      </script>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
-    <footer>
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-          <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
-        </div>
-      </div>
-    </footer>
-
   </div>
+</div>
 
-  <script type="text/javascript" src="js/editor.js"></script>
-  <script type="text/javascript" src="js/default.js"></script>
-  <noscript>You need to turn JavaScript on.</noscript>
+<footer>
+  <div class="row">
+    <div class="col-lg-12">
+      <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+      <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script type="text/javascript" src="js/editor.js"></script>
+<script type="text/javascript" src="js/default.js"></script>
+<script type="text/javascript" src="js/badge.js"></script>
+<script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
+<script type="text/javascript">
+
+  function startIntro(){
+    var intro = introJs();
+    intro.setOptions({
+      steps: [
+      {
+        intro: "WELCOME!!<br> "
+      }
+      ,
+
+      {
+        element: document.querySelector('#chat'),
+        position: 'left',
+        intro: "This is where you can read the messages with the instructions from the general or the soldier hint!"
+      },
+      {
+        element: document.querySelector('#editorpanel'),
+        intro: "This is where you code to fix the bugs!",
+        position: 'right'
+      },
+      {
+        element: document.querySelector('#gamepanel'),
+        intro: 'This is the game, play to see your changes!',
+        position: 'left'
+      },
+      {
+        element: document.querySelector('#submitButton'),
+        intro: 'Click here to update the game code!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#evaluateButton'),
+        intro: 'Click here to evaluate your code, if the solution is right you will go to the next level!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#refreshButton'),
+        intro: 'Click here to remove your last updates in the code!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#hintButton'),
+        intro: 'Click here to ask for help to the old programmer assistant!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#docButton'),
+        intro: 'Click here to read the surviving documentation!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#returnButton'),
+        intro: 'Click here to resume the game from the pause!',
+        position: 'top'
+      },
+      {
+        element: document.querySelector('#profileTutorial'),
+        intro: 'Click here to view your statistics!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#levelsTutorial'),
+        intro: 'Click here to view the locked and unlocked levels!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#leaderboardTutorial'),
+        intro: 'Click here to view the leaderboard, check your ranking!',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#logoutTutorial'),
+        intro: 'Click here to logout :(',
+        position: 'bottom'
+      },
+      {
+        element: document.querySelector('#tutorialbutton'),
+        intro: 'Click here if you want to see the tutorial again!',
+        position: 'bottom'
+      }
+
+      ]
+    });
+    intro.start();
+  }
+
+</script>
+<noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>

@@ -960,7 +960,7 @@ function userSolutionChecker(){
   if ( missileSpeed(5,9) == speed ) {
     return {
     passed: true,
-    msg: ""
+    msg: "GReat!"
   }
   } else {
    return {

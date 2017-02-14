@@ -47,8 +47,8 @@ if (isset($_SESSION['loggedinUser'])) {
             </div>
           </div>
           <!-- LOGIN FORM -->
-          <div class="text-center center-form" style="padding:20px 0">
-            <div class="logo">login</div>
+          <div id="loginform" class="text-center center-form" style="padding:20px 0">
+            <div id="logo" class="logo">Login</div>
             <!-- Main Form -->
             <div class="login-form-1">
               <form id="login-form" class="text-left">
@@ -66,8 +66,11 @@ if (isset($_SESSION['loggedinUser'])) {
                   </div>
                   <button type="submit" id="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
-                <div class="etc-login-form">
-                  <p>new user? <a href="registration.php">create new account</a></p>
+                <div id="etc-logo" class="etc-login-form">
+                  <a id="newuser" type="button" class="btn btn-default btn-lg navbar-btn text-center" href="registration.php">
+                    <span id="spanUser">New user? Create new account</span><br>
+                  </a>
+
                 </div>
               </form>
             </div>
@@ -76,7 +79,7 @@ if (isset($_SESSION['loggedinUser'])) {
           <footer>
             <div class="row">
               <div class="col-lg-12">
-                <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina..</p>
+                <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
                 <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
               </div>
             </div>
@@ -87,6 +90,18 @@ if (isset($_SESSION['loggedinUser'])) {
       </html>
       <script type="text/javascript">
 
+
+       //Chiamata LOAD PLAYER
+      
+      var stringa;
+      var oReq = new XMLHttpRequest(); //New request object
+      oReq.onload = function() {
+        stringa = this.responseText;
+      };
+      oReq.open("get", "load_player.php", true);
+      oReq.send();
+      console.log("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
+       
       //Chiamata LOAD LEVEL
       var data = new FormData();
       data.append("data", 0);
@@ -94,10 +109,9 @@ if (isset($_SESSION['loggedinUser'])) {
       xhr.open("post", "load_level_x.php", true);
       xhr.send(data);
 
-      //Chiamata LEADERBOARD
       
 
 
 
 
-        </script>
+</script>

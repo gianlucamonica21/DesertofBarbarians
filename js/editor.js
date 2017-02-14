@@ -20,13 +20,18 @@
   });
 
   var startedCoding;
+  editor.setSize(750,700);
   editor.on('change', function(cm, change) {
  //   drawStopMessage();
+
     startedCoding = (new Date()).getTime();
+    
     //console.log("Hai iniziato a scrivere :" + startCoding);
     stoppedGame = true;
     $('#returnButton').removeClass("disabled");
     $('#evaluateButton').addClass("disabled");
+
+
   });
 
   // Code to reload and reupdate the level
@@ -37,7 +42,7 @@
   };
   oReq.open("get", "DBConnection/load_player.php", false);
   oReq.send();
-  alert("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
+  console.log("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
 
   var data = new FormData();
   data.append("data", 0);

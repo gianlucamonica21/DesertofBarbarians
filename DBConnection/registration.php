@@ -36,10 +36,11 @@
     </div>
     <script src="js/registration.script.js">
     </script>​
+ 
     <?php
 
   //include "dbconfig.php";
-
+  session_start();
   // setting var to connect to the DB
   $servername = "localhost";
   $user = "root";
@@ -94,11 +95,12 @@
                                              ':initial_grade'=>$initial_grade) );
 
       // Solo se tutti gli insert sono andati a buon fine
-      if ( $result_user and $result_campaign and $result_arch and $result_grade){
+     if ( $result_user and $result_campaign and $result_arch and $result_grade){
           //header('location: registered.php');
-          $_SESSION['loggedin'] = true;
-          $_SESSION['loggedinUser'] = $username;
-          header('Location: ../index.php');
+
+          // $_SESSION['loggedin'] = true;
+          // $_SESSION['loggedinUser'] = $username;
+          header('Location: login.php');
       }
     }
 }
@@ -110,5 +112,18 @@ catch(PDOException $e)
 
 $conn = null;
 ?>
+
 </body>
+    <script type="text/javascript">
+
+      //Chiamata LOAD LEVEL
+      // var data = new FormData();
+      // data.append("data", 0);
+      // var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      // xhr.open("post", "load_level_x.php", true);
+      // xhr.send(data);
+
+      //Chiamata LEADERBOARD
+
+        </script>
 </html>

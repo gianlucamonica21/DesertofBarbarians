@@ -51,8 +51,34 @@ try {
 			$leader_scores[] = $leader["score"];
 		}
 
-		session_start();
+
+
+		
 		// Save the leaders info
+		
+		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
+		$user_query->bindParam(':login', $login);
+		$user_query->execute();
+		$user_rows = $user_query->fetch();
+		$total_score = $user_rows["score"];
+		$_SESSION['totalScore'] = $total_score;
+
+		// Estrai grado
+		$grade_query = $conn->prepare("SELECT * FROM Graduated WHERE login= :login");
+		$grade_query->bindParam(':login', $login);
+		$grade_query->execute();
+		$grade_rows = $grade_query->fetch();
+		$grade = $grade_rows["grade"];
+		$_SESSION['userGrade'] = $grade;
+
+		$grade_type = $conn->prepare("SELECT * FROM Grade WHERE id= :id");
+		$grade_type->bindParam(':id', $grade);
+		$grade_type->execute();
+		$grade_type_row = $grade_type->fetch();
+		$type = $grade_type_row["type"];
+		$_SESSION['gradeType'] = $type;
+
+
 		$_SESSION['leaderNames'] = $leader_names;
 		$_SESSION['leaderScores'] = $leader_scores;
 		$_SESSION['NUMBER']	= count($leader_names);	
