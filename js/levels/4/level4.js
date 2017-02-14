@@ -1,8 +1,4 @@
-var powerOf = function (base, exponent) {
-  var result = base;
-  while (exponent != 1) {
-    result = result * base;
-    exponent--;
-  }
-  return result;
-};
+var rechargeAntiMissileBatteries = function () {
+	/* Anti-missile batteries are contained in the antiMissileBatteries array */
+	antiMissileBatteries[1].missilesLeft = 6;
+}; 

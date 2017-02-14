@@ -6,6 +6,6 @@ var playerShoot = function( x, y ) {
       }
       var xOffset = 35;
       var yOffset = 25;
-      playerMissiles.push( new PlayerMissile( source, x + xOffset, y + yOffset ) );
+      playerMissiles.push( new PlayerMissile( source, x, y) );
     }
 };

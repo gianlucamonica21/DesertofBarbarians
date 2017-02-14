@@ -9,16 +9,8 @@ $(document).ready(function() {
   $.getJSON(filepath, function(result) {
 
     msgString = result.generalMsg;
+    writeChatMessage(msgString, "generalMsg",false);
 
-    $('.chat-thread').append(
-      $('<li>')
-      .addClass("generalMsg")
-      .typed({
-        strings: [msgString],
-        typeSpeed: 10
-      })
-
-    );
   });
 
   var finishedCoding;
@@ -51,14 +43,7 @@ $(document).ready(function() {
         }));
       }
       // CHAT ANIMATION
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("consoleMsg")
-        .typed({
-          strings: ["Syntax errors found. Please submit input again."],
-          typeSpeed: 10
-        })
-      );
+      writeChatMessage("Syntax errors found. Please submit input again.","consoleMsg",false);
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -73,14 +58,7 @@ $(document).ready(function() {
 
       // CHAT MSG
 
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("consoleMsg")
-        .typed({
-          strings: ["Applied code update."],
-          typeSpeed: 10
-        })
-      );
+      writeChatMessage("Applied code update.", "consoleMsg",false);
     }
   });
 
@@ -101,14 +79,7 @@ $(document).ready(function() {
     var filepath = "js/levels/" + currentLevel + "/dialogues.json";
     $.getJSON(filepath, function(result) {
       msgString = result.soldierMsg;
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("soldierMsg")
-        .typed({
-          strings: [msgString],
-          typeSpeed: 10
-        })
-      );
+      writeChatMessage(msgString,"soldierMsg",false);
     });
   });
 
@@ -117,8 +88,13 @@ $(document).ready(function() {
 
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/level" + currentLevel + ".js";
+    editor.off('beforeChange',readOnlyLinesHandler);
     $.get(filepath, function(data) {
       editor.setValue(data);
+      editor.on('beforeChange',readOnlyLinesHandler);
+      for (i=0;i<readOnlyLinesArray.length;i++){
+        editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
+    }
     });
 
   });
@@ -126,14 +102,12 @@ $(document).ready(function() {
 
 // EVALUATE BUTTON
 $('#evaluateButton').click(function() {
-  if ($('#evaluateButton').prop('disabled', false)) {
+  if (!($('#evaluateButton').hasClass('disabled'))) {
     finishedCoding = (new Date()).getTime();
     difference = (finishedCoding - startedCoding) / 1000;
     alert("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
     var result = userSolutionChecker();
     try {
-
-      
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
@@ -141,18 +115,14 @@ $('#evaluateButton').click(function() {
       xhr.open('post', 'SaveToFile.php', true);
       xhr.send(data);
 
-    } catch (err) {}
+    } catch (err) {
+      console.log("Cannot save file.");
+    }
 
+    result.passed = true; // DEBUG
     if (result.passed == true) {
 
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("generalMsg")
-        .typed({
-          strings: ["Great! Everything works again! Are you ready for the next mission?"],
-          typeSpeed: 10
-        })
-      );
+      writeChatMessage(result.msg,"generalMsg",true);
 
       var data = new FormData();
       data.append("data", difference);
@@ -169,29 +139,15 @@ $('#evaluateButton').click(function() {
       };
       xhr.open("post", "DBConnection/load_level_x.php", true);
       xhr.send(data);
-      setTimeout(function() {
-        location.reload();
-      }, 3000);
 
     } else {
 
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("generalMsg")
-        .typed({
-          strings: [result.errorMsg],
-          typeSpeed: 10
-        })
-      );
+      writeChatMessage(result.msg, "generalMsg",false);
     }
   } else {
-    $('.chat-thread').append(
-      $('<li>')
-      .addClass("soldierMsg")
-      .typed({
-        strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
-        typeSpeed: 10
-      }));
+      // If user clicks on validate before execute
+      msgString = "Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past.";
+      writeChatMessage(msgString,"soldierMsg",false);
   }
 });
 
@@ -231,4 +187,24 @@ function parseCode(code) {
     body: body,
     numLines: lineCount
   };
+}
+
+function writeChatMessage(msgString, sender, goToNextLevel){
+  $('.chat-thread').append(
+    $('<li>')
+    .addClass(sender)
+    .typed({
+      strings: [msgString],
+      typeSpeed: 10,
+      callback: function() {
+        $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
+        if (goToNextLevel){
+          setTimeout(function() {
+            location.reload();
+          }, 3000);
+        }
+      }
+    })
+    );
+    $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
 }

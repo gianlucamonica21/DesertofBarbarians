@@ -1,9 +1,4 @@
-var automaticShooting = function() {
+var decipher = function(string) {
 
-	for(i=0;i<enemyMissiles.length;i++){
-		if(enemyMissiles[i].delay == 0) {
-			playerShoot(enemyMissiles[i].x, enemyMissiles[i].y);
-		}
-	}
 
 };

@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "Good job! Not only has our aiming system regained it's precision, but we also caught the traitor! We convinced him to give us access to the enemy's anti-missile system through ... unconventional ... methods. <br>Your mission this time is to sabotage the automated system which loads the missiles to be fired so that no missile is loaded. Be quick, before the breach is discovered!",
+	"soldierMsg": "The missiles to be fired are created in the for loop. You should tweak it so that it is never executed!"
 }

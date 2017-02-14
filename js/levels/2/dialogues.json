@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "Damn it, newbie! There has been a security breach. The enemy managed to hack our system and insert malicious code in our aiming software. There must be a traitor among us... <br>Anyway. You're the only one who understands anything about this stuff... fix it <b>NOW</b>! ",
+	"soldierMsg": "Hmm.. It's as if they added an offset to the target coordinates... Pranksters!"
 }

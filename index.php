@@ -130,7 +130,7 @@ $conn = null;
         </div>
         <div class="row">
           <!-- Editor panel  -->
-          <div class="col-lg-5 col-md-6 col-sm-7">
+          <div class="col-lg-5 col-md-4 col-sm-7">
             <div class="panel panel-default">
               <div class="panel-heading">Editor</div>
               <div class="panel-body">
@@ -153,8 +153,8 @@ $conn = null;
             </div>
 
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-7">
            <!-- Chat Panel  -->
+           <div class="col-lg-5 col-md-4 col-sm-7">
            <div class="panel panel-default">
             <div class="panel-heading">Level <?php echo $_SESSION['level']?></div>
             <div class="panel-body">
@@ -167,8 +167,9 @@ $conn = null;
               </div>
             </div>
           </div>
+          </div>
           <!-- Game panel  -->
-          <div >
+          <div class="col-lg-5 col-md-4 col-sm-7">
             <div class="panel panel-default">
               <div class="panel-heading">Console</div>
               <div class="panel-body">
@@ -199,8 +200,9 @@ $conn = null;
              </div>
            </div>
          </div>
+         </div>
        </div>
-     </div>
+     
 
    </div>
    <!-- PROFILE MODAL -->

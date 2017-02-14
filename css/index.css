@@ -42,3 +42,8 @@ span.icon {
     padding: 0 3px; 
     margin-right: 7px;
 }
+
+.disabled{
+  background-color: #D3D3D3 !important;
+  background: #D3D3D3 !important;
+}

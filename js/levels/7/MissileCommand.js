@@ -1,6 +1,5 @@
 // Missile Command
 
-var stopNumbers=0;
 var canvas = document.querySelector( 'canvas' ),
 ctx = canvas.getContext( '2d' );
 
@@ -16,7 +15,7 @@ MISSILE = {
 
 // Variables
 var levelscore = 0,
-level = 1,
+level = 7,
 maxLevel = 1,
 levelIndex = {},
 cities = [],
@@ -73,10 +72,11 @@ var missileCommand = function(checkLevel) {
     }); 
   };
 
-  var rechargeAntiMissileBatteries = function () {
-    for(i=0;i<3;i++){
-      antiMissileBatteries[i].missilesLeft = 6;
-    }
+ var rechargeAntiMissileBatteries = function () {
+  for(i=0; i<3; i++) {
+    antiMissileBatteries[i].missilesLeft = 6;
+  }
+
   };
 
 // Reset various variables at the start of a new level
@@ -93,7 +93,7 @@ var initializeLevel = function() {
 // Create a certain number of enemy missiles based on the game level
 var createEmemyMissiles = function() {
   var targets = viableTargets(),
-  numMissiles = /*Increased since last level*/ 15;
+  numMissiles = /*Increased since last level*/ 20;
   for( var i = 0; i < numMissiles; i++ ) {
     enemyMissiles.push( new EnemyMissile(targets) );
   }
@@ -137,31 +137,31 @@ var drawScore = function() {
 
 // Show message before a level begins
 var drawLevelMessage = function() {
-  ctx.fillStyle = '#6d6';
+  ctx.fillStyle = 'white';
 
-  ctx.font =  '20px monaco, consolas';
-  ctx.fillText( 'click to start fifth level.', 130, 180 );
+  ctx.font =  '25px monaco, consolas';
+  ctx.fillText( 'click to start.', 130, 180 );
+
+  ctx.font = 'bold 25px monaco, consolas';
+  ctx.fillStyle = 'white';
+  ctx.fillText( 'level ' + level, 130, 150 );
+
   ctx.font = 'bold 32px monaco, consolas';
-  ctx.fillStyle = '#d66';
+  ctx.fillStyle = '#26070A';
   ctx.fillText( 'DEFEND THE BASE!', 130, 250 );
 };
 
 var drawStopMessage = function() {
-  if(stopNumbers == 0){
 
-  }
-  else
-  { 
-    ctx.fillStyle = '#6d6';
+  ctx.fillStyle = '#6d6';
 
-    ctx.font =  '20px monaco, consolas';
-    ctx.fillText( 'Game is now stop', 130, 180 );
-    ctx.font = 'bold 32px monaco, consolas';
-    ctx.fillStyle = '#d66';
-    ctx.fillText( '', 130, 250 );
-    stopLevel();
-  } 
-  stopNumbers++;
+  ctx.font =  '20px monaco, consolas';
+  ctx.fillText( 'Game is now stop', 130, 180 );
+  ctx.font = 'bold 32px monaco, consolas';
+  ctx.fillStyle = '#d66';
+  ctx.fillText( '', 130, 250 );
+  stopLevel();
+
 };
 
 // Show bonus points at end of a level
@@ -207,11 +207,13 @@ var getMultiplier = function() {
 
 // Show the basic game background
 var drawBackground = function() {
-    // Black background -> gradient sky
-
-    var grd=ctx.createLinearGradient(0,1000,0,0);
-    grd.addColorStop(0,"#a44");
-    grd.addColorStop(1,"#134");
+    // Draw SKY
+    var grd=ctx.createLinearGradient(0,0,0,510);
+    grd.addColorStop(0,"#163C52");
+    grd.addColorStop(0.3,"#4F4F47");
+    grd.addColorStop(0.6,"#C5752D");
+    grd.addColorStop(1,"#B7490F");
+  //  grd.addColorStop(1,"#2F1107");
 
     ctx.fillStyle = grd;
     ctx.fillRect( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT );
@@ -290,7 +292,7 @@ City.prototype.draw = function() {
   var x = this.x,
   y = this.y;
 
-  ctx.fillStyle = '#833';
+  ctx.fillStyle = '#7e8341';
   ctx.beginPath();
   ctx.moveTo( x, y );
   ctx.lineTo( x, y - 10 );
@@ -305,7 +307,7 @@ City.prototype.draw = function() {
   ctx.fill();
 
     //city shadows
-    ctx.fillStyle = '#411';
+    ctx.fillStyle = '#4d4729';
     ctx.beginPath();
     x = x+5;
     y = y+5;
@@ -342,7 +344,7 @@ AntiMissileBattery.prototype.draw = function() {
     y = this.y + delta[i][1] - 10;
       //NEW GRAPHICS
       // Draw a missile-launcher
-      ctx.fillStyle = '#af6f5f';
+      ctx.fillStyle = 'black';
       ctx.beginPath();
       ctx.moveTo( x, y );
       ctx.lineTo( x - 3, y + 10);
@@ -350,7 +352,7 @@ AntiMissileBattery.prototype.draw = function() {
       ctx.closePath();
       ctx.fill();
 
-      ctx.fillStyle = '#553322';
+      ctx.fillStyle = '#4B5320';
       ctx.beginPath();
       ctx.moveTo(x,y);
       ctx.lineTo( x , y + 12);
@@ -461,6 +463,7 @@ Missile.prototype.explode = function() {
 
 // Calculate the missile speed
 // the time with missile reach the point
+
 var missileSpeed = function (xDistance, yDistance) {
   var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
 
@@ -471,7 +474,8 @@ var missileSpeed = function (xDistance, yDistance) {
 
 // Constructor for the Player's Missile, which is a subclass of Missile
 // and uses Missile's constructor
-/*function PlayerMissile( source, endX, endY ) {
+
+function PlayerMissile( source, endX, endY ) {
     // Anti missile battery this missile will be fired from
     var amb = antiMissileBatteries[source];
 
@@ -491,7 +495,9 @@ var missileSpeed = function (xDistance, yDistance) {
 
     amb.missilesLeft--;
 
-  } */
+    addMissiles(6,amb);
+
+  }
 
 // Make PlayerMissile inherit from Missile
 PlayerMissile.prototype = Object.create( Missile.prototype );
@@ -514,6 +520,7 @@ PlayerMissile.prototype.update = function() {
   };
 
 // Create a missile that will be shot at indicated location
+
 var playerShoot = function( x, y ) {
   if( y >= 50 && y <= 370 ) {
     var source = whichAntiMissileBattery( x );
@@ -636,7 +643,7 @@ BonusMissile.prototype.update = function() {
     if (!this.bonuscatched) {
       this.bonuscatched = true;
         // bonus in ricarica di missili difensivi
-        addMissile(3);
+      //  addMissile(3);
       }
     }
 
@@ -873,10 +880,9 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
-  if(stopNumbers>0){
-    var fps = 30;
-    timerID = setInterval( nextFrame, 1000 / fps );
-  }
+  var fps = 30;
+  timerID = setInterval( nextFrame, 1000 / fps );
+
 };
 
 // Determine which Anti Missile Battery will be used to serve a
@@ -902,9 +908,9 @@ var firedtoMiddleThird = function( priority1, priority2 ) {
   }
 };
 
- var whichAntiMissileBattery = function( x ) {
+var whichAntiMissileBattery = function( x ) {
 
-if( !antiMissileBatteries[0].hasMissile() &&
+  if( !antiMissileBatteries[0].hasMissile() &&
     !antiMissileBatteries[1].hasMissile() &&
     !antiMissileBatteries[2].hasMissile() ) {
     return -1;
@@ -933,6 +939,7 @@ var setupListeners = function() {
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
       playerShoot( mousePos.x, mousePos.y);
+      
     });
   });
 };
@@ -951,11 +958,20 @@ function isDefined (x) {
 };
 
 function userSolutionChecker(){
-    //check the missile speed
-    if (SPEEDMISSILEDEFENSE > 8 && SPEEDMISSILEDEFENSE < 15){
-      return true;
-    }
-    else{
-      return false;
+
+  missileCommand(true);
+  amb = antiMissileBatteries[0];
+  amb.missilesLeft = 0;
+  addMissiles(6,amb);
+  if (amb.missilesLeft == 6){
+    return {
+      passed: true,
+      msg: "Perfect! Let's see who gets tired first now!"
+    } ;
+  } else {
+    return {
+      passed: false,
+      msg: "These missiles aren't enough to counter-attack the enemy offensive."
     }
   }
+}

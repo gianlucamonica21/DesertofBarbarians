@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "The situation is bad, soldier. The enemy attacks have increased in speed AND number. We have sent a message to the main base and they have sent us the code to unlock a special weapon, except ... The codeword to activate it is encrypted with a top-of-the-line cryptography algorithms: it is written  backwards! To decrypt it, write a function which reverses the string given as input!",
+	"soldierMsg": "You could try using the built-in functions. Or how about a decrementing for-loop?"
 }
