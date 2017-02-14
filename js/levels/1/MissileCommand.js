@@ -14,6 +14,7 @@ MISSILE = {
 };
 
 // Variables
+var gamestarted = false;
 var levelscore = 0,
 level = 1,
 maxLevel = 1,
@@ -152,6 +153,7 @@ var drawLevelMessage = function() {
 
 var drawStopMessage = function() {
 
+  if( gamestarted == true){
   ctx.fillStyle = '#6d6';
 
   ctx.font =  '20px monaco, consolas';
@@ -160,7 +162,7 @@ var drawStopMessage = function() {
   ctx.fillStyle = '#d66';
   ctx.fillText( '', 130, 250 );
   stopLevel();
-
+  }
 };
 
 // Show bonus points at end of a level
@@ -168,18 +170,19 @@ var drawEndLevel = function( missilesLeft, missilesBonus, citiesSaved, citiesBon
   drawGameState();
   var bonus = missilesBonus + citiesBonus;
   ctx.fillStyle = '#6d6';
-  ctx.font = 'bold 25px monaco, consolas';
+  ctx.font = 'bold 35px monaco, consolas';
  //   ctx.fillText( 'BONUS POINTS: ' +  bonus, 150, 149 );
-
+ ctx.fillStyle = 'white';
+ ctx.fillText( "Wave of attacks ended!", 90, 170 );
  ctx.font = '20px monaco, consolas';
  ctx.fillStyle = 'white';
  //   ctx.fillText( '' + missilesBonus, 170, 213 );
  ctx.fillStyle = 'white';
- ctx.fillText( 'Missiles Left: ' + missilesLeft, 230, 213 );
+ ctx.fillText( 'Missiles Left: ' + missilesLeft, 200, 220 );
  ctx.fillStyle = 'white';
  //   ctx.fillText( '' + citiesBonus, 170, 277 );
  ctx.fillStyle = 'white';
- ctx.fillText( 'Cities Saved: ' + citiesSaved, 230, 277 );
+ ctx.fillText( 'Cities Saved: ' + citiesSaved, 200, 250 );
 };
 
 // Draw all active cities
@@ -874,7 +877,7 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
-
+  gamestarted = true;
   var fps = 30;
   timerID = setInterval( nextFrame, 1000 / fps );
 
@@ -959,12 +962,12 @@ function userSolutionChecker(){
   if ( missileSpeed(5,9) == speed ) {
     return {
     passed: true,
-    errorMsg: ""
+    msg: "GReat!"
   }
   } else {
    return {
     passed: false,
-    errorMsg: "The missiles still aren't firing! Do you think the enemy is going to wait for us to be ready? Get it together recruit!"
+    msg: "The missiles still aren't firing! Do you think the enemy is going to wait for us to be ready? Get it together recruit!"
   }
   }
 }

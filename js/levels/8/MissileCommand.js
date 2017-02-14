@@ -58,10 +58,10 @@ var missileCommand = function(checkLevel) {
     setupListeners();
   };
 
-  var createShields = function () {
+/*  var createShields = function () {
     shields.push( new Shield( shieldPos[0].x, shieldPos[0].y));
     shields.push( new Shield( shieldPos[1].x, shieldPos[1].y));
-  }
+  } */
 
   var createCities = function () {
     cities.push( new City( elementPos[3].x,  elementPos[3].y) );
@@ -474,7 +474,6 @@ Missile.prototype.draw = function() {
 
 // Handle update to help with animating an explosion
 Missile.prototype.explode = function() {
-  console.log(this.explodeRadius);
   if( this.state === MISSILE.exploding ) {
     this.explodeRadius++;
   }
@@ -585,7 +584,7 @@ function EnemyMissile( targets ) {
           endX: target[0], endY: target[1],
           color: 'white', trailColor: 'rgba(222,222,222,0.5)', explodeColor: 'rgba(200,100,100,0.5)' } );
 
-        framesToTarget = ( 650 - 30 * /*gamelevel.missilesSpeed*/ 5 ) / offSpeed;
+        framesToTarget = ( 650 - 30 * /*gamelevel.missilesSpeed*/ 7 ) / offSpeed;
         if( framesToTarget < 20 ) {
           framesToTarget = 20;
         }
@@ -616,13 +615,13 @@ EnemyMissile.prototype.update = function() {
       this.state = MISSILE.exploding;
       this.groundExplosion = true;
     }
-  if (shields[0].active == true ) {
+  if (shields.length > 0 && shields[0].active == true ) {
   if( distance(this.x,this.y,shieldPos[0].x,shieldPos[0].y) <= 80 ) {
       // Missile hit shield
       this.state = MISSILE.exploding;
       shields[0].active = false;
   }}
-  if (shields[1].active == true ) {
+  if (shields.length > 1 && shields[1].active == true ) {
     if( distance(this.x,this.y,shieldPos[1].x,shieldPos[1].y) <= 80 ) {
       // Missile hit shield
       this.state = MISSILE.exploding;
@@ -1010,19 +1009,34 @@ function isDefined (x) {
   return x !== undef;
 };
 
-function userSolutionChecker(){
-    //check the missile speed
-    if (SPEEDMISSILEDEFENSE > 8 && SPEEDMISSILEDEFENSE < 15){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+function distance(x1,y1,x2,y2){
+  xDistance = x2 - x1;
+  yDistance = y2 - y1;
+  return Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
+}
 
-  function distance(x1,y1,x2,y2){
-    xDistance = x2 - x1;
-    yDistance = y2 - y1;
-    var distance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
-    return distance;
+function userSolutionChecker(){
+  missileCommand(true);
+  if (shields.length == 2){
+    if (shields[0].x == shieldPos[0].x && shields[0].y == shieldPos[0].y && 
+      shields[1].x == shieldPos[1].x && shields[1].y == shieldPos[1].y ) {
+
+      return {
+        passed: true,
+        msg: "Our campe is safer now! Nice work!"
+      }
+
+    } else {
+      return {
+        passed: false,
+        msg: "The shields are activated, but the positions aren't the ones we gave you. Do what you are told!"
+      }
+    }
+    
+  } else {
+    return {
+      passed: false,
+      msg: "The shields didn't activate. This shouldn't be hard, if only you'd put in a little effort..."
+    }
   }
+}

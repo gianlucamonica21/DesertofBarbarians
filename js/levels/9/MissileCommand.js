@@ -937,9 +937,16 @@ var setupListeners = function() {
 
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
-      playerShoot( mousePos.x + 25, mousePos.y);
-      playerShoot( mousePos.x, mousePos.y);
-      playerShoot( mousePos.x - 25, mousePos.y);
+
+      if (decipher("hello") == "olleh") {
+        playerShoot( mousePos.x + 25, mousePos.y);
+        playerShoot( mousePos.x, mousePos.y);
+        playerShoot( mousePos.x - 25, mousePos.y);
+      } else {
+
+        playerShoot( mousePos.x, mousePos.y);
+        
+      }
       
     });
   });
@@ -959,11 +966,15 @@ function isDefined (x) {
 };
 
 function userSolutionChecker(){
-    //check the missile speed
-    if (SPEEDMISSILEDEFENSE > 8 && SPEEDMISSILEDEFENSE < 15){
-      return true;
-    }
-    else{
-      return false;
+if (decipher("hello") == "olleh") {
+  return {
+    passed: true,
+    msg: "This is excellent work, soldier. The enemy doesn't have any chance now that our system is all new and updated! Don't tell anyone I ever said this, but... you have been a good addition to the team, soldier!"
+  }
+  } else {
+    return {
+      passed: false,
+      msg: "I think you got it wrong, the code doesn't work!"
     }
   }
+}

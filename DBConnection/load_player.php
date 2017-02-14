@@ -88,7 +88,7 @@ try {
 		$_SESSION['achievementsTitle'] = $achievements_title;
 		$_SESSION['achievementsDescr'] = $achievements_descr;
 
-		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade'];
+		echo "Caricato il livello con i seguenti parametri. Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade'].$_SESSION['gradeType'];
 	}
 }
 catch(PDOException $e)

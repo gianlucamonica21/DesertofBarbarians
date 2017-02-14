@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "The enemy detected our intrusion and managed to fix their code, but now they are <b>MAD</b>. They tripled the number of missiles for each attack. Luckily, this little stunt bought us some time and the main base sent us more ammunition. <br/> Right now our code only recharges one anti-missile battery. You need to fix it so that it recharges all 3 of them! Remember though, each anti-missile battery can only contain a maximum of 6 missiles, or bad things might happen ... ",
+	"soldierMsg": "How about writing your own for loop?"
 }

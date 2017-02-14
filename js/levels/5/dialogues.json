@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "Well, at least we have a functioning anti-missile system now. However, our soldiers are complaining that it is too slow, especially in calculating distances. <br> Apparently, our <b>powerOf</b> function is a bit outdated. It works, but surely there is a better way to do it, something about recursion... Why don't you take a look?",
+	"soldierMsg": "Check out <b>recursion</b> in the manual. Careful with the base case! What happens when the exponent becomes 0?"
 }

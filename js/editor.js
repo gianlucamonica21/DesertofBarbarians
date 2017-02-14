@@ -1,17 +1,13 @@
   var stoppedGame = false;
   var widgets = [];
-
-
-
-
-
+  var readOnlyLinesArray = [0,7];
   // set editor by CodeMirror function
   var editor =
     CodeMirror.fromTextArea(document.getElementById("editor"), {
       mode: "javascript",
       lineNumbers: true,
       styleSelectedText: true,
-      lineWrapping: false,
+      lineWrapping: true,
       viewportMargin: Infinity
     });
 
@@ -26,11 +22,7 @@
   var startedCoding;
   editor.setSize(750,700);
   editor.on('change', function(cm, change) {
-    // if ( ~readOnlyLines.indexOf(change.from.line) ) {
-    //   change.cancel();
-    // }
-    // alert("stai scrivendo");
- //   drawStopMessage();
+    drawStopMessage();
 
     startedCoding = (new Date()).getTime();
 
@@ -71,7 +63,10 @@
         if (xhr.status === 200) {
           //Read the file content and set in the editor
           editor.setValue(xhr.responseText);
-
+          editor.on('beforeChange',readOnlyLinesHandler);
+          for (i=0;i<readOnlyLinesArray.length;i++){
+            editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
+          }
         } else {
           console.error(xhr.statusText);
         }
@@ -82,3 +77,10 @@
     };
     xhr.send(null);
   }
+
+  var readOnlyLinesHandler = function (codemirror, change) {
+          // Set read only lines
+          if ( ~readOnlyLinesArray.indexOf(change.from.line) ) {
+            change.cancel();
+          }
+        }

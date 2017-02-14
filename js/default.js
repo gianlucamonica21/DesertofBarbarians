@@ -12,16 +12,7 @@
   $.getJSON(filepath, function(result) {
 
     msgString = result.generalMsg;
-
-    $('.chat-thread').append(
-      $('<li>')
-      .addClass("generalMsg")
-      .typed({
-        strings: [msgString],
-        typeSpeed: 10
-      })
-
-      );
+    writeChatMessage(msgString, "generalMsg",false);
   });
 
   var finishedCoding;
@@ -53,15 +44,8 @@
           noHScroll: true
         }));
       }
-      // CHAT ANIMATION
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("consoleMsg")
-        .typed({
-          strings: ["Syntax errors found. Please submit input again."],
-          typeSpeed: 10
-        })
-        );
+      // CHAT ANIMATIOND
+      writeChatMessage("Syntax errors found. Please submit input again.","consoleMsg",false);
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -75,15 +59,7 @@
       eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
 
       // CHAT MSG
-
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("consoleMsg")
-        .typed({
-          strings: ["Applied code update."],
-          typeSpeed: 10
-        })
-        );
+      writeChatMessage("Applied code update.", "consoleMsg",false);
     }
   });
 
@@ -107,14 +83,7 @@
     var filepath = "js/levels/" + currentLevel + "/dialogues.json";
     $.getJSON(filepath, function(result) {
       msgString = result.soldierMsg;
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("soldierMsg")
-        .typed({
-          strings: [msgString],
-          typeSpeed: 10
-        })
-        );
+      writeChatMessage(msgString,"soldierMsg",false);
     });
   });
 
@@ -123,8 +92,13 @@
 
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/level" + currentLevel + ".js";
+    editor.off('beforeChange',readOnlyLinesHandler);
     $.get(filepath, function(data) {
       editor.setValue(data);
+      editor.on('beforeChange',readOnlyLinesHandler);
+      for (i=0;i<readOnlyLinesArray.length;i++){
+        editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
+    }
     });
 
   });
@@ -132,14 +106,18 @@
 
 // EVALUATE BUTTON
 $('#evaluateButton').click(function() {
-  if ($('#evaluateButton').prop('disabled', false)) {
+  if (!($('#evaluateButton').hasClass('disabled'))) {
     finishedCoding = (new Date()).getTime();
     difference = (finishedCoding - startedCoding) / 1000;
     console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
-    var result = true;//userSolutionChecker();
-    try {
+ //   var result = userSolutionChecker();
 
+     var result = {
+      passed: true,
+      msg: "DEBUG"
+     };
+    try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
@@ -147,26 +125,13 @@ $('#evaluateButton').click(function() {
       xhr.open('post', 'SaveToFile.php', true);
       xhr.send(data);
 
-    } catch (err) {}
+    } catch (err) {
+      console.log("Cannot save file.");
+    }
 
-    if (result == true) {
-
-
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("generalMsg")
-        .typed({
-          strings: ["Great! Everything works again! Are you ready for the next mission?"],
-          typeSpeed: 10
-        })
-        );
-        
-      var data = new FormData();
-      data.append("data", difference);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/nextlevel.php", true);
-      xhr.send(data);
-
+    if (result.passed == true) {
+      writeChatMessage(result.msg,"generalMsg",true);
+      // Unlock badges (if necessary)
       var unlockedbadgeQueue = [];
       unlockedbadgeQueue = badge();
       console.log("unlockedbadgeQueue LENGTH: " + unlockedbadgeQueue.length);
@@ -188,6 +153,13 @@ $('#evaluateButton').click(function() {
       oReq.open("get", "DBConnection/load_player.php", true);
       oReq.send();
 
+      // Carica dati del prossimo livello
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
+
       var data = new FormData();
       data.append("data", 0);
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
@@ -199,30 +171,15 @@ $('#evaluateButton').click(function() {
 
 
       xhr.send(data);
-      setTimeout(function() {
-        location.reload();
-      }, 10000);
-
 
     } else {
-
-      $('.chat-thread').append(
-        $('<li>')
-        .addClass("generalMsg")
-        .typed({
-          strings: [result.errorMsg],
-          typeSpeed: 10
-        })
-        );
+      // Level not passed
+      writeChatMessage(result.msg, "generalMsg",false);
     }
   } else {
-    $('.chat-thread').append(
-      $('<li>')
-      .addClass("soldierMsg")
-      .typed({
-        strings: ["Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past."],
-        typeSpeed: 10
-      }));
+      // If user clicks on validate before execute
+      msgString = "Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past.";
+      writeChatMessage(msgString,"soldierMsg",false);
   }
 });
 
@@ -262,4 +219,24 @@ function parseCode(code) {
     body: body,
     numLines: lineCount
   };
+}
+
+function writeChatMessage(msgString, sender, goToNextLevel){
+  $('.chat-thread').append(
+    $('<li>')
+    .addClass(sender)
+    .typed({
+      strings: [msgString],
+      typeSpeed: 10,
+      callback: function() {
+        $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
+        if (goToNextLevel){
+          setTimeout(function() {
+            location.reload();
+          }, 3000);
+        }
+      }
+    })
+    );
+    $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
 }

@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "The enemy attacks are continuing, and they are getting faster. We have to protect our camp! We used to have shields for situations like these, but they haven't been activated in such a long time... You know how these things work, try activating them!",
+	"soldierMsg": "Remember, shields are <b>objects</b>, so you have to create them before adding them to the array!"
 }

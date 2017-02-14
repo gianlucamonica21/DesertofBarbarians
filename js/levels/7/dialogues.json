@@ -1,4 +1,4 @@
 {
-	"generalMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo.<br>Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna.",
-	"soldierMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sapien justo. Phasellus facilisis lacus in consequat sodales. Ut dui tellus, dictum vitae tellus in, volutpat congue eros. Nullam id semper nisi, non scelerisque magna."
+	"generalMsg": "The good news is that we are holding our own. The bad news is that the enemy increased their missiles again. The main base sent us all their ammunition, but we need to recharge out anti-missile batteries automatically as soon as they are empty. <br> You need to write the function which automates this process. <b> NOW.</b>",
+	"soldierMsg": "Remember, you can check and modify the number of missiles left in a given anti-missile battery by accessing the <em>missilesLeft</em> property!"
 }
