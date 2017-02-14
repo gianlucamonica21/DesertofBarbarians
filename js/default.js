@@ -98,7 +98,7 @@
       editor.on('beforeChange',readOnlyLinesHandler);
       for (i=0;i<readOnlyLinesArray.length;i++){
         editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
-    }
+      }
     });
 
   });
@@ -113,11 +113,11 @@ $('#evaluateButton').click(function() {
 
  //   var result = userSolutionChecker();
 
-     var result = {
-      passed: true,
-      msg: "DEBUG"
-     };
-    try {
+ var result = {
+  passed: true,
+  msg: "DEBUG"
+};
+try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
       data.append("data", window.editor.getValue());
@@ -163,14 +163,28 @@ $('#evaluateButton').click(function() {
       var data = new FormData();
       data.append("data", 0);
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      // request.onreadystatechange = function()
+      // {
+      //   if (request.readyState == 4 && request.status == 200)
+      //   {
+      //       upgradeLevelBar(); // Another callback here
+      //     }
+      //   }; 
       var stringa;
       xhr.onload = function() {
         stringa = this.responseText;
       };
       xhr.open("post", "DBConnection/load_level_x.php", true);
+       xhr.onreadystatechange = function () {
+         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+
+         }
+       };
 
 
       xhr.send(data);
+      //upgradeLevelBar();
+
 
     } else {
       // Level not passed
@@ -180,8 +194,8 @@ $('#evaluateButton').click(function() {
       // If user clicks on validate before execute
       msgString = "Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past.";
       writeChatMessage(msgString,"soldierMsg",false);
-  }
-});
+    }
+  });
 
 function parseCode(code) {
   // Create an array where each element is one line of the code
@@ -238,5 +252,5 @@ function writeChatMessage(msgString, sender, goToNextLevel){
       }
     })
     );
-    $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
+  $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
 }
