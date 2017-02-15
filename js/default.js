@@ -177,7 +177,7 @@ $('#evaluateButton').click(function() {
  //var result = userSolutionChecker();
 
  var result = {
-  passed: false,
+  passed: true,
   msg: "DEBUG"
 };
 try {
