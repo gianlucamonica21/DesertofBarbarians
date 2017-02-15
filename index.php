@@ -395,13 +395,8 @@ $conn = null;
                 // Convert current level number to string
                 $levelNumber = $_SESSION["level"];
                 $levelString = "$levelNumber";
-                if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
-                  // Load user solution file
-                  echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
-                } else {
                   // Load default file
                  echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
-               }
                 // Load base game
                echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
                 // Start game
@@ -778,13 +773,12 @@ $conn = null;
   <script type="text/javascript" src="js/badge.js"></script>
   <script type="text/javascript" src="js/startDoc.js"></script>
   <script type="text/javascript" src="js/startIntro.js"></script>
+  <script type="text/javascript" src="js/gameOver.js"></script>
   <script type="text/javascript" src="js/startIntroLv1.js"></script> 
   <script type="text/javascript" src="js/gameOver.js"></script>
   <script type="text/javascript" src="js/startLevelPassed.js"></script>  
   <script type="text/javascript" src="js/startLevelNotPassed.js"></script>
-
   <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
-
   <script type="text/javascript">
     var score =  '<?php echo intval($_SESSION["totalScore"]) ?>'  ;
     if(score == 0){
