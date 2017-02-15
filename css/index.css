@@ -64,7 +64,7 @@ body {
 }
 #divchat{
  width: 520px;
- height: 820px;
+height: 812px;
 }
 
 #divchatmain{
@@ -78,7 +78,7 @@ body {
 }
 
 #chat{
- height: 765px;
+ height: 722px;
 }
 
 #chatthread{
@@ -142,8 +142,12 @@ body {
   border-color: #18bc9c;
 }
 
+.row{
+      margin-left: -50;
+}
 #footer{
   margin-top: 200px;
+  margin-left: 51.5px;
 }
 
 #docButton{
@@ -249,15 +253,20 @@ body {
   .primary-color{
    background-color: indianred;
  }
+ 
+ #editormargin{
+
+      margin-left: 30px;
+ }
 
  .col-md-12{
   left: -13px;
   bottom: 15px;
 }
 
-/*#miscom{
-  height: 480px;
-  }*/
+#miscom{
+     margin-left: 51.5;
+  }
 
   .image-general{
     width: 100px;
