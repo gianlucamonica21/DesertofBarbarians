@@ -2,7 +2,7 @@ document.getElementById("login-form").onsubmit = function (event) {
 	event.preventDefault();
 	var username = document.forms["login-form"]["lg_username"].value;
 	var password = document.forms["login-form"]["lg_password"].value;
-
+	//alert("password " + password);
 	if (username === "" || password === "") {
 		errorMsg = 'Both fields are required!';
 		var errorMessageElement = document.getElementsByClassName("login-form-main-message");

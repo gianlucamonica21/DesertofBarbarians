@@ -138,7 +138,7 @@ function badge(){
 		}
 		else{
 			$("#notificationModal").modal('hide');
-			location.reload();
+			//location.reload();
 		}
 	});
 

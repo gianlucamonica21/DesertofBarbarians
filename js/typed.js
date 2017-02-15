@@ -403,7 +403,7 @@
 		strings: ["These are the default values...", "You know what you should do?", "Use your own!", "Have a great day!"],
 		stringsElement: null,
 		// typing speed
-		typeSpeed: 0,
+		typeSpeed: 100,
 		// time before typing starts
 		startDelay: 0,
 		// backspacing speed

@@ -37,7 +37,7 @@ $conn = null;
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
   console.log("Livello massimo: " + maxlevel);
- 
+  
   var ownedBadges = '<?php echo json_encode($_SESSION['achievementsId']);?>';
   console.log("Owned: " + ownedBadges);
   var top = '<?php echo $_SESSION['top'];?>';
@@ -144,14 +144,14 @@ $conn = null;
 
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
-           <a  type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+           <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
             <span ><?php echo "Level: ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
 
           <ul>
-            <a id="displayscorerank" type="button" class="btn btn-default btn-lg navbar-btn text-center"  >
+            <a id="displayscorerank"  class="btn btn-lg navbar-btn text-center"  >
               <ul id="ul">
                 <span id="spanUser"><?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
 
@@ -195,7 +195,7 @@ $conn = null;
             </ul>
           </li>
           <li>
-            <a type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
+            <a id="bye" type="button" class="btn btn-default btn-lg navbar-btn text-center" href="logout.php" >
               <span id="spanUser">Welcome <?php echo $current_player ?>!</span><br> Logout
             </a>
           </li>
@@ -280,6 +280,37 @@ $conn = null;
 
             }
           });
+
+          upgradeLevelBar();      
+          function upgradeLevelBar(){
+            var lmax = maxlevel;
+            console.log("lmax"+lmax);
+            for(var i=1; i<=9; i++){
+              if( i >= 1 && i <= 3){
+                document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
+                document.getElementById("col"+i).style.backgroundColor="indianred";
+              }else
+              if( i >= 4 && i <= 6){
+                document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
+                document.getElementById("col"+i).style.backgroundColor="steelblue";
+
+              }else
+              if( i >= 7 && i <= 9){
+                document.getElementById("timebarlv"+i).style.backgroundColor="coral";
+                if(i<9){
+                  document.getElementById("col"+i).style.backgroundColor="coral";
+                }
+              }
+              if(i > lmax){
+               document.getElementById("textbarlv"+i).style.color="#2c3e50";
+               document.getElementById("timebarlv"+i).style.backgroundColor="beige";
+               if(i<9){
+                document.getElementById("col"+i).style.backgroundColor="beige";
+              }
+            }
+          }
+        };
+
         
 
 
@@ -294,6 +325,7 @@ $conn = null;
       <div  class="panel-heading">Editor</div>
       <div class="panel-body" >
         <textarea id="editor"></textarea>
+      <!--   <div class="btn-group"> -->
         <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
           <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
         </button>
@@ -309,6 +341,16 @@ $conn = null;
         <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
           <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
         </button>
+        <!-- </div> -->
+        <script type="text/javascript">
+          $("#docButton").click(function() {
+
+            javascript:
+                  //introJs().
+                  startDoc();
+                });
+
+              </script>
               <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
                 <i class="fa fa-play" aria-hidden="true"></i>
               </button>
@@ -361,14 +403,27 @@ $conn = null;
              </canvas>
              <!--CONSOLE -->
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
+              <div id="controllerbody" class="panel-body">
+               <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
+              <br>
+                  
+                 </button> -->
+                 <button  class="btn btn-success " id="nextButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+          <i id="nextButtonSymbol" class="fa fa-forward" aria-hidden="true"></i>
+        </button>
 
+                <script type="text/javascript">
+                  document.getElementById('nextButton').style.visibility='hidden';
+                </script>
+
+
+              </div>
                <div class="panel-heading"></div>
              </div>
            </div>
          </div>
        </div>
-
-       <footer>
+       <footer id="footer">
         <div class="row">
           <div class="col-lg-12">
             <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
@@ -632,201 +687,92 @@ $conn = null;
       </div>
     </div>
   </div>
+</div>
 
+<!-- LEADERBOARD MODAL -->
+<div class="modal" id="leaderboardModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Leaderboard</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-hover table-bordered ">
+          <thead>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>Username</th>
+              <th>Points</th>
+              <th>Badges</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardbody">
 
-  <!-- LEADERBOARD MODAL -->
-  <div class="modal" id="leaderboardModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Leaderboard</h4>
-        </div>
-        <div class="modal-body">
-          <table class="table table-striped table-hover table-bordered ">
-            <thead>
-              <tr>
-                <!-- <th>#</th> -->
-                <th>Username</th>
-                <th>Points</th>
-                <th>Badges</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboardbody">
+          </tbody>
+        </table>
+      </div>
+      <script type="text/javascript">
+        $('#leaderboardTutorial').click(function() {
+          var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
+          var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
+          var leaderBadges = '<?php  echo json_encode($_SESSION['leaderBadges']); ?>';
+          var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
+          console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores + "leaderBadges: " + leaderBadges);
 
-            </tbody>
-          </table>
-        </div>
-        <script type="text/javascript">
-          $('#leaderboardTutorial').click(function() {
-            var leaderNames = '<?php  echo json_encode($_SESSION['leaderNames']); ?>';
-            var leaderScores = '<?php  echo json_encode($_SESSION['leaderScores']); ?>';
-            var leaderBadges = '<?php  echo json_encode($_SESSION['leaderBadges']); ?>';
-            var number = '<?php  echo json_encode($_SESSION['NUMBER']); ?>';
-            console.log("leadernames: " + leaderNames + "leaderScores: " + leaderScores + "leaderBadges: " + leaderBadges);
-
-            $("#leaderboardbody").empty();
-            for(var i = 0;i < number; i++){
-              console.log("n: " + i);
-              $("#leaderboardbody").append(
-                $('<tr>')
-                .attr('id','player' + i)
-                );
-              $("#player" + i).append(
-                $('<td>')
-                .text((JSON.parse(leaderNames)[i])),
-                $('<td>')
-                .text((JSON.parse(leaderScores)[i])),
-                $('<td>')
-                .text((JSON.parse(leaderBadges)[i]))
-                );
-            }
-            clicked = false;
-          });
-        </script>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+          $("#leaderboardbody").empty();
+          for(var i = 0;i < number; i++){
+            console.log("n: " + i);
+            $("#leaderboardbody").append(
+              $('<tr>')
+              .attr('id','player' + i)
+              );
+            $("#player" + i).append(
+              $('<td>')
+              .text((JSON.parse(leaderNames)[i])),
+              $('<td>')
+              .text((JSON.parse(leaderScores)[i])),
+              $('<td>')
+              .text((JSON.parse(leaderBadges)[i]))
+              );
+          }
+          clicked = false;
+        });
+      </script>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
-  <footer>
+  <!-- <footer>
     <div class="row">
       <div class="col-lg-12">
         <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
         <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-</div>
 
-<script type="text/javascript" src="js/editor.js"></script>
-<script type="text/javascript" src="js/default.js"></script>
-<script type="text/javascript" src="js/badge.js"></script>
-<script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
-<script type="text/javascript">
 
-  function startIntro(){
-    var intro = introJs();
-    intro.setOptions({
-      steps: [
-      {
-        intro: "<img src='img/general.png' class='image-general center-block'/> <br>" +
-        " <h3>Welcome to the Bastiani Fortress, recruit!</h3>" + 
-        "I am General Drogo, and I have been guarding this encampment for many years from the barbarian horde rumored to live beyond this desert. I had begun to believe it was just that - a rumor. But now, after decades, suddenly the horde has decided to attack our old and unmaintaned fortress. And let me tell you - they are not the kind of barbarian horde you see in the movies, recruit. They have missiles, and an automated system which is light years ahead of ours. Our old lead developer is long gone now, so we need someone to fix and update our anti-missile system quickly before our camp is completely destroyed. You have been called here because you are the only one who knows anything about this new technology and programming stuff. Our survival depends on you, recruit! "
-      }
-      ,
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/default.js"></script>
+  <script type="text/javascript" src="js/badge.js"></script>
+  <script type="text/javascript" src="js/startDoc.js"></script>
+  <script type="text/javascript" src="js/startIntro.js"></script>
+    <script type="text/javascript" src="js/gameOver.js"></script>
+  <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
 
-      {
-        element: document.querySelector('#chat'),
-        position: 'left',
-        intro: "This is where you will receive your instructions and/or hints."
-      },
-      {
-        element: document.querySelector('#editorpanel'),
-        intro: "This is where you code to fix the bugs!",
-        position: 'right'
-      },
-      {
-        element: document.querySelector('#gamepanel'),
-        intro: 'This is the game, play to see your changes!',
-        position: 'left'
-      },
-      {
-        element: document.querySelector('#submitButton'),
-        intro: 'Click here to update the game code!',
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#evaluateButton'),
-        intro: 'Click here to evaluate your code, if the solution is right you will go to the next level!',
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#refreshButton'),
-        intro: 'Click here to remove your last updates in the code!',
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#hintButton'),
-        intro: "If you are stuck, you can ask for help to a soldier which had been assigned as our old lead developer's assistant. Maybe he has more of an idea on how the system works!",
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#docButton'),
-        intro: 'Click here to read the surviving documentation!',
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#returnButton'),
-        intro: 'Click here to resume the game from the pause!',
-        position: 'top'
-      },
-      {
-        element: document.querySelector('#profileTutorial'),
-        intro: 'Click here to view your statistics!',
-        position: 'bottom'
-      },
-      {
-        element: document.querySelector('#levelsTutorial'),
-        intro: 'Click here to view the locked and unlocked levels!',
-        position: 'bottom'
-      },
-      {
-        element: document.querySelector('#leaderboardTutorial'),
-        intro: 'Click here to view the leaderboard, check your ranking!',
-        position: 'bottom'
-      },
-      {
-        element: document.querySelector('#logoutTutorial'),
-        intro: 'Click here to logout :(',
-        position: 'bottom'
-      },
-      {
-        element: document.querySelector('#tutorialbutton'),
-        intro: 'Click here if you want to see the tutorial again!',
-        position: 'bottom'
-      }
+  <script type="text/javascript">
+    var score =  '<?php echo intval($_SESSION["totalScore"]) ?>'  ;
+    if(score == 0){
+      startIntro();
+    }
+  </script>
 
-      ]
-    });
-    intro.start();
-  }
 
-</script>
-<script type="text/javascript">
-    upgradeLevelBar();      
-        function upgradeLevelBar(){
-          var lmax = maxlevel;
-          console.log("lmax"+lmax);
-          for(var i=1; i<=9; i++){
-            if( i >= 1 && i <= 3){
-              document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
-              document.getElementById("col"+i).style.backgroundColor="indianred";
-            }else
-            if( i >= 4 && i <= 6){
-              document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
-              document.getElementById("col"+i).style.backgroundColor="steelblue";
-
-            }else
-            if( i >= 7 && i <= 9){
-              document.getElementById("timebarlv"+i).style.backgroundColor="coral";
-              if(i<9){
-                document.getElementById("col"+i).style.backgroundColor="coral";
-              }
-            }
-            if(i > lmax){
-             document.getElementById("textbarlv"+i).style.color="#2c3e50";
-             document.getElementById("timebarlv"+i).style.backgroundColor="beige";
-             if(i<9){
-              document.getElementById("col"+i).style.backgroundColor="beige";
-            }
-          }
-        }
-       };
-</script>
-<noscript>You need to turn JavaScript on.</noscript>
+  <noscript>You need to turn JavaScript on.</noscript>
 </body>
 </html>
