@@ -4,5 +4,5 @@ var gggs;
     var distancePerFrame = 12;
 
     var speed = distance / distancePerFrame;
-var i = 6;
+return speed;
 };

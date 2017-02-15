@@ -124,11 +124,17 @@
     editor.off('beforeChange',readOnlyLinesHandler);
     $.get(filepath, function(data) {
       editor.setValue(data);
-      editor.on('beforeChange',readOnlyLinesHandler);
-      for (i=0;i<readOnlyLinesArray.length;i++){
-        editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
-      }
-    });
+          // Get the read only lines for this level and set handler
+          $.getJSON('getReadOnlyLines.php', function(data) {
+            editor.on('beforeChange', readOnlyLinesHandler);
+            $.each(data, function(key, val) {
+              readOnlyLinesArray[key] = parseInt(val);
+           //   console.log("rolarray", readOnlyLinesArray);
+           window.editor.addLineClass(readOnlyLinesArray[key], 'background', 'disabled');
+
+         });
+          });
+        });
 
   });
 });
