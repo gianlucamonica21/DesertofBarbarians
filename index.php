@@ -762,6 +762,7 @@ $conn = null;
   <script type="text/javascript" src="js/badge.js"></script>
   <script type="text/javascript" src="js/startDoc.js"></script>
   <script type="text/javascript" src="js/startIntro.js"></script>
+  <script type="text/javascript" src="js/startIntroLv1.js"></script> 
     <script type="text/javascript" src="js/gameOver.js"></script>
   <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
 
