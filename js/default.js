@@ -127,7 +127,6 @@
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/level" + currentLevel + ".js";
     editor.off('beforeChange',readOnlyLinesHandler);
-<<<<<<< HEAD
 
 
 
