@@ -48,11 +48,7 @@
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
-      var data = new FormData();
-      data.append("data", window.editor.getValue());
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open('post', 'SaveToFile.php', true);
-      xhr.send(data);
+      $.post( "SaveToFile.php", window.editor.getValue());
       // Inject code inside the game
       var newFunction = parseCode(window.editor.getValue());
       eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
@@ -118,11 +114,7 @@ $('#evaluateButton').click(function() {
 };
 try {
       // scrittura su file modificato nell'editor
-      var data = new FormData();
-      data.append("data", window.editor.getValue());
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open('post', 'SaveToFile.php', true);
-      xhr.send(data);
+      $.post( "SaveToFile.php", window.editor.getValue());
 
     } catch (err) {
       console.log("Cannot save file.");
@@ -136,11 +128,7 @@ try {
       console.log("unlockedbadgeQueue LENGTH: " + unlockedbadgeQueue.length);
 
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
-        var data = new FormData();
-        data.append("data", unlockedbadgeQueue[i]);
-        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-        xhr.open("post", "DBConnection/add_badge.php", true);
-        xhr.send(data);
+        $.post( "DBConnection/add_badge.php", unlockedbadgeQueue[i]);
       }
 
       // Code to reload and reupdate the level
@@ -151,15 +139,20 @@ try {
       };
       oReq.open("get", "DBConnection/load_player.php", true);
       oReq.send();
+      $.get( "DBConnection/load_player.php", function( data ) {
+        stringa = data;
+      });
+      var data = new FormData();
 
+      var firstPromise = $.get( "DBConnection/load_player.php");
+      var secondPromise = $.post( "DBConnection/nextlevel.php", difference);
+      var tre         = $.post("DBConnection/load_level_x.php", data);
+      $.when(firstPromise, secondPromise).done(function(firstData, secondData, tre) {
+        console.log("all promise finished ", firstData, secondData, tre);
+      });
       // Carica dati del prossimo livello
-      var data = new FormData();
-      data.append("data", difference);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/nextlevel.php", true);
-      xhr.send(data);
+      $.post( "DBConnection/nextlevel.php", difference);
 
-      var data = new FormData();
       data.append("data", 0);
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
       // request.onreadystatechange = function()
@@ -182,6 +175,8 @@ try {
 
 
       xhr.send(data);
+    $.post( "DBConnection/load_level_x.php", difference);
+
       //upgradeLevelBar();
 
 
@@ -244,9 +239,9 @@ function writeChatMessage(msgString, sender, goToNextLevel){
       callback: function() {
         $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
         if (goToNextLevel){
-          setTimeout(function() {
+          /*setTimeout(function() {
             location.reload();
-          }, 3000);
+          }, 20000);*/
         }
       }
     })
