@@ -15,16 +15,16 @@
       {
         element: document.querySelector('#miscom'),
         position: 'left',
-        intro: "This is the game!"
+        intro: "This is the simulator, check it and play it to observe your updates!"
       },
       {
         element: document.querySelector('#editorpanel'),
-        intro: "This is where you code to fix the bugs! When you start coding the game will pause!",
+        intro: "This is where you code to fix the bugs!<br>REMEMBER: when you start coding the simulator will pause!",
         position: 'right'
       },
       {
         element: document.querySelector('#miscom'),
-        intro: 'Reclick here to resume the game from the pause!',
+        intro: 'Reclick here to resume the simulator from the pause!',
         position: 'left'
       },
       {
@@ -34,8 +34,13 @@
       },
       {
         element: document.querySelector('#submitButton'),
-        intro: 'Click here to update the game code!',
+        intro: 'Click here to update the simulator code!',
         position: 'top'
+      },
+        {
+        element: document.querySelector('#miscom'),
+        intro: 'Play it to verify the changes!',
+        position: 'left'
       },
       {
         element: document.querySelector('#evaluateButton'),
@@ -59,7 +64,7 @@
       },
       {
         element: document.querySelector('#timebarlv9'),
-        intro: 'The more you pass the levels the more this bar fill, until you reach the last level. The levels will be colored with different color according to the type of the problem to solve.',
+        intro: 'The more you pass the levels the more this bar will fill, until you reach the last level. The levels will be colored with different color according to the type of the problem to solve.',
         position: 'down'
       },
       {
@@ -85,7 +90,7 @@
       },
       {
         element: document.querySelector('#leaderboardTutorial'),
-        intro: 'Click here to watch the best scores list! Check your presence!',
+        intro: 'Click here to watch the highest scores list! Check your presence!',
         position: 'bottom'
       },
 

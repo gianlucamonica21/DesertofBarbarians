@@ -140,12 +140,12 @@ $('#evaluateButton').click(function() {
     difference = (finishedCoding - startedCoding) / 1000;
     console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
- //   var result = userSolutionChecker();
+ var result = userSolutionChecker();
 
- var result = {
-  passed: true,
-  msg: "DEBUG"
-};
+//  var result = {
+//   passed: true,
+//   msg: "DEBUG"
+// };
 try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
@@ -170,6 +170,10 @@ try {
       console.log("unlockedbadgeQueue LENGTH: " + unlockedbadgeQueue.length);
 
 
+      if( level == 1 && score == 0){
+
+         startIntroLv1();
+      }
       if(level == 9){
         gameOver(); 
       }
