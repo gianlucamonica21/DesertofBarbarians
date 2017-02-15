@@ -4,8 +4,8 @@ var playerShoot = function( x, y ) {
       if( source === -1 ){ // No missiles left
         return;
       }
-      var dx = 35;
-      var dy = 25;
+      var dx = 65;
+      var dy = 95;
       playerMissiles.push( new PlayerMissile( source, x + dx, y + dy ) );
     }
 };
