@@ -1,12 +1,12 @@
   var stoppedGame = false;
   var widgets = [];
   var readOnlyLinesArray = [];
-  // Get read only lines array
+  /* Get read only lines array
   $.getJSON('getReadOnlyLines.php', function (data) {
     $.each(data, function(key, val) {
       readOnlyLinesArray[key] = val;
     });
-  });
+  }); */
 
   
   // set editor by CodeMirror function
@@ -73,12 +73,14 @@
           editor.setValue(xhr.responseText);
 
           $.getJSON('getReadOnlyLines.php', function (data) {
+            console.log("data",data);
+            editor.on('beforeChange',readOnlyLinesHandler);
+
             $.each(data, function(key, val) {
-              readOnlyLinesArray[key] = val;
-              editor.on('beforeChange',readOnlyLinesHandler);
-              for (i=0;i<readOnlyLinesArray.length;i++){
-                editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
-              }
+              readOnlyLinesArray[key] = parseInt(val);
+              console.log("rolarray",readOnlyLinesArray);
+              window.editor.addLineClass( readOnlyLinesArray[key], 'background', 'disabled');
+    
             });
           });
         } else {
