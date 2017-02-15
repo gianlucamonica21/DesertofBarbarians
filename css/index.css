@@ -50,6 +50,9 @@ span.icon {
 body {
   padding-top: 140px;
   font-size: 17px;
+
+/*overflow-y:hidden;*/
+
 }
 
 #gamepanel{
@@ -206,6 +209,7 @@ body {
   }
   .level-buttons{
     font-size: 19px;
+        font-weight: bolder;
   }
   .one, .two, .three, .four, .five, .six, .seven, .eight{
     position:absolute;

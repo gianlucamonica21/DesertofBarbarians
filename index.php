@@ -335,12 +335,16 @@ $conn = null;
         <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
           <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
         </button>
+  
+        <span class="dochint">
         <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
           <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
         </button>
         <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
           <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
         </button>
+        </span>
+
         <!-- </div> -->
         <script type="text/javascript">
           $("#docButton").click(function() {
@@ -766,6 +770,9 @@ $conn = null;
   <script type="text/javascript" src="js/startIntro.js"></script>
   <script type="text/javascript" src="js/startIntroLv1.js"></script> 
     <script type="text/javascript" src="js/gameOver.js"></script>
+    <script type="text/javascript" src="js/startLevelPassed.js"></script>  
+      <script type="text/javascript" src="js/startLevelNotPassed.js"></script>
+
   <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
 
   <script type="text/javascript">

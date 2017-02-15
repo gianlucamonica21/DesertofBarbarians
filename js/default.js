@@ -140,12 +140,12 @@ $('#evaluateButton').click(function() {
     difference = (finishedCoding - startedCoding) / 1000;
     console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
- var result = userSolutionChecker();
+ //var result = userSolutionChecker();
 
-//  var result = {
-//   passed: true,
-//   msg: "DEBUG"
-// };
+ var result = {
+  passed: false,
+  msg: "DEBUG"
+};
 try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
@@ -174,12 +174,16 @@ try {
 
          startIntroLv1();
       }
-      if(level == 9){
+      // else
+      // if( level >= 2 && level <=8){
+      //    startLevelPassed();
+      // }
+       if(level == 9){
         gameOver(); 
       }
       else{
        document.getElementById('nextButton').style.visibility='visible';
-
+      
      }
      
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
@@ -197,6 +201,7 @@ try {
 
     } else {
       // Level not passed
+      startLevelNotPassed();
       writeChatMessage(result.msg, "generalMsg",false);
     }
   } else {
