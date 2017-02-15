@@ -59,7 +59,7 @@
       },
       {
         element: document.querySelector('.col-md-12'),
-        intro: 'This bar shows you the locked and unlocked levels!Click the unlocked levels you want to play!',
+        intro: 'This bar shows you the locked and unlocked levels!Click the unlocked levels you want to play!<br>REMEMBER: click the number, not the bar!',
         position: 'down'
       },
       {
