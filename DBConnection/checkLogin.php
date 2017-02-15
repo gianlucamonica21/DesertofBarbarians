@@ -116,8 +116,8 @@ try {
 		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
 		$user_query->bindParam(':login', $login);
 		$user_query->execute();
-		$user_rows = $user_query->fetch();
-		$total_score = $user_rows["score"];
+		$user_rows2 = $user_query->fetch();
+		$total_score = $user_rows2["score"];
 		$_SESSION['totalScore'] = $total_score;
 
 		// Estrai grado
