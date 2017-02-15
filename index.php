@@ -325,6 +325,7 @@ $conn = null;
       <div  class="panel-heading">Editor</div>
       <div class="panel-body" >
         <textarea id="editor"></textarea>
+      <!--   <div class="btn-group"> -->
         <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
           <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
         </button>
@@ -340,6 +341,7 @@ $conn = null;
         <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
           <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
         </button>
+        <!-- </div> -->
         <script type="text/javascript">
           $("#docButton").click(function() {
 
@@ -401,7 +403,21 @@ $conn = null;
              </canvas>
              <!--CONSOLE -->
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
+              <div id="controllerbody" class="panel-body">
+               <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
+              <br>
+                  
+                 </button> -->
+                 <button  class="btn btn-success " id="nextButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+          <i id="nextButtonSymbol" class="fa fa-forward" aria-hidden="true"></i>
+        </button>
 
+                <script type="text/javascript">
+                  document.getElementById('nextButton').style.visibility='hidden';
+                </script>
+
+
+              </div>
                <div class="panel-heading"></div>
              </div>
            </div>
@@ -409,7 +425,7 @@ $conn = null;
        </div>
 
 
-       <footer>
+       <footer id="footer">
         <div class="row">
           <div class="col-lg-12">
             <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>

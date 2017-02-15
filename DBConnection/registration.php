@@ -40,7 +40,7 @@
     </div>
     <!-- LOGIN FORM -->
     <div id="loginform" class="text-center center-form" style="padding:20px 0">
-      <div id="logo" class="logo">Login</div>
+      <div id="logo" class="logo">Registration</div>
       <!-- Main Form -->
       <div class="login-form-1">
         <form name="registration" id="registration" method="POST">

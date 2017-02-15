@@ -63,15 +63,45 @@
   });
 
   // RESTART GAME BUTTON
-  $('#returnButton').click(function() {
+  $('#nextButton').click(function() {
 
-    //nextFrame();
-    if (stoppedGame) {
-      startLevel();
-      stoppedGame = false;
-      $('#returnButton').addClass("disabled");
-    }
-  });
+    
+
+      // // Code to reload and reupdate the level
+      var stringa;
+      var oReq = new XMLHttpRequest(); //New request object
+      oReq.onload = function() {
+        stringa = this.responseText;
+      };
+      oReq.open("get", "DBConnection/load_player.php", true);
+      oReq.send();
+
+      // // Carica dati del prossimo livello
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
+
+      var data = new FormData();
+      data.append("data", 0);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+      var stringa;
+      xhr.onload = function() {
+        stringa = this.responseText;
+      };
+      xhr.open("post", "DBConnection/load_level_x.php", true);
+      xhr.onreadystatechange = function () {
+       if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+
+       }
+     };
+      xhr.send(data);
+      
+
+     location.reload();
+
+   });
 
   // HINT BUTTON
 
@@ -129,56 +159,36 @@ try {
     }
 
     if (result.passed == true) {
+
+     
+
+
       writeChatMessage(result.msg,"generalMsg",true);
       // Unlock badges (if necessary)
       var unlockedbadgeQueue = [];
       unlockedbadgeQueue = badge();
       console.log("unlockedbadgeQueue LENGTH: " + unlockedbadgeQueue.length);
 
+
       if(level == 9){
         gameOver(); 
       }
+      else{
+       document.getElementById('nextButton').style.visibility='visible';
+
+     }
+     
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
-        var data = new FormData();
-        data.append("data", unlockedbadgeQueue[i]);
-        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-        xhr.open("post", "DBConnection/add_badge.php", true);
-        xhr.send(data);
-      }
-
-      // Code to reload and reupdate the level
-      var stringa;
-      var oReq = new XMLHttpRequest(); //New request object
-      oReq.onload = function() {
-        stringa = this.responseText;
-      };
-      oReq.open("get", "DBConnection/load_player.php", true);
-      oReq.send();
-
-      // Carica dati del prossimo livello
       var data = new FormData();
-      data.append("data", difference);
+      data.append("data", unlockedbadgeQueue[i]);
       var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.open("post", "DBConnection/add_badge.php", true);
       xhr.send(data);
-
-      var data = new FormData();
-      data.append("data", 0);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
-      var stringa;
-      xhr.onload = function() {
-        stringa = this.responseText;
-      };
-      xhr.open("post", "DBConnection/load_level_x.php", true);
-       xhr.onreadystatechange = function () {
-         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-
-         }
-       };
+    }
 
 
-      xhr.send(data);
-      
+
+
 
 
     } else {
@@ -241,7 +251,7 @@ function writeChatMessage(msgString, sender, goToNextLevel){
         $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
         if (goToNextLevel){
           setTimeout(function() {
-            location.reload();
+            //location.reload();
           }, 3000);
         }
       }

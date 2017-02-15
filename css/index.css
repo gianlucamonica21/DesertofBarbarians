@@ -92,7 +92,7 @@ body {
 }
 
 #submitButton{
- width: 146px;
+ width: 160px;
  height: 60px;
 }
 
@@ -101,7 +101,7 @@ body {
 }
 
 #evaluateButton{
- width: 148px;
+ width: 160px;
  height: 60px;
 }
 
@@ -110,7 +110,7 @@ body {
 }
 
 #hintButton{
- width: 148px;
+ width: 160px;
  height: 60px;
 }
 
@@ -120,7 +120,7 @@ body {
 }
 
 #refreshButton{
- width: 148px;
+ width: 160px;
  height: 60px;
 }
 
@@ -129,14 +129,22 @@ body {
 
 }
 
-#returnButton{
+#nextButton{
   width: 509px;
   height: 60px;
-  font-size: 25px;
+  font-size: 22px;
+  margin-top: 25px;
+  color: #ffffff;
+  background-color: #18bc9c;
+  border-color: #18bc9c;
+}
+
+#footer{
+  margin-top: 200px;
 }
 
 #docButton{
-  width: 148px;
+  width: 100px;
   height: 60px;
   font-size: 25px;
   background-color: green;
@@ -173,82 +181,82 @@ body {
 
 /*#textbar{
   font-color: white;
-}*/
+  }*/
 
-#ul{
-  margin-right: 45px;
-  color: white;
-}
-.progress.active .progress-bar {
-  -webkit-transition: none !important;
-  transition: none !important;
-}
+  #ul{
+    margin-right: 45px;
+    color: white;
+  }
+  .progress.active .progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
 
-#displayscorerank{
-  width: 350px;
-}
+  #displayscorerank{
+    width: 350px;
+  }
 
-.disabled{
-  background-color: beige !important;
-  background: beige !important;
-}
+  .disabled{
+    background-color: beige !important;
+    background: beige !important;
+  }
 
-#lev{
-  height: 82.97px;
-}
-.level-buttons{
-  font-size: 19px;
-}
-.one, .two, .three, .four, .five, .six, .seven, .eight{
+  #lev{
+    height: 82.97px;
+  }
+  .level-buttons{
+    font-size: 19px;
+  }
+  .one, .two, .three, .four, .five, .six, .seven, .eight{
     position:absolute;
-  margin-top:-10px;
-  z-index:1;
-  height:35px;
-  width:35px;
-  border-radius:25px;
-  background-color: indianred;
+    margin-top:-10px;
+    z-index:1;
+    height:35px;
+    width:35px;
+    border-radius:25px;
+    background-color: indianred;
 
-}
-.one{
-  left:11.1%;
-}
-.two{
-  left:22.2%;
-}
-.three{
-  left:33.3%;
-}
-.four{
-  left:44.4%;
-}
-.five{
-  left:55.5%;
-}
-.six{
-  left:66.6%;
-}
-.seven{
-  left:77.7%;
-}
-.eight{
-  left:88.8%;
-}
+  }
+  .one{
+    left:11.1%;
+  }
+  .two{
+    left:22.2%;
+  }
+  .three{
+    left:33.3%;
+  }
+  .four{
+    left:44.4%;
+  }
+  .five{
+    left:55.5%;
+  }
+  .six{
+    left:66.6%;
+  }
+  .seven{
+    left:77.7%;
+  }
+  .eight{
+    left:88.8%;
+  }
 
-.primary-color{
- background-color: indianred;
-}
+  .primary-color{
+   background-color: indianred;
+ }
 
-.col-md-12{
+ .col-md-12{
   left: -13px;
-    bottom: 15px;
+  bottom: 15px;
 }
 
 /*#miscom{
   height: 480px;
-}*/
+  }*/
 
-.image-general{
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-}
+  .image-general{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
