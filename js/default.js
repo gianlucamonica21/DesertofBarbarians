@@ -119,9 +119,20 @@
   // REFRESH BUTTON
   $('#refreshButton').click(function() {
 
+    $("#reset-modal-title").text('ATTENTION!');
+      $("#modal-textreset").text('Do you want to reset your updates?');
+      $("#image-modal").attr('src', '');
+      $("#resetModal").modal('show');
+
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/level" + currentLevel + ".js";
     editor.off('beforeChange',readOnlyLinesHandler);
+
+
+
+
+    $("#closeModalY").click(function() {
+
     $.get(filepath, function(data) {
       editor.setValue(data);
           // Get the read only lines for this level and set handler
@@ -135,6 +146,23 @@
          });
           });
         });
+
+      $("#resetModal").modal('hide');
+    });
+
+    $("#closeModalN").click(function() {
+      
+    
+      $("#resetModal").modal('hide');
+    });
+
+
+
+
+
+
+    
+    
 
   });
 });

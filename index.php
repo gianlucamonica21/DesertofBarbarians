@@ -60,6 +60,7 @@ $conn = null;
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link href="plugin/codemirror/lib/codemirror.css" rel="stylesheet">
 
+
   <!-- TUTORIAL -->
   <!-- <link href="intro.js-2.4.0/example/assets/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="intro.js-2.4.0/example/assets/css/demo.css" rel="stylesheet">
@@ -349,7 +350,7 @@ $conn = null;
         <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
           <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
         </button>
-        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
+        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Reset" >
           <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
         </button>
 
@@ -601,6 +602,28 @@ $conn = null;
 
 
   </script>
+
+  <!-- NOTIFICATION RESET MODAL -->
+          <div class="modal" id="resetModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 id="reset-modal-title" class="modal-title">BADGE!!</h4>
+                </div>
+                <div class="modal-body" style="text-align : center;">
+                  <image id="image-modal" src=""  align="center"> </image>
+                  <!-- src="img/general.png" -->
+                  <p id="modal-textreset" ></p>
+                </div>
+                <div class="modal-footer">
+                 <button type="button" id="closeModalY" class="btn btn-primary" >Yes</button>
+                <button type="button" id="closeModalN" class="btn btn-primary" >No</button>
+               </div>
+             </div>
+           </div>
+         </div>
+         <script type="text/javascript"></script>
 
   <!-- LEVELS MODAL -->
   <div class="modal" id="levelsModal">
