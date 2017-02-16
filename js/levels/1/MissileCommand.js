@@ -879,6 +879,7 @@ var drawPlayerMissiles = function() {
   });
 };
 
+
 // Stop animating a game level
 var stopLevel = function() {
   clearInterval( timerID );
