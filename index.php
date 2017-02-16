@@ -344,6 +344,14 @@ $conn = null;
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
                 </ul>
               </div>
+              <span class="dochint">
+          <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+            <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+          </button>
+          <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+            <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+          </button>
+        </span>
             </div>
           </div>
 
@@ -365,14 +373,7 @@ $conn = null;
           <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
         </button>
 
-        <span class="dochint">
-          <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
-            <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
-          </button>
-          <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
-            <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
-          </button>
-        </span>
+        
 
         <!-- </div> -->
         <script type="text/javascript">
@@ -419,6 +420,14 @@ $conn = null;
              <!--CONSOLE -->
              <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
               <div id="controllerbody" class="panel-body">
+              <div id="playpause">
+                <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="playButton" >
+                  <i id="playButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="pauseButton" >
+                  <i id="playButtonSymbol" class="fa fa-pause" aria-hidden="true"></i>
+                </button>
+                </div>
                <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
               <br>
 
