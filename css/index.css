@@ -50,6 +50,9 @@ span.icon {
 body {
   padding-top: 140px;
   font-size: 17px;
+
+/*overflow-y:hidden;*/
+
 }
 
 #gamepanel{
@@ -61,7 +64,7 @@ body {
 }
 #divchat{
  width: 520px;
- height: 820px;
+height: 812px;
 }
 
 #divchatmain{
@@ -75,7 +78,7 @@ body {
 }
 
 #chat{
- height: 765px;
+ height: 722px;
 }
 
 #chatthread{
@@ -134,13 +137,18 @@ body {
   height: 60px;
   font-size: 22px;
   margin-top: 25px;
+      margin-left: 33px;
   color: #ffffff;
   background-color: #18bc9c;
   border-color: #18bc9c;
 }
 
+.row{
+      margin-left: -50;
+}
 #footer{
   margin-top: 200px;
+  margin-left: 51.5px;
 }
 
 #docButton{
@@ -206,6 +214,7 @@ body {
   }
   .level-buttons{
     font-size: 19px;
+        font-weight: bolder;
   }
   .one, .two, .three, .four, .five, .six, .seven, .eight{
     position:absolute;
@@ -245,15 +254,20 @@ body {
   .primary-color{
    background-color: indianred;
  }
+ 
+ #editormargin{
+
+      margin-left: 30px;
+ }
 
  .col-md-12{
   left: -13px;
   bottom: 15px;
 }
 
-/*#miscom{
-  height: 480px;
-  }*/
+#miscom{
+     margin-left: 51.5;
+  }
 
   .image-general{
     width: 100px;

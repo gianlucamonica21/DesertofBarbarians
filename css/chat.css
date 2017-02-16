@@ -2,10 +2,12 @@
 #chat {
   padding: 20px;
   margin: 0;
-  background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
+/*  background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
   background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
-  background-repeat: no-repeat;
+*/  background-repeat: no-repeat;
   background-attachment: fixed;
+   background: white;
+
 }
 
 ::-webkit-scrollbar {
@@ -65,6 +67,7 @@
   animation: show-chat-even 0.15s 1 ease-in;
   -moz-animation: show-chat-even 0.15s 1 ease-in;
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
+    background-color: darkseagreen;
   float: left;
   margin-left: 80px;
   color: white;
@@ -73,11 +76,13 @@
 .chat-thread li.generalMsg:before {
   left: -80px;
   background-image: url(../img/general-scaled.png);
+     
 }
 
 .chat-thread li.generalMsg:after {
   border-left: 15px solid transparent;
   left: -15px;
+  color: darkseagreen;
 }
 
 .chat-thread li.soldierMsg {
@@ -86,7 +91,7 @@
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
   margin-left: 80px;
-  color: #0EC879;
+  color: #2c3e50;
 }
 
 .chat-thread li.soldierMsg:before {
@@ -105,7 +110,7 @@
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
   margin-left: 80px;
-  color: #0AD5C1;
+  color: darkred;
 }
 
 .chat-thread li.consoleMsg:before {

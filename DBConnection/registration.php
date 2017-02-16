@@ -127,8 +127,8 @@
     $sql_campaign_insertion = "INSERT INTO Campaign ( login, level, score ) VALUES ( :login, :initial_level, :max_score_per_level)";
 
     // r.3 Per inserzione tabella Achieved
-    $initial_achievement = 1;
-    $sql_ach_insertion = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :initial_achievement)";
+    // $initial_achievement = 1;
+    // $sql_ach_insertion = "INSERT INTO Achieved ( login, achievement ) VALUES ( :login, :initial_achievement)";
 
     // r.4 Per inserzione tabella Graduated
     $initial_grade = 1;
@@ -145,15 +145,15 @@
       $result_campaign = $query->execute( array( ':login'=>$username,
        ':initial_level'=>$initial_level,
        ':max_score_per_level'=>$max_score_per_level) );
-      $query = $conn->prepare($sql_ach_insertion);
-      $result_arch = $query->execute( array( ':login'=>$username,
-        ':initial_achievement'=>$initial_achievement) );
+      // $query = $conn->prepare($sql_ach_insertion);
+      // $result_arch = $query->execute( array( ':login'=>$username,
+      //   ':initial_achievement'=>$initial_achievement) );
       $query = $conn->prepare($sql_grade_insertion);
       $result_grade = $query->execute( array( ':login'=>$username,
        ':initial_grade'=>$initial_grade) );
 
       // Solo se tutti gli insert sono andati a buon fine
-      if ( $result_user and $result_campaign and $result_arch and $result_grade){
+      if ( $result_user and $result_campaign and $result_grade){
           //header('location: registered.php');
 
           // $_SESSION['loggedin'] = true;

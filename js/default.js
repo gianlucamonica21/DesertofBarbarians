@@ -119,16 +119,50 @@
   // REFRESH BUTTON
   $('#refreshButton').click(function() {
 
+    $("#reset-modal-title").text('ATTENTION!');
+      $("#modal-textreset").text('Do you want to reset your updates?');
+      $("#image-modal").attr('src', '');
+      $("#resetModal").modal('show');
+
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/level" + currentLevel + ".js";
     editor.off('beforeChange',readOnlyLinesHandler);
+
+
+
+
+    $("#closeModalY").click(function() {
+
     $.get(filepath, function(data) {
       editor.setValue(data);
-      editor.on('beforeChange',readOnlyLinesHandler);
-      for (i=0;i<readOnlyLinesArray.length;i++){
-        editor.addLineClass( readOnlyLinesArray[i], 'background', 'disabled');
-      }
+          // Get the read only lines for this level and set handler
+          $.getJSON('getReadOnlyLines.php', function(data) {
+            editor.on('beforeChange', readOnlyLinesHandler);
+            $.each(data, function(key, val) {
+              readOnlyLinesArray[key] = parseInt(val);
+           //   console.log("rolarray", readOnlyLinesArray);
+           window.editor.addLineClass(readOnlyLinesArray[key], 'background', 'disabled');
+
+         });
+          });
+        });
+
+      $("#resetModal").modal('hide');
     });
+
+    $("#closeModalN").click(function() {
+      
+    
+      $("#resetModal").modal('hide');
+    });
+
+
+
+
+
+
+    
+    
 
   });
 });
@@ -142,10 +176,10 @@ $('#evaluateButton').click(function() {
 
  var result = userSolutionChecker();
 
-//  var result = {
-//   passed: true,
-//   msg: "DEBUG"
-// };
+ /*var result = {
+  passed: false,
+  msg: "DEBUG"
+}; */
 try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
@@ -174,12 +208,16 @@ try {
 
          startIntroLv1();
       }
-      if(level == 9){
+      // else
+      // if( level >= 2 && level <=8){
+      //    startLevelPassed();
+      // }
+       if(level == 9){
         gameOver(); 
       }
       else{
        document.getElementById('nextButton').style.visibility='visible';
-
+      
      }
      
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
@@ -197,6 +235,7 @@ try {
 
     } else {
       // Level not passed
+      startLevelNotPassed();
       writeChatMessage(result.msg, "generalMsg",false);
     }
   } else {
@@ -250,14 +289,9 @@ function writeChatMessage(msgString, sender, goToNextLevel){
     .addClass(sender)
     .typed({
       strings: [msgString],
-      typeSpeed: 10,
+      typeSpeed: 5,
       callback: function() {
         $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
-        if (goToNextLevel){
-          setTimeout(function() {
-            //location.reload();
-          }, 3000);
-        }
       }
     })
     );

@@ -60,6 +60,7 @@ $conn = null;
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link href="plugin/codemirror/lib/codemirror.css" rel="stylesheet">
 
+
   <!-- TUTORIAL -->
   <!-- <link href="intro.js-2.4.0/example/assets/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="intro.js-2.4.0/example/assets/css/demo.css" rel="stylesheet">
@@ -319,28 +320,49 @@ $conn = null;
   </div>
 </div>
 <div class="row">
+
+     <!-- Chat Panel  -->
+            <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
+             <div class="panel panel-default" id="divchat">
+              <div class="panel-heading">Chat</div>
+              <div class="panel-body">
+                <div id="chat" >
+                  <ul class="chat-thread">
+            <!-- <li class="generalMsg">Are we meeting today?</li>
+                  <li class="soldierMsg">yes, what time suits you?</li>
+                  <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
   <!-- Editor panel  -->
-  <div class="col-lg-5 col-md-8 col-sm-7">
+  <div id="editormargin" class="col-lg-5 col-md-8 col-sm-7">
     <div id="editorpanel" class="panel panel-default">
       <div  class="panel-heading">Editor</div>
       <div class="panel-body" >
         <textarea id="editor"></textarea>
-      <!--   <div class="btn-group"> -->
+        <!--   <div class="btn-group"> -->
         <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
           <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
         </button>
         <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
           <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
         </button>
-        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh" >
+        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Reset" >
           <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
         </button>
-        <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
-          <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
-        </button>
-        <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
-          <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
-        </button>
+
+        <span class="dochint">
+          <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+            <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+          </button>
+          <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+            <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+          </button>
+        </span>
+
         <!-- </div> -->
         <script type="text/javascript">
           $("#docButton").click(function() {
@@ -351,20 +373,7 @@ $conn = null;
                 });
 
               </script>
-              <!-- <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" data-step="8" data-intro="Click here to execute your code!">
-                <i class="fa fa-play" aria-hidden="true"></i>
-              </button>
-              <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" data-step="9" data-intro="Click here to evaluate your code!">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </button>
-              <button  class="btn btn-default disabled" id="returnButton">Restart Game</button>
-              <script type="text/javascript"></script>
-              <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Refresh">
-                <i class="fa fa-undo" aria-hidden="true"></i>
-              </button>
-              <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help">
-                <i class="fa fa-question" aria-hidden="true"></i>
-              </button> -->
+
             </div>
           </div>
 
@@ -386,13 +395,8 @@ $conn = null;
                 // Convert current level number to string
                 $levelNumber = $_SESSION["level"];
                 $levelString = "$levelNumber";
-                if(file_exists("js/levels/".$levelString."/".$_SESSION["loggedinUser"].".js")) {
-                  // Load user solution file
-                  echo '<script src="js/levels/'.$levelString.'/'.$_SESSION["loggedinUser"].'.js" type="text/javascript"></script>';
-                } else {
                   // Load default file
                  echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
-               }
                 // Load base game
                echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
                 // Start game
@@ -407,30 +411,30 @@ $conn = null;
                <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
               <br>
 
-                 </button> -->
-                 <button  class="btn btn-success " id="nextButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
-          <i id="nextButtonSymbol" class="fa fa-forward" aria-hidden="true"></i>
-        </button>
+            </button> -->
+            <button  class="btn btn-success " id="nextButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+              <i id="nextButtonSymbol" class="fa fa-forward" aria-hidden="true"></i>
+            </button>
 
-                <script type="text/javascript">
-                  document.getElementById('nextButton').style.visibility='hidden';
-                </script>
+            <script type="text/javascript">
+              document.getElementById('nextButton').style.visibility='hidden';
+            </script>
 
 
-              </div>
-               <div class="panel-heading"></div>
-             </div>
-           </div>
-         </div>
-       </div>
-       <footer id="footer">
-        <div class="row">
-          <div class="col-lg-12">
-            <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-            <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
           </div>
+          <div class="panel-heading"></div>
         </div>
-      </footer>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+      </div>
+    </div>
+  </footer>
               <!--  <div id="progressbar" class="progress" >
                 <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
               </div> -->
@@ -452,22 +456,7 @@ $conn = null;
 
 
 
-            <!-- Chat Panel  -->
-            <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
-             <div class="panel panel-default" id="divchat">
-              <div class="panel-heading">Chat</div>
-              <div class="panel-body">
-                <div id="chat" >
-                  <ul class="chat-thread">
-            <!-- <li class="generalMsg">Are we meeting today?</li>
-                  <li class="soldierMsg">yes, what time suits you?</li>
-                  <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
-                </ul>
-              </div>
-            </div>
-          </div>
 
-        </div>
 
       </div>
       <!-- PROFILE MODAL -->
@@ -613,6 +602,28 @@ $conn = null;
 
 
   </script>
+
+  <!-- NOTIFICATION RESET MODAL -->
+          <div class="modal" id="resetModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 id="reset-modal-title" class="modal-title">BADGE!!</h4>
+                </div>
+                <div class="modal-body" style="text-align : center;">
+                  <image id="image-modal" src=""  align="center"> </image>
+                  <!-- src="img/general.png" -->
+                  <p id="modal-textreset" ></p>
+                </div>
+                <div class="modal-footer">
+                 <button type="button" id="closeModalY" class="btn btn-primary" >Yes</button>
+                <button type="button" id="closeModalN" class="btn btn-primary" >No</button>
+               </div>
+             </div>
+           </div>
+         </div>
+         <script type="text/javascript"></script>
 
   <!-- LEVELS MODAL -->
   <div class="modal" id="levelsModal">
@@ -762,10 +773,17 @@ $conn = null;
   <script type="text/javascript" src="js/badge.js"></script>
   <script type="text/javascript" src="js/startDoc.js"></script>
   <script type="text/javascript" src="js/startIntro.js"></script>
+<<<<<<< HEAD
   <script type="text/javascript" src="js/startIntroLv1.js"></script>
     <script type="text/javascript" src="js/gameOver.js"></script>
+=======
+  <script type="text/javascript" src="js/gameOver.js"></script>
+  <script type="text/javascript" src="js/startIntroLv1.js"></script>
+  <script type="text/javascript" src="js/gameOver.js"></script>
+  <script type="text/javascript" src="js/startLevelPassed.js"></script>
+  <script type="text/javascript" src="js/startLevelNotPassed.js"></script>
+>>>>>>> b4c23c04b2e6856a8a5ef44b9f12d8ebb95ca3bb
   <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
-
   <script type="text/javascript">
     var score =  '<?php echo intval($_SESSION["totalScore"]) ?>'  ;
     if(score == 0){
