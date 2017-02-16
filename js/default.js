@@ -65,7 +65,7 @@
   // RESTART GAME BUTTON
   $('#nextButton').click(function() {
 
-    
+
 
       // // Code to reload and reupdate the level
       var stringa;
@@ -85,7 +85,7 @@
 
       var data = new FormData();
       data.append("data", 0);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
       var stringa;
       xhr.onload = function() {
         stringa = this.responseText;
@@ -97,7 +97,7 @@
        }
      };
       xhr.send(data);
-      
+
 
      location.reload();
 
@@ -151,8 +151,8 @@
     });
 
     $("#closeModalN").click(function() {
-      
-    
+
+
       $("#resetModal").modal('hide');
     });
 
@@ -161,8 +161,8 @@
 
 
 
-    
-    
+
+
 
   });
 });
@@ -204,10 +204,10 @@ $('#evaluateButton').click(function() {
 
  var result = userSolutionChecker();
 
- /*var result = {
-  passed: false,
-  msg: "DEBUG"
-}; */
+ //var result = {
+  //passed: false,
+  //msg: "DEBUG"
+//};
 try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
@@ -222,7 +222,7 @@ try {
 
     if (result.passed == true) {
 
-     
+
 
 
       writeChatMessage(result.msg,"generalMsg",true);
@@ -241,13 +241,13 @@ try {
       //    startLevelPassed();
       // }
        if(level == 9){
-        gameOver(); 
+        gameOver();
       }
       else{
        document.getElementById('nextButton').style.visibility='visible';
-      
+
      }
-     
+
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
       var data = new FormData();
       data.append("data", unlockedbadgeQueue[i]);

@@ -82,7 +82,7 @@ var missileCommand = function(checkLevel) {
   var initializeAntiMissileBatteries = function () {
     $.each( antiMissileBatteries, function( index, amb ) {
       amb.missilesLeft = 0;
-    }); 
+    });
   };
 
   var rechargeAntiMissileBatteries = function () {
@@ -181,7 +181,7 @@ var drawStopMessage = function() {
       $( '#miscom' ).unbind().click(function( event ) {
         var mousePos = getMousePos(this, event);
         playerShoot( mousePos.x, mousePos.y);
-        
+
       });
     });
   }
@@ -692,7 +692,7 @@ BonusMissile.prototype.update = function() {
       this.y = this.endY;
       this.state = MISSILE.exploding;
       this.groundExplosion = true;
-    } 
+    }
     if( this.state === MISSILE.active ) {
       this.x += this.dx;
       this.y += this.dy;
@@ -942,6 +942,9 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
+  $('#pauseButton').removeClass('disabled');
+  $('#playButton').addClass('disabled');
+
   gamestarted = true;
   var fps = 30;
   if (timerID != undefined){
@@ -1001,11 +1004,14 @@ var setupListeners = function() {
   $( '#miscom' ).unbind();
   $( '#mc-container' ).one( 'click', function() {
     startLevel();
+    $('#pauseButton').removeClass('disabled');
+    $('#playButton').addClass('disabled');
+
 
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
       playerShoot( mousePos.x, mousePos.y);
-      
+
     });
   });
 };
@@ -1032,7 +1038,7 @@ function distance(x1,y1,x2,y2){
 function userSolutionChecker(){
   missileCommand(true);
   if (shields.length == 2){
-    if (shields[0].x == shieldPos[0].x && shields[0].y == shieldPos[0].y && 
+    if (shields[0].x == shieldPos[0].x && shields[0].y == shieldPos[0].y &&
       shields[1].x == shieldPos[1].x && shields[1].y == shieldPos[1].y ) {
 
       return {
@@ -1046,7 +1052,7 @@ function userSolutionChecker(){
         msg: "The shields are activated, but the positions aren't the ones we gave you. Do what you are told!"
       }
     }
-    
+
   } else {
     return {
       passed: false,

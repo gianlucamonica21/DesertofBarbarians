@@ -34,6 +34,8 @@ try {
 		$next_grade = $_SESSION['nextGrade'];
 		$next_grade_score = $_SESSION['nextGradeScore'];
 		$next_grade_details = $_SESSION['nextGradeDetails'];
+
+		$basic_score = $_SESSION["levelScores"];
 	} else {
 		echo '<script type="text/javascript">alert("non sei loggato");</script>';
 	}
@@ -48,6 +50,12 @@ try {
 	}
 	else {
 		$new_current_level_score = ((($time_limit - $time_to_finish) / $time_limit) * 100) * $points_coef;
+	}
+
+		/* NUOVA POLITICA PUNTI */
+	if ($current_level < 9 &&
+			$current_level == $max_level) {
+		$new_current_level_score = $new_current_level_score + $basic_score[$current_level];
 	}
 
 	if($new_current_level_score > $old_current_level_score) {
@@ -88,7 +96,6 @@ try {
 		$max_level = $max_level + 1;
 		$_SESSION['maxLevel'] = $max_level;
 	}
-
 	if ($current_level < 9 && $current_level < $max_level) {
 		$current_level = $current_level + 1;
 	}

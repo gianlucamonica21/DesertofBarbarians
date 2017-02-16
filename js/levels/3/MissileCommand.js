@@ -70,7 +70,7 @@ var missileCommand = function(checkLevel) {
   var initializeAntiMissileBatteries = function () {
     $.each( antiMissileBatteries, function( index, amb ) {
       amb.missilesLeft = 0;
-    }); 
+    });
   };
 
  var rechargeAntiMissileBatteries = function () {
@@ -167,7 +167,7 @@ var drawStopMessage = function() {
       $( '#miscom' ).unbind().click(function( event ) {
         var mousePos = getMousePos(this, event);
         playerShoot( mousePos.x, mousePos.y);
-        
+
       });
     });
   }
@@ -887,6 +887,9 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
+  $('#pauseButton').removeClass('disabled');
+  $('#playButton').addClass('disabled');
+
   gamestarted = true;
   var fps = 30;
   if (timerID != undefined){
@@ -946,11 +949,14 @@ var setupListeners = function() {
   $( '#miscom' ).unbind();
   $( '#mc-container' ).one( 'click', function() {
     startLevel();
+    $('#pauseButton').removeClass('disabled');
+    $('#playButton').addClass('disabled');
+
 
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);
       playerShoot( mousePos.x, mousePos.y);
-      
+
     });
   });
 };
