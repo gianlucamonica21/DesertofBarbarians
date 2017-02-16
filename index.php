@@ -145,7 +145,7 @@ $conn = null;
           </li> -->
 
           <li>
-            <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" >
+            <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" style="padding-top: 12px;">
               <span class="icon">&#xf091;</span><br> Leaderboard
             </button>
           </li>

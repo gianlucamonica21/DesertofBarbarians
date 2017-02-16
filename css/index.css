@@ -257,6 +257,7 @@ body {
 
   #displayscorerank{
     width: 350px;
+    cursor: default;
   }
 
   .disabled{
@@ -266,6 +267,7 @@ body {
 
   #lev{
     height: 82.97px;
+    cursor: default;
   }
   .level-buttons{
     font-size: 19px;
