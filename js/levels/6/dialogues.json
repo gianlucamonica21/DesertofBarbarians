@@ -1,4 +1,7 @@
 {
 	"generalMsg": "I don't know if your changes did something or if someone else tried to tinker with our code, but now our system is running way too slowly. If we keep going on like this, our camp will be destroyed before we even see the enemy missiles.<br> We managed to get our hands on an old backup of our code. The function which computes system time has to sum all elements of an array whose value is between 0 and 10 (included). Evidently our old developer had no idea how loops worked... Luckily we have you now. <b>FIX IT</b>. ",
-	"soldierMsg": "Oh haha... maybe I wrote that in the olden days. Wow, I had no idea what I was doing. Anyway, I think you can write those two conditions together in one if loop."
+	"soldierMsg": {
+		"1":"Oh haha... maybe I wrote that in the olden days. Wow, I had no idea what I was doing. Anyway, I think you can write those two conditions together in one <b>if</b> loop.",
+		"2": "Remember, you have to sum ONLY the elements whose value is between 0 and 10 INCLUDED."
+	}
 }

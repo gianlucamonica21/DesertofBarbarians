@@ -9,7 +9,7 @@
 
         position: "top",
         intro: "<img src='img/general.png' class='image-general center-block'/> <br>" +
-        " <h3>Level not passed! You <b>can not</b> go to the nextlevel! </h3><h3>If you need more help you may ask to the <b>old assistant</b>.</h3><h3> If you are really stuck, try asking to the <b>ghost</b>!(if it really exists)</h3>"  
+        " <h3>Your solution was incorrect! You <b>can't</b> go to the next level! Try again. <br> If you need more help you may ask to the <b>assistant</b>. If you are really stuck, try asking to the <b>ghost</b>! (If it really exists...)</h3>"  
            }
   
       ]

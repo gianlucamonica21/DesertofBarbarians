@@ -1,6 +1,6 @@
 @import "http://fonts.googleapis.com/css?family=Noto+Sans";
 #chat {
-  padding: 20px;
+  padding-top: 20px;
   margin: 0;
 /*  background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
   background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
@@ -38,7 +38,7 @@
   display: inline-block;
   padding: 16px 40px 16px 20px;
   margin: 0 0 20px 0;
-  font: 16px/20px 'Noto Sans', sans-serif;
+  font: 18px/22px 'Noto Sans', sans-serif;
   border-radius: 10px;
   background-color: rgba(25, 147, 147, 0.2);
 }

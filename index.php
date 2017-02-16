@@ -16,9 +16,9 @@ $errflag = false;
 try {
   //set the connection to DB
   $conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);
-    // set the PDO error mode to exception
+  // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  if(!$conn){
+  if(!$conn) {
     echo "Error! You are not connected!";
   }
 }
@@ -55,8 +55,6 @@ $conn = null;
   console.log("achievementQty:" +achievementsQty);
 
 
-  var ownedBadge = '<?php echo json_encode($_SESSION['achievementsTitle']);?>';
-  console.log("Owned: " + ownedBadge);
 
 </script>
 <!DOCTYPE html>
@@ -162,7 +160,7 @@ $conn = null;
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
            <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
-            <span ><?php echo "Level ".$_SESSION['level']; ?></span>
+            <span ><?php echo "Current Level ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
@@ -238,37 +236,39 @@ $conn = null;
          <div id="col7" class="seven"></div>
          <div id="col8" class="eight "></div>
 
+         <div id="movebar" class="progress progress-striped">
 
 
 
-         <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
+           <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
 
-           <span type="button"  class="level-buttons" id="textbarlv1">1</span>
-         </div>
+             <span type="button"  class="level-buttons" id="textbarlv1">1</span>
+           </div>
 
-         <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv2">2</span>
-        </div>
-        <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv3">3</span>
-        </div>
-        <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv4">4</span>
-        </div>
-        <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv5">5</span>
-        </div>
-        <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv6">6</span>
-        </div>
-        <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv7">7</span>
-        </div>
-        <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span  class="level-buttons" id="textbarlv8">8</span>
-        </div>
-        <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv9">9</span>
+           <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv2">2</span>
+          </div>
+          <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv3">3</span>
+          </div>
+          <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv4">4</span>
+          </div>
+          <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv5">5</span>
+          </div>
+          <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv6">6</span>
+          </div>
+          <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv7">7</span>
+          </div>
+          <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span  class="level-buttons" id="textbarlv8">8</span>
+          </div>
+          <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv9">9</span>
+          </div>
         </div>
         <script type="text/javascript">
           var levelArr = document.getElementsByClassName("level-buttons");
@@ -303,6 +303,7 @@ $conn = null;
             var lmax = maxlevel;
             console.log("lmax"+lmax);
             for(var i=1; i<=9; i++){
+
               if( i >= 1 && i <= 3){
                 document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
                 document.getElementById("col"+i).style.backgroundColor="indianred";
@@ -324,67 +325,72 @@ $conn = null;
                if(i<9){
                 document.getElementById("col"+i).style.backgroundColor="beige";
               }
+
             }
-          }
-        };
+            if( i == level){
+
+             $("#timebarlv"+i).addClass('progress-striped active');
+
+           }
+         }
+       };
 
 
 
-
-      </script>
-    </div>
-  </div>
+     </script>
+   </div>
+ </div>
 </div>
 <div class="row">
 
-     <!-- Chat Panel  -->
-            <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
-             <div class="panel panel-default" id="divchat">
-              <div class="panel-heading">Chat</div>
-              <div class="panel-body">
-                <div id="chat" >
-                  <ul class="chat-thread">
+ <!-- Chat Panel  -->
+ <div class="col-lg-6 col-md-2 col-sm-7" id= "divchatmain" >
+   <div class="panel panel-default" id="divchat">
+    <div class="panel-heading">Chat</div>
+    <div class="panel-body">
+      <div id="chat" >
+        <ul class="chat-thread">
             <!-- <li class="generalMsg">Are we meeting today?</li>
                   <li class="soldierMsg">yes, what time suits you?</li>
                   <li class="consoleMsg">I was thinking after lunch, I have a meeting in the morning</li> -->
                 </ul>
               </div>
               <span class="dochint">
-          <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
-            <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
-          </button>
-          <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
-            <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
-          </button>
-        </span>
+                <button  class="btn btn-info" id="hintButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Ask for help" >
+                  <i id="hintButtonSymbol" class="fa fa-question" aria-hidden="true"></i>
+                </button>
+                <button  class="btn btn-info" id="docButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Read the documentation" >
+                  <i id="docButtonSymbol" class="fa fa-book" aria-hidden="true"></i>
+                </button>
+              </span>
             </div>
           </div>
 
         </div>
-  <!-- Editor panel  -->
-  <div id="editormargin" class="col-lg-5 col-md-8 col-sm-7">
-    <div id="editorpanel" class="panel panel-default">
-      <div  class="panel-heading">Editor</div>
-      <div class="panel-body" >
-        <textarea id="editor"></textarea>
-        <!--   <div class="btn-group"> -->
-        <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
-          <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
-        </button>
-        <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
-          <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
-        </button>
-        <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Reset" >
-          <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
-        </button>
+        <!-- Editor panel  -->
+        <div id="editormargin" class="col-lg-5 col-md-8 col-sm-7">
+          <div id="editorpanel" class="panel panel-default">
+            <div  class="panel-heading">Editor</div>
+            <div class="panel-body" >
+              <textarea id="editor"></textarea>
+              <!--   <div class="btn-group"> -->
+              <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
+                <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+              </button>
+              <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
+                <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Reset" >
+                <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
+              </button>
 
 
 
-        <!-- </div> -->
-        <script type="text/javascript">
-          $("#docButton").click(function() {
+              <!-- </div> -->
+              <script type="text/javascript">
+                $("#docButton").click(function() {
 
-            javascript:
+                  javascript:
                   //introJs().
                   startDoc();
                 });
@@ -413,16 +419,16 @@ $conn = null;
                 $levelNumber = $_SESSION["level"];
                 $levelString = "$levelNumber";
                   // Load default file
-                 echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
+                echo '<script src="js/levels/'.$levelString.'/level'.$levelString.'.js" type="text/javascript"></script>';
                 // Load base game
-               echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
+                echo '<script src="js/levels/'.$levelString.'/MissileCommand.js" type="text/javascript"> </script>';
                 // Start game
-               echo '<script type="text/javascript">  missileCommand(true); </script>';
-               ?>
+                echo '<script type="text/javascript">  missileCommand(true); </script>';
+                ?>
 
-               Missile Command
-             </canvas>
-             
+                Missile Command
+              </canvas>
+
                <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
               <br>
 
@@ -438,8 +444,8 @@ $conn = null;
 
           </div>
           <!--CONSOLE -->
-             <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
-              <div id="controllerbody" class="panel-body">
+          <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
+            <div id="controllerbody" class="panel-body">
               <div id="playpause">
                 <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="playButton" >
                   <i id="playButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
@@ -447,20 +453,20 @@ $conn = null;
                 <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="pauseButton" >
                   <i id="playButtonSymbol" class="fa fa-pause" aria-hidden="true"></i>
                 </button>
-                </div>
-          <div class="panel-heading"></div>
+              </div>
+              <div class="panel-heading"></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <footer id="footer">
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
-        <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
-      </div>
-    </div>
-  </footer>
+      <footer id="footer">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Made by Gianluca Monica, Margherita Donnici and Maxim Gaina.</p>
+            <p>Human-Computer Interaction course project, University of Bologna, 2017 </p>
+          </div>
+        </div>
+      </footer>
               <!--  <div id="progressbar" class="progress" >
                 <div id="myBar" class="progress-bar progress-bar-danger" style="width: 100%"></div>
               </div> -->
@@ -484,143 +490,267 @@ $conn = null;
 
 
 
-      </div>
-      <!-- PROFILE MODAL -->
-      <div id="profileModal" class="modal" >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button  type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
-              <h4  class="modal-title" >Profile</h4>
-            </div>
-            <div class="modal-body">
-              <div align="center">
-                <div class="outter"><img src="img/avatar.gif" class="image-circle"/></div>
-                <h2><?php echo $current_player ?></h2>
-                <h3><?php echo $_SESSION["gradeType"]?></h3>
-                <div class="progress">
-                  <div id="scorebar" class="progress-bar" style="width: %"></div>
-                  <script type="text/javascript">
-
-                    var total = <?php echo intval($_SESSION["totalScore"])?>;
-                    var percent;
-                    var diff;
-                    if( total == 0){
-                      percent = 100;
-                    }
-                    else
-                      if( total <= 250)
-                      {
-                        diff = 250 - total;
-                        percent = (100 * diff) / 250;
-                      }else
-                      if( total > 250 && total <= 500)
-                      {
-                        diff = 500 - total;
-                        percent = (100 * diff) / 250;
-                      }else
-                      if( total > 500 && total <= 750)
-                      {
-                        diff = 750 - total;
-                        percent = (100 * diff) / 250;
-                      }else{
-                        percent = 100;
-                      }
-
-
-                      document.getElementById("scorebar").style="width:"+(100-percent)+"%";
-                    </script>
-                  </div>
-                  <script type="text/javascript">
-                    var nowscore = <?php echo intval($_SESSION["totalScore"])?>;
-                  </script>
-                  <h4>
-                    <?php
-                    if ( intval($_SESSION["totalScore"]) == 0)
-                    {
-                      $zero = 250;
-                      echo "Points to the next rank: ".$zero;
-                    }
-                    else
-                      if( intval($_SESSION["totalScore"]) <= 250 )
-                      {
-                        echo "Points to the next rank: ".intval(250 - $_SESSION["totalScore"]);
-                      }
-                      else if
-                        ( intval($_SESSION["totalScore"]) > 250 && intval($_SESSION["totalScore"]) <= 500)
-                      {
-                        echo "Points to the next rank: ".intval(500 - $_SESSION["totalScore"]);
-                      }else
-                      if( intval($_SESSION["totalScore"]) > 500 && intval($_SESSION["totalScore"]) <= 750 ){
-                        echo "Points to the next rank: ".intval(750 - $_SESSION["totalScore"]);
-                      }else
-                      {
-                        echo "You are at the max rank!";
-                      }
-
-
-
-                      ?>
-
-
-
-                    </h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 col-xs-6 follow line" align="center">
-                      <h3><?php echo intval($_SESSION["totalScore"]) ?> <br/>
-                        <span>POINTS</span>
-                      </h3>
-                    </div>
-                    <div class="col-md-6 col-xs-6 follow line" align="center">
-                      <h3><?php echo $_SESSION['achievementsQty'];?> <br/> <span>BADGES</span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
           </div>
-          <!-- TUTORIAL MODAL -->
-          <div class="modal" id="tutorialModal">
+          <!-- PROFILE MODAL -->
+          <div id="profileModal" class="modal" >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">How to Play</h4>
+                  <button  type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
+                  <h4  class="modal-title" >Profile</h4>
                 </div>
                 <div class="modal-body">
-                  <p>One fine body…</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+                  <div align="center">
+                    <div class="outter"><img src="img/avatar.gif" class="image-circle"/></div>
+                    <h2><?php echo $current_player ?></h2>
+                    <h3><?php echo $_SESSION["gradeType"]?></h3>
+                    <div class="progress">
+                      <div id="scorebar" class="progress-bar" style="width: %"></div>
+                      <script type="text/javascript">
+
+                        var total = <?php echo intval($_SESSION["totalScore"])?>;
+                        var percent;
+                        var diff;
+                        if( total == 0){
+                          percent = 100;
+                        }
+                        else
+                          if( total <= 250)
+                          {
+                            diff = 250 - total;
+                            percent = (100 * diff) / 250;
+                          }else
+                          if( total > 250 && total <= 500)
+                          {
+                            diff = 500 - total;
+                            percent = (100 * diff) / 250;
+                          }else
+                          if( total > 500 && total <= 750)
+                          {
+                            diff = 750 - total;
+                            percent = (100 * diff) / 250;
+                          }else{
+                            percent = 100;
+                          }
+
+
+                          document.getElementById("scorebar").style="width:"+(100-percent)+"%";
+                        </script>
+                      </div>
+                      <script type="text/javascript">
+                        var nowscore = <?php echo intval($_SESSION["totalScore"])?>;
+                      </script>
+                      <h4>
+                        <?php
+                        if ( intval($_SESSION["totalScore"]) == 0)
+                        {
+                          $zero = 250;
+                          echo "Points to the next rank: ".$zero;
+                        }
+                        else
+                          if( intval($_SESSION["totalScore"]) <= 250 )
+                          {
+                            echo "Points to the next rank: ".intval(250 - $_SESSION["totalScore"]);
+                          }
+                          else if
+                            ( intval($_SESSION["totalScore"]) > 250 && intval($_SESSION["totalScore"]) <= 500)
+                          {
+                            echo "Points to the next rank: ".intval(500 - $_SESSION["totalScore"]);
+                          }else
+                          if( intval($_SESSION["totalScore"]) > 500 && intval($_SESSION["totalScore"]) <= 750 ){
+                            echo "Points to the next rank: ".intval(750 - $_SESSION["totalScore"]);
+                          }else
+                          {
+                            echo "You are at the max rank!";
+                          }
+
+
+
+                          ?>
+
+
+
+                        </h4>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-xs-6 follow line" align="center">
+                          <h3><?php echo intval($_SESSION["totalScore"]) ?> <br/>
+                            <span>POINTS</span>
+                          </h3>
+                        </div>
+                        <div class="col-md-6 col-xs-6 follow line" align="center">
+                          <h3><?php echo $_SESSION['achievementsQty'];?> <br/> <span>BADGES</span>
+                          </h3>
+                        </div>
+                      </div>
+                      <div id="row">
+                        <p>Badges obtained:</p>
+                        <table class="table table-bordered badge-table">
+                          <tbody>
+                            <tr>
+                              <td class="col-md-3 badge-lock obscure" id="debugging" name="Debugging">
+                                <img  class="mybadge obscure" id="debuggingB" src="img/star_badge1.png"><br>
+                                <p><b>Debug</b></p>
+                                <p>All debug levels completed.</p>
+                              </td>
+                              <td class="col-md-3 badge-lock obscure" id="refactoring" name="Refactoring">
+                                <img class="mybadge obscure" id="refactoringB" src="img/star_badge1.png">
+                                <p><b>Refactoring</b></p>
+                                <p>All refactoring levels completed.</p>
+                              </td>
+                              <td class="col-md-3 badge-lock obscure" id="designing" name="Design">
+                                <img class="mybadge obscure" id="designingB" src="img/star_badge1.png">
+                                <p><b>Design</b><p>
+                                  <p>All design levels completed.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="gameover" name="Level-10">
+                                  <img class="mybadge obscure" id="gameoverB" src="img/star_badge1.png">
+                                  <p><b>War Is Over!</b></p>
+                                  <p>Won level 9.</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="col-md-3 badge-lock obscure" id="best" name="Champion">
+                                  <img class="mybadge obscure" id="bestB" src="img/star_badge1.png">
+                                  <p><b>Champion</b></p>
+                                  <p>You are the top player.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="nohint" name="noHint">
+                                  <img class="mybadge obscure" id="nohintB" src="img/star_badge1.png">
+                                  <p><b>Indie Programmer</b></p>
+                                  <p>Hint is not in your vocabolary.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="l2" name="level2">
+                                  <img class="mybadge obscure" id="l2B" src="img/star_badge1.png">
+                                  <p><b>First Level Gone</b></p>
+                                  <p>You are at the second level.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="half" name="halfway">
+                                  <img class="mybadge obscure" id="halfB" src="img/star_badge1.png">
+                                  <p><b>Halfway</b></p>
+                                  <p>You passed level 4.</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <script type="text/javascript">
+                              $('#profileTutorial').click(function() {
+                                var unlockedB = JSON.parse(achievementsId);
+                                console.log("UNLOCKEDBADGE: "+unlockedB);
+                              // $('.col-md-3 badge-lock').addClass('obscure');
+                              // $('.mybadge').addClass('obscure');
+                              for(var i = 0; i < achievementsQty; i++){
+                                console.log("unlockedB in pos i: " + unlockedB[i]);
+                                disobscureBadge(parseInt(unlockedB[i]));
+                              }
+
+                              function disobscureBadge(id){
+                               console.log("sono dentro disobscure function();");
+                               switch(id){
+                                case 1:
+                                {
+
+                                  $('#l2').removeClass('obscure');
+                                  $('#l2B').removeClass('obscure');
+                                  break;
+                                }
+                                case 2:
+                                {
+                                  $('#half').removeClass('obscure');
+                                  $('#halfB').removeClass('obscure');
+                                  break;
+                                }
+                                case 3:
+                                {
+                                  $('#nohint2').removeClass('obscure');
+                                  $('#nohintB').removeClass('obscure');
+                                  break;
+                                }
+                                case 4:
+                                {
+                                  $('#best').removeClass('obscure');
+                                  $('#bestB').removeClass('obscure');
+                                  break;
+                                }
+                                case 5:
+                                {
+                                  $('#debugging').removeClass('obscure');
+                                  $('#debuggingB').removeClass('obscure');
+                                  break;
+                                }
+                                case 6:
+                                {
+                                  $('#refactoring').removeClass('obscure');
+                                  $('#refactoringB').removeClass('obscure');
+                                  break;
+                                }
+                                case 7:
+                                {
+                                  $('#designing').removeClass('obscure');
+                                  $('#designingB').removeClass('obscure');
+                                  break;
+                                }
+                                case 8:
+                                {
+                                  $('#gameoverBver').removeClass('obscure');
+                                  $('#gameoverB').removeClass('obscure');
+                                  break;
+                                }
+                                default: {console.log("SONO NEL DEFAULT" + typeof id); break;}
+
+                              }
+
+                            }
+
+
+
+                          });
+                        </script>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- NOTIFICATION LEVEL MODAL -->
-          <div class="modal" id="notificationModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
+            <!-- TUTORIAL MODAL -->
+            <div class="modal" id="tutorialModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">How to Play</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>One fine body…</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+                  </div>
                 </div>
-                <div class="modal-body" style="text-align : center;">
-                  <image id="image-modal" src=""  align="center"> </image>
-                  <!-- src="img/general.png" -->
-                  <p id="modal-text" ></p>
-                </div>
-                <div class="modal-footer">
-                 <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
+              </div>
+            </div>
+            <!-- NOTIFICATION LEVEL MODAL -->
+            <div class="modal" id="notificationModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
+                  </div>
+                  <div class="modal-body" style="text-align : center;">
+                    <image id="image-modal" src=""  align="center"> </image>
+                    <!-- src="img/general.png" -->
+                    <p id="modal-text" ></p>
+                  </div>
+                  <div class="modal-footer">
+                   <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
+                 </div>
                </div>
              </div>
            </div>
-         </div>
-         <script type="text/javascript">
+           <script type="text/javascript">
 
     //$('#notificationModal').modal('toggle');
     // $('#notificationModal').modal('show');
@@ -630,37 +760,37 @@ $conn = null;
   </script>
 
   <!-- NOTIFICATION RESET MODAL -->
-          <div class="modal" id="resetModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 id="reset-modal-title" class="modal-title">BADGE!!</h4>
-                </div>
-                <div class="modal-body" style="text-align : center;">
-                  <image id="image-modal" src=""  align="center"> </image>
-                  <!-- src="img/general.png" -->
-                  <p id="modal-textreset" ></p>
-                </div>
-                <div class="modal-footer">
-                 <button type="button" id="closeModalY" class="btn btn-primary" >Yes</button>
-                <button type="button" id="closeModalN" class="btn btn-primary" >No</button>
-               </div>
-             </div>
-           </div>
-         </div>
-         <script type="text/javascript"></script>
-
-  <!-- LEVELS MODAL -->
-  <div class="modal" id="levelsModal">
+  <div class="modal" id="resetModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Levels</h4>
+          <h4 id="reset-modal-title" class="modal-title">BADGE!!</h4>
         </div>
-        <div class="buttons">
-          <div class="btn-group">
+        <div class="modal-body" style="text-align : center;">
+          <image id="image-modal" src=""  align="center"> </image>
+          <!-- src="img/general.png" -->
+          <p id="modal-textreset" ></p>
+        </div>
+        <div class="modal-footer">
+         <button type="button" id="closeModalY" class="btn btn-primary" >Yes</button>
+         <button type="button" id="closeModalN" class="btn btn-primary" >No</button>
+       </div>
+     </div>
+   </div>
+ </div>
+ <script type="text/javascript"></script>
+
+ <!-- LEVELS MODAL -->
+ <div class="modal" id="levelsModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Levels</h4>
+      </div>
+      <div class="buttons">
+        <div class="btn-group">
             <!-- <span   id="button1" class="btn btn-primary level-buttons">1</span>
           </div>
           <div class="btn-group">

@@ -6,7 +6,7 @@
       {
             
         intro: "<img src='img/general.png' class='image-general center-block'/> <br>" +
-        " <h3>Level passed! You <b>can go</b> to the next level!</h3>"  
+        " <h3>Level passed! You can go to the next level!</h3>"  
            }
   
       ]

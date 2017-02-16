@@ -1,4 +1,9 @@
 {
 	"generalMsg": "The good news is that we are holding our own. The bad news is that the enemy increased their missiles again. The main base sent us all their ammunition, but we need to recharge out anti-missile batteries automatically as soon as they are empty. <br> You need to write the function which automates this process. <b> NOW.</b>",
-	"soldierMsg": "Remember, you can check and modify the number of missiles left in a given anti-missile battery by accessing the <em>missilesLeft</em> property!"
+	"soldierMsg": {
+		"1": "Remember, you can check and modify the number of missiles left in a given anti-missile battery by accessing the <code>missilesLeft</code> property!",
+		"2": "You don't need to go looking for the anti-missile battery, it will be given as the second argument by whoever calls your function. It's properties can be accessed using the <code>amb</code> variable.",
+		"3": "The <code>missilesLeft</code> property should be set to n.",
+		"4": "You should reset the missiles left only if they reach 0."
+	}
 }

@@ -982,12 +982,25 @@ function userSolutionChecker(){
 
   missileCommand(true);
   amb = antiMissileBatteries[0];
+  amb.missilesLeft = 2;
+  addMissiles(6,amb);
+  if (amb.missilesLeft != 2) {
+    return {
+      passed: false,
+      msg: "The missiles have to be recharged ONLY when the anti-missile battery is EMPTY."
+    } ;
+  }
   amb.missilesLeft = 0;
   addMissiles(6,amb);
   if (amb.missilesLeft == 6){
     return {
       passed: true,
       msg: "Perfect! Let's see who gets tired first now!"
+    } ;
+  } else if (amb.missilesLeft > 6) {
+    return {
+      passed: false,
+      msg: "I SAID NO MORE THAN SIX MISSILES IN EVERY ANTI-MISSILE BATTERY !!!!"
     } ;
   } else {
     return {

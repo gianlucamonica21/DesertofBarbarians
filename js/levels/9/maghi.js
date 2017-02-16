@@ -1,11 +1,7 @@
 var decipher = function(string) {
-
-
-    var newString = "";
-
+	var newString = "";
     for (var i = string.length - 1; i >= 0; i--) { 
-       newString = newString + string[i];
+        newString += string[i];
     }
-    return newString;
-  
+	return newString;
 };

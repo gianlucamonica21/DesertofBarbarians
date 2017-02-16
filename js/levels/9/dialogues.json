@@ -1,4 +1,8 @@
 {
 	"generalMsg": "The situation is bad, soldier. The enemy attacks have increased in speed AND number. We have sent a message to the main base and they have sent us the code to unlock a special weapon, except ... The codeword to activate it is encrypted with a top-of-the-line cryptography algorithms: it is written  backwards! To decrypt it, write a function which reverses the string given as input!",
-	"soldierMsg": "You could try using the built-in functions. Or how about a decrementing for-loop?"
+	"soldierMsg": {
+		"1": "You could try using a decrementing for-loop? You can use the <code>--</code> operator, which decrements of one instead of incrementing.",
+		"2": "Your loop's iterator should be initialized to the last element of the string.",
+		"3": "Your loop should end when <code>i</code> is less than 0. Remember, the loop stops when the second statement returns <code>false</code>."
+	}
 }

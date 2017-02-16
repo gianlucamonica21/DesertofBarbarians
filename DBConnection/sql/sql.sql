@@ -237,7 +237,9 @@ INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (8, 0);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (8, 1);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (8, 3);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 0);
-INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 2);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 1);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 3);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 4);
 
 COMMIT;
 

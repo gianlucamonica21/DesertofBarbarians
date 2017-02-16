@@ -59,15 +59,18 @@ try {
 	}
 
 	if($new_current_level_score > $old_current_level_score) {
+		$new_total_score = ($old_total_score - $old_current_level_score) + $new_current_level_score;
 		$update_campaign = "UPDATE Campaign SET score= :score WHERE login= :login AND level= :level";
 		$query = $conn->prepare($update_campaign);
 		$result_update_campaign = $query->execute( array( ':score'=>$new_current_level_score,
 																							 ':login'=>$current_player,
 																							 ':level'=>$current_level) );
   }
+	else {
+		$new_total_score = $old_total_score;
+	}
 
 	// E una volta finito il livello aggiorna anche lo score totale
-	$new_total_score = ($old_total_score - $old_current_level_score) + $new_current_level_score;
 	$_SESSION['totalScore'] = $new_total_score;
 	$update_total_score = "UPDATE User SET score= :score WHERE login= :login";
 	$query = $conn->prepare($update_total_score);
