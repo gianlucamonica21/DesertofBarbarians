@@ -42,6 +42,17 @@ $conn = null;
   console.log("Owned: " + ownedBadges);
   var top = '<?php echo $_SESSION['top'];?>';
   var champion = '<?php echo $_SESSION['isChampion'];?>';
+
+  var achievementsQty = '<?php echo json_encode($_SESSION["achievementsQty"]);?>';
+  var achievementsId = '<?php echo json_encode($_SESSION["achievementsId"]); ?>';
+  var achievementsTitle = '<?php echo json_encode($_SESSION["achievementsTitle"]); ?>';
+  var achievementsDescr = '<?php echo json_encode($_SESSION["achievementsDescr"]); ?>';
+
+  console.log("achievementDescr: " +achievementsDescr);
+  console.log("achievementId: " +achievementsId);
+  console.log("achievementTitle:" +achievementsTitle);
+  console.log("achievementQty:" +achievementsQty);
+  
 </script>
 <!DOCTYPE html>
 <html lang="en">
