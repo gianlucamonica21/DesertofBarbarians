@@ -773,16 +773,11 @@ $conn = null;
   <script type="text/javascript" src="js/badge.js"></script>
   <script type="text/javascript" src="js/startDoc.js"></script>
   <script type="text/javascript" src="js/startIntro.js"></script>
-<<<<<<< HEAD
-  <script type="text/javascript" src="js/startIntroLv1.js"></script>
-    <script type="text/javascript" src="js/gameOver.js"></script>
-=======
   <script type="text/javascript" src="js/gameOver.js"></script>
   <script type="text/javascript" src="js/startIntroLv1.js"></script>
   <script type="text/javascript" src="js/gameOver.js"></script>
   <script type="text/javascript" src="js/startLevelPassed.js"></script>
   <script type="text/javascript" src="js/startLevelNotPassed.js"></script>
->>>>>>> b4c23c04b2e6856a8a5ef44b9f12d8ebb95ca3bb
   <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
   <script type="text/javascript">
     var score =  '<?php echo intval($_SESSION["totalScore"]) ?>'  ;
