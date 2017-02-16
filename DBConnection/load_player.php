@@ -71,20 +71,17 @@ try {
 			/* L'array achievements conterrà i codici di tutti i badges mai
 			   guadagnati dall'utente appena loggato */
 			$achievements[] = $achievements_row["achievement"];
+
+			$badge_info_query = $conn->prepare("SELECT * FROM Achievement WHERE id= :id");
+			$badge_info_query->bindParam(':id', $achievements_row["achievement"]);
+			$badge_info_query->execute();
+			$badge_info = $badge_info_query->fetch();
+
+			$achievements_title[] = $badge_info["title"];
+			$achievements_descr[] = $badge_info["descr"];
 		}
 		$_SESSION['achievementsQty'] = count($achievements_rows);
 		$_SESSION['achievementsId'] = $achievements;
-
-		foreach ($achievements as $achievement) {
-			// Estrai informazioni per ogni badge guadagnato dal giocatore
-			$achievements_query = $conn->prepare("SELECT title, descr FROM Achievement WHERE id= :id");
-			$achievements_query->bindParam(':id', $achievement);
-			$achievements_query->execute();
-			$achievements_row = $achievements_query->fetch();
-
-			$achievements_title[] = $achievments_row["title"];
-			$achievements_descr[] = $achievments_row["descr"];
-		}
 		$_SESSION['achievementsTitle'] = $achievements_title;
 		$_SESSION['achievementsDescr'] = $achievements_descr;
 
