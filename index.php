@@ -53,11 +53,11 @@ $conn = null;
   console.log("achievementId: " +achievementsId);
   console.log("achievementTitle:" +achievementsTitle);
   console.log("achievementQty:" +achievementsQty);
-  
+
 
   var ownedBadge = '<?php echo json_encode($_SESSION['achievementsTitle']);?>';
   console.log("Owned: " + ownedBadge);
-  
+
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -378,7 +378,7 @@ $conn = null;
           <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
         </button>
 
-        
+
 
         <!-- </div> -->
         <script type="text/javascript">
