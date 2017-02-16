@@ -167,6 +167,34 @@
   });
 });
 
+
+
+// PLAY GAME BUTTON
+$('#playButton').click(function() {
+
+  startLevel();
+  $('#playButton').addClass('disabled');
+  $('#pauseButton').removeClass('disabled');
+
+
+});
+
+
+// PAUSE GAME BUTTON
+$('#pauseButton').click(function() {
+
+  drawStopMessage();
+  $('#pauseButton').addClass('disabled');
+  $('#playButton').removeClass('disabled');
+
+
+
+
+});
+
+
+
+
 // EVALUATE BUTTON
 $('#evaluateButton').click(function() {
   if (!($('#evaluateButton').hasClass('disabled'))) {

@@ -4,13 +4,13 @@
 
   // set editor by CodeMirror function
   var editor =
-    CodeMirror.fromTextArea(document.getElementById("editor"), {
-      mode: "javascript",
-      lineNumbers: true,
-      styleSelectedText: true,
-      lineWrapping: true,
-      viewportMargin: Infinity
-    });
+  CodeMirror.fromTextArea(document.getElementById("editor"), {
+    mode: "javascript",
+    lineNumbers: true,
+    styleSelectedText: true,
+    lineWrapping: true,
+    viewportMargin: Infinity
+  });
 
   $.ajax({
     url: 'getEditorCode.php',
@@ -26,14 +26,20 @@
   // Handler for when change happens in the editor
   editor.on('change', function(cm, change) {
     // Pause the game
+
+
     drawStopMessage();
     startedCoding = (new Date()).getTime();
     stoppedGame = true;
     $('#returnButton').removeClass("disabled");
     $('#evaluateButton').addClass("disabled");
-    // Handler in case of insertion/deletion of a line
+
+    
+    $('#pauseButton').addClass('disabled');
+    $('#playButton').removeClass('disabled');
+    // // Handler in case of insertion/deletion of a line
     if (change.origin != "setValue"){ //If the change is caused by loading the coading in the editor, the read-only lines remain the same
-    lineChangeHandler(change);
+      lineChangeHandler(change);
     }
   });
 
@@ -45,7 +51,7 @@
   };
   oReq.open("get", "DBConnection/load_player.php", true);
   oReq.send();
-*/
+  */
   // Update level data
   $.post("DBConnection/load_level_x.php", 0);
 
@@ -68,9 +74,9 @@
             $.each(data, function(key, val) {
               readOnlyLinesArray[key] = parseInt(val);
            //   console.log("rolarray", readOnlyLinesArray);
-              window.editor.addLineClass(readOnlyLinesArray[key], 'background', 'disabled');
+           window.editor.addLineClass(readOnlyLinesArray[key], 'background', 'disabled');
 
-            });
+         });
           });
         } );
   }
