@@ -4,7 +4,6 @@ $servername = "localhost";
 $user = "root";
 $pass = "root";
 $errflag = false;
-
 try {
 	//set the connection to DB
 	$conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);

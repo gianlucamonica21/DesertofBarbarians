@@ -183,7 +183,7 @@
         }
 
         for (var i = 0; i < unlockedbadgeQueue.length; i++) {
-          $.post("DBConnection/add_badge.php", unlockedbadgeQueue[i]);
+          $.post("DBConnection/add_badge.php", {data: unlockedbadgeQueue[i]});
         }
 
       } else {
