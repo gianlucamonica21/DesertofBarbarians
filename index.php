@@ -43,7 +43,6 @@ $conn = null;
   var top = '<?php echo $_SESSION['top'];?>';
   var champion = '<?php echo $_SESSION['isChampion'];?>';
 
-
   var achievementsQty = '<?php echo json_encode($_SESSION["achievementsQty"]);?>';
   var achievementsId = '<?php echo json_encode($_SESSION["achievementsId"]); ?>';
   var achievementsTitle = '<?php echo json_encode($_SESSION["achievementsTitle"]); ?>';
@@ -53,9 +52,6 @@ $conn = null;
   console.log("achievementId: " +achievementsId);
   console.log("achievementTitle:" +achievementsTitle);
   console.log("achievementQty:" +achievementsQty);
-
-
-
 </script>
 <!DOCTYPE html>
 <html lang="en">

@@ -67,6 +67,14 @@
 
 
 
+
+      // // Carica dati del prossimo livello
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
+
       // // Code to reload and reupdate the level
       var stringa;
       var oReq = new XMLHttpRequest(); //New request object
@@ -75,13 +83,6 @@
       };
       oReq.open("get", "DBConnection/load_player.php", true);
       oReq.send();
-
-      // // Carica dati del prossimo livello
-      var data = new FormData();
-      data.append("data", difference);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/nextlevel.php", true);
-      xhr.send(data);
 
       var data = new FormData();
       data.append("data", 0);
