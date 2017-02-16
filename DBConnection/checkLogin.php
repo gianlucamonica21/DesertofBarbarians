@@ -19,7 +19,7 @@ try {
 	// Check the input of data
 	if(!empty($login) and !empty($password)){
     // Query to login
-		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login AND password= :password");
+		$user_query = $conn->prepare("SELECT * FROM User WHERE BINARY login= :login AND BINARY password= :password");
 		$user_query->bindParam(':login', $login);
 		$user_query->bindParam(':password', $password);
 		$user_query->execute();
@@ -112,7 +112,7 @@ try {
 			$leader_scores[] = $leader["score"];
 		}
 
-		// Save the leaders info		
+		// Save the leaders info
 		$user_query = $conn->prepare("SELECT * FROM User WHERE login= :login");
 		$user_query->bindParam(':login', $login);
 		$user_query->execute();
