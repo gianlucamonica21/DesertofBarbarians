@@ -199,11 +199,7 @@ var drawStopMessage = function() {
 
       $('#miscom').unbind().click(function(event) {
         var mousePos = getMousePos(this, event);
-<<<<<<< HEAD
         playerShoot(mousePos.x, mousePos.y);
-=======
-        playerShoot( mousePos.x, mousePos.y);
->>>>>>> e52b7b1b1936334d96beb44582153aa2a9c41079
 
       });
     });
@@ -914,11 +910,7 @@ var setupListeners = function() {
 
     $('#miscom').unbind().click(function(event) {
       var mousePos = getMousePos(this, event);
-<<<<<<< HEAD
       playerShoot(mousePos.x, mousePos.y);
-=======
-      playerShoot( mousePos.x, mousePos.y);
->>>>>>> e52b7b1b1936334d96beb44582153aa2a9c41079
 
     });
   });
