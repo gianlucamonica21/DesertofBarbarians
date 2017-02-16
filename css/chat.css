@@ -76,7 +76,7 @@
 .chat-thread li.generalMsg:before {
   left: -80px;
   background-image: url(../img/general-scaled.png);
-     
+
 }
 
 .chat-thread li.generalMsg:after {
@@ -144,7 +144,7 @@
 @media all and (min-width: 768px) {
   .chat-thread {
     width: 90%;
-    height: 723px;
+    height: 660px;
   }
 
   .chat-window {

@@ -3176,14 +3176,14 @@ fieldset[disabled] .btn-primary.focus {
 }
 .btn-success {
   color: #ffffff;
-  background-color: #18bc9c;
-  border-color: #18bc9c;
+  background-color: #128f76;
+  border-color: #128f76;
 }
 .btn-success:focus,
 .btn-success.focus {
   color: #ffffff;
   background-color: #128f76;
-  border-color: #0a4b3e;
+  border-color: #128f76;
 }
 .btn-success:hover {
   color: #ffffff;
@@ -5464,6 +5464,7 @@ button.list-group-item-danger.active:focus {
   padding: 2px;
 }
 .panel-heading {
+
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;

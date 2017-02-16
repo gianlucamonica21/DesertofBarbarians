@@ -879,6 +879,7 @@ var drawPlayerMissiles = function() {
   });
 };
 
+
 // Stop animating a game level
 var stopLevel = function() {
   clearInterval( timerID );
@@ -886,6 +887,9 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
+  $('#pauseButton').removeClass('disabled');
+  $('#playButton').addClass('disabled');
+     
   gamestarted = true;
   var fps = 30;
   if (timerID != undefined){
@@ -945,6 +949,9 @@ var setupListeners = function() {
   $( '#miscom' ).unbind();
   $( '#mc-container' ).one( 'click', function() {
     startLevel();
+    $('#pauseButton').removeClass('disabled');
+    $('#playButton').addClass('disabled');
+     
 
     $( '#miscom' ).unbind().click(function( event ) {
       var mousePos = getMousePos(this, event);

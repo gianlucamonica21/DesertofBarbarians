@@ -59,7 +59,7 @@ try {
   }
 
 	// E una volta finito il livello aggiorna anche lo score totale
-	$new_total_score = $old_total_score + $new_current_level_score;
+	$new_total_score = ($old_total_score - $old_current_level_score) + $new_current_level_score;
 	$_SESSION['totalScore'] = $new_total_score;
 	$update_total_score = "UPDATE User SET score= :score WHERE login= :login";
 	$query = $conn->prepare($update_total_score);

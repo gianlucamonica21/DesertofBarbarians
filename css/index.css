@@ -51,29 +51,67 @@ body {
   padding-top: 140px;
   font-size: 17px;
 
-/*overflow-y:hidden;*/
+  /*overflow-y:hidden;*/
+}
+
+#playButton{
+  width: 258px;
+  margin-left: -269;
+  margin-top: 47px;
+  height: 46px;
+  background-color: #2c3e50;
+  color: white;
+ /*       margin-top: -400;
+ margin-left: -269;*/
+}
+
+#pauseButton{
+  margin-left: -1px;
+  width: 258px;
+  height: 46px;  
+  background-color: #2c3e50; 
+  color: white;
+  margin-top: 45;
+}
+
+
+#playpause{
+
+  margin-left: 250px;
+  width: 320px;
+  
+  margin-bottom: 0px;
+  margin-top: -254;
 
 }
 
 #gamepanel{
   width: 520px;
-  height: 514px;
+  height: 561px;
 }
 
-.panel-body{
-}
-#divchat{
- width: 520px;
-height: 812px;
+/*.fa-play{
+  color : white;
 }
 
-#divchatmain{
- width: 520px;
- height: 780px;
- margin-left: 30px;
-}
+.fa-pause{
+  color : white;
+  }*/
 
-#leaderboardTutorial{
+  .panel-body{
+  }
+  #divchat{
+   width: 520px;
+   height: 812px;
+ }
+
+ #divchatmain{
+   width: 520px;
+   height: 780px;
+   margin-left: 30px;
+ }
+
+ #leaderboardTutorial{
   height: 81px;
 }
 
@@ -95,8 +133,21 @@ height: 812px;
 }
 
 #submitButton{
- width: 160px;
+ width: 253.5px;
  height: 60px;
+}
+
+#refreshButton{
+ width: 253.5px;
+ height: 60px;
+}
+
+#playButtonSymbol{
+  font-size: 20px;
+}
+
+#pauseButtonSymbol{
+  font-size: 20px;
 }
 
 #submitButtonSymbol{
@@ -104,7 +155,7 @@ height: 812px;
 }
 
 #evaluateButton{
- width: 160px;
+ width: 253.5px;
  height: 60px;
 }
 
@@ -113,8 +164,10 @@ height: 812px;
 }
 
 #hintButton{
- width: 160px;
+ width: 254.5px;
  height: 60px;
+ margin-bottom: 0px;
+ margin-top: -22;
 }
 
 #hintButtonSymbol{
@@ -122,10 +175,18 @@ height: 812px;
 
 }
 
-#refreshButton{
- width: 160px;
- height: 60px;
+#docButton{
+  width: 254.5px;
+  height: 60px;
+  font-size: 25px;
+  margin-bottom: 0px;
+  margin-top: -22;
+  background-color: green;
+  border-color: green;
 }
+
+
+
 
 #refreshButtonSymbol{
   font-size: 25px;
@@ -133,31 +194,25 @@ height: 812px;
 }
 
 #nextButton{
+  margin-top: 75px;
+  margin-left: 50px;
   width: 509px;
-  height: 60px;
+  height: 133px;
   font-size: 22px;
-  margin-top: 25px;
-      margin-left: 33px;
+
   color: #ffffff;
-  background-color: #18bc9c;
-  border-color: #18bc9c;
+  background-color: crimson;
+  border-color: crimson ;
 }
 
 .row{
-      margin-left: -50;
+  margin-left: -50;
 }
 #footer{
-  margin-top: 200px;
+  margin-top: 172px;
   margin-left: 51.5px;
 }
 
-#docButton{
-  width: 100px;
-  height: 60px;
-  font-size: 25px;
-  background-color: green;
-  border-color: green;
-}
 
 
 
@@ -214,7 +269,7 @@ height: 812px;
   }
   .level-buttons{
     font-size: 19px;
-        font-weight: bolder;
+    font-weight: bolder;
   }
   .one, .two, .three, .four, .five, .six, .seven, .eight{
     position:absolute;
@@ -254,20 +309,31 @@ height: 812px;
   .primary-color{
    background-color: indianred;
  }
- 
+
  #editormargin{
 
-      margin-left: 30px;
- }
+  margin-left: 30px;
+}
 
- .col-md-12{
+.col-md-12{
   left: -13px;
   bottom: 15px;
 }
 
 #miscom{
-     margin-left: 51.5;
-  }
+ margin-left: 51.5;
+}
+
+.image-general{
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.obscure{
+  opacity: 0.55;
+  filter(alpha(opacity = 40));
+}
 
   .image-general{
     width: 100px;
@@ -278,3 +344,6 @@ height: 812px;
 code {
   background-color: transparent;
 }
+
+
+
