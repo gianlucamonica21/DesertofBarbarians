@@ -162,7 +162,7 @@ $conn = null;
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
            <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
-            <span ><?php echo "Level: ".$_SESSION['level']; ?></span>
+            <span ><?php echo "Level ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
@@ -172,7 +172,7 @@ $conn = null;
               <ul id="ul">
                 <span id="spanUser"><?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
 
-                <span> Score:  <?php echo intval($_SESSION["totalScore"]); ?> </span>
+                <span> Score  <?php echo intval($_SESSION["totalScore"]); ?> </span>
               </ul>
               <div id="progress-score2" class="progress">
 
@@ -422,17 +422,7 @@ $conn = null;
 
                Missile Command
              </canvas>
-             <!--CONSOLE -->
-             <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
-              <div id="controllerbody" class="panel-body">
-              <div id="playpause">
-                <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="playButton" >
-                  <i id="playButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
-                </button>
-                <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="pauseButton" >
-                  <i id="playButtonSymbol" class="fa fa-pause" aria-hidden="true"></i>
-                </button>
-                </div>
+             
                <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
               <br>
 
@@ -447,6 +437,17 @@ $conn = null;
 
 
           </div>
+          <!--CONSOLE -->
+             <div id="controller" class="col-lg-6 col-md-2 col-sm-7">
+              <div id="controllerbody" class="panel-body">
+              <div id="playpause">
+                <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="playButton" >
+                  <i id="playButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <button class="btn" aria-hidden="true"  class="btn btn-success disabled" id="pauseButton" >
+                  <i id="playButtonSymbol" class="fa fa-pause" aria-hidden="true"></i>
+                </button>
+                </div>
           <div class="panel-heading"></div>
         </div>
       </div>
