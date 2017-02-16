@@ -271,6 +271,11 @@ body {
     font-size: 19px;
     font-weight: bolder;
   }
+
+  .level-buttons:hover{
+    cursor:pointer;
+    cursor:hand;
+  }
   .one, .two, .three, .four, .five, .six, .seven, .eight{
     position:absolute;
     margin-top:-10px;
@@ -344,6 +349,7 @@ body {
 code {
   background-color: transparent;
 }
+
 
 
 

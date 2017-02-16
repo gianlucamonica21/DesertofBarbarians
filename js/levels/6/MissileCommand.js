@@ -176,22 +176,16 @@ var drawStopMessage = function() {
 };
 
 // Show bonus points at end of a level
-var drawEndLevel = function( missilesLeft, missilesBonus, citiesSaved, citiesBonus ) {
+var drawEndLevel = function(missilesLeft, citiesSaved) {
   drawGameState();
-  var bonus = missilesBonus + citiesBonus;
-  ctx.fillStyle = '#6d6';
-  ctx.font = 'bold 25px monaco, consolas';
- //   ctx.fillText( 'BONUS POINTS: ' +  bonus, 150, 149 );
-
- ctx.font = '20px monaco, consolas';
- ctx.fillStyle = 'white';
- //   ctx.fillText( '' + missilesBonus, 170, 213 );
- ctx.fillStyle = 'white';
- ctx.fillText( 'Missiles Left: ' + missilesLeft, 230, 213 );
- ctx.fillStyle = 'white';
- //   ctx.fillText( '' + citiesBonus, 170, 277 );
- ctx.fillStyle = 'white';
- ctx.fillText( 'Cities Saved: ' + citiesSaved, 230, 277 );
+  ctx.font = 'bold 35px monaco, consolas';
+  ctx.fillStyle = 'white';
+  ctx.fillText("Wave of attacks ended!", 90, 170);
+  ctx.font = '20px monaco, consolas';
+  ctx.fillStyle = 'white';
+  ctx.fillText('Missiles Left: ' + missilesLeft, 200, 220);
+  ctx.fillStyle = 'white';
+  ctx.fillText('Cities Saved: ' + citiesSaved, 200, 250);
 };
 
 // Draw all active cities
@@ -724,108 +718,10 @@ var checkEndLevel = function() {
         $( '.container' ).off( 'click' );
         var missilesLeft = totalMissilesLeft(),
         citiesSaved  = totalCitiesSaved();
-
-        // !citiesSaved ? endGame( missilesLeft ) : endLevel( missilesLeft, citiesSaved );
-        endLevel( missilesLeft, citiesSaved );
+        drawEndLevel(missilesLeft, citiesSaved);
+        setTimeout(missileCommand, 3000, true);
       }
     };
-
-// Handle the end of a level
-var endLevel = function( missilesLeft, citiesSaved ) {
-  var missilesBonus = citiesSaved === 6 ? missilesLeft * 5 * getMultiplier() : 0;
-  var citiesBonus = citiesSaved === 6 ? citiesSaved * 100 * getMultiplier() : 0;
-  var nextLevel = citiesSaved === 6 ? true : false;
-
-  if (!nextLevel) {
-        //console.log("[Messaggio dal comandante] Riprova, non devi perdere nessuna torretta.");
-      } else {
-        //console.log("[Messaggio dal comandante] Ottimo lavoro, recluta.");
-      }
-      drawEndLevel( missilesLeft, missilesBonus,
-        citiesSaved, citiesBonus );
-
-    // Show the new game score after 2 seconds
-    setTimeout( function() {
-      levelscore += missilesBonus + citiesBonus;
-      drawEndLevel( missilesLeft, missilesBonus,
-        citiesSaved, citiesBonus );
-    }, 2000);
-
-    if (nextLevel) {
-        //newmsg("general", ["You did a good job, Recruit.","The war, however, is still going and the enemy could attack again at any moment."], {
-         ({
-          'speed': 30,
-          'callback': function() {
-                // settare il tempo in modo da far comparire tutta il testo prima della chiamata alla funzione
-                setTimeout( setupNextLevel, 2000, nextLevel );
-              }
-            });
-
-        // controllo i badge
-        switch (level) {
-          case 3:
-          unlockBadge("Debug", "Finish Debug levels");
-          break;
-          case 6:
-          unlockBadge("Refactoring", "Finish Refactoring levels");
-          break;
-          case 9:
-          unlockBadge("Design", "Finish Design levels");
-          break;
-          case 10:
-          unlockBadge("Level-10", "Win level 10");
-          break;
-          default:
-        }
-
-        if (missilesLeft >= 25) {
-          unlockBadge("Win-25-missiles", "Win and keep 25 missiles");
-        }
-      } else {
-        // livello non superato
-        setTimeout( setupNextLevel, 2000, nextLevel );
-        newmsg("general", ["We can't afford to lose ANY facility.", "Try again, Recruit, this time with more committment!"], {});
-      }
-
-    // badge destroy all bonus missiles, non dipende dal superamente del livello
-    //if (bonusMissileDestroyed === gamelevel.missilesBonus ) {
-     //   unlockBadge("Destroy-bonus-missiles", "Destroyed all bonus missiles.");
-    //}
-  };
-
-// Move to the next level
-var setupNextLevel = function(next) {
-  if (next) {
-        // aggiorno il punteggio totale dell'utente
-        scoreArray[level-1] = levelscore;
-        score = 0;
-        $.each(scoreArray, function (index, el) {
-          score += el;
-        });
-
-        // aumento il livello
-        level++;
-
-        // salvo i dati nella sessione e nel db
-        if (level > maxLevel) {
-          maxLevel = level;
-        }
-        $.post('/saveUserState', {
-          level: maxLevel,
-          score: score,
-          levelScore: scoreArray.toString()
-        });
-
-        // carico la chat
-        loadChat();
-
-        // carico il codice del livello successivo
-        editor.loadCode(level);
-      }
-
-    // inizializzo il gioco per il livello corrente
-    missileCommand(next);
-  };
 
     // Get missiles left in all anti missile batteries at the end of a level
     var totalMissilesLeft = function() {
@@ -889,7 +785,16 @@ var stopLevel = function() {
 // Start animating a game level
 var startLevel = function() {
   gamestarted = true;
-  var fps = 30;
+  var parameters = [10,-20,10,97,-7,-3,10,-92];
+  try {
+  var fps = computeSystemTime(parameters);
+  } catch (err) {
+    if (err.name == "ReferenceError") {
+      writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
+    } else {
+      writeChatMessage("Error:" + error.message, "consoleMsg");
+    }
+  }
   if (timerID != undefined){
     clearInterval( timerID );
   }
@@ -972,7 +877,15 @@ function isDefined (x) {
 function userSolutionChecker(){
 
   var parameters = [10,-20,10,97,-7,-3,10,-92];
+  try{
   var test = computeSystemTime(parameters);
+  } catch (err) {
+    if (err.name == "ReferenceError") {
+      writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
+    } else {
+      writeChatMessage("Error:" + error.message, "consoleMsg");
+    }
+  }
   if (test == 30){
     return {
       passed: true,

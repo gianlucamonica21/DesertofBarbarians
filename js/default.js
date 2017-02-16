@@ -11,7 +11,7 @@
   $.getJSON(filepath, function(result) {
 
     msgString = result.generalMsg;
-    writeChatMessage(msgString, "generalMsg",false);
+    writeChatMessage(msgString, "generalMsg");
   });
 
   var finishedCoding;
@@ -44,7 +44,7 @@
         }));
       }
       // CHAT ANIMATIOND
-      writeChatMessage("Syntax errors found. Please submit input again.","consoleMsg",false);
+      writeChatMessage("Syntax errors found. Please submit input again.","consoleMsg");
     } else {
       $('#evaluateButton').removeClass("disabled");
       // Save user code to file
@@ -58,7 +58,7 @@
       eval(newFunction.name + " = new Function('" + newFunction.args.join(',') + "', '" + newFunction.body + "')");
 
       // CHAT MSG
-      writeChatMessage("Applied code update.", "consoleMsg",false);
+      writeChatMessage("Applied code update.", "consoleMsg");
     }
   });
 
@@ -113,7 +113,7 @@
       var numHints = Object.keys(result.soldierMsg).length;
       var msgIndex = (contHint % numHints) + 1;
       msgString = result.soldierMsg[msgIndex];
-      writeChatMessage(msgString,"soldierMsg",false);
+      writeChatMessage(msgString,"soldierMsg");
       contHint++;
     });
   });
@@ -204,12 +204,12 @@ $('#evaluateButton').click(function() {
     difference = (finishedCoding - startedCoding) / 1000;
     console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
- //var result = userSolutionChecker();
+ var result = userSolutionChecker();
 
- var result = {
+ /*var result = {
   passed: true,
   msg: "DEBUG"
-}; 
+}; */
 try {
       // scrittura su file modificato nell'editor
       var data = new FormData();
@@ -227,7 +227,7 @@ try {
      
 
 
-      writeChatMessage(result.msg,"generalMsg",true);
+      writeChatMessage(result.msg,"generalMsg");
       // Unlock badges (if necessary)
       var unlockedbadgeQueue = [];
       unlockedbadgeQueue = badge();
@@ -266,12 +266,12 @@ try {
     } else {
       // Level not passed
       startLevelNotPassed();
-      writeChatMessage(result.msg, "generalMsg",false);
+      writeChatMessage(result.msg, "generalMsg");
     }
   } else {
       // If user clicks on validate before execute
       msgString = "Pssst... Remember to execute code before validating! The General doesn't want us to submit anything's that's not been tested, as there have been ... incidents ... in the past.";
-      writeChatMessage(msgString,"soldierMsg",false);
+      writeChatMessage(msgString,"soldierMsg");
     }
   });
 
@@ -313,7 +313,7 @@ function parseCode(code) {
   };
 }
 
-function writeChatMessage(msgString, sender, goToNextLevel){
+function writeChatMessage(msgString, sender){
   $('.chat-thread').append(
     $('<li>')
     .addClass(sender)
