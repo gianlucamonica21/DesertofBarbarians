@@ -31,12 +31,10 @@
     stoppedGame = true;
     $('#returnButton').removeClass("disabled");
     $('#evaluateButton').addClass("disabled");
-    console.log("origin",change.origin);
     // Handler in case of insertion/deletion of a line
     if (change.origin != "setValue"){ //If the change is caused by loading the coading in the editor, the read-only lines remain the same
     lineChangeHandler(change);
     }
-    console.log("Array AFTER", readOnlyLinesArray);
   });
 
   // Code to reload and reupdate the level
@@ -85,7 +83,6 @@
   }
 
   var lineChangeHandler = function(change) {
-    console.log("Array BEFORE", readOnlyLinesArray);
     if (change.to.line < change.from.line || change.to.line - change.from.line + 1 > change.text.length) { 
         // A line has been deleted
         var numRemoved = change.to.line - change.from.line - change.text.length + 1;

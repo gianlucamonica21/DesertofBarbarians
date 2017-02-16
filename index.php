@@ -37,7 +37,7 @@ $conn = null;
   console.log("Sei al livello: " + level);
   var maxlevel = "<?php echo $_SESSION['maxLevel'];?>";
   console.log("Livello massimo: " + maxlevel);
-  
+
   var ownedBadges = '<?php echo json_encode($_SESSION['achievementsId']);?>';
   console.log("Owned: " + ownedBadges);
   var top = '<?php echo $_SESSION['top'];?>';
@@ -233,7 +233,7 @@ $conn = null;
          <div id="col7" class="seven"></div>
          <div id="col8" class="eight "></div>
 
-         
+
 
 
          <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
@@ -293,7 +293,7 @@ $conn = null;
             }
           });
 
-          upgradeLevelBar();      
+          upgradeLevelBar();
           function upgradeLevelBar(){
             var lmax = maxlevel;
             console.log("lmax"+lmax);
@@ -323,7 +323,7 @@ $conn = null;
           }
         };
 
-        
+
 
 
       </script>
@@ -421,7 +421,7 @@ $conn = null;
               <div id="controllerbody" class="panel-body">
                <!--  <button aria-hidden="true" class="fa fa-forward" class="btn btn-success disabled" id="nextButton" >
               <br>
-                  
+
             </button> -->
             <button  class="btn btn-success " id="nextButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
               <i id="nextButtonSymbol" class="fa fa-forward" aria-hidden="true"></i>
@@ -785,9 +785,9 @@ $conn = null;
   <script type="text/javascript" src="js/startDoc.js"></script>
   <script type="text/javascript" src="js/startIntro.js"></script>
   <script type="text/javascript" src="js/gameOver.js"></script>
-  <script type="text/javascript" src="js/startIntroLv1.js"></script> 
+  <script type="text/javascript" src="js/startIntroLv1.js"></script>
   <script type="text/javascript" src="js/gameOver.js"></script>
-  <script type="text/javascript" src="js/startLevelPassed.js"></script>  
+  <script type="text/javascript" src="js/startLevelPassed.js"></script>
   <script type="text/javascript" src="js/startLevelNotPassed.js"></script>
   <script type="text/javascript" src="intro.js-2.4.0/intro.js"></script>
   <script type="text/javascript">

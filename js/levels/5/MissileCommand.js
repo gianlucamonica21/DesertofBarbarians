@@ -975,15 +975,24 @@ var numCalled = 0;
 // Counter function
 var addFnCounter = function(target){
     var swap = target;
-    return function(){;
+    return function(){
         swap.apply(null, arguments);
         numCalled++;
+        console.log("numCalled",numCalled);
     };
 };
 
 powerOf = addFnCounter(powerOf);
 
+try {
 powerOf(3,2);
+} catch(err) {
+    if(err.name == "RangeError"){
+    return {
+    passed: false,
+    msg: "Be careful there! You managed to create an infinite loop!"
+  }
+}}
 
 if (numCalled > 1) {
   return {
