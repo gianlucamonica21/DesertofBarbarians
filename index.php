@@ -162,7 +162,7 @@ $conn = null;
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
            <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
-            <span ><?php echo "Level: ".$_SESSION['level']; ?></span>
+            <span ><?php echo "Level ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
@@ -172,7 +172,7 @@ $conn = null;
               <ul id="ul">
                 <span id="spanUser"><?php echo $_SESSION["gradeType"];  ?>  &nbsp</span>
 
-                <span> Score:  <?php echo intval($_SESSION["totalScore"]); ?> </span>
+                <span> Score  <?php echo intval($_SESSION["totalScore"]); ?> </span>
               </ul>
               <div id="progress-score2" class="progress">
 
