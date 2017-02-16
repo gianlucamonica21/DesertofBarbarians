@@ -1,4 +1,9 @@
 {
 	"generalMsg": "Well, at least we have a functioning anti-missile system now. However, our soldiers are complaining that it is too slow, especially in calculating distances. <br> Apparently, our <b>powerOf</b> function is a bit outdated. It works, but surely there is a better way to do it, something about recursion... Why don't you take a look?",
-	"soldierMsg": "Check out <b>recursion</b> in the manual. Careful with the base case! What happens when the exponent becomes 0?"
+	"soldierMsg": {
+		"1": "Here is an example of recursive function, it might help you: <br> <code> <br>function factorial( n ) { <br> &emsp;if ( n === 1 ) { <br> &emsp; &emsp; return 1; <br>} <br> &emsp; return n*factorial( n-1 ); <br>}</code>",
+		"2": "Remember, 2<sup>4</sup> is the same thing as 2 * 2<sup>3</sup>, which is the same thing is a 2 * 2<sup>2</sup>, which is the same thing as 2 * 2<sup>1</sup>, which is the same things is as 2 * 2<sup>0</sup>, and then we stop, because 2<sup>0</sup> = 1. So to calculate <b>base <sup>exponent</sup></b> you just have to keep on calculating <b>base <sup>exponent-1</sup></b> until exponent = 0.",
+		"3": "Let's think about this step by step. First thing is the base case: what happens when the exponent is 0?",
+		"4": "Ok, I'll give you a tip for the recursive case. It's the same as the factorial function I showed you before, except you have to return the base multiplied by our <b>powerOf</b> function where the exponent argument is decremented by 1."
+	}	
 }

@@ -1037,7 +1037,7 @@ function userSolutionChecker(){
 
       return {
         passed: true,
-        msg: "Our campe is safer now! Nice work!"
+        msg: "Our camp is safer now! Nice work!"
       }
 
     } else {

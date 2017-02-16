@@ -974,7 +974,7 @@ function userSolutionChecker(){
   if ( missileSpeed(5,9) == speed ) {
     return {
     passed: true,
-    msg: "Great!"
+    msg: "Excellent, now we can counter-attack!"
   }
   } else {
    return {

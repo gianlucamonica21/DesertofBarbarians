@@ -106,13 +106,15 @@
   // HINT BUTTON
 
   $('#hintButton').click(function() {
-    contHint++;
     console.log("numero  aiuti: " + contHint);
     var currentLevel = document.body.getAttribute("level");
     var filepath = "js/levels/" + currentLevel + "/dialogues.json";
     $.getJSON(filepath, function(result) {
-      msgString = result.soldierMsg;
+      var numHints = Object.keys(result.soldierMsg).length;
+      var msgIndex = (contHint % numHints) + 1;
+      msgString = result.soldierMsg[msgIndex];
       writeChatMessage(msgString,"soldierMsg",false);
+      contHint++;
     });
   });
 
