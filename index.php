@@ -42,6 +42,8 @@ $conn = null;
   console.log("Owned: " + ownedBadges);
   var top = '<?php echo $_SESSION['top'];?>';
   var champion = '<?php echo $_SESSION['isChampion'];?>';
+  var ownedBadge = '<?php echo json_encode($_SESSION['achievementsTitle']);?>';
+  console.log("Owned: " + ownedBadge);
 </script>
 <!DOCTYPE html>
 <html lang="en">
