@@ -334,7 +334,19 @@ body {
 }
 
 .obscure{
-
   opacity: 0.55;
   filter(alpha(opacity = 40));
 }
+
+  .image-general{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+code {
+  background-color: transparent;
+}
+
+
+

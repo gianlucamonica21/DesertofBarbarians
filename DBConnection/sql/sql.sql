@@ -225,6 +225,9 @@ INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (5, 0);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (5, 7);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 0);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 1);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 2);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 3);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 13);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 14);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (6, 15);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (7, 0);
@@ -234,7 +237,9 @@ INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (8, 0);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (8, 1);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (8, 3);
 INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 0);
-INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 2);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 1);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 3);
+INSERT INTO `desertdb`.`ConstRow` (`level`, `row`) VALUES (9, 4);
 
 COMMIT;
 

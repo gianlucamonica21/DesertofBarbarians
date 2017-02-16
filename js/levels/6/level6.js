@@ -6,10 +6,10 @@ var computeSystemTime = function(parameters) {
 			if (parameters[i] > 10) {
 				// do nothing
 			} else {
-				temp += parameters[i];
+				temp = temp + parameters[i];
 			}
 		} else {
-			temp += parameters[i];
+			temp = temp + parameters[i];
 		}
 	}
 	return temp;

@@ -85,6 +85,7 @@ var initializeLevel = function() {
   rechargeAntiMissileBatteries();
   playerMissiles = [];
   enemyMissiles = [];
+  loadMissiles();
   createBonusMissiles(/*gamelevel.missilesBonus*/0);
   drawBeginLevel();
 };
