@@ -160,7 +160,7 @@ $conn = null;
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
            <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
-            <span ><?php echo "Level ".$_SESSION['level']; ?></span>
+            <span ><?php echo "Current Level ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
@@ -235,6 +235,7 @@ $conn = null;
          <div id="col6" class="six"></div>
          <div id="col7" class="seven"></div>
          <div id="col8" class="eight "></div>
+          <div id="col9" class="nine "></div>
 
 
 
@@ -301,26 +302,38 @@ $conn = null;
             var lmax = maxlevel;
             console.log("lmax"+lmax);
             for(var i=1; i<=9; i++){
-              if( i >= 1 && i <= 3){
-                document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
-                document.getElementById("col"+i).style.backgroundColor="indianred";
+              
+              if( i >= 1 && i <= 3 && i != level){
+                document.getElementById("timebarlv"+i).style.backgroundColor="lightsteelblue";
+                document.getElementById("col"+i).style.backgroundColor="lightsteelblue";
               }else
-              if( i >= 4 && i <= 6){
-                document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
-                document.getElementById("col"+i).style.backgroundColor="steelblue";
+              if( i >= 4 && i <= 6 && i != level){
+                document.getElementById("timebarlv"+i).style.backgroundColor="lightslategray";
+                document.getElementById("col"+i).style.backgroundColor="lightslategray";
 
               }else
-              if( i >= 7 && i <= 9){
-                document.getElementById("timebarlv"+i).style.backgroundColor="coral";
-                if(i<9){
-                  document.getElementById("col"+i).style.backgroundColor="coral";
+              if( i >= 7 && i <= 9 && i != level){
+                document.getElementById("timebarlv"+i).style.backgroundColor="#2c3e50";
+                if(i<=9 ){
+                  document.getElementById("col"+i).style.backgroundColor="#2c3e50";
                 }
               }
-              if(i > lmax){
+              if(i > lmax ){
                document.getElementById("textbarlv"+i).style.color="#2c3e50";
                document.getElementById("timebarlv"+i).style.backgroundColor="beige";
-               if(i<9){
+               if(i<=9 ){
                 document.getElementById("col"+i).style.backgroundColor="beige";
+              }
+              if( i == level){
+                document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
+                if( i >=1 && i <=3){
+                document.getElementById("col"+i).style.backgroundColor="lightsteelblue";
+                 }
+                 else if( i >= 4 && i <=6){
+                  document.getElementById("col"+i).style.backgroundColor="lightslategray";
+                 }else if ( i >= 7 && i <= 9) {
+                  document.getElementById("col"+i).style.backgroundColor="indianred";
+                 }
               }
             }
           }

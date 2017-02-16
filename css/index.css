@@ -271,7 +271,7 @@ body {
     font-size: 19px;
     font-weight: bolder;
   }
-  .one, .two, .three, .four, .five, .six, .seven, .eight{
+  .one, .two, .three, .four, .five, .six, .seven, .eight, .nine{
     position:absolute;
     margin-top:-10px;
     z-index:1;
@@ -304,6 +304,9 @@ body {
   }
   .eight{
     left:88.8%;
+  }
+   .nine{
+    right: 0px;
   }
 
   .primary-color{
