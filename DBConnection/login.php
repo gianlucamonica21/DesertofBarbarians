@@ -92,7 +92,7 @@ if (isset($_SESSION['loggedinUser'])) {
 
 
        //Chiamata LOAD PLAYER
-      
+
       var stringa;
       var oReq = new XMLHttpRequest(); //New request object
       oReq.onload = function() {
@@ -101,7 +101,7 @@ if (isset($_SESSION['loggedinUser'])) {
       oReq.open("get", "load_player.php", true);
       oReq.send();
       console.log("RISULTATO  CHIAMATA da editor.js (di load_player.php):" + stringa);
-       
+
       //Chiamata LOAD LEVEL
       var data = new FormData();
       data.append("data", 0);
@@ -109,7 +109,7 @@ if (isset($_SESSION['loggedinUser'])) {
       xhr.open("post", "load_level_x.php", true);
       xhr.send(data);
 
-      
+
 
 
 
