@@ -76,7 +76,7 @@
 .chat-thread li.generalMsg:before {
   left: -80px;
   background-image: url(../img/general-scaled.png);
-     
+
 }
 
 .chat-thread li.generalMsg:after {
