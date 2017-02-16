@@ -20,6 +20,7 @@ level = 9,
 maxLevel = 1,
 levelIndex = {},
 cities = [],
+shields = [],
 antiMissileBatteries = [],
 playerMissiles = [],
 enemyMissiles = [],
@@ -34,6 +35,9 @@ var undef;
 
 var elementPos = [{x: 35, y:410}, {x: 255, y:410}, {x: 475, y:410},
 {x: 80, y:430}, {x: 130, y:430}, {x: 180, y:430}, {x: 300, y:430}, {x: 350, y:430}, {x: 400, y:430} ];
+
+var shieldPos = [{x: 145, y:420},  // First shield
+                  {x: 365, y:420}]; // second shield
 // Create cities and anti missile batteries at the start of the game
 var missileCommand = function(checkLevel) {
   cities = [];
@@ -44,14 +48,19 @@ var missileCommand = function(checkLevel) {
 
     // Top middle position of anti-missile batteries
     createAntimissileBattery();
-
+    createShields();
     initializeLevel();
 
     levelscore = 0;
 
     setupListeners();
   };
+  
 
+    var createShields = function () {
+    shields.push( new Shield( shieldPos[0].x, shieldPos[0].y));
+    shields.push( new Shield( shieldPos[1].x, shieldPos[1].y));
+  }
   var createCities = function () {
     cities.push( new City( elementPos[3].x,  elementPos[3].y) );
     cities.push( new City( elementPos[4].x,  elementPos[4].y) );
@@ -116,6 +125,7 @@ var rand = function( min, max ) {
 var drawGameState = function() {
   drawBackground();
   drawCities();
+  drawShields();
   drawAntiMissileBatteries();
  //   drawScore();
 };
@@ -209,6 +219,15 @@ var getMultiplier = function() {
   return ( level > 10 ) ? 6 : Math.floor( (level + 1) / 2 );
 };
 
+// Draw all active shields
+var drawShields = function() {
+  $.each( shields, function( index, shield ) {
+    if( shield.active ) {
+      shield.draw();
+    }
+  });
+};
+
 // Show the basic game background
 var drawBackground = function() {
     // Draw SKY
@@ -289,6 +308,25 @@ function City( x, y ) {
   this.x = x;
   this.y = y;
   this.active = true;
+}
+
+// Constructor for a Shield
+function Shield(x,y) {
+  this.x = x;
+  this.y = y;
+  this.active = true;
+}
+
+// Draw shields based on position
+Shield.prototype.draw = function() {
+  x = this.x;
+  y = this.y;
+
+  ctx.strokeStyle= '#00FFFF';
+  ctx.beginPath();
+  ctx.arc(x, y, 80, 1 * Math.PI, 0);
+  ctx.stroke();
+  ctx.closePath();
 }
 
 // Show a city based on its position
@@ -580,6 +618,19 @@ EnemyMissile.prototype.update = function() {
       this.state = MISSILE.exploding;
       this.groundExplosion = true;
     }
+  if (shields.length > 0 && shields[0].active == true ) {
+  if( distance(this.x,this.y,shieldPos[0].x,shieldPos[0].y) <= 80 ) {
+      // Missile hit shield
+      this.state = MISSILE.exploding;
+      shields[0].active = false;
+  }}
+  if (shields.length > 1 && shields[1].active == true ) {
+    if( distance(this.x,this.y,shieldPos[1].x,shieldPos[1].y) <= 80 ) {
+      // Missile hit shield
+      this.state = MISSILE.exploding;
+      shields[1].active = false;
+    }};
+
     if( this.state === MISSILE.active ) {
       this.x += this.dx;
       this.y += this.dy;
@@ -886,6 +937,12 @@ function isDefined (x) {
   var undef;
   return x !== undef;
 };
+
+function distance(x1,y1,x2,y2){
+  xDistance = x2 - x1;
+  yDistance = y2 - y1;
+  return Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2) );
+}
 
 function userSolutionChecker(){
   try {
