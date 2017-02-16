@@ -5161,9 +5161,9 @@ a.thumbnail.active {
 }
 .progress.active .progress-bar,
 .progress-bar.active {
-  -webkit-animation: progress-bar-stripes 2s linear infinite;
-  -o-animation: progress-bar-stripes 2s linear infinite;
-  animation: progress-bar-stripes 2s linear infinite;
+  -webkit-animation: progress-bar-stripes 0.5s linear infinite;
+  -o-animation: progress-bar-stripes 0.5s linear infinite;
+  animation: progress-bar-stripes 0.5s linear infinite;
 }
 .progress-bar-success {
   background-color: #18bc9c;
@@ -6975,11 +6975,13 @@ input:focus {
   text-decoration: underline;
 }
 .progress {
+
   height: 10px;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .progress .progress-bar {
+
   font-size: 20px;
   line-height: ;
 }

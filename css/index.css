@@ -281,6 +281,11 @@ body {
     background-color: indianred;
 
   }
+
+  #movebar{
+            height: 25px;
+  }
+
   .one{
     left:11.1%;
   }
