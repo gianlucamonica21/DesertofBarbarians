@@ -50,8 +50,8 @@ span.icon {
 body {
   padding-top: 140px;
   font-size: 17px;
-
-  /*overflow-y:hidden;*/
+/*
+  overflow-y:hidden;*/
 }
 
 #playButton{
@@ -68,8 +68,8 @@ body {
 #pauseButton{
   margin-left: -1px;
   width: 258px;
-  height: 46px;  
-  background-color: #2c3e50; 
+  height: 46px;
+  background-color: #2c3e50;
   color: white;
   margin-top: 45;
 }
@@ -79,7 +79,7 @@ body {
 
   margin-left: 250px;
   width: 320px;
-  
+
   margin-bottom: 0px;
   margin-top: -254;
 
@@ -286,6 +286,11 @@ body {
     background-color: indianred;
 
   }
+
+  #movebar{
+            height: 25px;
+  }
+
   .one{
     left:11.1%;
   }
@@ -309,6 +314,9 @@ body {
   }
   .eight{
     left:88.8%;
+  }
+   .nine{
+    right: 0px;
   }
 
   .primary-color{
@@ -349,7 +357,3 @@ body {
 code {
   background-color: transparent;
 }
-
-
-
-

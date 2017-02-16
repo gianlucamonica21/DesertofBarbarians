@@ -92,11 +92,19 @@ var createAntimissileBattery = function() {
   antiMissileBatteries.push(new AntiMissileBattery(elementPos[2].x, elementPos[2].y));
 }
 
+<<<<<<< HEAD
 var initializeAntiMissileBatteries = function() {
   $.each(antiMissileBatteries, function(index, amb) {
     amb.missilesLeft = 0;
   });
 };
+=======
+  var initializeAntiMissileBatteries = function () {
+    $.each( antiMissileBatteries, function( index, amb ) {
+      amb.missilesLeft = 0;
+    });
+  };
+>>>>>>> e52b7b1b1936334d96beb44582153aa2a9c41079
 
 var rechargeAntiMissileBatteries = function() {
 
@@ -200,7 +208,11 @@ var drawStopMessage = function() {
 
       $('#miscom').unbind().click(function(event) {
         var mousePos = getMousePos(this, event);
+<<<<<<< HEAD
         playerShoot(mousePos.x, mousePos.y);
+=======
+        playerShoot( mousePos.x, mousePos.y);
+>>>>>>> e52b7b1b1936334d96beb44582153aa2a9c41079
 
       });
     });
@@ -845,6 +857,9 @@ var stopLevel = function() {
 
 // Start animating a game level
 var startLevel = function() {
+  $('#pauseButton').removeClass('disabled');
+  $('#playButton').addClass('disabled');
+
   gamestarted = true;
   var fps = 30;
   if (timerID != undefined) {
@@ -903,6 +918,9 @@ var setupListeners = function() {
   $('#miscom').unbind();
   $('#mc-container').one('click', function() {
     startLevel();
+    $('#pauseButton').removeClass('disabled');
+    $('#playButton').addClass('disabled');
+
 
     $('#miscom').unbind().click(function(event) {
       var mousePos = getMousePos(this, event);

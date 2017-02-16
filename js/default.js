@@ -65,7 +65,15 @@
   // RESTART GAME BUTTON
   $('#nextButton').click(function() {
 
-    
+
+
+
+      // // Carica dati del prossimo livello
+      var data = new FormData();
+      data.append("data", difference);
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+      xhr.open("post", "DBConnection/nextlevel.php", true);
+      xhr.send(data);
 
       // // Code to reload and reupdate the level
       var stringa;
@@ -76,16 +84,9 @@
       oReq.open("get", "DBConnection/load_player.php", true);
       oReq.send();
 
-      // // Carica dati del prossimo livello
-      var data = new FormData();
-      data.append("data", difference);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-      xhr.open("post", "DBConnection/nextlevel.php", true);
-      xhr.send(data);
-
       var data = new FormData();
       data.append("data", 0);
-      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP"); 
+      var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
       var stringa;
       xhr.onload = function() {
         stringa = this.responseText;
@@ -97,7 +98,7 @@
        }
      };
       xhr.send(data);
-      
+
 
      location.reload();
 
@@ -153,8 +154,8 @@
     });
 
     $("#closeModalN").click(function() {
-      
-    
+
+
       $("#resetModal").modal('hide');
     });
 
@@ -163,8 +164,8 @@
 
 
 
-    
-    
+
+
 
   });
 });
@@ -224,7 +225,7 @@ try {
 
     if (result.passed == true) {
 
-     
+
 
 
       writeChatMessage(result.msg,"generalMsg");
@@ -243,13 +244,13 @@ try {
       //    startLevelPassed();
       // }
        if(level == 9){
-        gameOver(); 
+        gameOver();
       }
       else{
        document.getElementById('nextButton').style.visibility='visible';
-      
+
      }
-     
+
       for(var i = 0; i < unlockedbadgeQueue.length; i++) {
       var data = new FormData();
       data.append("data", unlockedbadgeQueue[i]);
@@ -257,11 +258,6 @@ try {
       xhr.open("post", "DBConnection/add_badge.php", true);
       xhr.send(data);
     }
-
-
-
-
-
 
     } else {
       // Level not passed

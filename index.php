@@ -16,9 +16,9 @@ $errflag = false;
 try {
   //set the connection to DB
   $conn = new PDO("mysql:host=$servername;dbname=desertdb", $user, $pass);
-    // set the PDO error mode to exception
+  // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  if(!$conn){
+  if(!$conn) {
     echo "Error! You are not connected!";
   }
 }
@@ -43,7 +43,6 @@ $conn = null;
   var top = '<?php echo $_SESSION['top'];?>';
   var champion = '<?php echo $_SESSION['isChampion'];?>';
 
-
   var achievementsQty = '<?php echo json_encode($_SESSION["achievementsQty"]);?>';
   var achievementsId = '<?php echo json_encode($_SESSION["achievementsId"]); ?>';
   var achievementsTitle = '<?php echo json_encode($_SESSION["achievementsTitle"]); ?>';
@@ -53,9 +52,6 @@ $conn = null;
   console.log("achievementId: " +achievementsId);
   console.log("achievementTitle:" +achievementsTitle);
   console.log("achievementQty:" +achievementsQty);
-  
-
-
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,7 +156,7 @@ $conn = null;
         <ul id="logoutTutorial" class="nav navbar-nav navbar-right">
           <li>
            <a  type="button" id="lev" class="btn  btn-lg navbar-btn text-center"  >
-            <span ><?php echo "Level ".$_SESSION['level']; ?></span>
+            <span ><?php echo "Current Level ".$_SESSION['level']; ?></span>
           </a>
         </li>
         <li>
@@ -236,37 +232,39 @@ $conn = null;
          <div id="col7" class="seven"></div>
          <div id="col8" class="eight "></div>
 
+         <div id="movebar" class="progress progress-striped">
 
 
 
-         <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
+           <div id="timebarlv1" class="progress-bar progress-bar-danger" style="width:11.1%">
 
-           <span type="button"  class="level-buttons" id="textbarlv1">1</span>
-         </div>
+             <span type="button"  class="level-buttons" id="textbarlv1">1</span>
+           </div>
 
-         <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv2">2</span>
-        </div>
-        <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv3">3</span>
-        </div>
-        <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv4">4</span>
-        </div>
-        <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv5">5</span>
-        </div>
-        <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv6">6</span>
-        </div>
-        <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv7">7</span>
-        </div>
-        <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span  class="level-buttons" id="textbarlv8">8</span>
-        </div>
-        <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
-          <span class="level-buttons" id="textbarlv9">9</span>
+           <div id="timebarlv2" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv2">2</span>
+          </div>
+          <div id="timebarlv3" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv3">3</span>
+          </div>
+          <div id="timebarlv4" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv4">4</span>
+          </div>
+          <div id="timebarlv5" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv5">5</span>
+          </div>
+          <div id="timebarlv6" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv6">6</span>
+          </div>
+          <div id="timebarlv7" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv7">7</span>
+          </div>
+          <div id="timebarlv8" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span  class="level-buttons" id="textbarlv8">8</span>
+          </div>
+          <div id="timebarlv9" class="progress-bar progress-bar-danger" style="width:11.1%">
+            <span class="level-buttons" id="textbarlv9">9</span>
+          </div>
         </div>
         <script type="text/javascript">
           var levelArr = document.getElementsByClassName("level-buttons");
@@ -301,6 +299,7 @@ $conn = null;
             var lmax = maxlevel;
             console.log("lmax"+lmax);
             for(var i=1; i<=9; i++){
+
               if( i >= 1 && i <= 3){
                 document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
                 document.getElementById("col"+i).style.backgroundColor="indianred";
@@ -322,16 +321,21 @@ $conn = null;
                if(i<9){
                 document.getElementById("col"+i).style.backgroundColor="beige";
               }
+
             }
-          }
-        };
+            if( i == level){
+
+             $("#timebarlv"+i).addClass('progress-striped active');
+
+           }
+         }
+       };
 
 
 
-
-      </script>
-    </div>
-  </div>
+     </script>
+   </div>
+ </div>
 </div>
 <div class="row">
 
@@ -625,124 +629,124 @@ $conn = null;
                               </tr>
                             </tbody>
                             <script type="text/javascript">
-                            $('#profileTutorial').click(function() {
+                              $('#profileTutorial').click(function() {
                                 var unlockedB = JSON.parse(achievementsId);
                                 console.log("UNLOCKEDBADGE: "+unlockedB);
                               // $('.col-md-3 badge-lock').addClass('obscure');
                               // $('.mybadge').addClass('obscure');
-                               for(var i = 0; i < achievementsQty; i++){  
+                              for(var i = 0; i < achievementsQty; i++){
                                 console.log("unlockedB in pos i: " + unlockedB[i]);
                                 disobscureBadge(parseInt(unlockedB[i]));
                               }
 
                               function disobscureBadge(id){
-                                 console.log("sono dentro disobscure function();");
-                                switch(id){
-                                  case 1:
-                                  {
-                                    
-                                    $('#l2').removeClass('obscure');
-                                    $('#l2B').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 2:
-                                  {
-                                    $('#half').removeClass('obscure');
-                                    $('#halfB').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 3:
-                                  {
-                                    $('#nohint2').removeClass('obscure');
-                                    $('#nohintB').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 4:
-                                  {
-                                    $('#best').removeClass('obscure');
-                                    $('#bestB').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 5:
-                                  {
-                                    $('#debugging').removeClass('obscure');
-                                    $('#debuggingB').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 6:
-                                  {
-                                    $('#refactoring').removeClass('obscure');
-                                    $('#refactoringB').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 7:
-                                  {
-                                    $('#designing').removeClass('obscure');
-                                    $('#designingB').removeClass('obscure');
-                                    break;
-                                  }
-                                  case 8:
-                                  {
-                                    $('#gameoverBver').removeClass('obscure');
-                                    $('#gameoverB').removeClass('obscure');
-                                    break;
-                                  }
-                                  default: {console.log("SONO NEL DEFAULT" + typeof id); break;}
+                               console.log("sono dentro disobscure function();");
+                               switch(id){
+                                case 1:
+                                {
 
+                                  $('#l2').removeClass('obscure');
+                                  $('#l2B').removeClass('obscure');
+                                  break;
                                 }
+                                case 2:
+                                {
+                                  $('#half').removeClass('obscure');
+                                  $('#halfB').removeClass('obscure');
+                                  break;
+                                }
+                                case 3:
+                                {
+                                  $('#nohint').removeClass('obscure');
+                                  $('#nohintB').removeClass('obscure');
+                                  break;
+                                }
+                                case 4:
+                                {
+                                  $('#best').removeClass('obscure');
+                                  $('#bestB').removeClass('obscure');
+                                  break;
+                                }
+                                case 5:
+                                {
+                                  $('#debugging').removeClass('obscure');
+                                  $('#debuggingB').removeClass('obscure');
+                                  break;
+                                }
+                                case 6:
+                                {
+                                  $('#refactoring').removeClass('obscure');
+                                  $('#refactoringB').removeClass('obscure');
+                                  break;
+                                }
+                                case 7:
+                                {
+                                  $('#designing').removeClass('obscure');
+                                  $('#designingB').removeClass('obscure');
+                                  break;
+                                }
+                                case 8:
+                                {
+                                  $('#gameoverBver').removeClass('obscure');
+                                  $('#gameoverB').removeClass('obscure');
+                                  break;
+                                }
+                                default: {console.log("SONO NEL DEFAULT" + typeof id); break;}
 
                               }
 
-                             
+                            }
 
-                            });
-                          </script>
-                        </table>
-                      </div>
+
+
+                          });
+                        </script>
+                      </table>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
-              <!-- TUTORIAL MODAL -->
-              <div class="modal" id="tutorialModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title">How to Play</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>One fine body…</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
-                    </div>
+            </div>
+            <!-- TUTORIAL MODAL -->
+            <div class="modal" id="tutorialModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button id="howtoplay" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">How to Play</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>One fine body…</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
                   </div>
                 </div>
               </div>
-              <!-- NOTIFICATION LEVEL MODAL -->
-              <div class="modal" id="notificationModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
-                    </div>
-                    <div class="modal-body" style="text-align : center;">
-                      <image id="image-modal" src=""  align="center"> </image>
-                      <!-- src="img/general.png" -->
-                      <p id="modal-text" ></p>
-                    </div>
-                    <div class="modal-footer">
-                     <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
-                   </div>
+            </div>
+            <!-- NOTIFICATION LEVEL MODAL -->
+            <div class="modal" id="notificationModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 id="notification-modal-title" class="modal-title">BADGE!!</h4>
+                  </div>
+                  <div class="modal-body" style="text-align : center;">
+                    <image id="image-modal" src=""  align="center"> </image>
+                    <!-- src="img/general.png" -->
+                    <p id="modal-text" ></p>
+                  </div>
+                  <div class="modal-footer">
+                   <button type="button" id="closeModal" class="btn btn-primary" >Got it!</button>
                  </div>
                </div>
              </div>
-             <script type="text/javascript">
+           </div>
+           <script type="text/javascript">
 
     //$('#notificationModal').modal('toggle');
     // $('#notificationModal').modal('show');
