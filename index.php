@@ -661,7 +661,7 @@ $conn = null;
                                 }
                                 case 3:
                                 {
-                                  $('#nohint2').removeClass('obscure');
+                                  $('#nohint').removeClass('obscure');
                                   $('#nohintB').removeClass('obscure');
                                   break;
                                 }

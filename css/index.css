@@ -50,8 +50,8 @@ span.icon {
 body {
   padding-top: 140px;
   font-size: 17px;
-
-  /*overflow-y:hidden;*/
+/*
+  overflow-y:hidden;*/
 }
 
 #playButton{

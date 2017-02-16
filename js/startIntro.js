@@ -30,7 +30,7 @@
       {
         element: document.querySelector('#chat'),
         intro: 'This is the chat! Obey orders and listen the helps of the general.',
-        position: 'left'
+        position: 'right'
       },
       {
         element: document.querySelector('#submitButton'),
@@ -42,10 +42,25 @@
         intro: 'Play it to verify the changes!',
         position: 'left'
       },
+        {
+        element: document.querySelector('#playButton'),
+        intro: 'Click here to play or resume the simulator from the pause!',
+        position: 'left'
+      },
+        {
+        element: document.querySelector('#pauseButton'),
+        intro: 'Click here to pause the simulator!',
+        position: 'left'
+      },
       {
         element: document.querySelector('#evaluateButton'),
         intro: 'Click here to evaluate your code, if the solution is right you will go to the next level! Until you do not click the execute button this button will be locked!',
         position: 'top'
+      },
+      {
+        element: document.querySelector('#nextButton'),
+        intro: 'When you pass a level this button will appear,click to go to the next level!',
+        position: 'left'
       },
       {
         element: document.querySelector('#lev'),
@@ -59,17 +74,20 @@
       },
       {
         element: document.querySelector('.col-md-12'),
-        intro: 'This bar shows you the locked and unlocked levels!Click the unlocked levels you want to play!<br>REMEMBER: click the number, not the bar!',
+        intro: 'This bar shows you the locked and unlocked levels! The animated bar indicate your current level! Click the unlocked levels you want to play!<br>REMEMBER: click the number, not the bar!',
         position: 'down'
       },
+
+      
+
       {
         element: document.querySelector('#timebarlv9'),
-        intro: 'The more you pass the levels the more this bar will fill, until you reach the last level. The levels will be colored with different color according to the type of the problem to solve.',
+        intro: 'The more you pass the levels the more this bar will fill, until you reach the last level. The levels will be colored with a different color according to the type of the problem to solve.',
         position: 'down'
       },
       {
         element: document.querySelector('#hintButton'),
-        intro: "If you are stuck, you can ask for help to a soldier which had been assigned as our old lead developer's assistant. Maybe he has more of an idea on how the system works!",
+        intro: "If you are stuck, you can ask for help to a soldier which had been assigned as our old lead developer's assistant. Maybe he has more of an idea on how the system works! Try clicking more than ones for different hints!",
         position: 'top'
       },
       {

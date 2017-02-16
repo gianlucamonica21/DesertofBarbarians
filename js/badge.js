@@ -6,72 +6,72 @@ function showModal(id){
 		case 1:
 		{
 			console.log("id 1");
-			$("#notification-modal-title").text('NEW BADGE!');
-			$("#modal-text").text('SECOND LEVEL!');
-			$("#image-modal").attr('src', 'img/level2.png');
+			$("#notification-modal-title").text('First Level Gone!');
+			$("#modal-text").text('You are at the second level!');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 2:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
-			$("#modal-text").text('YOU ARE AN HALFWAY THERE!');
-			$("#image-modal").attr('src', '');
+			$("#notification-modal-title").text('Halfway!');
+			$("#modal-text").text('You passed level 4!');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 3:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
-			$("#modal-text").text('YOU HAVE PASSED THE LEVEL WITHOUT ANY HINT!');
-			$("#image-modal").attr('src', '');
+			$("#notification-modal-title").text('Indie Programmer!');
+			$("#modal-text").text('Hint is not in your vocabolary!');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 4:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
-			$("#modal-text").text('SEI NELLA TOP 3!');
-			$("#image-modal").attr('src', '');
+			$("#notification-modal-title").text('!');
+			$("#modal-text").text('!');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 5:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
-			$("#modal-text").text('SEI CAMPIONE!');
-			$("#image-modal").attr('src', '');
+			$("#notification-modal-title").text('Champion!');
+			$("#modal-text").text('You are the top player of all time!');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 6:{
-			$("#notification-modal-title").text('NEW BADGE!');
+			$("#notification-modal-title").text('Debug!');
 			$("#modal-text").text('YOU FINISHED THE DEBUGGING LEVELS!');
-			$("#image-modal").attr('src', '');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break
 		}
 		case 7:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
+			$("#notification-modal-title").text('Refactoring!');
 			$("#modal-text").text('YOU FINISHED THE REFACTORING LEVELS!');
-			$("#image-modal").attr('src', '');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 8:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
+			$("#notification-modal-title").text('Design!');
 			$("#modal-text").text('YOU FINISHED THE DESIGNING LEVELS!');
-			$("#image-modal").attr('src', '');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 9:
 		{
-			$("#notification-modal-title").text('NEW BADGE!');
+			$("#notification-modal-title").text('WAR IS OVER!');
 			$("#modal-text").text('YOU FINISHED THE GAME!');
-			$("#image-modal").attr('src', '');
+			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
