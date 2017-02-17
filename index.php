@@ -272,15 +272,14 @@ $conn = null;
           var levelArr = document.getElementsByClassName("level-buttons");
           // console.log("levelarr" + levelArr);
           // console.log("levelarr" + levelArr[0].textContent);
-          for(var i=0; i<levelArr.length; i++)
-          {
-            if(i >= maxlevel){
+          for (var i = 0; i < levelArr.length; i++) {
+            if (i >= maxlevel) {
               levelArr[i].classList.add("disabled");
             }
           }
-          $('.level-buttons').click(function(){
+          $('.level-buttons').click(function() {
             //clicked = true;
-            if(!($(this).hasClass("disabled"))){
+            if (!($(this).hasClass("disabled"))) {
 
               clickedLevel = this.textContent;
               // alert("clickedLevel" + clickedLevel);
@@ -297,44 +296,42 @@ $conn = null;
           });
 
           upgradeLevelBar();
-          function upgradeLevelBar(){
+
+          function upgradeLevelBar() {
             var lmax = maxlevel;
-            console.log("lmax"+lmax);
-            for(var i=1; i<=9; i++){
+            console.log("lmax" + lmax);
+            for (var i = 1; i <= 9; i++) {
 
-              if( i >= 1 && i <= 3){
-                document.getElementById("timebarlv"+i).style.backgroundColor="indianred";
-                document.getElementById("col"+i).style.backgroundColor="indianred";
-              }else
-              if( i >= 4 && i <= 6){
-                document.getElementById("timebarlv"+i).style.backgroundColor="steelblue";
-                document.getElementById("col"+i).style.backgroundColor="steelblue";
+              if (i >= 1 && i <= 3) {
+                document.getElementById("timebarlv" + i).style.backgroundColor = "indianred";
+                document.getElementById("col" + i).style.backgroundColor = "indianred";
+              } else
+              if (i >= 4 && i <= 6) {
+                document.getElementById("timebarlv" + i).style.backgroundColor = "steelblue";
+                document.getElementById("col" + i).style.backgroundColor = "steelblue";
 
-              }else
-              if( i >= 7 && i <= 9){
-                document.getElementById("timebarlv"+i).style.backgroundColor="coral";
-                if(i<9){
-                  document.getElementById("col"+i).style.backgroundColor="coral";
+              } else
+              if (i >= 7 && i <= 9) {
+                document.getElementById("timebarlv" + i).style.backgroundColor = "coral";
+                if (i < 9) {
+                  document.getElementById("col" + i).style.backgroundColor = "coral";
                 }
               }
-              if(i > lmax){
-               document.getElementById("textbarlv"+i).style.color="#2c3e50";
-               document.getElementById("timebarlv"+i).style.backgroundColor="beige";
-               if(i<9){
-                document.getElementById("col"+i).style.backgroundColor="beige";
+              if (i > lmax) {
+                document.getElementById("textbarlv" + i).style.color = "#2c3e50";
+                document.getElementById("timebarlv" + i).style.backgroundColor = "beige";
+                if (i < 9) {
+                  document.getElementById("col" + i).style.backgroundColor = "beige";
+                }
+
               }
+              if (i == level) {
 
+                $("#timebarlv" + i).addClass('progress-striped active');
+
+              }
             }
-            if( i == level){
-
-             $("#timebarlv"+i).addClass('progress-striped active');
-
-           }
-         }
-       };
-
-
-
+          };
      </script>
    </div>
  </div>
@@ -381,18 +378,13 @@ $conn = null;
               <button  class="btn btn-warning" id="refreshButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Reset" >
                 <i id="refreshButtonSymbol" class="fa fa-undo" aria-hidden="true"></i>
               </button>
-
-
-
-              <!-- </div> -->
+             <!-- </div> -->
               <script type="text/javascript">
                 $("#docButton").click(function() {
-
                   javascript:
                   //introJs().
                   startDoc();
                 });
-
               </script>
 
             </div>

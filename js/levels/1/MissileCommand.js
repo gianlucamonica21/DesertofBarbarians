@@ -537,7 +537,7 @@ function PlayerMissile(source, endX, endY) {
     if (err.name == "ReferenceError") {
       writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
     } else {
-      writeChatMessage("Error:" + error.message, "consoleMsg");
+      writeChatMessage("Error: " + err.message, "consoleMsg");
     }
   }
 
@@ -940,13 +940,16 @@ function userSolutionChecker() {
         msg: "Excellent, now we can counter-attack!"
       }
     } else {
-      writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
+       return {
+        passed: false,
+        msg: "The missiles still aren't firing! Do you think the enemy is going to wait for us to be ready? Get it together recruit!"
+      }
     }
   } catch (err) {
     if (err.name == "ReferenceError") {
       writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
     } else {
-      writeChatMessage("Error:" + error.message, "consoleMsg");
+      writeChatMessage("Error :" + err.message, "consoleMsg");
     }
   }
 }

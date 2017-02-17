@@ -9,6 +9,7 @@
     lineNumbers: true,
     styleSelectedText: true,
     lineWrapping: true,
+    autoCloseBrackets: true,
     viewportMargin: Infinity
   });
 
