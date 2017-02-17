@@ -52,6 +52,8 @@ $conn = null;
   console.log("achievementId: " +achievementsId);
   console.log("achievementTitle:" +achievementsTitle);
   console.log("achievementQty:" +achievementsQty);
+
+  var startedCoding = (new Date()).getTime();
 </script>
 <!DOCTYPE html>
 <html lang="en">

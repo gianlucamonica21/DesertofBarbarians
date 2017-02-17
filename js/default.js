@@ -59,9 +59,10 @@
 
     // NEXT LEVEL BUTTON
     $('#nextButton').click(function() {
-
       $.get("DBConnection/load_player.php");
+      console.log("DIFFERENZA TEMPO: "+difference);
       // Carica dati del prossimo livello
+      $.post("DBConnection/load_level_x.php", 0);
       $.post("DBConnection/nextlevel.php", difference);
 
       // Code to reload and reupdate the level

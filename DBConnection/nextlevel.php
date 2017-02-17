@@ -55,7 +55,7 @@ try {
 		/* NUOVA POLITICA PUNTI */
 	if ($current_level < 9 &&
 			$current_level == $max_level) {
-		$new_current_level_score = $new_current_level_score + $basic_score[$current_level];
+		$new_current_level_score = $new_current_level_score + $basic_score[$current_level - 1];
 	}
 
 	if($new_current_level_score > $old_current_level_score) {
