@@ -918,7 +918,7 @@ try {
     if (err.name == "ReferenceError") {
       writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
     } else {
-      writeChatMessage("Error:" + error.message, "consoleMsg");
+      writeChatMessage("Error:" + err.message, "consoleMsg");
     }
   }
     });
@@ -961,7 +961,7 @@ if (decipher("hello") == "olleh") {
     if (err.name == "ReferenceError") {
       writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
     } else {
-      writeChatMessage("Error:" + error.message, "consoleMsg");
+      writeChatMessage("Error:" + err.message, "consoleMsg");
     }
   }
 }
