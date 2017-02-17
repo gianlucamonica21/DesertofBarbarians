@@ -148,11 +148,11 @@
 
   });
 
-
   // EVALUATE BUTTON
   $('#evaluateButton').click(function() {
     if (!($('#evaluateButton').hasClass('disabled'))) {
       finishedCoding = (new Date()).getTime();
+      console.log("startedCoding", startedCoding, "Finished coding", finishedCoding)
       difference = (finishedCoding - startedCoding) / 1000;
       console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 

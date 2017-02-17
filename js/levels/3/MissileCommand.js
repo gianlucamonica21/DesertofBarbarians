@@ -117,7 +117,7 @@ var initializeLevel = function() {
     if (err.name == "ReferenceError") {
       writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
     } else {
-      writeChatMessage("Error:" + error.message, "consoleMsg");
+      writeChatMessage("Error:" + err.message, "consoleMsg");
     }
   }
   createBonusMissiles( /*gamelevel.missilesBonus*/ 0);

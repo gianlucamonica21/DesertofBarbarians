@@ -56,7 +56,7 @@ var missileCommand = function(checkLevel) {
     if (err.name == "ReferenceError") {
       writeChatMessage("Woops! Looks like you misspelled a variable or function name!", "soldierMsg");
     } else {
-      writeChatMessage("Error:" + error.message, "consoleMsg");
+      writeChatMessage("Error:" + err.message, "consoleMsg");
     }
   }
 
