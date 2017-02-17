@@ -30,6 +30,7 @@ catch(PDOException $e)
 $conn = null;
 ?>
 <script type="text/javascript">
+  // Sets level and player variables
   var clickedLevel;
   var clicked;
   var x = "<?php echo $current_player;?>";
@@ -103,11 +104,6 @@ $conn = null;
     <body level = <?php echo $_SESSION['level']?> >
       <!-- NAVBAR -->
       <div class="navbar navbar-default navbar-fixed-top">
-   <!--     <li>
-        <a type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#profileModal" data-intro="Click in to look your profile features!">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span><br> Profile
-        </a>
-      </li> -->
       <div class="container">
         <div class="navbar-header">
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
@@ -128,9 +124,7 @@ $conn = null;
             <li>
              <button id="tutorialbutton" type="button" class="btn btn-default btn-lg navbar-btn text-center"  data-target="#tutorialModal"  href="" onclick="">
                <script type="text/javascript">
-
                  $("#tutorialbutton").click(function() {
-
                   javascript:
                   //introJs().
                   startIntro();
@@ -139,13 +133,6 @@ $conn = null;
               <span class="glyphicon glyphicon-question-sign" aria-hidden="true" ></span><br> How to play
             </button>
           </li>
-
-          <!-- <li>
-            <button  id="levelsTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#levelsModal" >
-              <span class="glyphicon glyphicon-forward" aria-hidden="true"></span><br> Levels
-            </button>
-          </li> -->
-
           <li>
             <button id="leaderboardTutorial" type="button" class="btn btn-default btn-lg navbar-btn text-center" data-toggle="modal" data-target="#leaderboardModal" style="padding-top: 12px;">
               <span class="icon">&#xf091;</span><br> Leaderboard
