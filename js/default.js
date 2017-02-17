@@ -60,6 +60,7 @@
     // NEXT LEVEL BUTTON
     $('#nextButton').click(function() {
 
+      $.get("DBConnection/load_player.php");
       // Carica dati del prossimo livello
       $.post("DBConnection/nextlevel.php", difference);
 

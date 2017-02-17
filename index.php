@@ -367,8 +367,8 @@ $conn = null;
             <div class="panel-body" >
               <textarea id="editor"></textarea>
               <!--   <div class="btn-group"> -->
-              <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Execute" >
-                <i id="submitButtonSymbol" class="fa fa-play" aria-hidden="true"></i>
+              <button  class="btn btn-danger" id="submitButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Save your changes" >
+                <i id="submitButtonSymbol" class="fa fa-floppy-o" aria-hidden="true"></i>
               </button>
               <button  class="btn btn-success disabled" id="evaluateButton" data-toggle="tooltip" data-placement="bottom" data-original-title="Evaluate" >
                 <i id="evaluateButtonSymbol" class="fa fa-check" aria-hidden="true"></i>
