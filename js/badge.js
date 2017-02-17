@@ -7,14 +7,14 @@ function showModal(id){
 		{
 			console.log("id 1");
 			$("#notification-modal-title").text('First Level Gone!');
-			$("#modal-text").text('You are at the second level!');
+			$("#modal-text").text('You completed the first level!');
 			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
 		}
 		case 2:
 		{
-			$("#notification-modal-title").text('Halfway!');
+			$("#notification-modal-title").text('Halfway there!');
 			$("#modal-text").text('You passed level 4!');
 			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
@@ -46,7 +46,7 @@ function showModal(id){
 		}
 		case 6:{
 			$("#notification-modal-title").text('Debug!');
-			$("#modal-text").text('YOU FINISHED THE DEBUGGING LEVELS!');
+			$("#modal-text").text('YOU finished all the debugging levels!');
 			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break
@@ -54,7 +54,7 @@ function showModal(id){
 		case 7:
 		{
 			$("#notification-modal-title").text('Refactoring!');
-			$("#modal-text").text('YOU FINISHED THE REFACTORING LEVELS!');
+			$("#modal-text").text('You finished all the refactoring levels!');
 			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
@@ -62,7 +62,7 @@ function showModal(id){
 		case 8:
 		{
 			$("#notification-modal-title").text('Design!');
-			$("#modal-text").text('YOU FINISHED THE DESIGNING LEVELS!');
+			$("#modal-text").text('You finished all the designing levels!');
 			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
@@ -70,7 +70,7 @@ function showModal(id){
 		case 9:
 		{
 			$("#notification-modal-title").text('WAR IS OVER!');
-			$("#modal-text").text('YOU FINISHED THE GAME!');
+			$("#modal-text").text('You finished the game!');
 			$("#image-modal").attr('src', 'img/star_badge.png');
 			$("#notificationModal").modal('show');
 			break;
