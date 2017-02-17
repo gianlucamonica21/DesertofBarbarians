@@ -20,7 +20,7 @@
     }
   });
 
-  var startedCoding;
+  //var startedCoding;
   editor.setSize(750, 700);
 
   // Handler for when change happens in the editor
@@ -29,12 +29,12 @@
 
 
     drawStopMessage();
-    startedCoding = (new Date()).getTime();
+    //startedCoding = (new Date()).getTime();
     stoppedGame = true;
     $('#returnButton').removeClass("disabled");
     $('#evaluateButton').addClass("disabled");
 
-    
+
     $('#pauseButton').addClass('disabled');
     $('#playButton').removeClass('disabled');
     // // Handler in case of insertion/deletion of a line
@@ -89,7 +89,7 @@
   }
 
   var lineChangeHandler = function(change) {
-    if (change.to.line < change.from.line || change.to.line - change.from.line + 1 > change.text.length) { 
+    if (change.to.line < change.from.line || change.to.line - change.from.line + 1 > change.text.length) {
         // A line has been deleted
         var numRemoved = change.to.line - change.from.line - change.text.length + 1;
      //   console.log("Deletion", numRemoved, "happened at line", change.from.line);
