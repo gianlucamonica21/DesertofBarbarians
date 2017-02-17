@@ -661,31 +661,31 @@ $conn = null;
                                   $('#nohintB').removeClass('obscure');
                                   break;
                                 }
-                                case 4:
+                                case 5:
                                 {
                                   $('#best').removeClass('obscure');
                                   $('#bestB').removeClass('obscure');
                                   break;
                                 }
-                                case 5:
+                                case 6:
                                 {
                                   $('#debugging').removeClass('obscure');
                                   $('#debuggingB').removeClass('obscure');
                                   break;
                                 }
-                                case 6:
+                                case 7:
                                 {
                                   $('#refactoring').removeClass('obscure');
                                   $('#refactoringB').removeClass('obscure');
                                   break;
                                 }
-                                case 7:
+                                case 8:
                                 {
                                   $('#designing').removeClass('obscure');
                                   $('#designingB').removeClass('obscure');
                                   break;
                                 }
-                                case 8:
+                                case 9:
                                 {
                                   $('#gameoverBver').removeClass('obscure');
                                   $('#gameoverB').removeClass('obscure');
