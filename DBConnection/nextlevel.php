@@ -41,21 +41,29 @@ try {
 	}
 	echo "Prima di aggiornare i parametri sono i seguenti. TIME: ".$time_to_finish." Player: ".$_SESSION['loggedinUser']." Totale punti: ".$_SESSION['totalScore']." Grado: ".$_SESSION['userGrade']." Livello Massimo: ".$_SESSION['maxLevel']." Record Livello: ".$_SESSION['maxCurrentLevelScore'];
 
+	// Estrai Coefficiente di difficoltà e limite di tempo
+	$level_query = $conn->prepare("SELECT rows, coef, timelimit FROM Level WHERE level= :level");
+	$level_query->bindParam(':level', $loaded_level);
+	$level_query->execute();
+	$level_details = $level_query->fetch();
+	$time_limit = $level_details["timelimit"];
+	$_SESSION['timeLimit'] = $time_limit;
+
 	/* Se è più grande aggiorna lo score record del livello,
 		che viene calcolato prendendo il tempo ancora rimasto a disposizione dell'utente
 		e trasformandolo in percentuale, per poi essere moltiplicato per un Coefficiente
 		di difficoltà perstabilito per ogni livello. */
-	if ($time_to_finish > $time_limit) {
+	/* if ($time_to_finish >= $time_limit) {
 		$new_current_level_score = 0;
 	}
 	else {
 		$new_current_level_score = ((($time_limit - $time_to_finish) / $time_limit) * 100) * $points_coef;
-	}
+	} */
 
-		/* NUOVA POLITICA PUNTI */
+	$new_current_level_score = 0;
 	if ($current_level < 9 &&
 			$current_level == $max_level) {
-		$new_current_level_score = $new_current_level_score + $basic_score[$current_level];
+		$new_current_level_score = $new_current_level_score + $basic_score[$current_level - 1];
 	}
 
 	if($new_current_level_score > $old_current_level_score) {

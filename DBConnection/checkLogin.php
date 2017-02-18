@@ -26,7 +26,7 @@ try {
 		$user_rows = $user_query->fetch();
 
 		if($user_rows > 0) {
-			$_SESSION["levelScores"] = array(75, 75, 100, 75, 75, 100, 75, 75, 100);
+			$_SESSION["levelScores"] = array(90, 75, 100, 75, 75, 100, 75, 75, 100);
 
 			$total_score = $user_rows["score"];
 			$_SESSION['totalScore'] = $total_score;
@@ -135,7 +135,6 @@ try {
 			$grade_type_row = $grade_type->fetch();
 			$type = $grade_type_row["type"];
 			$_SESSION['gradeType'] = $type;
-
 
 			$_SESSION['leaderNames'] = $leader_names;
 			$_SESSION['leaderScores'] = $leader_scores;
