@@ -567,8 +567,10 @@ $conn = null;
                       <script type="text/javascript">
                       // Handle badges display
                       $('#profileTutorial').click(function() {
+                        console.log("achievemntsid: "+ achievementsId);
+                        console.log("ownedbadges: "+ ownedBadges);
                         var unlockedB = JSON.parse(achievementsId);
-                        console.log("UNLOCKEDBADGE: "+unlockedB);
+                        console.log("UNLOCKEDBADGE: "+ unlockedB);
                         for(var i = 0; i < achievementsQty; i++){
                           console.log("unlockedB in pos i: " + unlockedB[i]);
                           disobscureBadge(parseInt(unlockedB[i]));
@@ -578,7 +580,6 @@ $conn = null;
                          switch(id){
                           case 1:
                           {
-
                             $('#l2').removeClass('obscure');
                             $('#l2B').removeClass('obscure');
                             break;
@@ -595,19 +596,19 @@ $conn = null;
                             $('#nohintB').removeClass('obscure');
                             break;
                           }
-                          case 4:
+                          case 5:
                           {
                             $('#best').removeClass('obscure');
                             $('#bestB').removeClass('obscure');
                             break;
                           }
-                          case 5:
+                          case 6:
                           {
                             $('#debugging').removeClass('obscure');
                             $('#debuggingB').removeClass('obscure');
                             break;
                           }
-                          case 6:
+                          case 7:
                           {
                             $('#refactoring').removeClass('obscure');
                             $('#refactoringB').removeClass('obscure');
@@ -616,10 +617,10 @@ $conn = null;
 
 
 
-                          ?>
 
+                         
 
-
+                          </script>
                         </h4>
                       </div>
                       <div class="row">
@@ -764,14 +765,17 @@ $conn = null;
                 </div>
 =======
                           case 7:
+=======
+                          case 8:
+>>>>>>> 95bb267bd16730cf197ae0f64038e91807aed42c
                           {
                             $('#designing').removeClass('obscure');
                             $('#designingB').removeClass('obscure');
                             break;
                           }
-                          case 8:
+                          case 9:
                           {
-                            $('#gameoverBver').removeClass('obscure');
+                            $('#gameover').removeClass('obscure');
                             $('#gameoverB').removeClass('obscure');
                             break;
                           }
