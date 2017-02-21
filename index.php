@@ -614,7 +614,160 @@ $conn = null;
                             $('#refactoringB').removeClass('obscure');
                             break;
                           }
+
+
+
+
+                         
+
+                          </script>
+                        </h4>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-xs-6 follow line" align="center">
+                          <h3><?php echo intval($_SESSION["totalScore"]) ?> <br/>
+                            <span>POINTS</span>
+                          </h3>
+                        </div>
+                        <div class="col-md-6 col-xs-6 follow line" align="center">
+                          <h3><?php echo $_SESSION['achievementsQty'];?> <br/> <span>BADGES</span>
+                          </h3>
+                        </div>
+                      </div>
+                      <div id="row">
+                        <p>Badges obtained:</p>
+                        <table class="table table-bordered badge-table">
+                          <tbody>
+                            <tr>
+                              <td class="col-md-3 badge-lock obscure" id="debugging" name="Debugging">
+                                <img  class="mybadge obscure" id="debuggingB" src="img/star_badge1.png"><br>
+                                <p><b>Debug</b></p>
+                                <p>All debug levels completed.</p>
+                              </td>
+                              <td class="col-md-3 badge-lock obscure" id="refactoring" name="Refactoring">
+                                <img class="mybadge obscure" id="refactoringB" src="img/star_badge1.png">
+                                <p><b>Refactoring</b></p>
+                                <p>All refactoring levels completed.</p>
+                              </td>
+                              <td class="col-md-3 badge-lock obscure" id="designing" name="Design">
+                                <img class="mybadge obscure" id="designingB" src="img/star_badge1.png">
+                                <p><b>Design</b><p>
+                                  <p>All design levels completed.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="gameover" name="Level-10">
+                                  <img class="mybadge obscure" id="gameoverB" src="img/star_badge1.png">
+                                  <p><b>War Is Over!</b></p>
+                                  <p>Won level 9.</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="col-md-3 badge-lock obscure" id="best" name="Champion">
+                                  <img class="mybadge obscure" id="bestB" src="img/star_badge1.png">
+                                  <p><b>Champion</b></p>
+                                  <p>You are the top player.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="nohint" name="noHint">
+                                  <img class="mybadge obscure" id="nohintB" src="img/star_badge1.png">
+                                  <p><b>Indie Programmer</b></p>
+                                  <p>Hint is not in your vocabolary.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="l2" name="level2">
+                                  <img class="mybadge obscure" id="l2B" src="img/star_badge1.png">
+                                  <p><b>First Level Gone</b></p>
+                                  <p>You are at the second level.</p>
+                                </td>
+                                <td class="col-md-3 badge-lock obscure" id="half" name="halfway">
+                                  <img class="mybadge obscure" id="halfB" src="img/star_badge1.png">
+                                  <p><b>Halfway</b></p>
+                                  <p>You passed level 4.</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <script type="text/javascript">
+                              $('#profileTutorial').click(function() {
+                                var unlockedB = JSON.parse(achievementsId);
+                                console.log("UNLOCKEDBADGE: "+unlockedB);
+                              // $('.col-md-3 badge-lock').addClass('obscure');
+                              // $('.mybadge').addClass('obscure');
+                              for(var i = 0; i < achievementsQty; i++){
+                                console.log("unlockedB in pos i: " + unlockedB[i]);
+                                disobscureBadge(parseInt(unlockedB[i]));
+                              }
+
+                              function disobscureBadge(id){
+                               console.log("sono dentro disobscure function();");
+                               switch(id){
+                                case 1:
+                                {
+
+                                  $('#l2').removeClass('obscure');
+                                  $('#l2B').removeClass('obscure');
+                                  break;
+                                }
+                                case 2:
+                                {
+                                  $('#half').removeClass('obscure');
+                                  $('#halfB').removeClass('obscure');
+                                  break;
+                                }
+                                case 3:
+                                {
+                                  $('#nohint').removeClass('obscure');
+                                  $('#nohintB').removeClass('obscure');
+                                  break;
+                                }
+                                case 5:
+                                {
+                                  $('#best').removeClass('obscure');
+                                  $('#bestB').removeClass('obscure');
+                                  break;
+                                }
+                                case 6:
+                                {
+                                  $('#debugging').removeClass('obscure');
+                                  $('#debuggingB').removeClass('obscure');
+                                  break;
+                                }
+                                case 7:
+                                {
+                                  $('#refactoring').removeClass('obscure');
+                                  $('#refactoringB').removeClass('obscure');
+                                  break;
+                                }
+                                case 8:
+                                {
+                                  $('#designing').removeClass('obscure');
+                                  $('#designingB').removeClass('obscure');
+                                  break;
+                                }
+                                case 9:
+                                {
+                                  $('#gameoverBver').removeClass('obscure');
+                                  $('#gameoverB').removeClass('obscure');
+                                  break;
+                                }
+                                default: {console.log("SONO NEL DEFAULT" + typeof id); break;}
+
+                              }
+
+                            }
+
+
+
+                          });
+                        </script>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+=======
+                          case 7:
+=======
                           case 8:
+>>>>>>> 95bb267bd16730cf197ae0f64038e91807aed42c
                           {
                             $('#designing').removeClass('obscure');
                             $('#designingB').removeClass('obscure');
@@ -632,6 +785,7 @@ $conn = null;
                     });
                   </script>
                 </table>
+>>>>>>> dcad9180985d8c99984a20c11da8c9190abccb9a
               </div>
             </div>
             <div class="modal-footer">
