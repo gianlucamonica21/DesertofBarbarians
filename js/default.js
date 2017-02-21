@@ -158,12 +158,8 @@
       difference = (finishedCoding - startedCoding) / 1000;
       console.log("Hai impiegato " + (difference) + " secondi per fornire la soluzione");
 
-      var result = userSolutionChecker();
+     var result = userSolutionChecker();
 
-      /*var result = {
-  passed: true,
-  msg: "DEBUG"
-}; */
 
       if (result.passed == true) {
         // Level passed

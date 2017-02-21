@@ -61,7 +61,7 @@ try {
 	} */
 
 	$new_current_level_score = 0;
-	if ($current_level < 9 &&
+	if ($current_level <= 9 &&
 			$current_level == $max_level) {
 		$new_current_level_score = $new_current_level_score + $basic_score[$current_level - 1];
 	}

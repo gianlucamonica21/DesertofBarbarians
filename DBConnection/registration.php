@@ -50,14 +50,14 @@
               <div class="form-group">
                 <label for="lg_username" class="sr-only">Username</label>
 
-                <input id="username" type="text" name="username" class="form-control">
+                <input id="username" type="text" name="username" class="form-control" placeholder="username">
                 <span class="error"><p id="username_error"></p></span>
 
               </div>
               <div class="form-group">
                 <label for="lg_password" class="sr-only">Password</label>
 
-                <input id="password" type="password" name="password" class="form-control"/>
+                <input id="password" type="password" name="password" class="form-control" placeholder="password"/>
             <span class="error"><p id="password_error"></p></span>
               </div>
             </div>

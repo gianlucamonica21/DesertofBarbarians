@@ -181,7 +181,7 @@ var drawStopMessage = function() {
     ctx.fillStyle = '#FFFFFF';
 
     ctx.font = '20px monaco, consolas';
-    ctx.fillText('Game is now stopped, click to resume!', 130, 180);
+    ctx.fillText('Game is now stopped, click to resume!', 130, 50);
     ctx.font = 'bold 32px monaco, consolas';
     ctx.fillStyle = '#d66';
     ctx.fillText('', 130, 250);
